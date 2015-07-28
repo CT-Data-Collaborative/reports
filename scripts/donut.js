@@ -1,9 +1,18 @@
+args = require("minimist")(process.argv.slice(2));
+
 var d3 = require('d3');
 var document = require('jsdom').jsdom();
 
 var dataset = {
   apples: [53245, 28479, 19697, 24037, 40245],
 };
+
+try {
+    dataset = JSON.parse(args.data);
+} catch (e) {
+    console.log(e);
+    return;
+}
 
 var width = 460,
     height = 300,
@@ -36,4 +45,4 @@ var path = svg.selectAll("path")
 
 // oddly, if I comment this console.log command out, this all breaks...
 console.log(body.html());
-return body.html();
+// return body.html();

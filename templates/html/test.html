@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+
+{% block title %}Test Template - with CSS {% endblock title %}
+
+{% block body %}
+<object type="image/svg+xmlns" data="{{ data }}">Fallback</object>
+{% endblock body %}
+ 
