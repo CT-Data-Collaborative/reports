@@ -3,16 +3,19 @@ args = require("minimist")(process.argv.slice(2));
 var d3 = require('d3');
 var document = require('jsdom').jsdom();
 
-var dataset = {
-  apples: [53245, 28479, 19697, 24037, 40245],
-};
+// var dataset = {
+//   apples: [53245, 28479, 19697, 24037, 40245],
+// };
 
-try {
-    dataset = JSON.parse(args.data);
-} catch (e) {
-    console.log(e);
-    return;
-}
+var dataset = JSON.parse(args.data);
+
+// Uncomment for testing if you're getting nothing back - chances are JSON.parse failed silently-ish
+// try {
+//     dataset = JSON.parse(args.data);
+// } catch (e) {
+//     console.log(e);
+//     return;
+// }
 
 var width = 460,
     height = 300,

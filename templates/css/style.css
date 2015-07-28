@@ -1,4 +1,7 @@
-object {
+object, img {
     float:right;
-    border:4px groove orange;
+}
+body {
+    border:thin solid red;
+    height:500px;
 }

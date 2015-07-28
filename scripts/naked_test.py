@@ -3,14 +3,15 @@ from base64 import b64encode
 from jinja2 import Template, Environment, FileSystemLoader
 from weasyprint import HTML
 import json
-# helper for encoding svg so that we can hand off to weasy
+from pipes import quote
 
+# helper for encoding svg so that we can hand off to weasy
 def svg2data_url(value):
         return "data:image/svg+xml;charset=utf-8;base64,"+b64encode(value)
 
 # call node
 data = {"apples":[53245, 28479, 19697, 24037, 40245]}
-success = muterun_js('donut.js', "--data=\""+json.dumps(data)+"\"")
+success = muterun_js('donut.js', "--data="+quote(json.dumps(data)))
 
 # print svg
 # print(success.stdout)
@@ -25,8 +26,10 @@ success = muterun_js('donut.js', "--data=\""+json.dumps(data)+"\"")
 # use jinja's Environment and loaders on external template
 env = Environment(loader=FileSystemLoader("/vagrant/reports/templates/html"))
 template = env.get_template("test.html")
+rendered_template = template.render(data = svg2data_url(success.stdout))
 
-print(template.render(data = svg2data_url(success.stdout)))
+# simply output to stdout
+# print(rendered_template)
 
 # write to pdf
-# HTML(string=rendered_template).write_pdf('jinjatest.pdf')
+HTML(string=rendered_template).write_pdf('jinjatest2.pdf')
