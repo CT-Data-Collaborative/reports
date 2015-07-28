@@ -23,6 +23,7 @@ var body = d3.select(document.body);
 var svg = body.html('').append('svg')
     .attr("width", width)
     .attr("height", height)
+    .attr("xmlns", "http://www.w3.org/2000/svg")
     .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
@@ -32,11 +33,7 @@ var path = svg.selectAll("path")
     .attr("fill", function(d, i) { return color(i); })
     .attr("d", arc);
 
-// console.log('<?xml version="1.0" encoding="utf-8"?>');
-// console.log('<?xml-stylesheet type="text/css" href="chart.css" ?>');
-// console.log('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">');
 
 // oddly, if I comment this console.log command out, this all breaks...
-
 console.log(body.html());
 return body.html();

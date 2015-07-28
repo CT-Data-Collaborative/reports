@@ -11,10 +11,10 @@ def svg2data_url(value):
 success = run_js('donut.js')
 
 # print svg
-print(success)
+# print(success)
 
 # print encoded svg
-print (svg2data_url(success))
+# print (svg2data_url(success))
 
 template = Template('<!DOCTYPE html><html lang="en"><head><title>Report Test</title></head><body><h1> CERC Town Profile</h1><img src="{{ encoded_svg }}"></img></body></html>')
 rendered_template = template.render(encoded_svg=svg2data_url(success))
