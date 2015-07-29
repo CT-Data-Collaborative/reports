@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+    {% endblock %}
+    <script>
+    $(document).ready(function(){
+        // var appleData = {"apples":[53245, 28479, 19697, 24037, 40245]};
+        var appleData = {"apples":[]};
+
+        numApples = Math.floor(Math.random() * 13) + 3;
+
+        for(i = 0; i < numApples; i++) {
+            appleData.apples.push(Math.floor(Math.random() * 10000))
+        }
+        console.log(appleData);
+        $.ajax({
+            url : "./post",
+            method : "POST",
+            data : {"data" : JSON.stringify(appleData)},
+            error : function(jqXHR, textStatus, errorThrown){
+                alert(errorThrown);
+                console.log(jqXHR);
+            },
+            success : function(data, textStatus, jqXHR){
+                console.log(data);
+                $("body").replaceWith(data);
+            },
+            complete : function(jqXHR, textStatus){
+                console.log("Status: \""+textStatus+"\"");
+                return;
+            }
+            });
+        });
+    </script>
+</head>
+<body>
+    {% block body %}{{ body }}{% endblock %}
+</body>
+</html>

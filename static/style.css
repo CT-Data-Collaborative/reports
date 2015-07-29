@@ -1,5 +1,7 @@
 object, img {
-    float:right;
+    border: 1px solid black;
+    float: right;
+    width: 100px;
 }
 body {
     border:thin solid red;

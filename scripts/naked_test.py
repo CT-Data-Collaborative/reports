@@ -29,7 +29,7 @@ template = env.get_template("test.html")
 rendered_template = template.render(data = svg2data_url(success.stdout))
 
 # simply output to stdout
-# print(rendered_template)
+print(rendered_template)
 
 # write to pdf
-HTML(string=rendered_template).write_pdf('jinjatest2.pdf')
+# HTML(string=rendered_template).write_pdf('jinjatest2.pdf')
