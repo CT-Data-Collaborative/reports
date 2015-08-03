@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+
+{% block title -%}
+CERC Town Profile{% if town %} - {{ town }}{% endif %}
+{% endblock title -%}
+
+{% block ajax -%}
+{% endblock ajax -%}
+
+{% block body %}
+<a href="/form"><h2>Clear Request</h2></a>
+    {% if dump %}
+        <pre>
+            {{ dump }}
+        </pre>
+    {% endif %}
+    {% if objects %}
+        {% for object in objects %}
+        <div class="{{ object.className }} visualization">
+            {{ object.output|safe }}
+            <pre style="display:none;">{{ object.dump|safe }}</pre>
+            <pre style="display:none;">{{ object.data|safe }}</pre>
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endblock body %}
+ 

@@ -1,9 +1,9 @@
-object, img {
-    border: 1px solid black;
-    float: right;
-    width: 100px;
+html {
+    font-size: 12px;
 }
-body {
-    border:thin solid red;
-    height:500px;
+
+object, img {
+}
+
+div.visualization {
 }

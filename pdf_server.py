@@ -10,6 +10,10 @@ import json
 from pipes import quote
 ## 
 
+## This is a test of the intermediary data transformation step
+import imp
+intermediary = imp.load_source('intermediary', 'scripts/intermediate_test.py')
+
 # configure
 DEBUG = True
 
@@ -17,8 +21,7 @@ DEBUG = True
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-def svg2data_url(value):
-        return "data:image/svg+xml;charset=utf-8;base64,"+b64encode(value)
+app.jinja_env.filters['base64encode'] = b64encode
 
 # Routes
 @app.route("/")
@@ -49,6 +52,41 @@ def post_test():
     response = make_response(response)
     response.headers["Content-Disposition"] = "attachment; filename=foo.pdf"
     return response
+
+# @app.route("/town_profile", methods=["GET", "POST"])
+# def town_profile():
+@app.route("/form", methods=["GET", "POST"])
+def form():
+    print(request.method)
+    if(request.method == "GET"):
+        return render_template("form.html");
+    else:
+        req = json.loads(request.form["data"])
+    
+    objects = []
+    for requestObj in req["objects"]:
+        obj = {}
+
+        # in the future we should just have these available for every type of chart we expect from every application use case
+        # so we don't have to check, we just ALWAYS call:
+        #        ` requestObj["data"] = transform_data(requestObj["data"], requestObj["type"])  `
+        if (requestObj["type"] == "table"):
+            requestObj["data"] = intermediary.transform_data(requestObj["data"], "table")
+
+        nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"])))
+
+        obj["output"] = render_template(requestObj["type"]+".html", data = nodeResponse.stdout)
+
+        obj["className"] = requestObj["type"];
+        obj["dump"] = nodeResponse.stdout
+        obj["data"] = requestObj["data"]
+        objects.append(obj);
+
+    return render_template("town_profile.html", objects = objects)
+    # pdfResponse = HTML(string=render_template("town_profile.html", objects = objects)).write_pdf()
+    # pdfResponse = make_response(pdfResponse)
+    # pdfResponse.headers["Content-Disposition"] = "attachment; filename=town_profile.pdf"
+    # return pdfResponse
 
 
 # run the application to public server

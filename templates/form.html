@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    </head>
+    <body>
+        <a href="/form"><h2>Clear Request</h2></a>
+        {% block form %}
+        <form method="POST" action="/form">
+            <textarea name="data" style="width:80%;height:500px;margin: 0 10%;"></textarea>
+            <input type="submit" name="submit" title="Submit" style="margin:0 10%;"/>
+        </form>
+        {% endblock %}
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+    </body>
+</html>
