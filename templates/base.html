@@ -6,42 +6,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <title>{% block title %}{{ title }}{% endblock %}</title>
     {% endblock %}
-    {% block ajax %}
-    <script>
-    $(document).ready(function(){
-        // var appleData = {"apples":[53245, 28479, 19697, 24037, 40245]};
-        /*var appleData = {"apples":[]};
-
-        numApples = Math.floor(Math.random() * 13) + 3;
-
-        for(i = 0; i < numApples; i++) {
-            appleData.apples.push(Math.floor(Math.random() * 10000))
-        }
-        console.log(appleData);*/
-
-        var request = {"template":"town_profile","objects":[{"data":[["January",13],["February",8],["March",5],["April",17],["May",19],["June",22],["July",18],["August",16],["September",12],["October",18],["November",9],["December",5]],"type":"bar","config":{"stacked":false}},{"data":{"columns":["Month","Count"],"rows":[["January",13],["February",8],["March",5],["April",17],["May",19],["June",22],["July",18],["August",16],["September",12],["October",18],["November",9],["December",5]]},"type":"table","config":{}},{"data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"type":"pie","config":{}}]};
-        $.ajax({
-            url : "./town_profile",
-            method : "POST",
-            data : {"data" : JSON.stringify(request)},
-            error : function(jqXHR, textStatus, errorThrown){
-                alert(errorThrown);
-                console.log(jqXHR);
-            },
-            success : function(data, textStatus, jqXHR){
-                console.log(data);
-                // $("body").replaceWith(data);
-                document.write(data);
-                document.close();
-            },
-            complete : function(jqXHR, textStatus){
-                console.log("Status: \""+textStatus+"\"");
-                return;
-            }
-            });
-        });
-    </script>
-    {% endblock %}
 </head>
 <body>
     {% block body %}{{ body }}{% endblock %}

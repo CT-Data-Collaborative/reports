@@ -5,27 +5,21 @@
 {% endblock head %}
 
 {% block title -%}
-CERC Town Profile{% if town %} - {{ town }}{% endif %}
+Town Profile{% if town%} - {{ town }}{% endif %}
 {% endblock title -%}
 
-{% block ajax -%}
-{% endblock ajax -%}
-
 {% block body %}
-<a href="/form"><h2>Clear Request</h2></a>
-    {% if dump %}
-        <pre>
-            {{ dump }}
-        </pre>
-    {% endif %}
-    {% if objects %}
-        {% for object in objects %}
-        <div class="{{ object.className }} visualization">
-            {{ object.output|safe }}
-            <pre style="display:none;">{{ object.dump|safe }}</pre>
-            <pre style="display:none;">{{ object.data|safe }}</pre>
-        </div>
-        {% endfor %}
-    {% endif %}
+<div class="container">
+    <h3>Demographics</h3>
+    <div id="population" class="vis_container left">
+        {% if objects["population"] -%}{{ objects["population"]["output"] | safe }}{% endif -%}
+    </div>
+    <div id="race" class="vis_container right">
+        {% if objects["race"] -%}{{ objects["race"]["output"] | safe }}{% endif -%}
+    </div>
+    <div id="age" class="vis_container span">
+        {% if objects["age"] -%}{{ objects["age"]["output"] | safe }}{% endif -%}
+    </div>
+</div>
 {% endblock body %}
  
