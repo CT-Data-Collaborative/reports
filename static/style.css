@@ -20,7 +20,7 @@ h3 {
     display: inline-block;
     font-style: italic;
     left: 11%;
-    padding: 1px 2px;
+    padding: 1px 40px;
     position: absolute;
     top: 1%;
 }
@@ -31,22 +31,65 @@ div.container {
 
 div.vis_container.left,
 div.vis_container.right {
-    max-width: 49%
+    width: 48%;
+    float: left;
+    clear: right;
 }
 div.vis_container.left {}
 div.vis_container.right {}
-div.vis_container.span {}
+div.vis_container.span {
+    clear: both;
+}
 
 div.vis_container {
-
+    border-bottom: 3px double black;
+    border-left: 3px double black;
+    /*height:200pt;*/
+    margin: 1%;
 }
+
 div.vis_container > * {
-    border:1px solid red;
+    /*border: 1px solid red;*/
     max-width: 100%;
+    padding: 1pt 5pt 0;
+    width: 100%;
 }
 div.vis_container table td,
 div.vis_container table th {
     max-width: 6%;
+}
+
+div.vis_container table tbody tr td:first-child {
+  font-weight: bold;
+}
+div.vis_container table thead tr th,
+div.vis_container table tbody tr td:not(:first-child) {
+  text-align:right
+}
+table {
+    border-collapse: collapse;
+}
+th {
+    font-style: italic;
+}
+th, td {
+    padding:0.05em 0.75em;
+}
+div.vis_container > img {
+    display: block;
+    margin: auto;
+    max-height: 175pt;
+    width: auto;
+}
+h5 {
+    background: rgba(255, 255, 255, 1) none repeat scroll 0 0;
+    box-sizing: border-box;
+    display: inline;
+    font-style: italic;
+    margin: 0 !important;
+    padding: 1px 15px;
+    position: relative;
+    top: 5px;
 }
 
 @media screen {
@@ -60,11 +103,18 @@ div.vis_container table th {
 /* Print-specific rules */
 @media print {
     @page {
-            size: 8.5in 11in;
-            margin:0.3in 0.5in 0.5in;
-        }
+        size: 8.5in 11in;
+        margin:0.3in 0.5in 0.5in;
+    }
+    body {
+        font-size:8pt;
+        font-family: "FreeSerif";
+    }
     h3 {
-        top:-0.25in;
+        top:-0.15in;
         left:0.2in;
+    }
+    .noprint {
+        display: none;
     }
 }

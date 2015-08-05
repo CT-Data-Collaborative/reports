@@ -1,5 +1,9 @@
 args = require("minimist")(process.argv.slice(2));
 
+if (args.config) {
+    args.config = JSON.parse(args.config);
+}
+
 var d3 = require('d3');
 var document = require('jsdom').jsdom();
 
@@ -21,8 +25,6 @@ var width = 460,
     height = 300,
     radius = Math.min(width, height) / 2;
 
-var color = d3.scale.category20();
-
 var pie = d3.layout.pie()
     .sort(null)
     .value(function(d) { return d[1]; });
@@ -30,6 +32,15 @@ var pie = d3.layout.pie()
 var arc = d3.svg.arc()
     .innerRadius(radius - 100)
     .outerRadius(radius - 50);
+
+var color = d3.scale.category20();
+if (args.config.chartcolors.length > 0) {
+    // color = args.config.chartcolors;
+    color = d3.scale.ordinal()
+            .range(args.config.chartcolors);
+}
+
+dataset = dataset.concat(dataset).concat(dataset);
 
 var body = d3.select(document.body);
 

@@ -12,14 +12,24 @@ Town Profile{% if town%} - {{ town }}{% endif %}
 <div class="container">
     <h3>Demographics</h3>
     <div id="population" class="vis_container left">
-        {% if objects["population"] -%}{{ objects["population"]["output"] | safe }}{% endif -%}
+        {% if objects["population"] -%}
+        <h5>Population</h5>
+        {{ objects["population"]["output"] | safe }}
+        {% endif -%}
     </div>
     <div id="race" class="vis_container right">
-        {% if objects["race"] -%}{{ objects["race"]["output"] | safe }}{% endif -%}
+        {% if objects["race"] -%}
+        <h5>Race/Ethnicity</h5>
+        {{ objects["race"]["output"] | safe }}
+        {% endif -%}
     </div>
     <div id="age" class="vis_container span">
-        {% if objects["age"] -%}{{ objects["age"]["output"] | safe }}{% endif -%}
+        {% if objects["age"] -%}
+        <h5>Age Distribution</h5>
+        {{ objects["age"]["output"] | safe }}
+        {% endif -%}
     </div>
 </div>
+<a href="/town_profile?print=1" target="_blank" class="noprint">Print View</a>
 {% endblock body %}
  

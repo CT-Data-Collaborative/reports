@@ -90,7 +90,17 @@ def form():
 @app.route("/town_profile", methods=["GET", "POST"])
 def town_profile():
     # build vis objects
-    req = json.loads('{"template":"town_profile","objects":[{"type":"table","name":"race","data":[["","Hartford","Connecticut"],["American Indian and Alaska Native Alone",596,8770],["Black or African American Alone",47786,361668],["Hispanic or Latino",54289,496939],["White Alone",43660,2792554],["White Alone, Not Hispanic or Latino",20892,2526401]],"config":{}},{"type":"table","name":"population","data":[["","Hartford","Connecticut"],[2015,125999,3644545],[2020,126656,3702469],[2025,126185,3746181]],"config":{}},{"type":"table","name":"age","data":[["","0 to 4 years","10 to 14 years","15 to 19 years","20 to 24 years","25 to 29 years","30 to 34 years","35 to 44 years","45 to 54 years","55 to 64 years","5 to 9 years","65 to 74 years","75 to 84 years","85 years and over","Total"],["Hartford",8487,8613,12832,12571,10721,9165,14801,14919,11710,9184,6968,3514,1645,125130],["Connecticut",197395,236742,255816,229708,217169,211089,469746,568510,456963,220139,269422,164260,86602,3583561]],"config":{}}]}')
+    req = json.loads('{"template":"town_profile","objects":[{"type":"table","name":"race","data":[["","Hartford","Connecticut"],["Native American",596,8770],["Black",47786,361668],["Hispanic (any race)",54289,496939],["White",43660,2792554]],"config":{}},{"type":"table","name":"population","data":[["","Hartford","Connecticut"],[2015,125999,3644545],[2020,126656,3702469],[2025,126185,3746181]],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
+
+    req = json.loads('{"template":"town_profile","objects":[{"type":"pie","name":"race","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"table","name":"population","data":[["","Hartford","Connecticut"],[2015,125999,3644545],[2020,126656,3702469],[2025,126185,3746181]],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
+
+    template = req["template"]
+    
+    # config options should be passed in to the request as part of the json - under "config" - and should be an object of key:value pairs
+    # other config options (such as color schemes) will be loaded dynamically from static json files that share a name with the template
+    templateConfig = {}
+    if (os.path.isfile(os.path.join("static", template+".json"))):
+        templateConfig = json.load(open(os.path.join("static", template+".json")))
 
     objects = {}
     for requestObj in req["objects"]:
@@ -102,7 +112,7 @@ def town_profile():
         if (requestObj["type"] == "table"):
             requestObj["data"] = intermediary.transform_data(requestObj["data"], "table")
 
-        nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"])))
+        nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"]))+" --config="+quote(json.dumps(templateConfig)))
 
         obj["output"] = render_template(requestObj["type"]+".html", data = nodeResponse.stdout)
 
@@ -112,7 +122,7 @@ def town_profile():
         objects[requestObj["name"]] = obj
 
     # render template
-    response = render_template("town_profile.html", objects = objects)
+    response = render_template(template+".html", objects = objects)
 
     # Temporarily using a get parameter ("print" = true)
     # should be using request.method == POST, as commented out below.
