@@ -114,6 +114,10 @@ def town_profile():
 
         nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"]))+" --config="+quote(json.dumps(templateConfig)))
 
+        print(nodeResponse.stdout)
+        print(nodeResponse.stderr)
+        print(nodeResponse.exitcode)
+
         obj["output"] = render_template(requestObj["type"]+".html", data = nodeResponse.stdout)
 
         obj["className"] = requestObj["type"];
