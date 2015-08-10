@@ -40,14 +40,16 @@ div.vis_container.right {}
 div.vis_container.span {
     clear: both;
 }
-
+div.container {
+    page-break-inside: avoid;
+}
 div.vis_container {
     border-bottom: 3px double black;
     border-left: 3px double black;
     /*height:200pt;*/
     margin: 1%;
-}
 
+}
 div.vis_container > * {
     /*border: 1px solid red;*/
     max-width: 100%;
@@ -104,7 +106,31 @@ h5 {
 @media print {
     @page {
         size: 8.5in 11in;
-        margin:0.3in 0.5in 0.5in;
+        margin:0.3in 0.5in 0.75in;
+        @bottom-left {
+            font-size: 7pt;
+            width:35%;
+            text-align:left;
+            vertical-align: top;
+            content: "Town Profiles - Page " counter(page);
+        }
+        @bottom-center {
+            font-size: 9pt;
+            font-weight: bold;
+            font-style: italic;
+            width:30%;
+            text-align: center;
+            vertical-align: top;
+            content: "www.cerc.com";
+        }
+        @bottom-right {
+            font-size: 7pt;
+            font-style: italic;
+            width:35%;
+            text-align:right;
+            vertical-align: top;
+            content: "No representation or warranties, expressed or implied, are given regarding the accuracy of this information.";
+        }
     }
     body {
         font-size:8pt;

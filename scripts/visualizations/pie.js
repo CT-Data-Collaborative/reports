@@ -34,7 +34,7 @@ var arc = d3.svg.arc()
     .outerRadius(radius - 50);
 
 var color = d3.scale.category20();
-if (args.config.chartcolors.length > 0) {
+if ("chartcolors" in args.config && args.config.chartcolors.length > 0) {
     // color = args.config.chartcolors;
     color = d3.scale.ordinal()
             .range(args.config.chartcolors);
