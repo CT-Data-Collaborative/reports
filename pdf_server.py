@@ -61,36 +61,46 @@ def form():
         return render_template("form.html");
     else:
         req = json.loads(request.form["data"])
+
+        template = req["template"]
+        
+        # config options should be passed in to the request as part of the json - under "config" - and should be an object of key:value pairs
+        # other config options (such as color schemes) will be loaded dynamically from static json files that share a name with the template
+        templateConfig = {}
+        if (os.path.isfile(os.path.join("static", template+".json"))):
+            templateConfig = json.load(open(os.path.join("static", template+".json")))
     
-    objects = []
-    for requestObj in req["objects"]:
-        obj = {}
+        objects = {}
+        for requestObj in req["objects"]:
+            obj = {}
 
-        # in the future we should just have these available for every type of chart we expect from every application use case
-        # so we don't have to check, we just ALWAYS call:
-        #        ` requestObj["data"] = transform_data(requestObj["data"], requestObj["type"])  `
-        if (requestObj["type"] == "table"):
-            requestObj["data"] = intermediary.transform_data(requestObj["data"], "table")
+            # in the future we should just have these available for every type of chart we expect from every application use case
+            # so we don't have to check, we just ALWAYS call:
+            #        ` requestObj["data"] = transform_data(requestObj["data"], requestObj["type"])  `
+            if (requestObj["type"] == "table"):
+                requestObj["data"] = intermediary.transform_data(requestObj["data"], "table")
 
-        # nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"])))
-        nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"]))+" --config="+quote(json.dumps({})))
+            nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"]))+" --config="+quote(json.dumps(templateConfig)))
 
-        print(nodeResponse.stdout)
-        print(nodeResponse.stderr)
-        print(nodeResponse.exitcode)
+            if(requestObj['type'] == "pie"):
+                print(nodeResponse.stdout)
+                print(nodeResponse.stderr)
+                print(nodeResponse.exitcode)
 
-        obj["output"] = render_template(requestObj["type"]+".html", data = nodeResponse.stdout)
+            obj["output"] = render_template(requestObj["type"]+".html", data = nodeResponse.stdout)
 
-        obj["className"] = requestObj["type"];
-        obj["dump"] = nodeResponse.stdout
-        obj["data"] = requestObj["data"]
-        objects.append(obj);
+            obj["className"] = requestObj["type"];
+            obj["dump"] = nodeResponse.stdout
+            obj["data"] = requestObj["data"]
+            objects[requestObj["name"]] = obj
 
-    return render_template("form_output.html", objects = objects)
-    # pdfResponse = HTML(string=render_template("town_profile.html", objects = objects)).write_pdf()
-    # pdfResponse = make_response(pdfResponse)
-    # pdfResponse.headers["Content-Disposition"] = "attachment; filename=town_profile.pdf"
-    # return pdfResponse
+        # return render_template("form_output.html", objects = objects)
+        pdfResponse = HTML(string=render_template("town_profile.html", objects = objects))
+        pdfResponse = render_pdf(pdfResponse)
+        pdfResponse = make_response(pdfResponse)
+        pdfResponse.headers["Content-Disposition"] = "attachment; filename=town_profile.pdf"
+        pdfResponse.headers["Set-Cookie"] = "fileDownload=true; path=/"
+        return pdfResponse
 
 @app.route("/town_profile", methods=["GET", "POST"])
 def town_profile():
@@ -121,7 +131,7 @@ def town_profile():
 
         nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"]))+" --config="+quote(json.dumps(templateConfig)))
 
-        if(requestObj['type'] == "pie"):
+        if(requestObj['type'] == "map"):
             print(nodeResponse.stdout)
             print(nodeResponse.stderr)
             print(nodeResponse.exitcode)
