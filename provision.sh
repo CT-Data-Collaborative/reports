@@ -15,5 +15,4 @@ curl -sL https://deb.nodesource.com/setup | sudo bash -
 echo "Y" | sudo apt-get install nodejs build-essential
 
 # NPM install packages - THIS DOES NOT WORK
-#  however i've installed them in the repo
-# sudo npm install --global d3 minimist jsdom@3
+sudo npm install --prefix /usr/local d3 minimist jsdom@3
