@@ -5,7 +5,7 @@
     "author": "Brendan Swiniarski <bswiniarski@ctdata.org>",
     "contributors": [{
         "name": "Sasha Cuerda",
-        "email": "scuerda@ctdata.org",
+        "email": "scuerda@ctdata.org"
     }],
     "dependencies": {
         "d3": "3.5.6",
