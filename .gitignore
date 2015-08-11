@@ -7,3 +7,5 @@ pip-selfcheck.json
 node_modules/
 .DS_Store
 .vagrant
+venv/
+*.pyc
