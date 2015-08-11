@@ -1,97 +1,161 @@
-args = require("minimist")(process.argv.slice(2));
+/**
+ * Necessary Requirements
+ * d3 - charting library
+ * args - command line arguments, passed to node, processed by minimist
+ * jsdom - JSDOM library, for accessing browser-less virtual DOM
+ *
+ * Special for the map viz code
+ * fs - python filesystem interactions (file)
+ * path - python path manipulation (os.path)
+ */
+var d3 = require("d3"),
+        minimist = require("minimist"),
+        jsdom = require("jsdom"),
+        fs = require("fs");//,
+        // path = require("path");
 
-if (args.config) {
-    args.config = JSON.parse(args.config);
-}
+/**
+ * Process arguments from node call using minimist
+ */
+var args = minimist(process.argv.slice(2)),
+        data = JSON.parse(args.data),
+        config = JSON.parse(args.config),
+        geography = args.geography;
 
-var d3 = require('d3');
-var document = require('jsdom').jsdom();
 
-var dataset = JSON.parse(args.data);
+// get geojson from file - proposed node parameters as follows
+// ie --data="" --config="" --geography="/full/path/to/geometry/file"
 
-var width = 460,
-    height = 300;
-
-// get geojson from file - not sure if this is the best way of doing it, or if python should pass geojson as parameter
-// ie --data="" --config="" --geography=""
-var fs = require("fs");
-var path = require("path");
 // This works too
 // console.log(path.join(__dirname, "../static/town_shapes.json"));
+
 var geojson = fs.readFileSync("/vagrant/static/town_shapes.json", {encoding : "utf8"})
 geoData = JSON.parse(geojson);
 
 
-// stuff and things
-var projection = d3.geo.mercator()
-        .center([-72.664979, 41.55])
-        .scale(Math.pow(10,4.0))
-        .translate([width/2, height/2]);
+// get chart function object
+chart = mapChart();
 
-var path = d3.geo.path()
-        .projection(projection);
+// use available config parameters to override defaults
+// height
+if ("height" in config && config.height > 0) {
+    chart.height(config.height);
+}
 
-// get body from jsdom
-var body = d3.select(document.body);
+// width
+if ("width" in config && config.width > 0) {
+    chart.width(config.width);
+}
 
-// var svg = body.html("").append("svg")
-//         .attr("xmlns", "http://www.w3.org/2000/svg")
-//         .attr("width", width)
-//         .attr("height", height)
-//         .append("g")
-//         .attr("translate", [height/2, width/2]);
+//Color scale
+if ("colors" in config && config.colors.length > 0) {
+    chart.colors(config.colors);
+}
 
-// var path = svg.selectAll("path")
-//         .data(geojson.features)
-//         .enter()
-//         .append("path")
-//             .attr("d", path)
-//             .attr("stroke", "0.5px")
-//             .attr("fill", "steelblue")
-//             .attr("fill-opacity", function() {return Math.random();} )
-//             .attr("stroke", "black");
-
-var width  = 300;
-var height = 400;
-
-var vis = body.html("").append("svg")
-  .attr("width", width).attr("height", height)
-
-// create a first guess for the projection
-var center = d3.geo.centroid(geoData)
-var scale = 150;
-var offset = [width/2, height/2];
-var projection = d3.geo.mercator().scale(scale).center(center)
-    .translate(offset);
-
-// create the path
-var path = d3.geo.path().projection(projection);
-
-// using the path determine the bounds of the current map and use 
-// these to determine better values for the scale and translation
-var bounds  = path.bounds(geoData);
-var hscale  = scale*width  / (bounds[1][0] - bounds[0][0]);
-var vscale  = scale*height / (bounds[1][1] - bounds[0][1]);
-var scale   = (hscale < vscale) ? hscale : vscale;
-var offset  = [width - (bounds[0][0] + bounds[1][0])/2,
-                        height - (bounds[0][1] + bounds[1][1])/2];
-
-// new projection
-projection = d3.geo.mercator()
-        .center(center)
-        .scale(scale)
-        .translate(offset);
-path = path.projection(projection);
-
-// add a rectangle to see the bound of the svg
-vis.append("rect").attr('width', width).attr('height', height)
-.style('stroke', 'black').style('fill', 'none');
-
-vis.selectAll("path").data(geoData.features).enter().append("path")
-.attr("d", path)
-.style("fill", "red")
-.style("stroke-width", "1")
-.style("stroke", "black")
-
+// get body from jsdom, call chart function
+var document = jsdom.jsdom();
+var body = d3.select(document.body)
+            .html("")
+            .datum(data)
+            .call(chart);
 
 console.log(body.html());
+
+function mapChart() {
+    var width = 200,
+            height = 200,
+            margin = 5, // %
+            colors = d3.scale.category20();
+
+    function chart(selection) {
+        selection.each(function(data) {
+
+            // Convert data to standard representation greedily;
+            // this is needed for nondeterministic accessors.
+            data = data;
+            // data = data.map(function(d, i) {
+            //     return [label.call(data, d, i), value.call(data, d, i)];
+            // });
+
+            // SVG Container
+            var svg = d3.select(this).append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .attr("xmlns", "http://www.w3.org/2000/svg")
+                .append("g")
+                    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+            // create a first guess for the projection - a unit project of 1px centered at 0,0
+            var projection = d3.geo.mercator()
+                        .scale(1) 
+                        .translate([0,0]);
+
+            // create the path
+            var path = d3.geo.path().projection(projection);
+
+            // using the path determine the bounds of the current map and use 
+            // these to determine better values for the scale and translation
+            var bounds  = path.bounds(geoData),
+                    hscale = (bounds[1][0] - bounds[0][0]) / width,
+                    vscale = (bounds[1][1] - bounds[0][1]) / height,
+                    scale = (1-(margin/100)) / Math.max(hscale, vscale),
+                    translate = [(width - scale * (bounds[1][0] + bounds[0][0])) / 2, (height - scale * (bounds[1][1] + bounds[0][1])) / 2];
+
+                    console.log("<!--");
+                    console.log(translate);
+                    console.log("-->");
+                    return;
+            // update values accordingly in the projection object
+            projection.scale(scale).translate(translate);
+
+            // map features
+            svg.selectAll("path")
+                .data(geoData.features)
+                .enter()
+                .append("path")
+                    .attr("d", path)
+                    .attr("stroke", "0.5px")
+                    .attr("fill", "black")
+                    // .attr("fill-opacity", function() {return Math.random();} )
+                    .attr("fill-opacity", function(d) { return (d.properties.NAME10 == "Hartford" ? 1 : 0)} )
+                    .attr("stroke", "black");
+        });
+    }
+
+    /**
+     * Getter-Setter functions for chart function object
+     */
+    chart.width = function(_) {
+        if (!arguments.length) return width;
+        width = _;
+        return chart;
+    };
+
+    chart.height = function(_) {
+        if (!arguments.length) return height;
+        height = _;
+        return chart;
+    };
+
+    chart.colors = function(_) {
+      if (!arguments.length) return colors;
+      colors = d3.scale.ordinal()
+                        .range(_);
+      return chart;  
+    };
+
+    // These will probably never be used, but keeping for posterity
+    chart.label = function(_) {
+        if (!arguments.length) return label;
+        label = _;
+        return chart;
+    };
+
+    chart.value = function(_) {
+        if (!arguments.length) return value;
+        value = _;
+        return chart;
+    };
+
+    return chart;
+}
