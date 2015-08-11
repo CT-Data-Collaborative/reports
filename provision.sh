@@ -5,8 +5,7 @@ sudo apt-get update
 echo "Y" | sudo apt-get upgrade
 
 # install python dev, pip, and a series of dependancies
-echo "Y" | sudo apt-get install python-dev python-pip python-lxml libcairo2 libpango1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info g++
-
+echo "Y" | sudo apt-get install g++ libxml2-dev libxslt1-dev zlib1g-dev python-dev python-pip python-lxml libcairo2 libpango1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info git
 # PIP install packages 
 #
 # Now being installed in virtualevn via requirements.txt
