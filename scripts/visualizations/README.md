@@ -1,6 +1,9 @@
 # Visualizations
 ### D3 Based Visualization Scripts used by PDF serving application  
   
+#### Tables
+Tables do not currently have any configuration parameters. As they are drawn with pure HTML, they can and currently are styled using CSS only.  
+  
 #### Pie and "Donut" charts `pie.js`
 Pie Charts accept the following configuration parameters:  
 + `height` sets the height of the SVG container used to draw the chart. Corresponds to the `height` D3 parameter for an SVG object.
