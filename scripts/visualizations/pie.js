@@ -50,8 +50,8 @@ if ("endAngle" in config && config.endAngle > 0) {
 }
 
 //Color scale
-if ("chartcolors" in config && config.chartcolors.length > 0) {
-    chart.colors(config.chartcolors);
+if ("colors" in config && config.colors.length > 0) {
+    chart.colors(config.colors);
 }
 
 // get body from jsdom, call chart function

@@ -11,4 +11,4 @@ Pie Charts accept the following configuration parameters:
    + `startAngle = 1.5 * Math.PI, endAngle = 2.5 * Math.PI`.
 + `endAngle` sets the end angle __in radians__ for the pie slices drawn in the visualization. Corresponds to the `endAngle` D3 parameter for the `d3.svg.arc` path object. Useful for creating half-circle charts, ie:  
    + `startAngle = 1.5 * Math.PI, endAngle = 2.5 * Math.PI`.
-+ `chartcolors` sets the set of colors used to draw this chart. This list of colors (text, fully qualified hexidecimal colors such as `#F39B00`) will get fed into the `range` D3 parameter for the `d3.scale.ordinal` object used to determine colors for the chart.  
++ `colors` sets the set of colors used to draw this chart. This list of colors (text, fully qualified hexidecimal colors such as `#F39B00`) will get fed into the `range` D3 parameter for the `d3.scale.ordinal` object used to determine colors for the chart.  
