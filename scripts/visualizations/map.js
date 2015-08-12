@@ -47,6 +47,11 @@ if ("width" in config && config.width > 0) {
     chart.width(config.width);
 }
 
+// margin
+if ("margin" in config && config.margin > 0) {
+    chart.margin(config.margin);
+}
+
 //Color scale
 if ("colors" in config && config.colors.length > 0) {
     chart.colors(config.colors);
@@ -81,9 +86,8 @@ function mapChart() {
             var svg = d3.select(this).append("svg")
                 .attr("width", width)
                 .attr("height", height)
-                .attr("xmlns", "http://www.w3.org/2000/svg");
-                // .append("g")
-                    // .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                .attr("xmlns", "http://www.w3.org/2000/svg")
+                .append("g");
 
             // create a first guess for the projection - a unit project of 1px centered at 0,0
             var projection = d3.geo.mercator()
@@ -130,6 +134,12 @@ function mapChart() {
     chart.height = function(_) {
         if (!arguments.length) return height;
         height = _;
+        return chart;
+    };
+
+    chart.margin = function(_) {
+        if (!arguments.length) return margin;
+        margin = _;
         return chart;
     };
 
