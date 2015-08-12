@@ -81,9 +81,9 @@ function mapChart() {
             var svg = d3.select(this).append("svg")
                 .attr("width", width)
                 .attr("height", height)
-                .attr("xmlns", "http://www.w3.org/2000/svg")
-                .append("g")
-                    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                .attr("xmlns", "http://www.w3.org/2000/svg");
+                // .append("g")
+                    // .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
             // create a first guess for the projection - a unit project of 1px centered at 0,0
             var projection = d3.geo.mercator()
@@ -101,10 +101,6 @@ function mapChart() {
                     scale = (1-(margin/100)) / Math.max(hscale, vscale),
                     translate = [(width - scale * (bounds[1][0] + bounds[0][0])) / 2, (height - scale * (bounds[1][1] + bounds[0][1])) / 2];
 
-                    console.log("<!--");
-                    console.log(translate);
-                    console.log("-->");
-                    return;
             // update values accordingly in the projection object
             projection.scale(scale).translate(translate);
 
