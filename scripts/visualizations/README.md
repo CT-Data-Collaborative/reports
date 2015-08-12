@@ -16,9 +16,15 @@ Pie Charts accept the following configuration parameters:
    + `startAngle = 1.5 * Math.PI, endAngle = 2.5 * Math.PI`.
 + `colors` sets the set of colors used to draw this chart. This list of colors (text, fully qualified hexidecimal colors such as `#F39B00`) will get fed into the `range` D3 parameter for the `d3.scale.ordinal` object used to determine colors for the chart.  
 
+#### Bar charts `bar.js`
+Bar Charts accept the following configuration parameters:
++ `width` sets the height of the SVG container used to draw the chart. Corresponds to the `width` D3 parameter for an SVG object.
++ `barHeight` sets the height of the SVG rectangles drawn on the chart - roughly equivalent to a bin width parameter.
++ `colors` sets the set of colors used to draw this chart. This list of colors (text, fully qualified hexidecimal colors such as `#F39B00`) will get fed into the `range` D3 parameter for the `d3.scale.ordinal` object used to determine colors for the chart. 
+
 #### Maps `map.js`
 Maps accept the following configuration parameters:
-+ `height` sets the height of the SVG container used to draw the chart. Corresponds to the `height` D3 parameter for an SVG object.
-+ `width` sets the height of the SVG container used to draw the chart. Corresponds to the `width` D3 parameter for an SVG object.
++ `height` sets the height of the SVG container used to draw the map. Corresponds to the `height` D3 parameter for an SVG object.
++ `width` sets the height of the SVG container used to draw the map. Corresponds to the `width` D3 parameter for an SVG object.
 + `margin` A percentage as a whole integer (ie `5` not `.05`) that sets the margin between the SVG container and the bounding box of the map. Used in calculating the bounding box and center of the map. 
-+ `colors` sets the set of colors used to draw this chart. This list of colors (text, fully qualified hexidecimal colors such as `#F39B00`) will get fed into the `range` D3 parameter for the `d3.scale.ordinal` object used to determine colors for the chart.  
++ `colors` sets the set of colors used to draw this map. This list of colors (text, fully qualified hexidecimal colors such as `#F39B00`) will get fed into the `range` D3 parameter for the `d3.scale.ordinal` object used to determine colors for the map.  

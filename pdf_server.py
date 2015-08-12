@@ -110,6 +110,8 @@ def town_profile():
     req = json.loads('{"template":"town_profile","objects":[{"type":"pie","name":"race","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"table","name":"population","data":[["","Hartford","Connecticut"],[2015,125999,3644545],[2020,126656,3702469],[2025,126185,3746181]],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
     
     req = json.loads('{"template":"town_profile","objects":[{"type":"pie","name":"population","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"map","name":"race","data":[],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
+    
+    req = json.loads('{"template":"town_profile","objects":[{"type":"bar","name":"population","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"map","name":"race","data":[],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
 
     template = req["template"]
     
@@ -131,7 +133,7 @@ def town_profile():
 
         nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"]))+" --config="+quote(json.dumps(templateConfig)))
 
-        if(requestObj['type'] == "map"):
+        if(requestObj['type'] == "bar"):
             print(nodeResponse.stdout)
             print(nodeResponse.stderr)
             print(nodeResponse.exitcode)
