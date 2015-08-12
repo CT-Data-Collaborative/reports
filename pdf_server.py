@@ -131,7 +131,11 @@ def town_profile():
         if (requestObj["type"] == "table"):
             requestObj["data"] = intermediary.transform_data(requestObj["data"], "table")
 
-        nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"]))+" --config="+quote(json.dumps(templateConfig)))
+        # merge template config with specific configs for this object
+        config = templateConfig.copy()
+        config.update(requestObj["config"])
+
+        nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"]))+" --config="+quote(json.dumps(config)))
 
         if(requestObj['type'] == "bar"):
             print(nodeResponse.stdout)

@@ -90,14 +90,14 @@ function mapChart() {
                 .append("g");
 
             // create a first guess for the projection - a unit project of 1px centered at 0,0
-            var projection = d3.geo.mercator()
-                        .scale(1) 
+            var projection = d3.geo.equirectangular()
+                        .scale(1)
                         .translate([0,0]);
 
             // create the path
             var path = d3.geo.path().projection(projection);
 
-            // using the path determine the bounds of the current map and use 
+            // using the path determine the bounds of the current map and use
             // these to determine better values for the scale and translation
             var bounds  = path.bounds(geoData),
                     hscale = (bounds[1][0] - bounds[0][0]) / width,
@@ -147,7 +147,7 @@ function mapChart() {
       if (!arguments.length) return colors;
       colors = d3.scale.ordinal()
                         .range(_);
-      return chart;  
+      return chart;
     };
 
     // These will probably never be used, but keeping for posterity

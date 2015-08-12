@@ -4,31 +4,66 @@ body {
 div {
     box-sizing: border-box;
 }
-/*h3 {
-    background-color: rgba(255, 255, 255, 1);
-    border: 2px solid black;
-    bottom: 65px;
-    display: inline-block;
-    right: 20px;
-    position: relative;
-    font-style: italic;
-    padding:1px 2px;
-}*/
+
+
 h3 {
     background-color: rgba(255, 255, 255, 1);
     border: 2px solid black;
     display: inline-block;
     font-style: italic;
-    left: 11%;
+    left: 0;
+    margin: 0 !important;
     padding: 1px 40px;
     position: absolute;
-    top: 1%;
-}
-div.container {
-    border: 3px double black;
-    padding:2%;
+    top: -10pt;
 }
 
+h1 {
+    margin: 0;
+}
+
+h2 {
+    font-size: 16pt;
+    font-weight: normal;
+    margin: 0 !important;
+}
+div.title_header {
+    margin-bottom: 14pt;
+    position: relative;
+}
+
+div.container {
+    border: 3px double black;
+    padding:0;
+    position: relative;
+}
+div#small_map img {
+    height: 100pt;
+    width: auto;
+}
+
+div#small_map p {
+    bottom: 10pt;
+    font-size: 6pt;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 5pt;
+}
+div#small_map {
+    position: absolute;
+    right: 25pt;
+    top: 0;
+}
+div.title_header ul.address:first-of-type {
+    padding: 0;
+}
+ul.address {
+    display: inline-block;
+    font-size: 8pt;
+    list-style: outside none none;
+    margin: 0;
+}
 div.vis_container.left,
 div.vis_container.right {
     width: 48%;
@@ -44,14 +79,10 @@ div.container {
     page-break-inside: avoid;
 }
 div.vis_container {
-    border-bottom: 3px double black;
-    border-left: 3px double black;
-    /*height:200pt;*/
-    margin: 1%;
+    margin: 1pt;
 
 }
 div.vis_container > * {
-    /*border: 1px solid red;*/
     max-width: 100%;
     padding: 1pt 5pt 0;
     width: 100%;
@@ -62,11 +93,10 @@ div.vis_container table th {
 }
 
 div.vis_container table tbody tr td:first-child {
-  font-weight: bold;
 }
 div.vis_container table thead tr th,
 div.vis_container table tbody tr td:not(:first-child) {
-  text-align:right
+  text-align:center;
 }
 table {
     border-collapse: collapse;
@@ -83,7 +113,7 @@ div.vis_container > img {
     max-height: 175pt;
     width: auto;
 }
-h5 {
+h4 {
     background: rgba(255, 255, 255, 1) none repeat scroll 0 0;
     box-sizing: border-box;
     display: inline;
@@ -92,6 +122,7 @@ h5 {
     padding: 1px 15px;
     position: relative;
     top: 5px;
+    font-weight: normal;
 }
 
 @media screen {
@@ -133,7 +164,7 @@ h5 {
         }
     }
     body {
-        font-size:8pt;
+        font-size:7pt;
         font-family: "FreeSerif";
     }
     h3 {

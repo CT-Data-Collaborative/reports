@@ -9,23 +9,60 @@ Town Profile{% if town%} - {{ town }}{% endif %}
 {% endblock title -%}
 
 {% block body %}
+<div class="title_header">
+    <h1 id="town_header">{{ town }} Connecticut</h1>
+    <h2>CERC town Profile 2014</h2>
+    <ul class="address">
+        <li>Town Hall</li>
+        <li>550 Main Street</li>
+        <li>Hartford, CT 06103</li>
+        <li>(860) 543-8500</li>
+    </ul>
+    <ul class="address">
+        <li><i>Belongs To</i></li>
+        <li>Hartford County</li>
+        <li>LMA Hartford</li>
+        <li>Capitol Area Economic Dev. Region</li>
+        <li>Capitol Region Planning Area</li>
+    </ul>
+    <div id="small_map">
+            {{objects["header_map"]["output"] | safe }}
+            <p>Incorporated in 1784</p>
+    </div>
+</div>
 <div class="container">
-    <h3>Demographics</h3>
+    <h3 class="section_header">Demographics</h3>
     <div id="population" class="vis_container left">
         {% if objects["population"] -%}
-        <h5>Population</h5>
+        <h4>Population</h4>
         {{ objects["population"]["output"] | safe }}
         {% endif -%}
     </div>
     <div id="race" class="vis_container right">
         {% if objects["race"] -%}
-        <h5>Race/Ethnicity</h5>
+        <h4>Race/Ethnicity</h4>
         {{ objects["race"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div id="demog_facts" class="vis_container left">
+        {% if objects["demog_facts"] -%}
+        {{ objects["demog_facts"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div id="poverty" class="vis_container right">
+        {% if objects["poverty"] -%}
+        {{ objects["poverty"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div id="educational_attainment" class="vis_container right">
+        {% if objects["educational_attainment"] -%}
+        <h4>Educational Attainment</h4>
+        {{ objects["educational_attainment"]["output"] | safe }}
         {% endif -%}
     </div>
     <div id="age" class="vis_container span">
         {% if objects["age"] -%}
-        <h5>Age Distribution</h5>
+        <h4>Age Distribution</h4>
         {{ objects["age"]["output"] | safe }}
         {% endif -%}
     </div>
