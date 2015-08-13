@@ -14,7 +14,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         {% if config["town"] -%}{{ config["town"] }}, {% endif -%}
         Connecticut
     </h1>
-    <h2>CERC town Profile 2014</h2>
+    <h2>CERC Town Profile 2014</h2>
     {% if info["address"] -%}
         <ul class="header_list">
             {% for item in info["address"] -%}
@@ -135,6 +135,43 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         {% endif -%}
     </div>
     <div class="anchor">For more education data see: <a href="http://sdeportal.ct.gove/Cedar/WEB/ResearchandReports/SSPReports.aspx">http://sdeportal.ct.gove/Cedar/WEB/ResearchandReports/SSPReports.aspx</a></div>
+</div>
+<div class="title_header">
+    <h1 id="town_header">
+        {% if config["town"] -%}{{ config["town"] }}, {% endif -%}
+        Connecticut
+    </h1>
+    <h2>CERC town Profile 2014</h2>
+    <div id="logo">
+        <img src="{{ url_for("static", filename="images/cerc.png") }}"
+    </div>
+</div>
+<div class="container first-container">
+    <h3 class="section_header">Governemt</h3>
+    <div id="enrollment" class="vis_container left">
+        <p>Government Form: {{ info["government_form"] }}</p>
+    </div>
+    <div id="revenue" class="vis_container left quarter">
+        {% if objects["revenue"] -%}
+        {{ objects["revenue"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div id="expenditures" class="vis_container right quarter">
+        {% if objects["expenditures"] -%}
+        {{ objects["expenditures"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div id="tax" class="vis_container left quarter">
+        {% if objects["tax"] -%}
+        {{ objects["tax"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div id="indebtedness" class="vis_container right quarter">
+        {% if objects["indebtedness"] -%}
+        {{ objects["indebtedness"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div class="anchor"></div>
 </div>
 <a href="/town_profile?print=1" target="_blank" class="noprint">Print View</a>
 {% endblock body %}

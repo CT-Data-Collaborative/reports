@@ -34,4 +34,6 @@ def get_info(data):
 
     info["enrollment_info"] = {"district" : "Hartford School District", "enrollment" : 20390}
 
+    info["government_form"] = "Council-Manager"
+
     return info

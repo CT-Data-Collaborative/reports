@@ -98,6 +98,7 @@ div.vis_container > * {
     max-width: 100%;
     padding: 1pt 5pt 0;
     width: 100%;
+    margin-bottom: 0;
 }
 div.vis_container table td:not(:first-child),
 div.vis_container table th:not(:first-child) {
@@ -145,6 +146,16 @@ h4 {
     position: relative;
     top: 5px;
     font-weight: normal;
+}
+div#logo {
+    display: inline-block;
+    height: 30pt;
+}
+div#logo > img {
+    height: 70pt;
+    position: absolute;
+    right: 0;
+    top: -10pt;
 }
 
 @media screen {

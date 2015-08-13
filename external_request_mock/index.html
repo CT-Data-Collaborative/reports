@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    </head>
+    <body>
+    <h2>Simulation of calling pdf api from an external site.</h2>
+    <p>This application posts a request through to the application server. If you're running the application from the included vagrant box, this will work as is. Otherwise, you'll need to tweak the href and action settings to point correctly.</p>
+        <a href="http://192.168.33.101:9999/form"><h2>Clear Request</h2></a>
+        <form method="POST" action="http://192.168.33.101:9999/form">
+            <textarea name="data" id="data" style="width:80%;height:500px;margin: 0 10%;"></textarea>
+            <!-- <input type="submit" name="submit" title="Submit" style="margin:0 10%;"/> -->
+            <button type="button" name="submit" id="submit" style="margin:0 10%;">Submit</button>
+        </form>
+        <!-- JQuery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <!-- JQuery UI -->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <!-- fileDownload.js -->
+        <script src="static/jquery.fileDownload.js"></script>
+        <!-- register click for fileDownload -->
+        <script>
+        $(document).ready(function() {
+            $("button#submit").click(function() {
+                $.fileDownload(
+                    "http://192.168.33.101:9999/form",
+                    {
+                        preparingMessageHtml: "We are preparing your report, please wait...",
+                        failMessageHtml: "There was a problem generating your report, please try again.",
+                        httpMethod: "POST",
+                        data: {data : $("textarea#data").val()}
+                    });
+            });
+        });
+        </script>
+    </body>
+</html>
