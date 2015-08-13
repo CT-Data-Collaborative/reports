@@ -104,15 +104,19 @@ def form():
 
 @app.route("/town_profile", methods=["GET", "POST"])
 def town_profile():
-    # build vis objects
-    req = json.loads('{"template":"town_profile","objects":[{"type":"table","name":"race","data":[["","Hartford","Connecticut"],["Native American",596,8770],["Black",47786,361668],["Hispanic (any race)",54289,496939],["White",43660,2792554]],"config":{}},{"type":"table","name":"population","data":[["","Hartford","Connecticut"],[2015,125999,3644545],[2020,126656,3702469],[2025,126185,3746181]],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
+    # req = json.loads('{"template":"town_profile","objects":[{"type":"table","name":"race","data":[["","Hartford","Connecticut"],["Native American",596,8770],["Black",47786,361668],["Hispanic (any race)",54289,496939],["White",43660,2792554]],"config":{}},{"type":"table","name":"population","data":[["","Hartford","Connecticut"],[2015,125999,3644545],[2020,126656,3702469],[2025,126185,3746181]],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
 
-    req = json.loads('{"template":"town_profile","objects":[{"type":"pie","name":"race","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"table","name":"population","data":[["","Hartford","Connecticut"],[2015,125999,3644545],[2020,126656,3702469],[2025,126185,3746181]],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
+    # req = json.loads('{"template":"town_profile","objects":[{"type":"pie","name":"race","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"table","name":"population","data":[["","Hartford","Connecticut"],[2015,125999,3644545],[2020,126656,3702469],[2025,126185,3746181]],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
     
-    req = json.loads('{"template":"town_profile","objects":[{"type":"pie","name":"population","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"map","name":"race","data":[],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
+    # req = json.loads('{"template":"town_profile","objects":[{"type":"pie","name":"population","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"map","name":"race","data":[],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
     
-    req = json.loads('{"template":"town_profile","objects":[{"type":"bar","name":"population","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"map","name":"race","data":[],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
+    # req = json.loads('{"template":"town_profile","objects":[{"type":"bar","name":"population","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"map","name":"race","data":[],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
+    
+    # Town profile mock json request has been moved to it's own file.
+    req = open("static/mock.json")
+    req = json.load(req)
 
+    # Pull template name out of config file
     template = req["template"]
     
     # config options should be passed in to the request as part of the json - under "config" - and should be an object of key:value pairs
@@ -121,6 +125,9 @@ def town_profile():
     if (os.path.isfile(os.path.join("static", template+".json"))):
         templateConfig = json.load(open(os.path.join("static", template+".json")))
 
+    templateConfig.update(req["config"])
+
+    # build vis objects
     objects = {}
     for requestObj in req["objects"]:
         obj = {}
@@ -137,10 +144,17 @@ def town_profile():
 
         nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"]))+" --config="+quote(json.dumps(config)))
 
+<<<<<<< HEAD
         if(requestObj['type'] == "bar"):
             print(nodeResponse.stdout)
             print(nodeResponse.stderr)
             print(nodeResponse.exitcode)
+=======
+        # if(requestObj['type'] == "map"):
+        #     print(nodeResponse.stdout)
+        #     print(nodeResponse.stderr)
+        #     print(nodeResponse.exitcode)
+>>>>>>> Mock json for town profile mockup now stored as its own file. Easier to edit, read etc.
 
         obj["output"] = render_template(requestObj["type"]+".html", data = nodeResponse.stdout)
 
@@ -150,7 +164,7 @@ def town_profile():
         objects[requestObj["name"]] = obj
 
     # render template
-    response = render_template(template+".html", objects = objects)
+    response = render_template(template+".html", config = templateConfig, objects = objects)
 
     # Temporarily using a get parameter ("print" = true)
     # should be using request.method == POST, as commented out below.
