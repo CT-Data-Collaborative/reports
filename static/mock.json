@@ -6,14 +6,6 @@
   },
   "objects": [
     {
-      "type": "map",
-      "name": "header_map",
-      "data": [],
-      "config": {
-        "margin": 0
-      }
-    },
-    {
       "type": "table",
       "name": "population",
       "data": [
@@ -218,43 +210,316 @@
         ],
         [
           "Male",
-          "4865 (4%)",
-          "12034 (10%)",
-          "9585 (8%)",
-          "20337 (16%)",
-          "8377 (7%)",
-          "4825 (4%)",
+          "4865 4%",
+          "12034 10%",
+          "9585 8%",
+          "20337 16%",
+          "8377 7%",
+          "4825 4%",
           60023
         ],
         [
           "Female",
-          "3927 (3%)",
-          "12069 (10%)",
-          "9869 (8%)",
-          "22427 (18%)",
-          "9782 (8%)",
-          "6782 (5%)",
+          "3927 3%",
+          "12069 10%",
+          "9869 8%",
+          "22427 18%",
+          "9782 8%",
+          "6782 5%",
           64856
         ],
         [
           "County Total",
-          "40352 (6%)",
-          "152709 (17%)",
-          "79468 (9%)",
-          "299428 (34%)",
-          "180710 (20%)",
-          "130837 (15%)",
+          "40352 6%",
+          "152709 17%",
+          "79468 9%",
+          "299428 34%",
+          "180710 20%",
+          "130837 15%",
           893504
         ],
         [
           "State Total",
-          "200031 (6%)",
-          "612181 (17%)",
-          "328661 (9%)",
-          "1194793 (33%)",
-          "726725 (20%)",
-          "509822 (14%)",
+          "200031 6%",
+          "612181 17%",
+          "328661 9%",
+          "1194793 33%",
+          "726725 20%",
+          "509822 14%",
           3572213
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "business",
+      "data": [
+        [
+          "Sector",
+          "Units",
+          "Employment"
+        ],
+        [
+          "Total - All Industries",
+          3526,
+          112709
+        ],
+        [
+          "23 - Construction",
+          157,
+          1310
+        ],
+        [
+          "31 - Manufacturing",
+          68,
+          1236
+        ],
+        [
+          "44 - Retail Trade",
+          376,
+          3547
+        ],
+        [
+          "52 - Finance and Insurance",
+          241,
+          23074
+        ],
+        [
+          "62 - Health Care and Social Assistance",
+          394,
+          25745
+        ],
+        [
+          "Total Government",
+          169,
+          19846
+        ],
+        [
+          "State Government",
+          105,
+          11409
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "grand_list",
+      "data": [
+        [
+          "",
+          "Amount",
+          "% of Net"
+        ],
+        [
+          "Connecticut Light & Power",
+          "$139,442,670.00",
+          "3.90%"
+        ],
+        [
+          "Travelers Indemnity Co",
+          "$130,705,740.00",
+          "3.70%"
+        ],
+        [
+          "Hartford Fire Insurance & Twin City Ins",
+          "$118,704,090.00",
+          "3.40%"
+        ],
+        [
+          "Aetna Life Insurance Co",
+          "$105,487,280.00",
+          "3.00%"
+        ],
+        [
+          "HUB Properties Trust",
+          "$48,977,640.00",
+          "1.40%"
+        ],
+        [
+          "Net Grand List (2013)",
+          "$3,535,402,755.00",
+          ""
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "employers",
+      "data": [
+        [
+          ""
+        ],
+        [
+          "Northeast Utilities"
+        ],
+        [
+          "Travelers Indemnity Co"
+        ],
+        [
+          "Hartford Financial Svcs Group"
+        ],
+        [
+          "Aetna Inc"
+        ],
+        [
+          "The Hartford"
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "enrollment",
+      "data": [
+        [
+          "",
+          "Town",
+          "State"
+        ],
+        [
+          "Total Town School Enrollment",
+          21318,
+          548313
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "cmt",
+      "data": [
+        [
+          "",
+          "Grade 4",
+          "",
+          "Grade 6",
+          "",
+          "Grade 8",
+          ""
+        ],
+        [
+          "",
+          "Town",
+          "State",
+          "Town",
+          "State",
+          "Town",
+          "State"
+        ],
+        [
+          "Reading",
+          29,
+          63,
+          48,
+          76,
+          44,
+          75
+        ],
+        [
+          "Math",
+          32,
+          67,
+          42,
+          72,
+          32,
+          67
+        ],
+        [
+          "Writing",
+          35,
+          67,
+          39,
+          65,
+          30,
+          65
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "computers",
+      "data": [
+        [
+          "",
+          "Town",
+          "State"
+        ],
+        [
+          "Elementary",
+          3.8,
+          4.1
+        ],
+        [
+          "Middle",
+          1.5,
+          2.7
+        ],
+        [
+          "Secondary",
+          9,
+          2.9
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "class_size",
+      "data": [
+        [
+          "",
+          ""
+        ],
+        [
+          "Grade K",
+          17.9
+        ],
+        [
+          "Grade 2",
+          19.7
+        ],
+        [
+          "Grade 5",
+          19.6
+        ],
+        [
+          "Grade 7",
+          21.5
+        ],
+        [
+          "High School",
+          19.7
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "sat",
+      "data": [
+        [
+          "",
+          "Town",
+          "State"
+        ],
+        [
+          "Reading",
+          402,
+          502
+        ],
+        [
+          "Writing",
+          400,
+          506
+        ],
+        [
+          "Math",
+          392,
+          506
         ]
       ],
       "config": {}

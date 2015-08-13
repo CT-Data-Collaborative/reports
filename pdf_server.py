@@ -119,13 +119,20 @@ def town_profile():
     # Pull template name out of config file
     template = req["template"]
     
+    # pull extra information?
+    info = intermediary.get_info(req)
+
     # config options should be passed in to the request as part of the json - under "config" - and should be an object of key:value pairs
     # other config options (such as color schemes) will be loaded dynamically from static json files that share a name with the template
     templateConfig = {}
     if (os.path.isfile(os.path.join("static", template+".json"))):
         templateConfig = json.load(open(os.path.join("static", template+".json")))
 
+    # Add any template-level config params from request
     templateConfig.update(req["config"])
+
+    # Get extra objects - ones that will be present for all requests for this template that don't need to be included in the json passed in through POST
+    req["objects"].extend(intermediary.get_extra_obj(req))
 
     # build vis objects
     objects = {}
@@ -164,7 +171,7 @@ def town_profile():
         objects[requestObj["name"]] = obj
 
     # render template
-    response = render_template(template+".html", config = templateConfig, objects = objects)
+    response = render_template(template+".html", config = templateConfig, info = info, objects = objects)
 
     # Temporarily using a get parameter ("print" = true)
     # should be using request.method == POST, as commented out below.

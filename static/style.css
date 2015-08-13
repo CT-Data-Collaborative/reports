@@ -1,5 +1,5 @@
 body {
-    border:1px solid black;
+    /*border:1px solid black;*/
 }
 div {
     box-sizing: border-box;
@@ -19,19 +19,22 @@ h3 {
 }
 
 h1 {
+    font-size: 18pt;
     margin: 0;
 }
 
 h2 {
-    font-size: 16pt;
     font-weight: normal;
+    font-size:14pt;
     margin: 0 !important;
 }
 div.title_header {
     margin-bottom: 14pt;
     position: relative;
 }
-
+div.container:not(.first-container) {
+    border-top: medium none;
+}
 div.container {
     border: 3px double black;
     padding:0;
@@ -48,21 +51,29 @@ div#small_map p {
     margin: 0;
     padding: 0;
     position: absolute;
-    right: 5pt;
+    right: 50pt;
 }
 div#small_map {
     position: absolute;
-    right: 25pt;
+    right: 0pt;
     top: 0;
 }
-div.title_header ul.address:first-of-type {
+div.title_header ul.header_list:first-of-type {
     padding: 0;
 }
-ul.address {
+ul.header_list {
     display: inline-block;
     font-size: 8pt;
     list-style: outside none none;
     margin: 0;
+}
+
+div.anchor {
+    clear: both;
+}
+div.vis_container.left.quarter,
+div.vis_container.right.quarter {
+    width: 24%!important;
 }
 div.vis_container.left,
 div.vis_container.right {
@@ -77,6 +88,7 @@ div.vis_container.span {
 }
 div.container {
     page-break-inside: avoid;
+    padding-bottom: 10pt;
 }
 div.vis_container {
     margin: 1pt;
@@ -87,16 +99,17 @@ div.vis_container > * {
     padding: 1pt 5pt 0;
     width: 100%;
 }
-div.vis_container table td,
-div.vis_container table th {
-    max-width: 6%;
+div.vis_container table td:not(:first-child),
+div.vis_container table th:not(:first-child) {
+    max-width: 45pt;
 }
 
+div.vis_container table tbody tr th:first-child,
 div.vis_container table tbody tr td:first-child {
 }
-div.vis_container table thead tr th,
+div.vis_container table thead tr th:not(:first-child),
 div.vis_container table tbody tr td:not(:first-child) {
-  text-align:center;
+  text-align:right;
 }
 table {
     border-collapse: collapse;
@@ -112,6 +125,15 @@ div.vis_container > img {
     margin: auto;
     max-height: 175pt;
     width: auto;
+}
+
+ul.float_list {
+    list-style: outside none none;
+    margin: 0;
+}
+ul.float_list li {
+    display: inline-block;
+    width: 48%;
 }
 h4 {
     background: rgba(255, 255, 255, 1) none repeat scroll 0 0;
@@ -130,14 +152,13 @@ h4 {
         margin: 2% 10%;
         max-width: 80%;
         min-width: 800px;
-        overflow: hidden;
     }
 }
 /* Print-specific rules */
 @media print {
     @page {
         size: 8.5in 11in;
-        margin:0.3in 0.5in 0.75in;
+        margin:0.3in 0.4in 0.75in;
         @bottom-left {
             font-size: 7pt;
             width:35%;
@@ -164,7 +185,7 @@ h4 {
         }
     }
     body {
-        font-size:7pt;
+        font-size:8pt;
         font-family: "FreeSerif";
     }
     h3 {

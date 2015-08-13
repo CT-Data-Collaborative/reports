@@ -5,32 +5,39 @@
 {% endblock head %}
 
 {% block title -%}
-Town Profile{% if town%} - {{ town }}{% endif %}
+Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
 {% endblock title -%}
 
 {% block body %}
 <div class="title_header">
-    <h1 id="town_header">{{ town }} Connecticut</h1>
+    <h1 id="town_header">
+        {% if config["town"] -%}{{ config["town"] }}, {% endif -%}
+        Connecticut
+    </h1>
     <h2>CERC town Profile 2014</h2>
-    <ul class="address">
-        <li>Town Hall</li>
-        <li>550 Main Street</li>
-        <li>Hartford, CT 06103</li>
-        <li>(860) 543-8500</li>
-    </ul>
-    <ul class="address">
-        <li><i>Belongs To</i></li>
-        <li>Hartford County</li>
-        <li>LMA Hartford</li>
-        <li>Capitol Area Economic Dev. Region</li>
-        <li>Capitol Region Planning Area</li>
-    </ul>
+    {% if info["address"] -%}
+        <ul class="header_list">
+            {% for item in info["address"] -%}
+            <li>{{ item }}</li>
+            {% endfor -%}
+        </ul>
+    {% endif -%}
+    {% if info["belongs_to"] -%}
+        <ul class="header_list">
+            <li><i>Belongs To</i></li>
+            {% for item in info["belongs_to"] -%}
+            <li>{{ item }}</li>
+            {% endfor -%}
+        </ul>
+    {% endif -%}
+    {% if objects["header_map"] %}
     <div id="small_map">
-            {{objects["header_map"]["output"] | safe }}
-            <p>Incorporated in 1784</p>
+            {{ objects["header_map"]["output"] | safe }}
+            <p>Incorporated in {{ info["incorporated"] }}</p>
     </div>
+    {% endif %}
 </div>
-<div class="container">
+<div class="container first-container">
     <h3 class="section_header">Demographics</h3>
     <div id="population" class="vis_container left">
         {% if objects["population"] -%}
@@ -66,6 +73,68 @@ Town Profile{% if town%} - {{ town }}{% endif %}
         {{ objects["age"]["output"] | safe }}
         {% endif -%}
     </div>
+    <div class="anchor"></div>
+</div>
+<div class="container">
+    <h3 class="section_header">Economics</h3>
+    <div id="business" class="vis_container left">
+        {% if objects["business"] -%}
+        <h4>Business Profile (2013)</h4>
+        {{ objects["business"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div id="grand_list" class="vis_container right">
+        {% if objects["grand_list"] -%}
+        <h4>Top Five Grand List (2013)</h4>
+        {{ objects["grand_list"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div id="employers" class="vis_container right">
+        {% if objects["employers"] -%}
+        <h4>Major Employers (2014)</h4>
+        <ul class="float_list">
+            {% for row in objects["employers"]["data"]["rows"] if row != "" -%}
+            <li>{{ " ".join(row) }}</li>
+            {% endfor -%}
+        </ul>
+        {% endif -%}
+    </div>
+    <div class="anchor"></div>
+</div>
+<div class="container">
+    <h3 class="section_header">Education</h3>
+    <div id="enrollment" class="vis_container left">
+        {% if objects["enrollment"] -%}
+        <h4>2010-2011 School Year</h4>
+        {{ objects["enrollment"]["output"] | safe }}
+        {% endif -%}
+        <p>Most public school studnets in {{ config["town"] }} attend {{ info["enrollment_info"]["district"] }}, which has {{ info["enrollment_info"]["enrollment"] }} students.</p>
+    </div>
+    <div id="cmt" class="vis_container right">
+        {% if objects["cmt"] -%}
+        <h4>Connecticut Mastery Test Percent Above Goal</h4>
+        {{ objects["cmt"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div id="computers" class="vis_container left">
+        {% if objects["computers"] -%}
+        <h4>Students Per Computer</h4>
+        {{ objects["computers"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div id="class_size" class="vis_container right quarter">
+        {% if objects["class_size"] -%}
+        <h4>Average Class Size</h4>
+        {{ objects["class_size"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div id="sat" class="vis_container right quarter">
+        {% if objects["sat"] -%}
+        <h4>Average SAT Score</h4>
+        {{ objects["sat"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div class="anchor">For more education data see: <a href="http://sdeportal.ct.gove/Cedar/WEB/ResearchandReports/SSPReports.aspx">http://sdeportal.ct.gove/Cedar/WEB/ResearchandReports/SSPReports.aspx</a></div>
 </div>
 <a href="/town_profile?print=1" target="_blank" class="noprint">Print View</a>
 {% endblock body %}
