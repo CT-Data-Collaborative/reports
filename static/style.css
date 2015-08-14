@@ -19,7 +19,7 @@ h3 {
 }
 
 h1 {
-    font-size: 18pt;
+    font-size: 26pt;
     margin: 0;
 }
 
@@ -88,7 +88,7 @@ div.vis_container.span {
 }
 div.container {
     page-break-inside: avoid;
-    padding-bottom: 10pt;
+    padding:5pt 0 10pt;
 }
 div.vis_container {
     margin: 1pt;
@@ -100,9 +100,13 @@ div.vis_container > * {
     width: 100%;
     margin-bottom: 0;
 }
+div.vis_container > p {
+    width: 95%
+}
 div.vis_container table td:not(:first-child),
 div.vis_container table th:not(:first-child) {
-    max-width: 45pt;
+    max-width: 40pt;
+    /*overflow: hidden;*/
 }
 
 div.vis_container table tbody tr th:first-child,
@@ -114,12 +118,18 @@ div.vis_container table tbody tr td:not(:first-child) {
 }
 table {
     border-collapse: collapse;
+    line-height: 10pt;
+}
+#business table {
+    line-height: 14pt!important;
 }
 th {
     font-style: italic;
+    line-height: 1.1em;
 }
 th, td {
     padding:0.05em 0.75em;
+    height:1em;
 }
 div.vis_container > img {
     display: block;
@@ -139,12 +149,12 @@ ul.float_list li {
 h4 {
     background: rgba(255, 255, 255, 1) none repeat scroll 0 0;
     box-sizing: border-box;
-    display: inline;
+    display: inline-blick;
     font-style: italic;
     margin: 0 !important;
-    padding: 1px 15px;
+    /*padding: 1px 15px;*/
     position: relative;
-    top: 5px;
+    top: 3pt;
     font-weight: normal;
 }
 div#logo {
@@ -158,6 +168,12 @@ div#logo > img {
     top: -10pt;
 }
 
+.vis_container.thirds {
+    clear: right;
+    float: left;
+    width: 32% !important;
+}
+
 @media screen {
     body {
         margin: 2% 10%;
@@ -168,8 +184,9 @@ div#logo > img {
 /* Print-specific rules */
 @media print {
     @page {
+        resolution:300dpi;
         size: 8.5in 11in;
-        margin:0.3in 0.4in 0.75in;
+        margin:0.2in 0.4in 0.75in;
         @bottom-left {
             font-size: 7pt;
             width:35%;
@@ -196,8 +213,8 @@ div#logo > img {
         }
     }
     body {
-        font-size:8pt;
-        font-family: "FreeSerif";
+        font-size:9pt;
+        font-family: "LiberationSerif";
     }
     h3 {
         top:-0.15in;

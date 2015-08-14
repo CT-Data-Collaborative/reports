@@ -134,7 +134,10 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         {{ objects["sat"]["output"] | safe }}
         {% endif -%}
     </div>
-    <div class="anchor">For more education data see: <a href="http://sdeportal.ct.gove/Cedar/WEB/ResearchandReports/SSPReports.aspx">http://sdeportal.ct.gove/Cedar/WEB/ResearchandReports/SSPReports.aspx</a></div>
+    <div id="education_link" class="vis_container right">
+        <p>For more education data see: <a href="http://sdeportal.ct.gov/Cedar/WEB/ResearchandReports/SSPReports.aspx">http://sdeportal.ct.gove/Cedar/WEB/ResearchandReports/SSPReports.aspx</a></p>
+    </div>
+    <div class="anchor"></div>
 </div>
 <div class="title_header">
     <h1 id="town_header">
@@ -148,28 +151,162 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
 </div>
 <div class="container first-container">
     <h3 class="section_header">Governemt</h3>
-    <div id="enrollment" class="vis_container left">
+    <div id="government_form" class="vis_container">
         <p>Government Form: {{ info["government_form"] }}</p>
     </div>
-    <div id="revenue" class="vis_container left quarter">
-        {% if objects["revenue"] -%}
-        {{ objects["revenue"]["output"] | safe }}
+    <div class="vis_container thirds">
+        <div id="revenue" class="vis_container">
+            {% if objects["revenue"] -%}
+            {{ objects["revenue"]["output"] | safe }}
+            {% endif -%}
+        </div>
+        <div id="tax" class="vis_container">
+            {% if objects["tax"] -%}
+            {{ objects["tax"]["output"] | safe }}
+            {% endif -%}
+        </div>
+    </div>
+    <div class="vis_container thirds">
+        <div id="expenditures" class="vis_container">
+            {% if objects["expenditures"] -%}
+            {{ objects["expenditures"]["output"] | safe }}
+            {% endif -%}
+        </div>
+        <div id="indebtedness" class="vis_container">
+            {% if objects["indebtedness"] -%}
+            {{ objects["indebtedness"]["output"] | safe }}
+            {% endif -%}
+        </div>
+    </div>
+    <div class="vis_container thirds">
+        <div id="debt_service" class="vis_container">
+            {% if objects["debt_service"] -%}
+            {{ objects["debt_service"]["output"] | safe }}
+            {% endif -%}
+        </div>
+        <div id="eq_grand_list" class="vis_container">
+            {% if objects["eq_grand_list"] -%}
+            {{ objects["eq_grand_list"]["output"] | safe }}
+            {% endif -%}
+        </div>
+        <div id="bond_mill" class="vis_container">
+            {% if objects["bond_mill"] -%}
+            {{ objects["bond_mill"]["output"] | safe }}
+            {% endif -%}
+        </div>
+    </div>
+    <div class="anchor"></div>
+</div>
+<div class="container">
+    <h3 class="section_header">Housing/Real Estate</h3>
+    <div id="housing" class="vis_container right">
+        {% if objects["housing"] -%}
+        <h4>Housing Stock (2012)</h4>
+        {{ objects["housing"]["output"] | safe }}
         {% endif -%}
     </div>
-    <div id="expenditures" class="vis_container right quarter">
-        {% if objects["expenditures"] -%}
-        {{ objects["expenditures"]["output"] | safe }}
+    <div id="house_sales" class="vis_container right">
+        {% if objects["house_sales"] -%}
+        <h4>Distribution of House Sales (2011)</h4>
+        {{ objects["house_sales"]["output"] | safe }}
         {% endif -%}
     </div>
-    <div id="tax" class="vis_container left quarter">
-        {% if objects["tax"] -%}
-        {{ objects["tax"]["output"] | safe }}
+    <div class="anchor"></div>
+</div>
+<div class="container">
+    <h3 class="section_header">Labor Force</h3>
+    <div id="place_of_residence" class="vis_container left">
+        {% if objects["place_of_residence"] -%}
+        <h4>Place of Residence (2013)</h4>
+        {{ objects["place_of_residence"]["output"] | safe }}
         {% endif -%}
     </div>
-    <div id="indebtedness" class="vis_container right quarter">
-        {% if objects["indebtedness"] -%}
-        {{ objects["indebtedness"]["output"] | safe }}
+    <div id="place_of_work" class="vis_container left">
+        {% if objects["place_of_work"] -%}
+        <h4>Place of Work (2013)</h4>
+        {{ objects["place_of_work"]["output"] | safe }}
         {% endif -%}
+    </div>
+    <div id="commuters" class="vis_container right">
+        {% if objects["commuters"] -%}
+        <h4>Connecticut Commuters (2011)</h4>
+        {{ objects["commuters"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div class="anchor"></div>
+</div>
+<div class="container">
+    <h3 class="section_header">Other Information</h3>
+    <div class="vis_container thirds">
+        <div id="crime" class="vis_container">
+            {% if objects["crime"] -%}
+            <h4>Crime Rate (2012)</h4>
+            {{ objects["crime"]["output"] | safe }}
+            {% endif -%}
+        </div>
+        <div id="library" class="vis_container">
+            {% if objects["library"] -%}
+            <h4>Library (2013)</h4>
+            {{ objects["library"]["output"] | safe }}
+            {% endif -%}
+        </div>
+        <div id="family_assistance" class="vis_container">
+            {% if objects["family_assistance"] -%}
+            <h4>Families Receiving (2014)</h4>
+            {{ objects["family_assistance"]["output"] | safe }}
+            {% endif -%}
+        </div>
+        <div id="population_assistance" class="vis_container">
+            {% if objects["population_assistance"] -%}
+            <h4>Population Receiving (2014)</h4>
+            {{ objects["population_assistance"]["output"] | safe }}
+            {% endif -%}
+        </div>
+    </div>
+    <div class="vis_container thirds">
+        <div id="city_distance" class="vis_container">
+            {% if objects["city_distance"] -%}
+            <h4>Distance to Major Cities</h4>
+            {{ objects["city_distance"]["output"] | safe }}
+            {% endif -%}
+        </div>
+    </div>
+    <div class="vis_container thirds">
+        <div id="utilities" class="vis_container">
+            <h4>Residential Utilities</h4>
+            {% if objects["electric"] -%}
+            <ul class="indent_list">
+                <h4>Electric Provider</h4>
+                {% for row in objects["electric"]["data"]["rows"] if row != "" -%}
+                <li>{{ " ".join(row) }}</li>
+                {% endfor -%}
+            </ul>
+            {% endif -%}
+            {% if objects["gas"] -%}
+            <ul class="indent_list">
+                <h4>Gas Provider</h4>
+                {% for row in objects["gas"]["data"]["rows"] if row != "" -%}
+                <li>{{ " ".join(row) }}</li>
+                {% endfor -%}
+            </ul>
+            {% endif -%}
+            {% if objects["water"] -%}
+            <ul class="indent_list">
+                <h4>Water Provider</h4>
+                {% for row in objects["water"]["data"]["rows"] if row != "" -%}
+                <li>{{ " ".join(row) }}</li>
+                {% endfor -%}
+            </ul>
+            {% endif -%}
+            {% if objects["cable"] -%}
+            <ul class="indent_list">
+                <h4>Cable Provider</h4>
+                {% for row in objects["cable"]["data"]["rows"] if row != "" -%}
+                <li>{{ " ".join(row) }}</li>
+                {% endfor -%}
+            </ul>
+            {% endif -%}
+        </div>
     </div>
     <div class="anchor"></div>
 </div>
