@@ -150,7 +150,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
     </div>
 </div>
 <div class="container first-container">
-    <h3 class="section_header">Governemt</h3>
+    <h3 class="section_header">Governmet</h3>
     <div id="government_form" class="vis_container">
         <p>Government Form: {{ info["government_form"] }}</p>
     </div>
@@ -221,16 +221,16 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         {{ objects["place_of_residence"]["output"] | safe }}
         {% endif -%}
     </div>
-    <div id="place_of_work" class="vis_container left">
-        {% if objects["place_of_work"] -%}
-        <h4>Place of Work (2013)</h4>
-        {{ objects["place_of_work"]["output"] | safe }}
-        {% endif -%}
-    </div>
     <div id="commuters" class="vis_container right">
         {% if objects["commuters"] -%}
         <h4>Connecticut Commuters (2011)</h4>
         {{ objects["commuters"]["output"] | safe }}
+        {% endif -%}
+    </div>
+    <div id="place_of_work" class="vis_container left">
+        {% if objects["place_of_work"] -%}
+        <h4>Place of Work (2013)</h4>
+        {{ objects["place_of_work"]["output"] | safe }}
         {% endif -%}
     </div>
     <div class="anchor"></div>

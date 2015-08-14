@@ -78,11 +78,15 @@ div.vis_container.right.quarter {
 div.vis_container.left,
 div.vis_container.right {
     width: 48%;
-    float: left;
-    clear: right;
 }
-div.vis_container.left {}
-div.vis_container.right {}
+div.vis_container.left {
+    float: left;
+}
+
+div.vis_container.right {
+    float: right;
+}
+
 div.vis_container.span {
     clear: both;
 }
@@ -99,6 +103,7 @@ div.vis_container > * {
     padding: 1pt 5pt 0;
     width: 100%;
     margin-bottom: 0;
+    margin-top:2pt;
 }
 div.vis_container > p {
     width: 95%
@@ -128,8 +133,7 @@ th {
     line-height: 1.1em;
 }
 th, td {
-    padding:0.05em 0.75em;
-    height:1em;
+    padding:0.5pt 0;
 }
 div.vis_container > img {
     display: block;
@@ -167,7 +171,13 @@ div#logo > img {
     right: 0;
     top: -10pt;
 }
-
+ul.indent_list {
+    list-style: none;
+}
+ul.indent_list li {
+    width: 95%
+    padding:0 10pt;
+}
 .vis_container.thirds {
     clear: right;
     float: left;
@@ -213,7 +223,7 @@ div#logo > img {
         }
     }
     body {
-        font-size:9pt;
+        font-size:8.5pt;
         font-family: "LiberationSerif";
     }
     h3 {
