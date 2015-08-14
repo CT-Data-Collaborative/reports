@@ -163,17 +163,10 @@ def town_profile():
 
         nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"]))+" --config="+quote(json.dumps(config)))
 
-<<<<<<< HEAD
-        if(requestObj['type'] == "bar"):
-            print(nodeResponse.stdout)
-            print(nodeResponse.stderr)
-            print(nodeResponse.exitcode)
-=======
         # if(requestObj['type'] == "map"):
         #     print(nodeResponse.stdout)
         #     print(nodeResponse.stderr)
         #     print(nodeResponse.exitcode)
->>>>>>> Mock json for town profile mockup now stored as its own file. Easier to edit, read etc.
 
         obj["output"] = render_template(requestObj["type"]+".html", data = nodeResponse.stdout)
 
