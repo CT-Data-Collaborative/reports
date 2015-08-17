@@ -35,7 +35,7 @@ console.log(body.html());
 
 function tableChart() {
     // Vars
-    // var width = 460;
+    var colspan = null;
     
     function chart(selection) {
         selection.each(function(data) {
@@ -50,13 +50,29 @@ function tableChart() {
             // outermost table Container
             var table = d3.select(this).append("table")
 
+            // Calculate colspan
+            // if header cells < data cells, per row.
+            var noblankColumns = data.columns.filter(function(c) { return c !== "" })
+
+            if (noblankColumns.length < data.rows[0].length && noblankColumns.length > 0) {
+                colspan = Math.floor((data.rows[0].length)/(noblankColumns.length))
+                colspan = (colspan > 1 ? colspan : null)
+            }
+            
             // table header
             var thead = table.append("thead")
                     .append("tr")
                     .selectAll("th")
                     .data(data.columns).enter()
                     .append("th")
-                        .text(function(c) { return c; } );
+                        .text(function(c) { return c; } )
+                    .attr("colspan", function(d, i) {
+                        if (i > 0 || d != "") {
+                            return colspan;
+                        } else {
+                            return null;
+                        }
+                    });
 
             // tbody element
             var tbody = table.append("tbody");
@@ -70,13 +86,12 @@ function tableChart() {
             // create a cell in each row for each column
             var cells = rows.selectAll("td")
                 .data(function(row) {
-                    return data.columns.map(function(column, index) {
-                        return {column: column, value: row[index]};
-                    });
+                    return row;
                 })
                 .enter()
                 .append("td")
-                .text(function(d) { return d.value; });
+                .text(function(d) { return d; })
+                .attr("colspan", function() { return colspan ? 1 : null });
         });
     }
 

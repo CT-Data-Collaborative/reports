@@ -5,7 +5,19 @@ div {
     box-sizing: border-box;
 }
 
-
+th[colspan] {
+    /*border: 1px solid red;*/
+    text-align: center!important;
+}
+td[colspan] {
+    padding-right: 1%;
+}
+div#commuters table td:nth-child(even){
+    width: 20%!important;
+}
+div#commuters table td:nth-child(odd){
+    width: 30%!important;
+}
 h3 {
     background-color: rgba(255, 255, 255, 1);
     border: 2px solid black;
@@ -37,8 +49,9 @@ div.container:not(.first-container) {
 }
 div.container {
     border: 3px double black;
-    padding:0;
     position: relative;
+    page-break-inside: avoid;
+    padding:10pt 5pt 7.5pt;
 }
 div#small_map img {
     height: 100pt;
@@ -90,10 +103,7 @@ div.vis_container.right {
 div.vis_container.span {
     clear: both;
 }
-div.container {
-    page-break-inside: avoid;
-    padding:5pt 0 10pt;
-}
+
 div.vis_container {
     margin: 1pt;
 
@@ -158,12 +168,12 @@ h4 {
     margin: 0 !important;
     /*padding: 1px 15px;*/
     position: relative;
-    top: 3pt;
+    top:0;/* 3pt;*/
     font-weight: normal;
 }
 div#logo {
     display: inline-block;
-    height: 30pt;
+    height: 25pt;
 }
 div#logo > img {
     height: 70pt;
@@ -175,7 +185,7 @@ ul.indent_list {
     list-style: none;
 }
 ul.indent_list li {
-    width: 95%
+    width: 95%;
     padding:0 10pt;
 }
 .vis_container.thirds {
@@ -196,7 +206,7 @@ ul.indent_list li {
     @page {
         resolution:300dpi;
         size: 8.5in 11in;
-        margin:0.2in 0.4in 0.75in;
+        margin:0.2in 0.4in .75in;
         @bottom-left {
             font-size: 7pt;
             width:35%;
