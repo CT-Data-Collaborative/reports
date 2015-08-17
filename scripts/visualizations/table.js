@@ -15,6 +15,19 @@ var args = minimist(process.argv.slice(2)),
         data = JSON.parse(args.data),
         config = JSON.parse(args.config);
 
+// Number formatters
+var formatters = {
+    "string" : function(val) {return val; },
+    "currency" : d3.format("$,.0f"),
+    "integer" : d3.format(",0f"),
+    "decimal" : d3.format(",2f"),
+    "percent" : d3.format(".1%")
+};
+
+for (var type in config.formats) {
+    formatters[type] = d3.format(config.formats[type]);
+}
+
 // get chart function object
 chart = tableChart();
 
@@ -65,7 +78,7 @@ function tableChart() {
                     .selectAll("th")
                     .data(data.columns).enter()
                     .append("th")
-                        .text(function(c) { return c; } )
+                        .text(function(c) { return c.value; } )
                     .attr("colspan", function(d, i) {
                         if (i > 0 || d != "") {
                             return colspan;
@@ -90,7 +103,7 @@ function tableChart() {
                 })
                 .enter()
                 .append("td")
-                .text(function(d) { return d; })
+                .text(function(d) { return formatters[d.type](d.value); })
                 .attr("colspan", function() { return colspan ? 1 : null });
         });
     }
