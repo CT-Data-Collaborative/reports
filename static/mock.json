@@ -352,32 +352,32 @@
         ],
         [
           {"value" : "Connecticut Light & Power", "type" : "string"},
-          {"value" : 139442670, "type" : "integer"},
+          {"value" : 139442670, "type" : "currency"},
           {"value" : 0.039, "type" : "percent"}
         ],
         [
           {"value" : "Travelers Indemnity Co", "type" : "string"},
-          {"value" : 130705740, "type" : "integer"},
+          {"value" : 130705740, "type" : "currency"},
           {"value" : 0.037, "type" : "percent"}
         ],
         [
           {"value" : "Hartford Fire Insurance & Twin City Ins", "type" : "string"},
-          {"value" : 118704090, "type" : "integer"},
+          {"value" : 118704090, "type" : "currency"},
           {"value" : 0.034, "type" : "percent"}
         ],
         [
           {"value" : "Aetna Life Insurance Co", "type" : "string"},
-          {"value" : 105487280, "type" : "integer"},
+          {"value" : 105487280, "type" : "currency"},
           {"value" : 0.030, "type" : "percent"}
         ],
         [
           {"value" : "HUB Properties Trust", "type" : "string"},
-          {"value" : 48977640, "type" : "integer"},
+          {"value" : 48977640, "type" : "currency"},
           {"value" : 0.014, "type" : "percent"}
         ],
         [
           {"value" : "Net Grand List (2013)", "type" : "string"},
-          {"value" : 3535402755, "type" : "integer"},
+          {"value" : 3535402755, "type" : "currency"},
           {"value" : "", "type" : "string"}
         ]
       ],
@@ -563,6 +563,581 @@
           {"value" : "Math", "type" : "string"},
           {"value" : 392, "type" : "integer"},
           {"value" : 506, "type" : "integer"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "revenue",
+      "data": [
+        [
+          {"value" : "", "type" : "string"},
+          {"value" : "", "type" : "string"}
+        ],
+        [
+          {"value" : "Total Revenue (2012)", "type" : "string"},
+          {"value" : 573734000, "type" : "currency"}
+        ],
+        [
+          {"value" : "Tax Revenue", "type" : "string"},
+          {"value" : 277245000, "type" : "currency"}
+        ],
+        [
+          {"value" : "Non-tax Revenue", "type" : "string"},
+          {"value" : 296489000, "type" : "currency"}
+        ],
+        [
+          {"value" : "Intergovernmental", "type" : "string"},
+          {"value" : 280582000, "type" : "currency"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "tax",
+      "data": [
+        [
+          {"value" : "", "type" : "string"},
+          {"value" : "", "type" : "string"}
+        ],
+        [
+          {"value" : "Per Capita Tax (2012)", "type" : "string"},
+          {"value" : 2200, "type" : "currency"}
+        ],
+        [
+          {"value" : "As % of State Average", "type" : "string"},
+          {"value" : 0.86, "type" : "percent"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "expenditures",
+      "data": [
+        [
+          {"value" : "", "type" : "string"},
+          {"value" : "", "type" : "string"}
+        ],
+        [
+          {"value" : "Total Expenditures (2012)", "type" : "string"},
+          {"value" : 532626000, "type" : "currency"}
+        ],
+        [
+          {"value" : "Education", "type" : "string"},
+          {"value" : 313069000, "type" : "currency"}
+        ],
+        [
+          {"value" : "Other", "type" : "string"},
+          {"value" : 219557000, "type" : "currency"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "indebtedness",
+      "data": [
+        [
+          {"value" : "", "type" : "string"},
+          {"value" : "", "type" : "string"}
+        ],
+        [
+          {"value" : "Total Indebtedness (2012)", "type" : "string"},
+          {"value" : 337080000, "type" : "currency"}
+        ],
+        [
+          {"value" : "As % of Expenditures", "type" : "string"},
+          {"value" : 0.633, "type" : "percent"}
+        ],
+        [
+          {"value" : "Per Capita", "type" : "string"},
+          {"value" : 2699, "type" : "currency"}
+        ],
+        [
+          {"value" : "As % of State Average", "type" : "string"},
+          {"value" : 1.196, "type" : "percent"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "debt_service",
+      "data": [
+        [
+          {"value" : "", "type" : "string"},
+          {"value" : "", "type" : "string"}
+        ],
+        [
+          {"value" : "Annual Debt Service (2012)", "type" : "string"},
+          {"value" : 39647000, "type" : "currency"}
+        ],
+        [
+          {"value" : "As % of Expenditures", "type" : "string"},
+          {"value" : 0.074, "type" : "percent"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "eq_grand_list",
+      "data": [
+        [
+          {"value" : "", "type" : "string"},
+          {"value" : "", "type" : "string"}
+        ],
+        [
+          {"value" : "Eq. Net Grand List (2010)", "type" : "string"},
+          {"value" : 7147577757, "type" : "currency"}
+        ],
+        [
+          {"value" : "Per Capita", "type" : "string"},
+          {"value" : 57236, "type" : "currency"}
+        ],
+        [
+          {"value" : "As % of State Average", "type" : "string"},
+          {"value" : 0.39, "type" : "percent"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "bond_mill",
+      "data": [
+        [
+          {"value" : "", "type" : "string"},
+          {"value" : "", "type" : "string"}
+        ],
+        [
+          {"value" : "Moody's Bond Rating (2012)", "type" : "string"},
+          "A1"
+        ],
+        [
+          {"value" : "Actual Mill Rate (2012)", "type" : "string"},
+          {"value" : 71.79, "type" : "decimal"}
+        ],
+        [
+          {"value" : "Equalized Mill Rate (2012)", "type" : "string"},
+          {"value" : 38.96, "type" : "decimal"}
+        ],
+        [
+          {"value" : "% of Grand List Com/Ind (2012)", "type" : "string"},
+          {"value" : 0.412, "type" : "percent"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "housing",
+      "data": [
+        [
+          {"value" : "", "type" : "string"},
+          {"value" : "Town", "type" : "string"},
+          {"value" : "County", "type" : "string"},
+          {"value" : "State", "type" : "string"}
+        ],
+        [
+          {"value" : "Total Units", "type" : "string"},
+          {"value" : 54182, "type" : "integer"},
+          {"value" : 373676, "type" : "integer"},
+          {"value" : 1485445, "type" : "integer"}
+        ],
+        [
+          {"value" : "% Single Unit", "type" : "string"},
+          {"value" : 0.180, "type" : "percent"},
+          {"value" : 0.612, "type" : "percent"},
+          {"value" : 0.646, "type" : "percent"}
+        ],
+        [
+          {"value" : "New Permits Auth (2012)", "type" : "string"},
+          {"value" : 24, "type" : "integer"},
+          {"value" : 838, "type" : "integer"},
+          {"value" : 4669, "type" : "integer"}
+        ],
+        [
+          {"value" : "As % Existing Units", "type" : "string"},
+          {"value" : 0.0004, "type" : "percent"},
+          {"value" : 0.0022, "type" : "percent"},
+          {"value" : 0.0031, "type" : "percent"}
+        ],
+        [
+          {"value" : "Demolitions (2012)", "type" : "string"},
+          {"value" : 44, "type" : "integer"},
+          {"value" : 192, "type" : "integer"},
+          {"value" : 955, "type" : "integer"}
+        ],
+        [
+          {"value" : "House Sales (2011)", "type" : "string"},
+          {"value" : "NA", "type" : "integer"},
+          {"value" : 2789, "type" : "integer"},
+          {"value" : 13847, "type" : "integer"}
+        ],
+        [
+          {"value" : "Median Price", "type" : "string"},
+          {"value" : "NA", "type" : "currency"},
+          {"value" : 256000, "type" : "currency"},
+          {"value" : 291000, "type" : "currency"}
+        ],
+        [
+          {"value" : "Built Pre-1950 share (2012)", "type" : "string"},
+          {"value" : 0.523, "type" : "percent"},
+          {"value" : 0.291, "type" : "percent"},
+          {"value" : 0.302, "type" : "percent"}
+        ],
+        [
+          {"value" : "Owner Occupied Dwellings (2012)", "type" : "string"},
+          {"value" : 11322, "type" : "integer"},
+          {"value" : 230060, "type" : "integer"},
+          {"value" : 929560, "type" : "integer"}
+        ],
+        [
+          {"value" : "As % Total Dwellings", "type" : "string"},
+          {"value" : 0.21, "type" : "percent"},
+          {"value" : 0.62, "type" : "percent"},
+          {"value" : 0.63, "type" : "percent"}
+        ],
+        [
+          {"value" : "Subsidized Housing (2012)", "type" : "string"},
+          {"value" : 19245, "type" : "integer"},
+          {"value" : 52064, "type" : "integer"},
+          {"value" : 161379, "type" : "integer"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "house_sales",
+      "data": [
+        [
+          {"value" : "Number of Sales", "type" : "string"},
+          {"value" : "Town", "type" : "string"},
+          {"value" : "County", "type" : "string"},
+          {"value" : "State", "type" : "string"}
+        ],
+        [
+          {"value" : "Less than $100,000", "type" : "string"},
+          {"value" : "NA", "type" : "integer"},
+          {"value" : 36, "type" : "integer"},
+          {"value" : 392, "type" : "integer"}
+        ],
+        [
+          {"value" : "$100,000-$199,999", "type" : "string"},
+          {"value" : "NA", "type" : "integer"},
+          {"value" : 777, "type" : "integer"},
+          {"value" : 3205, "type" : "integer"}
+        ],
+        [
+          {"value" : "$200,000-$299,999", "type" : "string"},
+          {"value" : "NA", "type" : "integer"},
+          {"value" : 899, "type" : "integer"},
+          {"value" : 3494, "type" : "integer"}
+        ],
+        [
+          {"value" : "$300,000-$399,999", "type" : "string"},
+          {"value" : "NA", "type" : "integer"},
+          {"value" : 503, "type" : "integer"},
+          {"value" : 2086, "type" : "integer"}
+        ],
+        [
+          {"value" : "$400,000 or More", "type" : "string"},
+          {"value" : "NA", "type" : "integer"},
+          {"value" : 574, "type" : "integer"},
+          {"value" : 4670, "type" : "integer"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "place_of_residence",
+      "data": [
+        [
+          {"value" : "", "type" : "string"},
+          {"value" : "Town", "type" : "string"},
+          {"value" : "County", "type" : "string"},
+          {"value" : "State", "type" : "string"}
+        ],
+        [
+          {"value" : "Labor Force", "type" : "string"},
+          {"value" : 49677, "type" :" integer"},
+          {"value" : 457617, "type" :" integer"},
+          {"value" : 1859934, "type" :" integer"}
+        ],
+        [
+          {"value" : "Employed", "type" : "string"},
+          {"value" : 42396, "type" :" integer"},
+          {"value" : 420586, "type" :" integer"},
+          {"value" : 1715398, "type" :" integer"}
+        ],
+        [
+          {"value" : "Unemployed", "type" : "string"},
+          {"value" : 7281, "type" :" integer"},
+          {"value" : 37031, "type" :" integer"},
+          {"value" : 144536, "type" :" integer"}
+        ],
+        [
+          {"value" : "Unemployment Rate", "type" : "string"},
+          {"value" : 0.147, "type" : " percent"},
+          {"value" : 0.081, "type" : " percent"},
+          {"value" : 0.078, "type" : " percent"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "place_of_work",
+      "data": [
+        [
+          {"value" : "", "type" : "string"},
+          {"value" : "Town", "type" : "string"},
+          {"value" : "County", "type" : "string"},
+          {"value" : "State", "type" : "string"}
+        ],
+        [
+          {"value" : "Units", "type" : "string"},
+          {"value" : 3526, "type" : "integer"},
+          {"value" : 26224, "type" : "integer"},
+          {"value" : 113697, "type" : "integer"}
+        ],
+        [
+          {"value" : "Total Employment", "type" : "string"},
+          {"value" : 112709, "type" : "integer"},
+          {"value" : 495009, "type" : "integer"},
+          {"value" : 1640223, "type" : "integer"}
+        ],
+        [
+          {"value" : "200-'13 AAGR", "type" : "string"},
+          {"value" : -0.0070, "type" : "percent"},
+          {"value" : -0.0010, "type" : "percent"},
+          {"value" : 0.0020, "type" : "percent"}
+        ],
+        [
+          {"value" : "Mfg Employment", "type" : "string"},
+          {"value" : 1236, "type" : "integer"},
+          {"value" : 53045, "type" : "integer"},
+          {"value" : 163828, "type" : "integer"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "commuters",
+      "data": [
+        [
+          {"value" : "Commute Into Town From:", "type" : "string"},
+          {"value" : "Commute Out of Town To:", "type" : "string"}
+        ],
+        [
+          {"value" : "Hartford", "type" : "string"},
+          {"value" : 14661, "type" : "integer"},
+          {"value" : "Hartford", "type" : "string"},
+          {"value" : 14661, "type" : "integer"}
+        ],
+        [
+          {"value" : "West Hartford", "type" : "string"},
+          {"value" : 7687, "type" : "integer"},
+          {"value" : "West Hartford", "type" : "string"},
+          {"value" : 2981, "type" : "integer"}
+        ],
+        [
+          {"value" : "Manchester", "type" : "string"},
+          {"value" : 5223, "type" : "integer"},
+          {"value" : "East Hartford", "type" : "string"},
+          {"value" : 1949, "type" : "integer"}
+        ],
+        [
+          {"value" : "East Hartford", "type" : "string"},
+          {"value" : 5174, "type" : "integer"},
+          {"value" : "Bloomfield", "type" : "string"},
+          {"value" : 1854, "type" : "integer"}
+        ],
+        [
+          {"value" : "Windsor", "type" : "string"},
+          {"value" : 3613, "type" : "integer"},
+          {"value" : "Farmington", "type" : "string"},
+          {"value" : 1680, "type" : "integer"}
+        ],
+        [
+          {"value" : "New Britain", "type" : "string"},
+          {"value" : 3494, "type" : "integer"},
+          {"value" : "Windsor", "type" : "string"},
+          {"value" : 1433, "type" : "integer"}
+        ],
+        [
+          {"value" : "Wethersfield", "type" : "string"},
+          {"value" : 3463, "type" : "integer"},
+          {"value" : "Manchester", "type" : "string"},
+          {"value" : 1404, "type" : "integer"}
+        ],
+        [
+          {"value" : "Glastonbury", "type" : "string"},
+          {"value" : 3392, "type" : "integer"},
+          {"value" : "New Britain", "type" : "string"},
+          {"value" : 1104, "type" : "integer"}
+        ],
+        [
+          {"value" : "Newington", "type" : "string"},
+          {"value" : 3369, "type" : "integer"},
+          {"value" : "Newington", "type" : "string"},
+          {"value" : 1024, "type" : "integer"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "crime",
+      "data": [
+        [
+          {"value" : "", "type" : "string"},
+          {"value" : "Town", "type" : "string"},
+          {"value" : "State", "type" : "string"}
+        ],
+        [
+          {"value" : "Per 100,000 Residents", "type" : "string"},
+          {"value" : 5441, "type" : "integer"},
+          {"value" : 2433, "type" : "integer"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "library",
+      "data": [
+        [
+          {"value" : "", "type" : "string"},
+          {"value" : "Town", "type" : "string"}
+        ],
+        [
+          {"value" : "Public Web Computers", "type" : "string"},
+          {"value" : 243, "type" : "integer"}
+        ],
+        [
+          {"value" : "Circulation per Capita", "type" : "string"},
+          {"value" : 4, "type" : "integer"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "family_assistance",
+      "data": [
+        [
+          {"value" : "", "type" : "string"},
+          {"value" : "Town", "type" : "string"}
+        ],
+        [
+          {"value" : "Temporary Assistance", "type" : "string"},
+          {"value" : 5772, "type" : "integer"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "population_assitance",
+      "data": [
+        [
+          {"value" : "", "type" : "string"},
+          {"value" : "Town", "type" : "string"}
+        ],
+        [
+          {"value" : "Food Stamps", "type" : "string"},
+          {"value" : 51969, "type" : "integer"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "city_distance",
+      "data": [
+        [
+          {"value" : "City", "type" : "string"},
+          {"value" : "Miles", "type" : "string"}
+        ],
+        [
+          {"value" : "Hartford", "type" : "string"},
+          {"value" : 0, "type" : "integer"}
+        ],
+        [
+          {"value" : "Boston", "type" : "string"},
+          {"value" : 94, "type" : "integer"}
+        ],
+        [
+          {"value" : "New York", "type" : "string"},
+          {"value" : 100, "type" : "integer"}
+        ],
+        [
+          {"value" : "Providence", "type" : "string"},
+          {"value" : 66, "type" : "integer"}
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "electric",
+      "data": [
+        [],
+        [
+          "Connecticut Light & Power"
+        ],
+        [
+          "(800) 286-2000"
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "gas",
+      "data": [
+        [],
+        [
+          "CNG Corp"
+        ],
+        [
+          "(860) 727-3000"
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "water",
+      "data": [
+        [],
+        [
+          "Municipal Provider"
+        ],
+        [
+          "Local Contact"
+        ]
+      ],
+      "config": {}
+    },
+    {
+      "type": "table",
+      "name": "cable",
+      "data": [
+        [],
+        [
+          "Comcast Hartford"
+        ],
+        [
+          "(800) 266-2278"
         ]
       ],
       "config": {}
