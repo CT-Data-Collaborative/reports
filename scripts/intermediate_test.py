@@ -1,10 +1,13 @@
 import json
 
-def transform_data(data, type = None):
+def transform_data(visObj, type = None):
     if type == "table":
-        columns = data.pop(0)
-        rows = data
-        return {"columns" : columns, "rows" : rows}
+        if ("header" not in visObj["config"] or visObj["config"]["header"] == True):
+            columns = visObj["data"].pop(0)
+            rows = visObj["data"]
+            return {"columns" : columns, "rows" : rows}
+        else:
+            return {"columns" : [], "rows" : visObj["data"]}
 
 def get_extra_obj(data):
     extra_obj = []
@@ -12,7 +15,28 @@ def get_extra_obj(data):
     header_map = {
       "type": "map",
       "name": "header_map",
-      "data": [],
+      "data": [
+        [
+          {
+            "value": "FIPS",
+            "type": "string"
+          },
+          {
+            "value": "Statistic",
+            "type": "string"
+          }
+        ],
+        [
+          {
+            "value": "0900337070",
+            "type": "FIPS"
+          },
+          {
+            "value": 1,
+            "type": "decimal"
+          }
+        ]
+      ],
       "config": {
         "margin": 10,
         "width" : 275,

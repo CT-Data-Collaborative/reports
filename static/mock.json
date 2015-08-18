@@ -510,10 +510,6 @@
       "name": "class_size",
       "data": [
         [
-          {"value" : "", "type" : "string"},
-          {"value" : "", "type" : "string"}
-        ],
-        [
           {"value" : "Grade K", "type" : "string"},
           {"value" : 17.9, "type" : "decimal"}
         ],
@@ -535,6 +531,7 @@
         ]
       ],
       "config": {
+        "header" : false,
         "formats" : {
           "decimal" : ",.1f"
         }
@@ -572,10 +569,6 @@
       "name": "revenue",
       "data": [
         [
-          {"value" : "", "type" : "string"},
-          {"value" : "", "type" : "string"}
-        ],
-        [
           {"value" : "Total Revenue (2012)", "type" : "string"},
           {"value" : 573734000, "type" : "currency"}
         ],
@@ -592,16 +585,14 @@
           {"value" : 280582000, "type" : "currency"}
         ]
       ],
-      "config": {}
+      "config": {
+        "header" : false
+      }
     },
     {
       "type": "table",
       "name": "tax",
       "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "", "type" : "string"}
-        ],
         [
           {"value" : "Per Capita Tax (2012)", "type" : "string"},
           {"value" : 2200, "type" : "currency"}
@@ -611,16 +602,14 @@
           {"value" : 0.86, "type" : "percent"}
         ]
       ],
-      "config": {}
+      "config": {
+        "header" : false
+      }
     },
     {
       "type": "table",
       "name": "expenditures",
       "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "", "type" : "string"}
-        ],
         [
           {"value" : "Total Expenditures (2012)", "type" : "string"},
           {"value" : 532626000, "type" : "currency"}
@@ -634,16 +623,14 @@
           {"value" : 219557000, "type" : "currency"}
         ]
       ],
-      "config": {}
+      "config": {
+        "header" : false
+      }
     },
     {
       "type": "table",
       "name": "indebtedness",
       "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "", "type" : "string"}
-        ],
         [
           {"value" : "Total Indebtedness (2012)", "type" : "string"},
           {"value" : 337080000, "type" : "currency"}
@@ -661,16 +648,14 @@
           {"value" : 1.196, "type" : "percent"}
         ]
       ],
-      "config": {}
+      "config": {
+        "header" : false
+      }
     },
     {
       "type": "table",
       "name": "debt_service",
       "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "", "type" : "string"}
-        ],
         [
           {"value" : "Annual Debt Service (2012)", "type" : "string"},
           {"value" : 39647000, "type" : "currency"}
@@ -680,16 +665,14 @@
           {"value" : 0.074, "type" : "percent"}
         ]
       ],
-      "config": {}
+      "config": {
+        "header" : false
+      }
     },
     {
       "type": "table",
       "name": "eq_grand_list",
       "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "", "type" : "string"}
-        ],
         [
           {"value" : "Eq. Net Grand List (2010)", "type" : "string"},
           {"value" : 7147577757, "type" : "currency"}
@@ -703,16 +686,14 @@
           {"value" : 0.39, "type" : "percent"}
         ]
       ],
-      "config": {}
+      "config": {
+        "header" : false
+      }
     },
     {
       "type": "table",
       "name": "bond_mill",
       "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "", "type" : "string"}
-        ],
         [
           {"value" : "Moody's Bond Rating (2012)", "type" : "string"},
           "A1"
@@ -730,7 +711,9 @@
           {"value" : 0.412, "type" : "percent"}
         ]
       ],
-      "config": {}
+      "config": {
+        "header" : false
+      }
     },
     {
       "type": "table",

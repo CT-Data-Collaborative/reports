@@ -83,9 +83,9 @@ def form():
 
             # in the future we should just have these available for every type of chart we expect from every application use case
             # so we don't have to check, we just ALWAYS call:
-            #        ` requestObj["data"] = transform_data(requestObj["data"], requestObj["type"])  `
+            #        ` requestObj["data"] = transform_data(requestObj, requestObj["type"])  `
             if (requestObj["type"] == "table"):
-                requestObj["data"] = intermediary.transform_data(requestObj["data"], "table")
+                requestObj["data"] = intermediary.transform_data(requestObj, "table")
 
             # merge template config with specific configs for this object
             config = templateConfig.copy()
@@ -153,9 +153,9 @@ def town_profile():
 
         # in the future we should just have these available for every type of chart we expect from every application use case
         # so we don't have to check, we just ALWAYS call:
-        #        ` requestObj["data"] = transform_data(requestObj["data"], requestObj["type"])  `
+        #        ` requestObj["data"] = transform_data(requestObj, requestObj["type"])  `
         if (requestObj["type"] == "table"):
-            requestObj["data"] = intermediary.transform_data(requestObj["data"], "table")
+            requestObj["data"] = intermediary.transform_data(requestObj, "table")
 
         # merge template config with specific configs for this object
         config = templateConfig.copy()
