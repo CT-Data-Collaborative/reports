@@ -22,6 +22,18 @@ var args = minimist(process.argv.slice(2)),
         config = JSON.parse(args.config),
         geography = args.geography;
 
+// Number formatters
+var formatters = {
+    "string" : function(val) {return val; },
+    "currency" : d3.format("$,.0f"),
+    "integer" : d3.format(",0f"),
+    "decimal" : d3.format(",2f"),
+    "percent" : d3.format(".1%")
+};
+
+for (var type in config.formats) {
+    formatters[type] = d3.format(config.formats[type]);
+}
 
 // get geojson from file - proposed node parameters as follows
 // ie --data="" --config="" --geography="/full/path/to/geometry/file"
@@ -70,7 +82,10 @@ function mapChart() {
     var width = 200,
             height = 200,
             margin = 5, // %
-            colors = d3.scale.category20();
+            colors = d3.scale.category20()
+            fill = d3.scale.linear()
+                        .range([0, 1])
+                        .domain([0, 1]);
 
     function chart(selection) {
         selection.each(function(data) {
@@ -81,6 +96,8 @@ function mapChart() {
             // data = data.map(function(d, i) {
             //     return [label.call(data, d, i), value.call(data, d, i)];
             // });
+
+            fill.domain([0, d3.max(data.slice(1), function(d) { return d[1].value; })]);
 
             // SVG Container
             var svg = d3.select(this).append("svg")
@@ -108,6 +125,14 @@ function mapChart() {
             // update values accordingly in the projection object
             projection.scale(scale).translate(translate);
 
+            // add data to geodata
+            geoData.features.forEach(function(feature, index, features) {
+                dataForLocation = data.filter(function(d) {
+                    return d[0].value == feature.properties.GEOID10
+                }).pop();
+                geoData.features[index].properties.DATAVALUE = (dataForLocation ? dataForLocation[1].value : null);
+            });
+
             // map features
             svg.selectAll("path")
                 .data(geoData.features)
@@ -116,8 +141,9 @@ function mapChart() {
                     .attr("d", path)
                     .attr("stroke", "0.5px")
                     .attr("fill", "black")
+                    .attr("fill-opacity", function(d, i) { return fill(d.properties.DATAVALUE); })
                     // .attr("fill-opacity", function() {return Math.random();} )
-                    .attr("fill-opacity", function(d) { return (d.properties.NAME10 == "Hartford" ? 1 : 0)} )
+                    // .attr("fill-opacity", function(d) { return (d.properties.NAME10 == "Hartford" ? 1 : 0)} )
                     .attr("stroke", "black");
         });
     }
