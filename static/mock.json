@@ -757,13 +757,13 @@
         ],
         [
           {"value" : "House Sales (2011)", "type" : "string"},
-          {"value" : "NA", "type" : "integer"},
+          {"value" : "NA", "type" : "string"},
           {"value" : 2789, "type" : "integer"},
           {"value" : 13847, "type" : "integer"}
         ],
         [
           {"value" : "Median Price", "type" : "string"},
-          {"value" : "NA", "type" : "currency"},
+          {"value" : "NA", "type" : "string"},
           {"value" : 256000, "type" : "currency"},
           {"value" : 291000, "type" : "currency"}
         ],
@@ -806,31 +806,31 @@
         ],
         [
           {"value" : "Less than $100,000", "type" : "string"},
-          {"value" : "NA", "type" : "integer"},
+          {"value" : "NA", "type" : "string"},
           {"value" : 36, "type" : "integer"},
           {"value" : 392, "type" : "integer"}
         ],
         [
           {"value" : "$100,000-$199,999", "type" : "string"},
-          {"value" : "NA", "type" : "integer"},
+          {"value" : "NA", "type" : "string"},
           {"value" : 777, "type" : "integer"},
           {"value" : 3205, "type" : "integer"}
         ],
         [
           {"value" : "$200,000-$299,999", "type" : "string"},
-          {"value" : "NA", "type" : "integer"},
+          {"value" : "NA", "type" : "string"},
           {"value" : 899, "type" : "integer"},
           {"value" : 3494, "type" : "integer"}
         ],
         [
           {"value" : "$300,000-$399,999", "type" : "string"},
-          {"value" : "NA", "type" : "integer"},
+          {"value" : "NA", "type" : "string"},
           {"value" : 503, "type" : "integer"},
           {"value" : 2086, "type" : "integer"}
         ],
         [
           {"value" : "$400,000 or More", "type" : "string"},
-          {"value" : "NA", "type" : "integer"},
+          {"value" : "NA", "type" : "string"},
           {"value" : 574, "type" : "integer"},
           {"value" : 4670, "type" : "integer"}
         ]

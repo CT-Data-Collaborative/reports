@@ -24,7 +24,7 @@ div#commuters table td:nth-child(odd){
 }
 
 div#city_distance table tr {
-    line-height: 14pt;
+    line-height: 14pt!important;
 }
 
 h3 {
