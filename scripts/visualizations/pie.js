@@ -18,6 +18,19 @@ var args = minimist(process.argv.slice(2)),
 // get chart function object
 chart = pieChart();
 
+// Number formatters
+var formatters = {
+    "string" : function(val) {return val; },
+    "currency" : d3.format("$,.0f"),
+    "integer" : d3.format(",0f"),
+    "decimal" : d3.format(",2f"),
+    "percent" : d3.format(".1%")
+};
+
+for (var type in config.formats) {
+    formatters[type] = d3.format(config.formats[type]);
+}
+
 // use available config parameters to override defaults
 // height
 if ("height" in config && config.height > 0) {
@@ -69,8 +82,8 @@ function pieChart() {
             radius = Math.min(height, width) / 2,
             innerRadius = 0,
             outerRadius = radius * 0.9,
-            label = function(d) { return d[0]; },
-            value = function(d) { return d[1]; },
+            label = function(d) { return d[0].value; },
+            value = function(d) { return formatters[d[1].type](d[1].value); },
             pie = d3.layout.pie()
                         .sort(null)
                         .value(value)
@@ -117,7 +130,8 @@ function pieChart() {
                     .attr("transform", function(d) {return "translate("+arc.centroid(d)+")"})
                     .attr("text-anchor", "middle")
                     .style("font-size", "10px")
-                    .text(function(d){ return d.data[0] });
+                    .text(function(d){ return label(d.data) });
+                    // .text(function(d){ return d.data[0].value });
         });
     }
 
