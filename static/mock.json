@@ -933,8 +933,8 @@
       "name": "commuters",
       "data": [
         [
-          {"value" : "Commute Into Town From:", "type" : "string"},
-          {"value" : "Commute Out of Town To:", "type" : "string"}
+          {"value" : "Commuters Into Town From:", "type" : "string"},
+          {"value" : "Town Residents Commuting To:", "type" : "string"}
         ],
         [
           {"value" : "Hartford", "type" : "string"},

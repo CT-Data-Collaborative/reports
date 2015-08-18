@@ -10,13 +10,17 @@ th[colspan] {
     text-align: center!important;
 }
 td[colspan] {
-    padding-right: 1%;
+    padding-right: 3%;
+}
+div#commuters table td {
+    padding:0 5%;
 }
 div#commuters table td:nth-child(even){
     width: 20%!important;
 }
 div#commuters table td:nth-child(odd){
     width: 30%!important;
+    text-align: left;
 }
 h3 {
     background-color: rgba(255, 255, 255, 1);
@@ -86,7 +90,8 @@ div.anchor {
 }
 div.vis_container.left.quarter,
 div.vis_container.right.quarter {
-    width: 24%!important;
+    margin: 1%;
+    width: 23%!important;
 }
 div.vis_container.left,
 div.vis_container.right {

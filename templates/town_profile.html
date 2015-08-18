@@ -134,8 +134,8 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         {{ objects["sat"]["output"] | safe }}
         {% endif -%}
     </div>
-    <div id="education_link" class="vis_container right">
-        <p>For more education data see: <a href="http://sdeportal.ct.gov/Cedar/WEB/ResearchandReports/SSPReports.aspx">http://sdeportal.ct.gove/Cedar/WEB/ResearchandReports/SSPReports.aspx</a></p>
+    <div id="education_link" class="vis_container left">
+        <p>For more education data see: <a href="http://sdeportal.ct.gov/Cedar/WEB/ResearchandReports/SSPReports.aspx">http://sdeportal.ct.gov/Cedar/WEB/ResearchandReports/SSPReports.aspx</a></p>
     </div>
     <div class="anchor"></div>
 </div>
@@ -199,7 +199,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
 </div>
 <div class="container">
     <h3 class="section_header">Housing/Real Estate</h3>
-    <div id="housing" class="vis_container right">
+    <div id="housing" class="vis_container left">
         {% if objects["housing"] -%}
         <h4>Housing Stock (2012)</h4>
         {{ objects["housing"]["output"] | safe }}

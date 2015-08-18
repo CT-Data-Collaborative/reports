@@ -65,9 +65,9 @@ function tableChart() {
 
             // Calculate colspan
             // if header cells < data cells, per row.
-            var noblankColumns = data.columns.filter(function(c) { return c !== "" })
+            var noblankColumns = data.columns.filter(function(col) { return col.value !== "" })
 
-            if (noblankColumns.length < data.rows[0].length && noblankColumns.length > 0) {
+            if (noblankColumns.length < data.rows[0].length-1 && noblankColumns.length > 0) {
                 colspan = Math.floor((data.rows[0].length)/(noblankColumns.length))
                 colspan = (colspan > 1 ? colspan : null)
             }
@@ -78,9 +78,9 @@ function tableChart() {
                     .selectAll("th")
                     .data(data.columns).enter()
                     .append("th")
-                        .text(function(c) { return c.value; } )
+                        .text(function(d) { return d.value; } )
                     .attr("colspan", function(d, i) {
-                        if (i > 0 || d != "") {
+                        if (i > 0 || d.value != "") {
                             return colspan;
                         } else {
                             return null;
@@ -104,7 +104,7 @@ function tableChart() {
                 .enter()
                 .append("td")
                 .text(function(d) { return formatters[d.type](d.value); })
-                .attr("colspan", function() { return colspan ? 1 : null });
+                .attr("colspan", function(d, i) { return colspan && (i > 0 || data.columns[i].value != "") ? 1 : null });
         });
     }
 
