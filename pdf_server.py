@@ -24,40 +24,12 @@ app.config.from_object(__name__)
 
 app.jinja_env.filters['base64encode'] = b64encode
 
+## Helpful accessor function used in jinja templates
 def listValues(l):
     return [o["value"] for o in l if o["value"] != ""]
 app.jinja_env.filters['listValues'] = listValues
 
 # Routes
-@app.route("/")
-def index():
-    return render_template("base.html", title = "Hello World!", body="This is body content.")
-
-@app.route("/post", methods=["GET", "POST"])
-def post_test():
-    # # This works just fine, however i don't think it's the best option because we will need to 
-    # # Have a predetermined set of objects/names/keys in our POST data.
-    # return str(request.form.getlist("apples[]"))
-    # return str(request.form.getlist("types[Maccoun][]"))
-    # return str(request.form)
-    
-    # # In theory - we should be able to get requests as JSON directly from the requests object but I can't get it to work.
-    # r = request.get_json()
-    # return str(r)
-    
-    ## another json request route - more manual, but it works!
-    # data = json.loads(request.form["data"])
-    # print(str(data))
-
-    # data = {"apples":[53245, 28479, 19697, 24037, 40245]}
-    # print(request.form)
-    data = {"apples" : request.args.getlist("apples[]")}
-    svgImage = muterun_js('scripts/donut.js', "--data="+quote(json.dumps(data)))
-    response = HTML(string=render_template("test.html", data=svg2data_url(svgImage.stdout))).write_pdf()
-    response = make_response(response)
-    response.headers["Content-Disposition"] = "attachment; filename=foo.pdf"
-    return response
-
 @app.route("/form", methods=["GET", "POST"])
 def form():
     print(request.method)
@@ -167,6 +139,7 @@ def town_profile():
 
         nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"]))+" --config="+quote(json.dumps(config)))
 
+        # # Useful debugging - change if clause to be whatever type of chart you're debugging
         # if(requestObj['type'] == "table"):
         #     print("###############")
         #     print(requestObj["name"])
