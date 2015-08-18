@@ -60,7 +60,7 @@ div.container {
     border: 3px double black;
     position: relative;
     page-break-inside: avoid;
-    padding:10pt 5pt 7.5pt;
+    padding:6pt 5pt 12pt;
 }
 div#small_map img {
     height: 100pt;
@@ -123,7 +123,7 @@ div.vis_container > * {
     padding: 1pt 5pt 0;
     width: 100%;
     margin-bottom: 0;
-    margin-top:2pt;
+    margin-top:1pt;
 }
 div.vis_container > p {
     width: 95%
@@ -170,16 +170,21 @@ ul.float_list li {
     display: inline-block;
     width: 48%;
 }
+ul > h4 {
+    top:0!important;
+}
 h4 {
-    background: rgba(255, 255, 255, 1) none repeat scroll 0 0;
+    background: rgba(255, 255, 255, 0) none repeat scroll 0 0;
     box-sizing: border-box;
-    display: inline-blick;
+    display: inline-block;
     font-style: italic;
     margin: 0 !important;
-    /*padding: 1px 15px;*/
+    padding: 1pt 5pt;
     position: relative;
-    top:0;/* 3pt;*/
+    top: 3pt;
     font-weight: normal;
+    padding-left:0!important;
+    padding-right:0!important;
 }
 div#logo {
     display: inline-block;
@@ -214,7 +219,6 @@ ul.indent_list li {
 /* Print-specific rules */
 @media print {
     @page {
-        resolution:300dpi;
         size: 8.5in 11in;
         margin:0.2in 0.4in .85in;
         @bottom-left {
@@ -244,6 +248,7 @@ ul.indent_list li {
     }
     body {
         font-size:8.5pt;
+        margin:0!important;
         font-family: "LiberationSerif";
     }
     h3 {

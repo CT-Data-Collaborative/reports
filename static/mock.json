@@ -388,25 +388,24 @@
       "name": "employers",
       "data": [
         [
-          ""
+          {"value" : "Northeast Utilities", "type" : "string"}
         ],
         [
-          "Northeast Utilities"
+          {"value" : "Travelers Indemnity Co", "type" : "string"}
         ],
         [
-          "Travelers Indemnity Co"
+          {"value" : "Hartford Financial Svcs Group", "type" : "string"}
         ],
         [
-          "Hartford Financial Svcs Group"
+          {"value" : "Aetna Inc", "type" : "string"}
         ],
         [
-          "Aetna Inc"
-        ],
-        [
-          "The Hartford"
+          {"value" : "The Hartford", "type" : "string"}
         ]
       ],
-      "config": {}
+      "config": {
+        "header" : false
+      }
     },
     {
       "type": "table",
@@ -696,7 +695,7 @@
       "data": [
         [
           {"value" : "Moody's Bond Rating (2012)", "type" : "string"},
-          "A1"
+          {"value" : "A1", "type" : "string"}
         ],
         [
           {"value" : "Actual Mill Rate (2012)", "type" : "string"},
@@ -849,27 +848,27 @@
         ],
         [
           {"value" : "Labor Force", "type" : "string"},
-          {"value" : 49677, "type" :" integer"},
-          {"value" : 457617, "type" :" integer"},
-          {"value" : 1859934, "type" :" integer"}
+          {"value" : 49677, "type" :"integer"},
+          {"value" : 457617, "type" :"integer"},
+          {"value" : 1859934, "type" :"integer"}
         ],
         [
           {"value" : "Employed", "type" : "string"},
-          {"value" : 42396, "type" :" integer"},
-          {"value" : 420586, "type" :" integer"},
-          {"value" : 1715398, "type" :" integer"}
+          {"value" : 42396, "type" :"integer"},
+          {"value" : 420586, "type" :"integer"},
+          {"value" : 1715398, "type" :"integer"}
         ],
         [
           {"value" : "Unemployed", "type" : "string"},
-          {"value" : 7281, "type" :" integer"},
-          {"value" : 37031, "type" :" integer"},
-          {"value" : 144536, "type" :" integer"}
+          {"value" : 7281, "type" :"integer"},
+          {"value" : 37031, "type" :"integer"},
+          {"value" : 144536, "type" :"integer"}
         ],
         [
           {"value" : "Unemployment Rate", "type" : "string"},
-          {"value" : 0.147, "type" : " percent"},
-          {"value" : 0.081, "type" : " percent"},
-          {"value" : 0.078, "type" : " percent"}
+          {"value" : 0.147, "type" : "percent"},
+          {"value" : 0.081, "type" : "percent"},
+          {"value" : 0.078, "type" : "percent"}
         ]
       ],
       "config": {}
@@ -1073,57 +1072,61 @@
       "type": "table",
       "name": "electric",
       "data": [
-        [],
         [
-          "Connecticut Light & Power"
+          {"value" : "Connecticut Light & Power", "type" : "string"}
         ],
         [
-          "(800) 286-2000"
+          {"value" : "(800) 286-2000", "type" : "string"}
         ]
       ],
-      "config": {}
+      "config": {
+        "header" : false
+      }
     },
     {
       "type": "table",
       "name": "gas",
       "data": [
-        [],
         [
-          "CNG Corp"
+          {"value" : "CNG Corp", "type" : "string"}
         ],
         [
-          "(860) 727-3000"
+          {"value" : "(860) 727-3000", "type" : "string"}
         ]
       ],
-      "config": {}
+      "config": {
+        "header" : "false"
+      }
     },
     {
       "type": "table",
       "name": "water",
       "data": [
-        [],
         [
-          "Municipal Provider"
+          {"value" : "Municipal Provider", "type" : "string"}
         ],
         [
-          "Local Contact"
+          {"value" : "Local Contact", "type" : "string"}
         ]
       ],
-      "config": {}
+      "config": {
+        "header" : "false"
+      }
     },
     {
       "type": "table",
       "name": "cable",
       "data": [
-        [],
         [
-          "Comcast Hartford"
+          {"value" : "Comcast Hartford", "type" : "string"}
         ],
         [
-          "(800) 266-2278"
+          {"value" : "(800) 266-2278", "type" : "string"}
         ]
       ],
-      "config": {}
+      "config": {
+        "header" : "false"
+      }
     }
   ]
 }

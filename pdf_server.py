@@ -24,6 +24,10 @@ app.config.from_object(__name__)
 
 app.jinja_env.filters['base64encode'] = b64encode
 
+def listValues(l):
+    return [o["value"] for o in l if o["value"] != ""]
+app.jinja_env.filters['listValues'] = listValues
+
 # Routes
 @app.route("/")
 def index():
@@ -163,7 +167,10 @@ def town_profile():
 
         nodeResponse = muterun_js('scripts/visualizations/'+requestObj["type"]+'.js', "--data="+quote(json.dumps(requestObj["data"]))+" --config="+quote(json.dumps(config)))
 
-        # if(requestObj['type'] == "map"):
+        # if(requestObj['type'] == "table"):
+        #     print("###############")
+        #     print(requestObj["name"])
+        #     print("###############")
         #     print(nodeResponse.stdout)
         #     print(nodeResponse.stderr)
         #     print(nodeResponse.exitcode)
