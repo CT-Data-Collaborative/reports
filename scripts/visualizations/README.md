@@ -2,7 +2,8 @@
 ### D3 Based Visualization Scripts used by PDF serving application  
   
 #### Tables `table.js`
-Tables do not currently have any configuration parameters. As they are drawn with pure HTML, they can and currently are styled using CSS only.  
+Tables are drawn with pure HTML, they can and currently are styled using CSS only.  Tables only currently support the following configuration parameter:  
++ `header` is only necessary to set as `false` if you want to specify that there are NO column headers in the supplied data. This will prevent the first row of data being used as column headers. If not supplied, or supplied as `true`, it will be assumed that the data presents headers and the first row of data will be put into `<th>` tags in the `<thead>` element.
   
 #### Pie and "Donut" charts `pie.js`
 Pie Charts accept the following configuration parameters:  

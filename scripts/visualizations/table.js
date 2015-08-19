@@ -15,6 +15,19 @@ var args = minimist(process.argv.slice(2)),
         data = JSON.parse(args.data),
         config = JSON.parse(args.config);
 
+// Number formatters
+var formatters = {
+    "string" : function(val) {return val; },
+    "currency" : d3.format("$,.0f"),
+    "integer" : d3.format(",0f"),
+    "decimal" : d3.format(",2f"),
+    "percent" : d3.format(".1%")
+};
+
+for (var type in config.formats) {
+    formatters[type] = d3.format(config.formats[type]);
+}
+
 // get chart function object
 chart = tableChart();
 
@@ -35,7 +48,7 @@ console.log(body.html());
 
 function tableChart() {
     // Vars
-    // var width = 460;
+    var colspan = null;
     
     function chart(selection) {
         selection.each(function(data) {
@@ -50,13 +63,29 @@ function tableChart() {
             // outermost table Container
             var table = d3.select(this).append("table")
 
+            // Calculate colspan
+            // if header cells < data cells, per row.
+            var noblankColumns = data.columns.filter(function(col) { return col.value !== "" })
+
+            if (noblankColumns.length < data.rows[0].length-1 && noblankColumns.length > 0) {
+                colspan = Math.floor((data.rows[0].length)/(noblankColumns.length))
+                colspan = (colspan > 1 ? colspan : null)
+            }
+            
             // table header
             var thead = table.append("thead")
                     .append("tr")
                     .selectAll("th")
                     .data(data.columns).enter()
                     .append("th")
-                        .text(function(c) { return c; } );
+                        .text(function(d) { return d.value; } )
+                    .attr("colspan", function(d, i) {
+                        if (i > 0 || d.value != "") {
+                            return colspan;
+                        } else {
+                            return null;
+                        }
+                    });
 
             // tbody element
             var tbody = table.append("tbody");
@@ -70,13 +99,12 @@ function tableChart() {
             // create a cell in each row for each column
             var cells = rows.selectAll("td")
                 .data(function(row) {
-                    return data.columns.map(function(column, index) {
-                        return {column: column, value: row[index]};
-                    });
+                    return row;
                 })
                 .enter()
                 .append("td")
-                .text(function(d) { return d.value; });
+                .text(function(d) { return formatters[d.type](d.value); })
+                .attr("colspan", function(d, i) { return colspan && (i > 0 || data.columns[i].value != "") ? 1 : null });
         });
     }
 

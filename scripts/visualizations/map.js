@@ -22,11 +22,23 @@ var args = minimist(process.argv.slice(2)),
         config = JSON.parse(args.config),
         geography = args.geography;
 
+// Number formatters
+var formatters = {
+    "string" : function(val) {return val; },
+    "currency" : d3.format("$,.0f"),
+    "integer" : d3.format(",0f"),
+    "decimal" : d3.format(",2f"),
+    "percent" : d3.format(".1%")
+};
+
+for (var type in config.formats) {
+    formatters[type] = d3.format(config.formats[type]);
+}
 
 // get geojson from file - proposed node parameters as follows
 // ie --data="" --config="" --geography="/full/path/to/geometry/file"
 
-// This works too
+// This works too, make sure to require path in commented-out code @ line 15
 // console.log(path.join(__dirname, "../static/town_shapes.json"));
 
 var geojson = fs.readFileSync("/vagrant/static/town_shapes.json", {encoding : "utf8"})
@@ -70,7 +82,10 @@ function mapChart() {
     var width = 200,
             height = 200,
             margin = 5, // %
-            colors = d3.scale.category20();
+            colors = d3.scale.category20()
+            fill = d3.scale.linear()
+                        .range([0, 1])
+                        .domain([0, 1]);
 
     function chart(selection) {
         selection.each(function(data) {
@@ -82,6 +97,8 @@ function mapChart() {
             //     return [label.call(data, d, i), value.call(data, d, i)];
             // });
 
+            fill.domain([0, d3.max(data.slice(1), function(d) { return d[1].value; })]);
+
             // SVG Container
             var svg = d3.select(this).append("svg")
                 .attr("width", width)
@@ -90,14 +107,14 @@ function mapChart() {
                 .append("g");
 
             // create a first guess for the projection - a unit project of 1px centered at 0,0
-            var projection = d3.geo.mercator()
-                        .scale(1) 
+            var projection = d3.geo.equirectangular()
+                        .scale(1)
                         .translate([0,0]);
 
             // create the path
             var path = d3.geo.path().projection(projection);
 
-            // using the path determine the bounds of the current map and use 
+            // using the path determine the bounds of the current map and use
             // these to determine better values for the scale and translation
             var bounds  = path.bounds(geoData),
                     hscale = (bounds[1][0] - bounds[0][0]) / width,
@@ -108,6 +125,14 @@ function mapChart() {
             // update values accordingly in the projection object
             projection.scale(scale).translate(translate);
 
+            // add data to geodata
+            geoData.features.forEach(function(feature, index, features) {
+                dataForLocation = data.filter(function(d) {
+                    return d[0].value == feature.properties.GEOID10
+                }).pop();
+                geoData.features[index].properties.DATAVALUE = (dataForLocation ? dataForLocation[1].value : null);
+            });
+
             // map features
             svg.selectAll("path")
                 .data(geoData.features)
@@ -116,8 +141,7 @@ function mapChart() {
                     .attr("d", path)
                     .attr("stroke", "0.5px")
                     .attr("fill", "black")
-                    // .attr("fill-opacity", function() {return Math.random();} )
-                    .attr("fill-opacity", function(d) { return (d.properties.NAME10 == "Hartford" ? 1 : 0)} )
+                    .attr("fill-opacity", function(d, i) { return fill(d.properties.DATAVALUE); })
                     .attr("stroke", "black");
         });
     }
@@ -147,7 +171,7 @@ function mapChart() {
       if (!arguments.length) return colors;
       colors = d3.scale.ordinal()
                         .range(_);
-      return chart;  
+      return chart;
     };
 
     // These will probably never be used, but keeping for posterity

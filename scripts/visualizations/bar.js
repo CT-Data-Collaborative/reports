@@ -16,6 +16,19 @@ var args = minimist(process.argv.slice(2)),
         config = JSON.parse(args.config);
 
 
+// Number formatters
+var formatters = {
+    "string" : function(val) {return val; },
+    "currency" : d3.format("$,.0f"),
+    "integer" : d3.format(",0f"),
+    "decimal" : d3.format(",2f"),
+    "percent" : d3.format(".1%")
+};
+
+for (var type in config.formats) {
+    formatters[type] = d3.format(config.formats[type]);
+}
+
 // get chart function object
 chart = barChart();
 
@@ -64,7 +77,7 @@ function barChart() {
             // });
 
             // set domain of scale appropriate to data
-            x.domain([0, d3.max(data, function(d) { return d[1]; })])
+            x.domain([0, d3.max(data, function(d) { return d[1].value; })])
 
             var svg = d3.select(this).append('svg')
                 .attr("width", width)
@@ -77,17 +90,17 @@ function barChart() {
                 .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
 
             bar.append("rect")
-                .attr("width", function(d) { return x(d[1]); })
+                .attr("width", function(d) { return x(d[1].value); })
                 .attr("height", barHeight - 1)
                 .attr("fill", "steelblue");
 
             bar.append("text")
-                // .attr("x", function(d) { return x(d) - 3; })
+                // .attr("x", function(d) { return x(d) - 3; }) // offset for text labels
                 .attr("x", 0)
                 .attr("y", barHeight / 2)
                 .attr("dy", ".35em")
                 .attr("fill", "white")
-                .text(function(d) { return d[0]; });
+                .text(function(d) { return d[0].value; });
         });
     }
 
