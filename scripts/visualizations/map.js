@@ -38,7 +38,7 @@ for (var type in config.formats) {
 // get geojson from file - proposed node parameters as follows
 // ie --data="" --config="" --geography="/full/path/to/geometry/file"
 
-// This works too
+// This works too, make sure to require path in commented-out code @ line 15
 // console.log(path.join(__dirname, "../static/town_shapes.json"));
 
 var geojson = fs.readFileSync("/vagrant/static/town_shapes.json", {encoding : "utf8"})
@@ -142,8 +142,6 @@ function mapChart() {
                     .attr("stroke", "0.5px")
                     .attr("fill", "black")
                     .attr("fill-opacity", function(d, i) { return fill(d.properties.DATAVALUE); })
-                    // .attr("fill-opacity", function() {return Math.random();} )
-                    // .attr("fill-opacity", function(d) { return (d.properties.NAME10 == "Hartford" ? 1 : 0)} )
                     .attr("stroke", "black");
         });
     }

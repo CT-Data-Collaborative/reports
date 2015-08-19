@@ -131,7 +131,6 @@ function pieChart() {
                     .attr("text-anchor", "middle")
                     .style("font-size", "10px")
                     .text(function(d){ return label(d.data) });
-                    // .text(function(d){ return d.data[0].value });
         });
     }
 

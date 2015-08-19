@@ -95,7 +95,7 @@ function barChart() {
                 .attr("fill", "steelblue");
 
             bar.append("text")
-                // .attr("x", function(d) { return x(d) - 3; })
+                // .attr("x", function(d) { return x(d) - 3; }) // offset for text labels
                 .attr("x", 0)
                 .attr("y", barHeight / 2)
                 .attr("dy", ".35em")
