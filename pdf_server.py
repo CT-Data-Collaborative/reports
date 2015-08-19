@@ -30,6 +30,28 @@ def listValues(l):
 app.jinja_env.filters['listValues'] = listValues
 
 # Routes
+@app.route("/download", methods = ["GET", "POST"])
+def download():
+    # Get report
+    report = renderRequest(request)
+
+    ## Return PDF as pdf file
+    response = HTML(string=report)
+    response = render_pdf(response)
+
+    # # Return pdf as download attachment - for use with the jquery.FileDownload plugin
+    # response = HTML(string=render_template("town_profile.html", config = templateConfig, info = info, objects = objects))
+    # response = render_pdf(response)
+    # response = make_response(response)
+    # response.headers["Content-Disposition"] = "attachment; filename=town_profile.pdf"
+    # response.headers["Set-Cookie"] = "fileDownload=true; path=/"
+
+    return response
+
+@app.route("/view")
+def view():
+    return renderRequest(request)
+
 @app.route("/form", methods=["GET", "POST"])
 def form():
     print(request.method)
@@ -92,6 +114,13 @@ def form():
 
 @app.route("/town_profile", methods=["GET", "POST"])
 def town_profile():
+    mockJSON = open("static/mock.json")
+    mockJSON = json.load(mockJSON)
+
+    # Somehow return "/download" view endpoint with data = {"data" : mockJSON} as post param?
+    return "Hello World"
+
+def renderRequest(request):
     # req = json.loads('{"template":"town_profile","objects":[{"type":"table","name":"race","data":[["","Hartford","Connecticut"],["Native American",596,8770],["Black",47786,361668],["Hispanic (any race)",54289,496939],["White",43660,2792554]],"config":{}},{"type":"table","name":"population","data":[["","Hartford","Connecticut"],[2015,125999,3644545],[2020,126656,3702469],[2025,126185,3746181]],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
 
     # req = json.loads('{"template":"town_profile","objects":[{"type":"pie","name":"race","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"table","name":"population","data":[["","Hartford","Connecticut"],[2015,125999,3644545],[2020,126656,3702469],[2025,126185,3746181]],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
@@ -101,8 +130,9 @@ def town_profile():
     # req = json.loads('{"template":"town_profile","objects":[{"type":"bar","name":"population","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"map","name":"race","data":[],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}')
     
     # Town profile mock json request has been moved to it's own file.
-    req = open("static/mock.json")
-    req = json.load(req)
+    # req = open("static/mock.json")
+    # req = json.load(req)
+    req = json.loads(request.form["data"])
 
     # Pull template name out of config file
     template = req["template"]
