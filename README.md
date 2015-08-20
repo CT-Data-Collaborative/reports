@@ -50,7 +50,7 @@ If you are deploying this application to an existing server or vagrantbox, you w
 `python pdf_server.py`
 
 #### Testing The Application  
-This application has a testing file, using Flask and python UnitTest based functions. To run this test, and any future test that get implemented, simply execute `python pdf_server_tests.py` from the command line.  The output should illustrate if any changes to the current working repository have broken the functionality for the tests involved. Currently, only a file comparison for the Town Profiles is implemented.
+This application has a testing file, using Flask and python UnitTest based functions. To run this test, and any future test that get implemented, simply follow the instructions above for running activating the virtualenv, and execute `python pdf_server_tests.py` to run the testing script.  The output should illustrate if any changes to the current working repository have broken the functionality for the tests involved. Currently, only a file comparison for the Town Profiles is implemented.
   
 #### Testing External Calls
 
