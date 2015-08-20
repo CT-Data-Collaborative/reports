@@ -1,8 +1,15 @@
-import os
+## Imports
+# the flask application we're testing
 import pdf_server
+# unittest package
 import unittest
-import filecmp
+# os file and pathing utilities
+from os import path, unlink, write, close, path as path
+# temp file creation
 from tempfile import mkstemp
+# file comparing tool
+import filecmp
+##
 
 class TownProfileTest(unittest.TestCase):
     def setUp(self):
@@ -12,26 +19,29 @@ class TownProfileTest(unittest.TestCase):
         self.tempFiles = []
 
     def tearDown(self):
+        # Remove temp files from tests
         for tempFile in self.tempFiles:
-            os.unlink(tempFile)
-        #more stuff
+            unlink(tempFile)
 
-    def test_post(self):
+    def test_town_profile(self):
         # Get file path to testing standard
-        standardFile = os.path.abspath("static/tests/town_profile.pdf")
-        print(standardFile)
+        standardFile = path.abspath("static/tests/town_profile.pdf")
+
+        # Get Town profile mock request from file.
+        townProfileMock = open("static/tests/town_profile_mock.json")
+        townProfileMock = townProfileMock.read()
 
         # Get response to simulated request
-        res = self.app.get('/download', query_string = {"print" : 1})
+        res = self.app.post('/download', data = {"data" : townProfileMock})
 
         # Create temporary file, get handle and path
         tempHandle, tempFile = mkstemp(dir="temp")
         # store path in list of temp paths to remove later.
         self.tempFiles.append(tempFile)
         # Write request response to temp file
-        os.write(tempHandle, res.data)
+        write(tempHandle, res.data)
         # Close temp file handle
-        os.close(tempHandle)
+        close(tempHandle)
         # Assert tempfile is the same as current testing standard
         assert filecmp.cmp(tempFile, standardFile), "Town Profile does not match Standard!"
 
