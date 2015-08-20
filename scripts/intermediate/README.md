@@ -1,7 +1,7 @@
 # Intermediary Processing Scripts  
   
-These scripts are an intermediate step between receiving a request, and production of the desired visualizations. This step is intended to do 3 important things, and the structure follows that pattern accordingly.  
-  
+These scripts are an intermediate step between receiving a request, and production of the desired visualizations. This step is intended to do 3 important things, and the structure follows that pattern accordingly. When writing an intermediary script for a new report, use the skeleton as a starting point, as it will be updated to maintain the input and return types expected by the serving script.  
+
 
 ### Intermediary Processing of Request Data
 One function should be defined for each type of visualization. This step is intended to allow for a custom processing step that reshapes data as necessary from the original request to make it suitable for use in the associated D3 script. These functions are put into an dictionary that is available when the file is read using python's `imp` to import the intermediary file, and is automatically called dynamicall for every request object, by type, as follows in [pdf_server.py:91](https://github.com/CT-Data-Collaborative/reports/blob/master/pdf_server.py#L91)  

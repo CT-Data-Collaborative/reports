@@ -70,8 +70,8 @@ The following examples will produce variations of town profile reports, however 
 `{"template":"town_profile","config":{},"objects":[{"type":"pie","name":"race","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"table","name":"population","data":[["","Hartford","Connecticut"],[2015,125999,3644545],[2020,126656,3702469],[2025,126185,3746181]],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}`
 
 #### Application Directory Structure  
-Once installed, the application directory will be layed out as the tree below details. Some structural points of note:
-+ `external_request_mock` - This is intended to be run comletely outside of the `pdf_server` application as detailed above.  
+Once installed, the application directory will be laid out as the tree below details. Some structural points of note:
++ `external_request_mock` - This is intended to be run completely outside of the `pdf_server` application as detailed above.  
 + `node_modules`, `venv` - These will only exist after correct installation of the application and are not included in the repository itself.
 + `scripts` - With the exception of the main application file, this is where all the scripts reside, including intermediary processing and visualization scripts.
 + `static` - 
