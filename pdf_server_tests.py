@@ -4,7 +4,7 @@ import pdf_server
 # unittest package
 import unittest
 # os file and pathing utilities
-from os import path, unlink, write, close, path as path
+from os import path, mkdir, unlink, write, close, path as path
 # temp file creation
 from tempfile import mkstemp
 # file comparing tool
@@ -14,9 +14,14 @@ import filecmp
 class TownProfileTest(unittest.TestCase):
     def setUp(self):
         # test client setup
+        # application setup
         pdf_server.app.config["TESTING"] = True
         self.app = pdf_server.app.test_client()
         self.tempFiles = []
+        # if temp directory doesn't exist, create one.
+        if not path.isdir("temp"):
+            mkdir("temp")
+
 
     def tearDown(self):
         # Remove temp files from tests
