@@ -11,16 +11,15 @@
 var d3 = require("d3"),
         minimist = require("minimist"),
         jsdom = require("jsdom"),
-        fs = require("fs");//,
-        // path = require("path");
+        fs = require("fs");
 
 /**
  * Process arguments from node call using minimist
  */
 var args = minimist(process.argv.slice(2)),
         data = JSON.parse(args.data),
-        config = JSON.parse(args.config),
-        geography = args.geography;
+        config = JSON.parse(args.config);//,
+        // geography = args.geography;
 
 // Number formatters
 var formatters = {
@@ -35,13 +34,11 @@ for (var type in config.formats) {
     formatters[type] = d3.format(config.formats[type]);
 }
 
-// get geojson from file - proposed node parameters as follows
+// // get geojson from file - proposed node parameters as follows - UNCOMMENT CODE ON @ LINE 23
 // ie --data="" --config="" --geography="/full/path/to/geometry/file"
+// var geojson = fs.readFileSync(geographyFile, {encoding : "utf8"})
 
-// This works too, make sure to require path in commented-out code @ line 15
-// console.log(path.join(__dirname, "../static/town_shapes.json"));
-
-var geojson = fs.readFileSync("/vagrant/static/town_shapes.json", {encoding : "utf8"})
+var geojson = fs.readFileSync("/vagrant/static/geography/town_shapes.json", {encoding : "utf8"})
 geoData = JSON.parse(geojson);
 
 

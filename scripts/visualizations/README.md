@@ -1,6 +1,9 @@
 # Visualizations
 ### D3 Based Visualization Scripts used by PDF serving application  
   
+#### An important note about configuration parameters
+Any configuration available can be specified at any level of the "hierarchy" and will be applied at that scope. Hierarchy starts at a static config set in the template-specific configuration file in `static/template_config/`, then is overridden by template-level config specified in the request. Both of these levels will apply globally to all visualizations present in the request. These in turn can be overridden by visualization-level config in each visualization object listed in the request, which will only affect that single visualization.
+
 #### Tables `table.js`
 Tables are drawn with pure HTML, they can and currently are styled using CSS only.  Tables only currently support the following configuration parameter:  
 + `header` is only necessary to set as `false` if you want to specify that there are NO column headers in the supplied data. This will prevent the first row of data being used as column headers. If not supplied, or supplied as `true`, it will be assumed that the data presents headers and the first row of data will be put into `<th>` tags in the `<thead>` element.
