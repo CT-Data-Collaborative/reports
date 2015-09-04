@@ -50,7 +50,7 @@ def download():
     return response
 
 # view route - returns report directly to calling page as html
-@app.route("/view")
+@app.route("/view", methods = ["GET", "POST"])
 def view():
     return renderRequest(request)
 
