@@ -88,7 +88,7 @@ def renderRequest(request):
         obj = {}
 
         # Every intermediary script should have one transformation method for each type of viz [pie, map, bar, table]
-        requestObj["data"] = intermediary.transformations[requestObj["type"]](requestObj)
+        requestObj = intermediary.transformations[requestObj["type"]](requestObj)
 
         # take a copy of the template-level config and update with visualization-level configs for this object
         config = templateConfig.copy()
@@ -118,6 +118,7 @@ def renderRequest(request):
         obj["output"] = render_template(requestObj["type"]+".html", data = nodeResponse.stdout)
 
         obj["className"] = requestObj["type"];
+        obj["config"] = requestObj["config"];
         obj["dump"] = nodeResponse.stdout
         obj["data"] = requestObj["data"]
         objects[requestObj["name"]] = obj

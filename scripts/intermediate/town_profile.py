@@ -4,18 +4,19 @@ def table(visObj):
     if ("header" not in visObj["config"] or visObj["config"]["header"] == True):
             columns = visObj["data"].pop(0)
             rows = visObj["data"]
-            return {"columns" : columns, "rows" : rows}
+            visObj["data"] = {"columns" : columns, "rows" : rows}
     else:
-            return {"columns" : [], "rows" : visObj["data"]}
+            visObj["data"] = {"columns" : [], "rows" : visObj["data"]}
+    return visObj
 
 def pie(visObj):
-    return visObj["data"]
+    return visObj
 
 def map(visObj):
-    return visObj["data"]
+    return visObj
 
 def bar(visObj):
-    return visObj["data"]
+    return visObj
 
 transformations = {"table" : table, "pie" : pie, "map" : map, "bar" : bar}
 

@@ -1,0 +1,25 @@
+body {
+    height: 600px;
+}
+
+
+.r1 {
+    height:33%;
+    float: right;
+}
+.r2 {
+    height:33%;
+    float: right;
+}
+.r3 {
+    height:33%;
+    float: right;
+}
+.l1 {
+    height:50%;
+    float: left;
+}
+.l2 {
+    height:50%;
+    float: left;
+}

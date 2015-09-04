@@ -1,0 +1,51 @@
+{
+  "template": "connect",
+  "config": {},
+  "objects": [
+    {
+      "name" : "l1",
+      "type" : "table",
+      "data": {},
+      "config": {
+        "height": 6,
+        "width": 6
+      }
+    },
+    {
+      "name" : "l2",
+      "type" : "table",
+      "data": {},
+      "config": {
+        "height": 6,
+        "width": 6
+      }
+    },
+    {
+      "name" : "r1",
+      "type" : "table",
+      "data": {},
+      "config": {
+        "height": 4,
+        "width": 6
+      }
+    },
+    {
+      "name" : "r2",
+      "type" : "table",
+      "data": {},
+      "config": {
+        "height": 4,
+        "width": 6
+      }
+    },
+    {
+      "name" : "r3",
+      "type" : "table",
+      "data": {},
+      "config": {
+        "height": 4,
+        "width": 6
+      }
+    }
+  ]
+}

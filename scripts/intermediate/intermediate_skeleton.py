@@ -1,16 +1,16 @@
 import json
 
 def table(visObj):
-    return visObj["data"]
+    return visObj
 
 def bar(visObj):
-    return visObj["data"]
+    return visObj
 
 def pie(visObj):
-    return visObj["data"]
+    return visObj
 
 def map(visObj):
-    return visObj["data"]
+    return visObj
 
 transformations = {"table" : table, "pie" : pie, "map" : map, "bar" : bar}
 

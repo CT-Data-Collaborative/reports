@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/connect.css') }}">
+    <link href="{{ url_for('static', filename = 'styles/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+{% endblock head %}
+
+{% block title -%}
+CONNECT
+{% endblock title -%}
+
+{% block body %}
+<div class="l1 {{ objects["l1"]["config"]["class"] }}" style="background-color:{{ objects["l1"]["config"]["color"] }}">
+    "l1"
+</div>
+<div class="r1 {{ objects["r1"]["config"]["class"] }}" style="background-color:{{ objects["r1"]["config"]["color"] }}">
+    "r1"
+</div>
+
+<div class="r2 {{ objects["r2"]["config"]["class"] }}" style="background-color:{{ objects["r2"]["config"]["color"] }}">
+    "r2"
+</div>
+<div class="l2 {{ objects["l2"]["config"]["class"] }}" style="background-color:{{ objects["l2"]["config"]["color"] }}">
+    "l2"
+</div>
+<div class="r3 {{ objects["r3"]["config"]["class"] }}" style="background-color:{{ objects["r3"]["config"]["color"] }}">
+    "r3"
+</div>
+{% endblock body %}
+ 
