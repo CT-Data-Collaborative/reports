@@ -11,21 +11,31 @@ CONNECT
 {% endblock title -%}
 
 {% block body %}
-<div class="l1 {{ objects["l1"]["config"]["class"] }}" style="background-color:{{ objects["l1"]["config"]["color"] }}">
-    "l1"
-</div>
-<div class="r1 {{ objects["r1"]["config"]["class"] }}" style="background-color:{{ objects["r1"]["config"]["color"] }}">
-    "r1"
-</div>
+<!--
+ As of this commit, this template is intended for use with the following mock json request:
 
-<div class="r2 {{ objects["r2"]["config"]["class"] }}" style="background-color:{{ objects["r2"]["config"]["color"] }}">
-    "r2"
-</div>
-<div class="l2 {{ objects["l2"]["config"]["class"] }}" style="background-color:{{ objects["l2"]["config"]["color"] }}">
-    "l2"
-</div>
-<div class="r3 {{ objects["r3"]["config"]["class"] }}" style="background-color:{{ objects["r3"]["config"]["color"] }}">
-    "r3"
-</div>
+{"template":"connect","config":{},"objects":[{"name":"l1","type":"pie","data":[[{"value":"Q1","type":"string"},{"value":26,"type":"integer"}],[{"value":"Q2","type":"string"},{"value":58,"type":"integer"}],[{"value":"Q3","type":"string"},{"value":46,"type":"integer"}],[{"value":"Q4","type":"string"},{"value":32,"type":"integer"}]],"config":{"height":6,"width":6}},{"name":"l2","type":"bar","data":[[{"value":"Q1","type":"string"},{"value":26,"type":"integer"}],[{"value":"Q2","type":"string"},{"value":58,"type":"integer"}],[{"value":"Q3","type":"string"},{"value":46,"type":"integer"}],[{"value":"Q4","type":"string"},{"value":32,"type":"integer"}]],"config":{"height":6,"width":6}},{"name":"r1","type":"pie","data":[[{"value":"Q1","type":"string"},{"value":26,"type":"integer"}],[{"value":"Q2","type":"string"},{"value":58,"type":"integer"}],[{"value":"Q3","type":"string"},{"value":46,"type":"integer"}],[{"value":"Q4","type":"string"},{"value":32,"type":"integer"}]],"config":{"height":4,"width":6}},{"name":"r2","type":"bar","data":[[{"value":"Q1","type":"string"},{"value":26,"type":"integer"}],[{"value":"Q2","type":"string"},{"value":58,"type":"integer"}],[{"value":"Q3","type":"string"},{"value":46,"type":"integer"}],[{"value":"Q4","type":"string"},{"value":32,"type":"integer"}]],"config":{"height":4,"width":6}},{"name":"r3","type":"pie","data":[[{"value":"Q1","type":"string"},{"value":26,"type":"integer"}],[{"value":"Q2","type":"string"},{"value":58,"type":"integer"}],[{"value":"Q3","type":"string"},{"value":46,"type":"integer"}],[{"value":"Q4","type":"string"},{"value":32,"type":"integer"}]],"config":{"height":4,"width":6}}]}
+
+-->
+<body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-6">
+          <!-- 2 6x6 boxes -->
+          {{objects["l1"]["output"] | safe}}
+          {{objects["l2"]["output"] | safe}}
+        </div>
+        <div class="col-xs-6">
+          <!-- 3 4x6 boxes -->
+          {{objects["r1"]["output"] | safe}}
+          {{objects["r2"]["output"] | safe}}
+          {{objects["r3"]["output"] | safe}}
+        </div>
+      </div>
+    </div>
+  </body>
+
+
+
 {% endblock body %}
  

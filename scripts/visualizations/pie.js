@@ -35,11 +35,23 @@ for (var type in config.formats) {
 // height
 if ("height" in config && config.height > 0) {
     chart.height(config.height);
+
+    chart.radius(Math.min(chart.height(), chart.width()) / 2);
+    // chart.outerRadius(chart.radius() * 0.9);
 }
 
 // width
 if ("width" in config && config.width > 0) {
     chart.width(config.width);
+
+    chart.radius(Math.min(chart.height(), chart.width()) / 2);
+    // chart.outerRadius(chart.radius() * 0.9);
+}
+
+// radius
+if ("radius" in config) {
+    chart.radius(config.radius);
+    chart.outerRadius(config.radius * 0.9)
 }
 
 // innerRadius
@@ -147,6 +159,17 @@ function pieChart() {
         if (!arguments.length) return height;
         height = _;
         return chart;
+    };
+
+    chart.radius = function(_) {
+      if (!arguments.length) return radius;
+      radius = _;
+
+      // Also update calculated outer radius of arc
+      outerRadius = _ * 0.9;
+      arc.outerRadius(outerRadius);
+      
+      return chart;  
     };
 
     chart.innerRadius = function(_) {

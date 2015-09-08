@@ -119,6 +119,12 @@ function barChart() {
         return chart;
     };
 
+    chart.barHeight = function(_) {
+        if (!arguments.length) return barHeight;
+        barHeight = _;
+        return chart;
+    };
+
     chart.colors = function(_) {
       if (!arguments.length) return colors;
       colors = d3.scale.ordinal()

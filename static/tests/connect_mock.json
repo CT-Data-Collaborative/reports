@@ -4,8 +4,49 @@
   "objects": [
     {
       "name" : "l1",
-      "type" : "table",
-      "data": {},
+      "type" : "pie",
+      "data": [
+        [
+          {
+            "value": "Q1",
+            "type": "string"
+          },
+          {
+            "value": 26,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q2",
+            "type": "string"
+          },
+          {
+            "value": 58,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q3",
+            "type": "string"
+          },
+          {
+            "value": 46,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q4",
+            "type": "string"
+          },
+          {
+            "value": 32,
+            "type": "integer"
+          }
+        ]
+      ],
       "config": {
         "height": 6,
         "width": 6
@@ -13,8 +54,49 @@
     },
     {
       "name" : "l2",
-      "type" : "table",
-      "data": {},
+      "type" : "bar",
+      "data": [
+        [
+          {
+            "value": "Q1",
+            "type": "string"
+          },
+          {
+            "value": 26,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q2",
+            "type": "string"
+          },
+          {
+            "value": 58,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q3",
+            "type": "string"
+          },
+          {
+            "value": 46,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q4",
+            "type": "string"
+          },
+          {
+            "value": 32,
+            "type": "integer"
+          }
+        ]
+      ],
       "config": {
         "height": 6,
         "width": 6
@@ -22,8 +104,49 @@
     },
     {
       "name" : "r1",
-      "type" : "table",
-      "data": {},
+      "type" : "pie",
+      "data": [
+        [
+          {
+            "value": "Q1",
+            "type": "string"
+          },
+          {
+            "value": 26,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q2",
+            "type": "string"
+          },
+          {
+            "value": 58,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q3",
+            "type": "string"
+          },
+          {
+            "value": 46,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q4",
+            "type": "string"
+          },
+          {
+            "value": 32,
+            "type": "integer"
+          }
+        ]
+      ],
       "config": {
         "height": 4,
         "width": 6
@@ -31,8 +154,49 @@
     },
     {
       "name" : "r2",
-      "type" : "table",
-      "data": {},
+      "type" : "bar",
+      "data": [
+        [
+          {
+            "value": "Q1",
+            "type": "string"
+          },
+          {
+            "value": 26,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q2",
+            "type": "string"
+          },
+          {
+            "value": 58,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q3",
+            "type": "string"
+          },
+          {
+            "value": 46,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q4",
+            "type": "string"
+          },
+          {
+            "value": 32,
+            "type": "integer"
+          }
+        ]
+      ],
       "config": {
         "height": 4,
         "width": 6
@@ -40,8 +204,49 @@
     },
     {
       "name" : "r3",
-      "type" : "table",
-      "data": {},
+      "type" : "pie",
+      "data": [
+        [
+          {
+            "value": "Q1",
+            "type": "string"
+          },
+          {
+            "value": 26,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q2",
+            "type": "string"
+          },
+          {
+            "value": 58,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q3",
+            "type": "string"
+          },
+          {
+            "value": 46,
+            "type": "integer"
+          }
+        ],
+        [
+          {
+            "value": "Q4",
+            "type": "string"
+          },
+          {
+            "value": 32,
+            "type": "integer"
+          }
+        ]
+      ],
       "config": {
         "height": 4,
         "width": 6

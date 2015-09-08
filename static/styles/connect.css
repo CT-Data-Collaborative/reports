@@ -2,24 +2,31 @@ body {
     height: 600px;
 }
 
+div.row > div > img,
+div.row > div > table,
+div.row > div > div {
+    width: 100%;
+    /*border: 1px solid black;*/
+}
 
-.r1 {
-    height:33%;
-    float: right;
+/* Print-specific rules */
+@media print {
+    @page {
+        size: 11in 8.5in;
+        margin:0.25in;
+    }
+    body {
+        font-size:8.5pt;
+        margin:0!important;
+        font-family: "LiberationSerif";
+    }
+    .noprint {
+        display: none;
+    }
 }
-.r2 {
-    height:33%;
-    float: right;
-}
-.r3 {
-    height:33%;
-    float: right;
-}
-.l1 {
-    height:50%;
-    float: left;
-}
-.l2 {
-    height:50%;
-    float: left;
+
+@media screen {
+    body {
+        height:800px;
+    }
 }
