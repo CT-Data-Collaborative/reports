@@ -25,6 +25,17 @@ def pie(visObj):
         visObj["config"]["height"] = visObj["config"]["height"]*CONNECT_HEIGHT/12.0
 
     visObj["config"]["color"] = random_hex_color()
+
+    if len(visObj["data"]["records"][0]) > 2:
+        # trim fields
+        visObj["data"]["fields"] = visObj["data"]["fields"][0:2]
+        # get field names, these are the keys in the records that we will keep, and remove all other keys
+        toKeep = [field["id"] for field in visObj["data"]["fields"]]
+        # iterate through records, modifying data in place, only keeping first two values
+        for i in range(0, len(visObj["data"]["records"])):
+            visObj["data"]["records"][i] = {key : visObj["data"]["records"][i][key] for key in toKeep}
+
+
     return visObj
 
 def map(visObj):
