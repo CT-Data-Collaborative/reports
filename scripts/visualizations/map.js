@@ -74,11 +74,10 @@ var body = d3.select(document.body)
             .call(chart);
 
 console.log(body.html());
-
 function mapChart() {
-    var width = 200,
-            height = 200,
-            margin = 5, // %
+    var width = 460,
+            height = 320,
+            margin = 5, // % - should re-implement as standard margin in px {top, right, bottom, left}
             colors = d3.scale.category20()
             fill = d3.scale.linear()
                         .range([0, 1])
@@ -90,11 +89,10 @@ function mapChart() {
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
             data = data;
-            // data = data.map(function(d, i) {
-            //     return [label.call(data, d, i), value.call(data, d, i)];
-            // });
+            
+            // reshape data
 
-            fill.domain([0, d3.max(data.slice(1), function(d) { return d[1].value; })]);
+            fill.domain([0, d3.max(data.records, function(d) { return d.Value; })]);
 
             // SVG Container
             var svg = d3.select(this).append("svg")
@@ -124,10 +122,10 @@ function mapChart() {
 
             // add data to geodata
             geoData.features.forEach(function(feature, index, features) {
-                dataForLocation = data.filter(function(d) {
-                    return d[0].value == feature.properties.GEOID10
+                dataForLocation = data.records.filter(function(d) {
+                    return d.FIPS == feature.properties.GEOID10;
                 }).pop();
-                geoData.features[index].properties.DATAVALUE = (dataForLocation ? dataForLocation[1].value : null);
+                geoData.features[index].properties.DATAVALUE = (dataForLocation ? dataForLocation.Value : null);
             });
 
             // map features
