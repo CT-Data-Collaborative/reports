@@ -65,10 +65,10 @@ function tableChart() {
 
             // Calculate colspan
             // if header cells < data cells, per row.
-            var noblankColumns = data.columns.filter(function(col) { return col.value !== "" })
+            var noblankColumns = data.fields.filter(function(col) { return col.id !== "" & col.id !== "_id"})
 
-            if (noblankColumns.length < data.rows[0].length-1 && noblankColumns.length > 0) {
-                colspan = Math.floor((data.rows[0].length)/(noblankColumns.length))
+            if (noblankColumns.length < data.records[0].length-1 && noblankColumns.length > 0) {
+                colspan = Math.floor((data.records[0].length)/(noblankColumns.length))
                 colspan = (colspan > 1 ? colspan : null)
             }
             
@@ -76,9 +76,9 @@ function tableChart() {
             var thead = table.append("thead")
                     .append("tr")
                     .selectAll("th")
-                    .data(data.columns).enter()
+                    .data(noblankColumns).enter()
                     .append("th")
-                        .text(function(d) { return d.value; } )
+                        .text(function(d) { return d.id; } )
                     .attr("colspan", function(d, i) {
                         if (i > 0 || d.value != "") {
                             return colspan;
@@ -87,24 +87,33 @@ function tableChart() {
                         }
                     });
 
+            fields = {}
+            data.fields.forEach(function(field) {
+                fields[field.id] = field;
+            });
+
             // tbody element
             var tbody = table.append("tbody");
 
             // tr elements
             var rows = tbody.selectAll("tr")
-                    .data(data.rows)
+                    .data(data.records)
                     .enter()
                     .append("tr");
 
             // create a cell in each row for each column
             var cells = rows.selectAll("td")
-                .data(function(row) {
+                .data(function(d) {
+                    row = [];
+                    noblankColumns.forEach(function(field) {
+                        row.push({key : field.id, value : formatters[field.type](d[field.id])});
+                    });
                     return row;
                 })
                 .enter()
                 .append("td")
-                .text(function(d) { return formatters[d.type](d.value); })
-                .attr("colspan", function(d, i) { return colspan && (i > 0 || data.columns[i].value != "") ? 1 : null });
+                .text(function(d) { return d.value; })
+                .attr("colspan", function(d, i) { return colspan && (i > 0 || data.fields[i].value != "") ? 1 : null });
         });
     }
 
