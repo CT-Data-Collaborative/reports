@@ -89,8 +89,9 @@ var body = d3.select(document.body)
 console.log(body.html());
 
 function pieChart() {
-    var width = 460,
-            height = 300,
+    var margin = {top : 20, left : 10, bottom : 20, right : 10},
+            width = 460 - margin.left - margin.right,
+            height = 300 - margin.top - margin.bottom,
             radius = Math.min(height, width) / 2,
             innerRadius = 0,
             outerRadius = radius * 0.9,
@@ -101,7 +102,9 @@ function pieChart() {
             arc = d3.svg.arc()
                         .innerRadius(innerRadius)
                         .outerRadius(outerRadius),
-            colors = d3.scale.category20();
+            colors = d3.scale.category20()
+            xl = d3.scale.ordinal()
+                    .rangeRoundBands([0, width+margin.left+margin.right], 0.1, 0.2);
 
 
 
@@ -129,14 +132,15 @@ function pieChart() {
 
             // SVG Container
             var svg = d3.select(this).append("svg")
-                .attr("width", width+"px")
-                .attr("height", height+"px")
-                .attr("xmlns", "http://www.w3.org/2000/svg")
-                .append("g")
+                .attr("width", (width + margin.left + margin.right)+"px")
+                .attr("height", (height + margin.top + margin.bottom)+"px")
+                .attr("xmlns", "http://www.w3.org/2000/svg");
+                
+            var pieGroup = svg.append("g")
                     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
             // Pie slices
-            var path = svg.selectAll("path")
+            var slices = pieGroup.selectAll("path")
                 .data(pie(data))
                 .enter()
                 .append("path")
@@ -144,14 +148,40 @@ function pieChart() {
                     .attr("d", arc);
 
             // labels
-            var path = svg.selectAll("text")
+            var labels = pieGroup.selectAll("text")
                 .data(pie(data))
                 .enter()
                 .append("text")
                     .attr("transform", function(d) {return "translate("+arc.centroid(d)+")"})
                     .attr("text-anchor", "middle")
                     .style("font-size", "10px")
-                    .text(function(d){ return label(d.data) });
+                    .text(function(d){ return value(d.data) });
+
+            // Legend
+            // update scale
+            xl.domain(d3.range(data.length));
+
+            var legend = svg.append("g")
+                .attr("transform", "translate(0,"+ height +")");
+
+            legend.selectAll("rect")
+                .data(data)
+                .enter()
+                    .append("rect")
+                        .attr("height", margin.bottom)
+                        .attr("width", margin.bottom)
+                        .attr("x", function(d, i) { return xl(i); })
+                        .attr("y", 0)
+                        .attr("fill", function(d, i) { return colors(i); });
+
+            legend.selectAll("text")
+                .data(data)
+                .enter()
+                    .append("text")
+                        .attr("x", function(d, i) { return xl(i)+margin.bottom; })
+                        .attr("y", 0)
+                        .attr("dy", "1em")
+                        .text(function(d, i) { return label(d); });
         });
     }
 
@@ -160,13 +190,13 @@ function pieChart() {
      */
     chart.width = function(_) {
         if (!arguments.length) return width;
-        width = _;
+        width = _ - margin.left - margin.right;
         return chart;
     };
 
     chart.height = function(_) {
         if (!arguments.length) return height;
-        height = _;
+        height = _ - margin.top - margin.bottom;
         return chart;
     };
 
