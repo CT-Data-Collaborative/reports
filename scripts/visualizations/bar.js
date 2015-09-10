@@ -89,33 +89,28 @@ function barChart() {
     function chart(selection) {
         selection.each(function(data) {
 
-            var fields = {};
-            data.fields.forEach(function(field) {
-                fields[field.id] = field;
-            });
-
             // Should this be a parameter? passed in config?
             var grouping = "Quarter";
 
-            var groupLabels = d3.keys(data.records[0]).filter(function(key) { return key !== grouping && key !== "_id"; });
+            var groupLabels = d3.keys(data[0]).filter(function(key) { return key !== grouping && key !== "_id"; });
 
             // This is the step that seems to be the most confused and broken - what shape am i aiming for?
-            data.records.forEach(function(d) {
+            data.forEach(function(d) {
                 d.values = groupLabels.map(function(label) {
-                    return {name: label, value: formatters[fields[label]["type"]](d[label])};
+                    return {name: label, value: formatters[d[label].type](d[label].value)};
                 });
             });
 
 
             //  set domain for group scale
-            x0.domain(data.records.map(function(d) { return d[grouping]; }));
+            x0.domain(data.map(function(d) { return d[grouping].value; }));
 
             // set domain and range banding for scale for bars within groups
             x1.domain(groupLabels)
                 .rangeRoundBands([0, x0.rangeBand()]);
 
             // set y-scale domain 
-            y.domain([0, d3.max(data.records, function(d) { return d3.max(d.values, function(d) { return d.value; }); })]);
+            y.domain([0, d3.max(data, function(d) { return d3.max(d.values, function(d) { return d.value; }); })]);
 
             // container, margined interior container
             var svg = d3.select(this).append('svg')
@@ -133,10 +128,10 @@ function barChart() {
 
             // group containers
             var groups = svg.selectAll(".group")
-                    .data(data.records)
+                    .data(data)
                     .enter()
                         .append("g")
-                        .attr("transform", function(d) { return "translate(" + x0(d[grouping]) + ", 0)"});
+                        .attr("transform", function(d) { return "translate(" + x0(d[grouping].value) + ", 0)"});
 
             // bars within groups
             groups.selectAll("rect")

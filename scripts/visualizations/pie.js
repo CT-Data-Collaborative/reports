@@ -116,9 +116,12 @@ function pieChart() {
             // });
 
             // build accessors
-            var label = function(d) { return d[data.fields[0].id]; },
+            var labelKey = d3.keys(data[0])[0],
+                valueKey = d3.keys(data[0])[1];
+
+            var label = function(d) { return d[labelKey].value; },
                 value = function(d) {
-                    return formatters[data.fields[1].type](d[data.fields[1].id]);
+                    return formatters[d[valueKey].type](d[valueKey].value);
                 }
 
             // update pie function object with accessor
@@ -134,7 +137,7 @@ function pieChart() {
 
             // Pie slices
             var path = svg.selectAll("path")
-                .data(pie(data.records))
+                .data(pie(data))
                 .enter()
                 .append("path")
                     .attr("fill", function(d, i) { return colors(i); })
@@ -142,7 +145,7 @@ function pieChart() {
 
             // labels
             var path = svg.selectAll("text")
-                .data(pie(data.records))
+                .data(pie(data))
                 .enter()
                 .append("text")
                     .attr("transform", function(d) {return "translate("+arc.centroid(d)+")"})

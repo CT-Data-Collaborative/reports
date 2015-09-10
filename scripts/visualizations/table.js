@@ -106,7 +106,7 @@ function tableChart() {
                 .data(function(d) {
                     row = [];
                     noblankColumns.forEach(function(field) {
-                        row.push({key : field.id, value : formatters[field.type](d[field.id])});
+                        row.push({key : field.id, value : formatters[d[field.id].type](d[field.id].value)});
                     });
                     return row;
                 })

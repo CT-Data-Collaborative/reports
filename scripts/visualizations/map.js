@@ -89,10 +89,10 @@ function mapChart() {
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
             data = data;
-            
             // reshape data
 
-            fill.domain([0, d3.max(data.records, function(d) { return d.Value; })]);
+
+            fill.domain([0, d3.max(data, function(d) { return d.Value.value; })]);
 
             // SVG Container
             var svg = d3.select(this).append("svg")
@@ -122,10 +122,10 @@ function mapChart() {
 
             // add data to geodata
             geoData.features.forEach(function(feature, index, features) {
-                dataForLocation = data.records.filter(function(d) {
-                    return d.FIPS == feature.properties.GEOID10;
+                dataForLocation = data.filter(function(d) {
+                    return d.FIPS.value == feature.properties.GEOID10;
                 }).pop();
-                geoData.features[index].properties.DATAVALUE = (dataForLocation ? dataForLocation.Value : null);
+                geoData.features[index].properties.DATAVALUE = (dataForLocation ? dataForLocation.Value.value : null);
             });
 
             // map features

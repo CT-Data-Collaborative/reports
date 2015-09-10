@@ -6,7 +6,7 @@ div.row > div > img,
 div.row > div > table,
 div.row > div > div {
     width: 100%;
-    /*border: 1px solid black;*/
+    border: 1px solid black;
 }
 
 /* Print-specific rules */
@@ -19,6 +19,9 @@ div.row > div > div {
         font-size:8.5pt;
         margin:0!important;
         font-family: "LiberationSerif";
+    }
+    div.row {
+        page-break-inside: avoid;
     }
     .noprint {
         display: none;

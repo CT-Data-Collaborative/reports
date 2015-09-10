@@ -15,6 +15,8 @@ def table(visObj):
         visObj["config"]["height"] = visObj["config"]["height"]*CONNECT_HEIGHT/12.0
 
     visObj["config"]["color"] = random_hex_color()
+    
+    # visObj["data"] = visObj["data"]["records"]
     return visObj
 
 def pie(visObj):
@@ -36,6 +38,8 @@ def pie(visObj):
             visObj["data"]["records"][i] = {key : visObj["data"]["records"][i][key] for key in toKeep}
 
 
+    
+    visObj["data"] = visObj["data"]["records"]
     return visObj
 
 def map(visObj):
@@ -46,6 +50,8 @@ def map(visObj):
         visObj["config"]["height"] = visObj["config"]["height"]*CONNECT_HEIGHT/12.0
 
     visObj["config"]["color"] = random_hex_color()
+    
+    visObj["data"] = visObj["data"]["records"]
     return visObj
 
 def bar(visObj):
@@ -60,6 +66,8 @@ def bar(visObj):
         visObj["config"]["barHeight"] = visObj["config"]["height"]/len(visObj["data"])
 
     visObj["config"]["color"] = random_hex_color()
+    
+    visObj["data"] = visObj["data"]["records"]
     return visObj
 
 transformations = {"table" : table, "pie" : pie, "map" : map, "bar" : bar}
