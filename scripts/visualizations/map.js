@@ -140,7 +140,7 @@ function mapChart() {
             jenks.domain(breaks.map(function(cluster) {return cluster[0];}));
             //Two ways of coloring with Jenks-type breaks
             // Using a predifined (by us, most likely) categorical color pallete
-            jenks.range(d3.range(numBreaks).map(function(i) { return colors(i); }));
+            jenks.range(["#EEEEEE"].concat(d3.range(numBreaks).map(function(i) { return colors(i); })));
             // OR by using colorbrewer
             // js version of colorbrewer, this would require us to install/include colorbrewer, which doesn't seem to be available from npm
             // jenks.range(colorbrewer.Blues[numBreaks])
@@ -153,51 +153,62 @@ function mapChart() {
                 .enter()
                 .append("path")
                     .attr("d", path)
-                    .attr("stroke", "0.5px")
+                    .attr("stroke-width", "0.5px")
+                    .attr("stroke", "black")
                     // if using predefined color pallette
-                    .attr("fill", function(d) { return jenks(d.properties.DATAVALUE); })
+                    .attr("fill", function(d) { return jenks(d.properties.DATAVALUE); });
                     // if using colorbrewer as JS
-                    // .attr("fill", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
+                    // .attr("fill", function(d) { return colors(jenks(d.properties.DATAVALUE)); });
                     // if using colorbrewer css
-                    // .attr("class", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
-                    .attr("stroke", "black");
+                    // .attr("class", function(d) { return colors(jenks(d.properties.DATAVALUE)); });
 
             var legend = svg.append("g")
                     .attr("height", 0.25*height)
                     .attr("width", 0.5*width)
-                    .attr("transform", "translate(" + width / 2 + "," + height*0.75 + ")");
+                    .attr("transform", "translate(" + width * 0.75 + "," + height*0.75 + ")");
 
-            var legendData = d3.range(numBreaks).map(function(i) {
-                return [breaks[i][0], breaks[i][breaks[i].length-1]]
+            var legendData = jenks.range().map(function(color, index) {
+                if (index === 0) {
+                    return []
+                } else {
+                    return [breaks[index-1][0], breaks[index-1][breaks[index-1].length-1]]
+                }
             });
 
             var legendBoxes = legend.selectAll("rect")
                 .data(legendData)
                 .enter()
                 .append("rect")
+                    .attr("stroke-width", "0.5px")
+                    .attr("stroke", "black")
                     // if using predefined color pallette
-                    .attr("fill", function(d) { return jenks(d[0]); })
+                    .attr("fill", function(d) {
+                        return d.length > 0 ? jenks(d[0]) : jenks(null);
+                    })
                     // if using colorbrewer as JS
                     // .attr("fill", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
                     // if using colorbrewer css
                     // .attr("class", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
-                    .attr("height", "1em")
-                    .attr("width", "1em")
+                    .attr("height", "10px")
+                    .attr("width", "10px")
                     .attr("x", 0)
-                    .attr("y", function(d, i) { return i+"em"});
+                    .attr("y", function(d, i) { return i*10+"px"});
 
             var legendText = legend.selectAll("text")
                 .data(legendData)
                 .enter()
                 .append("text")
-                    .attr("dy", function(d, i) { return (i+1)+"em"})
-                    .attr("dx", "1em")
-                    .text(function(d) {
-                        var low = formatters[dataType](d[0]),
-                            high = formatters[dataType](d[1]);
-                        // var low = d[0],
-                            // high = d[1];
-                        return low+" - "+high;
+                    .attr("font-size", "6pt")
+                    .attr("dy", function(d, i) { return (i+1)*10+"px"})
+                    .attr("dx", "10px")
+                    .text(function(d, i) {
+                        if (i === 0) {
+                            return "Undefined/Suppressed";
+                        } else {
+                            var low = formatters[dataType](d[0]),
+                                high = formatters[dataType](d[1]);
+                            return low+" - "+high;
+                        }
                     });
         });
     }
