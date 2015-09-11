@@ -76,9 +76,13 @@ var body = d3.select(document.body)
 
 console.log(body.html());
 function mapChart() {
-    var width = 460,
-            height = 320,
-            margin = 10, // % - should re-implement as standard margin in px {top, right, bottom, left}
+    var margin = {"top" : 10, "left" : 20, "bottom" : 10, "right" : 10}
+            width = 460 - margin.left - margin.right,
+            height = 320 - margin.top - margin.bottom,
+            fontSize = d3.scale.threshold()
+                    .domain(d3.range(11).map(function(i){ return i*100; }))
+                    .range(d3.range(2,8,0.5)),
+            // margin = 10, // % - should re-implement as standard margin in px {top, right, bottom, left}
             colors = d3.scale.category20(),
             jenks = d3.scale.threshold(),
             numBreaks = 5;
@@ -93,11 +97,14 @@ function mapChart() {
 
             // SVG Container
             var svg = d3.select(this).append("svg")
-                .attr("width", width)
-                .attr("height", height)
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
                 .attr("xmlns", "http://www.w3.org/2000/svg")
                 
-            var map = svg.append("g");
+            var map = svg.append("g")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .attr("transform", "translate("+margin.top+", "+margin.right+")");
 
             // create a first guess for the projection - a unit project of 1px centered at 0,0
             var projection = d3.geo.equirectangular()
@@ -112,7 +119,7 @@ function mapChart() {
             var bounds  = path.bounds(geoData),
                     hscale = (bounds[1][0] - bounds[0][0]) / width,
                     vscale = (bounds[1][1] - bounds[0][1]) / height,
-                    scale = (1-(margin/100)) / Math.max(hscale, vscale),
+                    scale = 1 / Math.max(hscale, vscale),
                     translate = [(width - scale * (bounds[1][0] + bounds[0][0])) / 2, (height - scale * (bounds[1][1] + bounds[0][1])) / 2];
 
             // update values accordingly in the projection object
@@ -165,7 +172,7 @@ function mapChart() {
             var legend = svg.append("g")
                     .attr("height", 0.25*height)
                     .attr("width", 0.5*width)
-                    .attr("transform", "translate(" + width * 0.75 + "," + height*0.75 + ")");
+                    .attr("transform", "translate(" + (width + margin.left + margin.right) * 0.5 + "," + (height + margin.top + margin.bottom) * 0.75 + ")");
 
             var legendData = jenks.range().map(function(color, index) {
                 if (index === 0) {
@@ -189,18 +196,18 @@ function mapChart() {
                     // .attr("fill", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
                     // if using colorbrewer css
                     // .attr("class", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
-                    .attr("height", "10px")
-                    .attr("width", "10px")
+                    .attr("height", 0.03*height)
+                    .attr("width", 0.03*height)
                     .attr("x", 0)
-                    .attr("y", function(d, i) { return i*10+"px"});
+                    .attr("y", function(d, i) { return i*0.03*height+"px"});
 
             var legendText = legend.selectAll("text")
                 .data(legendData)
                 .enter()
                 .append("text")
-                    .attr("font-size", "6pt")
-                    .attr("dy", function(d, i) { return (i+1)*10+"px"})
-                    .attr("dx", "10px")
+                    .attr("font-size", fontSize(height)+"pt")
+                    .attr("dy", function(d, i) { return (i+1)*0.03*height+"px"})
+                    .attr("dx", 0.03*height+"px")
                     .text(function(d, i) {
                         if (i === 0) {
                             return "Undefined/Suppressed";
@@ -218,13 +225,13 @@ function mapChart() {
      */
     chart.width = function(_) {
         if (!arguments.length) return width;
-        width = _;
+        width = _ - margin.left - margin.right;
         return chart;
     };
 
     chart.height = function(_) {
         if (!arguments.length) return height;
-        height = _;
+        height = _ - margin.top - margin.bottom;
         return chart;
     };
 
