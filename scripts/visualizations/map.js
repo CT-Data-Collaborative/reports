@@ -11,7 +11,8 @@
 var d3 = require("d3"),
         minimist = require("minimist"),
         jsdom = require("jsdom"),
-        fs = require("fs");
+        fs = require("fs"),
+        ss = require("simple-statistics");
 
 /**
  * Process arguments from node call using minimist
@@ -77,11 +78,10 @@ console.log(body.html());
 function mapChart() {
     var width = 460,
             height = 320,
-            margin = 5, // % - should re-implement as standard margin in px {top, right, bottom, left}
-            colors = d3.scale.category20()
-            fill = d3.scale.linear()
-                        .range([0, 1])
-                        .domain([0, 1]);
+            margin = 10, // % - should re-implement as standard margin in px {top, right, bottom, left}
+            colors = d3.scale.category20(),
+            jenks = d3.scale.threshold(),
+            numBreaks = 5;
 
     function chart(selection) {
         selection.each(function(data) {
@@ -91,15 +91,13 @@ function mapChart() {
             data = data;
             // reshape data
 
-
-            fill.domain([0, d3.max(data, function(d) { return d.Value.value; })]);
-
             // SVG Container
             var svg = d3.select(this).append("svg")
                 .attr("width", width)
                 .attr("height", height)
                 .attr("xmlns", "http://www.w3.org/2000/svg")
-                .append("g");
+                
+            var map = svg.append("g");
 
             // create a first guess for the projection - a unit project of 1px centered at 0,0
             var projection = d3.geo.equirectangular()
@@ -125,19 +123,82 @@ function mapChart() {
                 dataForLocation = data.filter(function(d) {
                     return d.FIPS.value == feature.properties.GEOID10;
                 }).pop();
-                geoData.features[index].properties.DATAVALUE = (dataForLocation ? dataForLocation.Value.value : null);
+                if (dataForLocation) {
+                    geoData.features[index].properties.DATAVALUE = dataForLocation.Value.value;
+                    dataType = dataForLocation.Value.type; // we only have one type, really
+                } else {
+                    geoData.features[index].properties.DATAVALUE = null;
+                }
             });
 
+
+            // define domain, range scale by jenks-type clustered breaks
+            breaks = ss.ckmeans(
+                    data.map(function(d) { return d.Value.value }),
+                    numBreaks
+                );
+            jenks.domain(breaks.map(function(cluster) {return cluster[0];}));
+            //Two ways of coloring with Jenks-type breaks
+            // Using a predifined (by us, most likely) categorical color pallete
+            jenks.range(d3.range(numBreaks).map(function(i) { return colors(i); }));
+            // OR by using colorbrewer
+            // js version of colorbrewer, this would require us to install/include colorbrewer, which doesn't seem to be available from npm
+            // jenks.range(colorbrewer.Blues[numBreaks])
+            // css version -> would require us to include colorbrewer css file in template, which seems easier.
+            // jenks.range(d3.range(numBreaks).map(function(i) {return "q"+i+"-9"; }))
+
             // map features
-            svg.selectAll("path")
+            var map = map.selectAll("path")
                 .data(geoData.features)
                 .enter()
                 .append("path")
                     .attr("d", path)
                     .attr("stroke", "0.5px")
-                    .attr("fill", "black")
-                    .attr("fill-opacity", function(d, i) { return fill(d.properties.DATAVALUE); })
+                    // if using predefined color pallette
+                    .attr("fill", function(d) { return jenks(d.properties.DATAVALUE); })
+                    // if using colorbrewer as JS
+                    // .attr("fill", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
+                    // if using colorbrewer css
+                    // .attr("class", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
                     .attr("stroke", "black");
+
+            var legend = svg.append("g")
+                    .attr("height", 0.25*height)
+                    .attr("width", 0.5*width)
+                    .attr("transform", "translate(" + width / 2 + "," + height*0.75 + ")");
+
+            var legendData = d3.range(numBreaks).map(function(i) {
+                return [breaks[i][0], breaks[i][breaks[i].length-1]]
+            });
+
+            var legendBoxes = legend.selectAll("rect")
+                .data(legendData)
+                .enter()
+                .append("rect")
+                    // if using predefined color pallette
+                    .attr("fill", function(d) { return jenks(d[0]); })
+                    // if using colorbrewer as JS
+                    // .attr("fill", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
+                    // if using colorbrewer css
+                    // .attr("class", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
+                    .attr("height", "1em")
+                    .attr("width", "1em")
+                    .attr("x", 0)
+                    .attr("y", function(d, i) { return i+"em"});
+
+            var legendText = legend.selectAll("text")
+                .data(legendData)
+                .enter()
+                .append("text")
+                    .attr("dy", function(d, i) { return (i+1)+"em"})
+                    .attr("dx", "1em")
+                    .text(function(d) {
+                        var low = formatters[dataType](d[0]),
+                            high = formatters[dataType](d[1]);
+                        // var low = d[0],
+                            // high = d[1];
+                        return low+" - "+high;
+                    });
         });
     }
 
