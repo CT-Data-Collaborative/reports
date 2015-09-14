@@ -65,7 +65,7 @@ console.log(body.html());
 function barChart() {
             // VARS
             // dims
-    var margin = {top: 20, right: 20, bottom: 20, left: 20},
+    var margin = {top: 30, right: 10, bottom: 20, left: 10},
             width = 480 - margin.left - margin.right,
             height = 250 - margin.top - margin.bottom,
 
@@ -116,18 +116,34 @@ function barChart() {
             var svg = d3.select(this).append('svg')
                     .attr("xmlns", "http://www.w3.org/2000/svg")
                     .attr("height", height + margin.top + margin.bottom )
-                    .attr("width", width + margin.left + margin.right )
-                .append("g")
+                    .attr("width", width + margin.left + margin.right );
+
+            var barGroup = svg.append("g")
+                    .attr("height", height)
+                    .attr("width", width)
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+            if ("title" in config && config.title !== "") {
+                var title = svg.append("g")
+                        .attr("height", margin.top + "px")
+                        .attr("width", width + "px")
+                        .attr("transform", "translate(" + (width) + "," + (0.75 * margin.top) + ")");
+
+                title.append("text")
+                    .attr("text-anchor", "end")
+                    .text(config.title)
+                    //.text("ABCDEFGHIJKLMNOPQRSTUVABCDEFGHIJKLMNO")
+                    .attr("font-size", "12pt");
+            }
+
             // x axis, includes group labels automatically
-            svg.append("g")
+            barGroup.append("g")
                   .attr("transform", "translate(0," + height + ")")
                   .attr("font-size", "8pt")
                   .call(xAxis);
 
             // group containers
-            var groups = svg.selectAll(".group")
+            var groups = barGroup.selectAll(".group")
                     .data(data)
                     .enter()
                         .append("g")

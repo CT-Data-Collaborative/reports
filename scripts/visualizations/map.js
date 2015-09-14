@@ -102,7 +102,7 @@ function mapChart() {
             var svg = d3.select(this).append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
-                .attr("xmlns", "http://www.w3.org/2000/svg")
+                .attr("xmlns", "http://www.w3.org/2000/svg");
                 
             var map = svg.append("g")
                     .attr("width", width)

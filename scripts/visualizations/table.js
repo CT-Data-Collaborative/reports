@@ -60,6 +60,12 @@ function tableChart() {
             //     return [label.call(data, d, i), value.call(data, d, i)];
             // });
 
+            if ("title" in config && config.title !== "") {
+                var title = d3.select(this).append("h2")
+                    .attr("class", "table_title")
+                    .text(config.title);
+            }
+
             // outermost table Container
             var table = d3.select(this).append("table")
 
@@ -71,6 +77,7 @@ function tableChart() {
                 colspan = Math.floor((data.records[0].length)/(noblankColumns.length))
                 colspan = (colspan > 1 ? colspan : null)
             }
+
             
             // table header
             var thead = table.append("thead")
