@@ -76,12 +76,12 @@ var body = d3.select(document.body)
 
 console.log(body.html());
 function mapChart() {
-    var margin = {"top" : 10, "left" : 20, "bottom" : 10, "right" : 10}
+    var margin = {"top" : 30, "left" : 10, "bottom" : 10, "right" : 10}
             width = 460 - margin.left - margin.right,
             height = 320 - margin.top - margin.bottom,
             fontSize = d3.scale.threshold()
-                    .domain(d3.range(11).map(function(i){ return i*100; }))
-                    .range(d3.range(2,8,0.5)),
+                    .domain(d3.range(4).map(function(i){ return i*300; }))
+                    .range(d3.range(4,14,2)),
             // margin = 10, // % - should re-implement as standard margin in px {top, right, bottom, left}
             colors = d3.scale.category20(),
             jenks = d3.scale.threshold(),
@@ -89,6 +89,9 @@ function mapChart() {
 
     function chart(selection) {
         selection.each(function(data) {
+
+            // console.log(fontSize.domain());
+            // console.log(fontSize.range());
 
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
@@ -104,7 +107,7 @@ function mapChart() {
             var map = svg.append("g")
                     .attr("width", width)
                     .attr("height", height)
-                    .attr("transform", "translate("+margin.top+", "+margin.right+")");
+                    .attr("transform", "translate("+margin.left+", "+margin.top+")");
 
             // create a first guess for the projection - a unit project of 1px centered at 0,0
             var projection = d3.geo.equirectangular()
@@ -169,10 +172,23 @@ function mapChart() {
                     // if using colorbrewer css
                     // .attr("class", function(d) { return colors(jenks(d.properties.DATAVALUE)); });
 
+            if ("title" in config && config.title !== "") {
+                var title = svg.append("g")
+                        .attr("height", margin.top + "px")
+                        .attr("width", width + "px")
+                        .attr("transform", "translate(" + (width) + "," + (0.75 * margin.top) + ")");
+
+                title.append("text")
+                    .attr("text-anchor", "end")
+                    .text(config.title)
+                    //.text("ABCDEFGHIJKLMNOPQRSTUVABCDEFGHIJKLMNO")
+                    .attr("font-size", "12pt");
+            }
+
             var legend = svg.append("g")
                     .attr("height", 0.25*height)
                     .attr("width", 0.5*width)
-                    .attr("transform", "translate(" + (width + margin.left + margin.right) * 0.5 + "," + (height + margin.top + margin.bottom) * 0.75 + ")");
+                    .attr("transform", "translate(" + (width + margin.left + margin.right) * 0.6 + "," + (height + margin.top + margin.bottom) * 0.78 + ")");
 
             var legendData = jenks.range().map(function(color, index) {
                 if (index === 0) {
@@ -199,14 +215,15 @@ function mapChart() {
                     .attr("height", 0.03*height)
                     .attr("width", 0.03*height)
                     .attr("x", 0)
-                    .attr("y", function(d, i) { return i*0.03*height+"px"});
+                    .attr("y", function(d, i) { return ((i*0.03*height)+((i-1) * 2))+"px"});
 
             var legendText = legend.selectAll("text")
                 .data(legendData)
                 .enter()
                 .append("text")
                     .attr("font-size", fontSize(height)+"pt")
-                    .attr("dy", function(d, i) { return (i+1)*0.03*height+"px"})
+                    // .attr("font-size", "8pt")
+                    .attr("dy", function(d, i) { return (((i+1)*0.03*height)+((i-1) * 2))+"px"})
                     .attr("dx", 0.03*height+"px")
                     .text(function(d, i) {
                         if (i === 0) {
