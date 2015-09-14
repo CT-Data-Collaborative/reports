@@ -65,7 +65,7 @@ console.log(body.html());
 function barChart() {
             // VARS
             // dims
-    var margin = {top: 30, right: 10, bottom: 20, left: 10},
+    var margin = {top: 30, right: 10, bottom: 20, left: 30},
             width = 480 - margin.left - margin.right,
             height = 250 - margin.top - margin.bottom,
 
@@ -76,11 +76,17 @@ function barChart() {
             y = d3.scale.linear()
                     .range([height, 0]),
             color = d3.scale.category20(),
+            fontSize = d3.scale.threshold()
+                    .domain(d3.range(4).map(function(i){ return i*300; }))
+                    .range(d3.range(4,14,2)),
 
             // axes
             xAxis = d3.svg.axis()
                 .scale(x0)
                 .orient("bottom"),
+            yAxis = d3.svg.axis()
+                .scale(y)
+                .orient("left"),
 
             // bar widths
             defaultBarWidth = true,
@@ -88,6 +94,9 @@ function barChart() {
 
     function chart(selection) {
         selection.each(function(data) {
+
+            // updating scales etc?
+            y.range([height, 0])
 
             // Should this be a parameter? passed in config?
             var grouping = "Quarter";
@@ -137,10 +146,31 @@ function barChart() {
             }
 
             // x axis, includes group labels automatically
-            barGroup.append("g")
-                  .attr("transform", "translate(0," + height + ")")
-                  .attr("font-size", "8pt")
-                  .call(xAxis);
+            var xAxisGroup = barGroup.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .attr("font-size", "8pt")
+                .call(xAxis)
+                .call(function(g) {
+                    g.selectAll("path").remove();
+                    
+                    g.selectAll("g").selectAll("line")
+                        .attr("stroke", "#777");
+                });
+
+            // Y axis
+            var yAxisGroup = barGroup.append("g")
+                .attr("transform", "translate(0,0)")
+                .attr("font-size", "8pt")
+                .call(yAxis)
+                .call(function(g) {
+                    g.selectAll("path").remove();
+                    
+                    g.selectAll("g").selectAll("line")
+                        .attr("x1", 0)
+                        .attr("x2", width)
+                        .attr("stroke", "#DDD")
+                        .attr("stroke-width", "1px");
+                });
 
             // group containers
             var groups = barGroup.selectAll(".group")
@@ -159,6 +189,17 @@ function barChart() {
                             .attr("y", function(d) { return y(d.value); })
                             .attr("height", function(d) { return height - y(d.value); })
                             .style("fill", function(d) { return color(d.name); });
+
+            groups.selectAll("text")
+                    .data(function(d) { return d.values; })
+                    .enter()
+                        .append("text")
+                            .text(function(d) { return d.value; })
+                            .attr("text-anchor", "middle")
+                            .attr("font-size", fontSize(height) + "pt")
+                            .attr("x", function(d) { return x1(d.name) + (0.5 * x1.rangeBand()); })
+                            .attr("y", function(d) { return y(d.value)+fontSize(height)+3; })
+                            .attr("fill", "white");
 
 
             /* Old Code */
