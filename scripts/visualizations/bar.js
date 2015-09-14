@@ -84,9 +84,14 @@ function barChart() {
             xAxis = d3.svg.axis()
                 .scale(x0)
                 .orient("bottom"),
+
+            // format function
+            si = d3.format('s'),
             yAxis = d3.svg.axis()
                 .scale(y)
-                .orient("left"),
+                .orient("left")
+                .ticks(8)
+                .tickFormat(function(val) { return si(val).replace(/G/, 'B') }),
 
             // bar widths
             defaultBarWidth = true,
@@ -99,17 +104,16 @@ function barChart() {
             y.range([height, 0])
 
             // Should this be a parameter? passed in config?
-            var grouping = "Quarter";
+            var grouping = "Year";
 
             var groupLabels = d3.keys(data[0]).filter(function(key) { return key !== grouping && key !== "_id"; });
 
             // This is the step that seems to be the most confused and broken - what shape am i aiming for?
             data.forEach(function(d) {
                 d.values = groupLabels.map(function(label) {
-                    return {name: label, value: formatters[d[label].type](d[label].value)};
+                    return {name: label, label: formatters[d[label].type](d[label].value), value: d[label].value};
                 });
             });
-
 
             //  set domain for group scale
             x0.domain(data.map(function(d) { return d[grouping].value; }));
@@ -164,6 +168,9 @@ function barChart() {
                 .call(yAxis)
                 .call(function(g) {
                     g.selectAll("path").remove();
+
+                    g.selectAll("g").selectAll("text")
+                        .attr("x", 0);
                     
                     g.selectAll("g").selectAll("line")
                         .attr("x1", 0)
@@ -194,11 +201,13 @@ function barChart() {
                     .data(function(d) { return d.values; })
                     .enter()
                         .append("text")
-                            .text(function(d) { return d.value; })
-                            .attr("text-anchor", "middle")
-                            .attr("font-size", fontSize(height) + "pt")
-                            .attr("x", function(d) { return x1(d.name) + (0.5 * x1.rangeBand()); })
-                            .attr("y", function(d) { return y(d.value)+fontSize(height)+3; })
+                            .text(function(d) { return d.label; })
+                            .attr("transform", "rotate(-90)")
+                            // .attr("text-anchor", "middle")
+                            .attr("text-anchor", "end")
+                            .attr("font-size", "5pt")
+                            .attr("x", function(d) { return 0-3-y(d.value); })
+                            .attr("y", function(d) { return x1(d.name)+x1.rangeBand()-3; })
                             .attr("fill", "white");
 
 

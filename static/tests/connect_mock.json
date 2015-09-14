@@ -3082,15 +3082,23 @@
         "fields": [
           {
             "type": "string",
-            "id": "Quarter"
+            "id": "Year"
           },
           {
-            "type": "integer",
-            "id": "Income"
+            "type": "currency",
+            "id": "Q1"
           },
           {
-            "type": "integer",
-            "id": "Expenditures"
+            "type": "currency",
+            "id": "Q2"
+          },
+          {
+            "type": "currency",
+            "id": "Q3"
+          },
+          {
+            "type": "currency",
+            "id": "Q4"
           },
           {
             "type": "integer",
@@ -3099,75 +3107,143 @@
         ],
         "records": [
           {
-            "Quarter": {
-              "type": "string",
-              "value": "Q1"
+            "_id": 0,
+            "Year": 2008,
+            "Q1": {
+              "value": 2636424,
+              "type": "currency"
             },
-            "Income": {
-              "type": "integer",
-              "value": 368
+            "Q2": {
+              "value": 9929904,
+              "type": "currency"
             },
-            "Expenditures": {
-              "type": "integer",
-              "value": 588
+            "Q3": {
+              "value": 2650640,
+              "type": "currency"
             },
-            "_id": {
-              "type": "integer",
-              "value": 1
+            "Q4": {
+              "value": 6557333,
+              "type": "currency"
             }
           },
           {
-            "Quarter": {
-              "type": "string",
-              "value": "Q2"
+            "_id": 1,
+            "Year": 2009,
+            "Q1": {
+              "value": 3738180,
+              "type": "currency"
             },
-            "Income": {
-              "type": "integer",
-              "value": 428
+            "Q2": {
+              "value": 6504878,
+              "type": "currency"
             },
-            "Expenditures": {
-              "type": "integer",
-              "value": 200
+            "Q3": {
+              "value": 5722807,
+              "type": "currency"
             },
-            "_id": {
-              "type": "integer",
-              "value": 2
+            "Q4": {
+              "value": 1063596,
+              "type": "currency"
             }
           },
           {
-            "Quarter": {
-              "type": "string",
-              "value": "Q3"
+            "_id": 2,
+            "Year": 2010,
+            "Q1": {
+              "value": 4887505,
+              "type": "currency"
             },
-            "Income": {
-              "type": "integer",
-              "value": 545
+            "Q2": {
+              "value": 1207561,
+              "type": "currency"
             },
-            "Expenditures": {
-              "type": "integer",
-              "value": 411
+            "Q3": {
+              "value": 3621062,
+              "type": "currency"
             },
-            "_id": {
-              "type": "integer",
-              "value": 3
+            "Q4": {
+              "value": 5722971,
+              "type": "currency"
             }
           },
           {
-            "Quarter": {
-              "type": "string",
-              "value": "Q4"
+            "_id": 3,
+            "Year": 2011,
+            "Q1": {
+              "value": 6506676,
+              "type": "currency"
             },
-            "Income": {
-              "type": "integer",
-              "value": 558
+            "Q2": {
+              "value": 4598748,
+              "type": "currency"
             },
-            "Expenditures": {
-              "type": "integer",
-              "value": 382
+            "Q3": {
+              "value": 2255444,
+              "type": "currency"
             },
-            "_id": {
-              "type": "integer",
-              "value": 4
+            "Q4": {
+              "value": 1419991,
+              "type": "currency"
+            }
+          },
+          {
+            "_id": 4,
+            "Year": 2012,
+            "Q1": {
+              "value": 3629301,
+              "type": "currency"
+            },
+            "Q2": {
+              "value": 9763799,
+              "type": "currency"
+            },
+            "Q3": {
+              "value": 4297256,
+              "type": "currency"
+            },
+            "Q4": {
+              "value": 3094942,
+              "type": "currency"
+            }
+          },
+          {
+            "_id": 5,
+            "Year": 2013,
+            "Q1": {
+              "value": 5104629,
+              "type": "currency"
+            },
+            "Q2": {
+              "value": 1815457,
+              "type": "currency"
+            },
+            "Q3": {
+              "value": 8066583,
+              "type": "currency"
+            },
+            "Q4": {
+              "value": 6565474,
+              "type": "currency"
+            }
+          },
+          {
+            "_id": 6,
+            "Year": 2014,
+            "Q1": {
+              "value": 2797064,
+              "type": "currency"
+            },
+            "Q2": {
+              "value": 4442157,
+              "type": "currency"
+            },
+            "Q3": {
+              "value": 5628109,
+              "type": "currency"
+            },
+            "Q4": {
+              "value": 9849077,
+              "type": "currency"
             }
           }
         ],
