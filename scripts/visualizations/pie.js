@@ -89,7 +89,7 @@ var body = d3.select(document.body)
 console.log(body.html());
 
 function pieChart() {
-    var margin = {top : 30, left : 10, bottom : 30, right : 10},
+    var margin = {top : 60, left : 10, bottom : 60, right : 10},
             width = 460 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom,
             radius = Math.min(height, width) / 2,
@@ -114,8 +114,6 @@ function pieChart() {
             //     return [label.call(data, d, i), value.call(data, d, i)];
             // });
 
-            data = data.concat(data);
-
             // build accessors
             var labelKey = d3.keys(data[0])[0],
                 valueKey = d3.keys(data[0])[1];
@@ -139,11 +137,16 @@ function pieChart() {
                     .attr("height", height)
                     .attr("transform", "translate(" + ((width / 2) + margin.left) + "," + ((height / 2) + margin.top) + ")");
 
+            var labelGroup = svg.append("g")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .attr("transform", "translate(" + ((width / 2) + margin.left) + "," + ((height / 2) + margin.top) + ")");
+
             if ("title" in config && config.title !== "") {
                 var title = svg.append("g")
                         .attr("height", margin.top + "px")
                         .attr("width", width + "px")
-                        .attr("transform", "translate(" + (width) + "," + (0.75 * margin.top) + ")");
+                        .attr("transform", "translate(" + (width) + "," + 24 + ")");
 
                 title.append("text")
                     .attr("text-anchor", "end")
@@ -159,7 +162,63 @@ function pieChart() {
                     .attr("fill", function(d, i) { return colors(i); })
                     .attr("d", arc);
 
-            // labels
+
+            // Labels
+            var labelText = labelGroup.selectAll("text")
+                .data(pie(data))
+                .enter()
+                .append("text")
+                    .attr("font-size", "8pt")
+                    .attr("text-anchor", "middle")
+                    .attr("x", function(d) {
+                        var a = d.startAngle + (d.endAngle - d.startAngle)/2 - Math.PI/2;
+                        d.cx = Math.cos(a) * (radius - 75);
+                        d.cx = arc.centroid(d)[0];
+                        return d.x = Math.cos(a) * (radius + 10);
+                    })
+                    .attr("y", function(d) {
+                        var a = d.startAngle + (d.endAngle - d.startAngle)/2 - Math.PI/2;
+                        d.cy = Math.sin(a) * (radius - 75);
+                        d.cy = arc.centroid(d)[1];
+                        return d.y = Math.sin(a) * (radius + 10);
+                    })
+                    .text(function(d) { return d.value; })
+                    .each(function(d) {
+                        var bbox = this.getBoundingClientRect();
+                        bbox.width = Math.abs(bbox.left-bbox.right);
+                        d.sx = d.x - bbox.width/2 - 3 - 8;
+                        d.ox = d.x + bbox.width/2 + 3 + 8;
+                        d.sy = d.oy = d.y + 2;
+                    });
+
+            svg.append("defs").append("marker")
+                .attr("id", "circ")
+                .attr("markerWidth", 3)
+                .attr("markerHeight", 3)
+                .attr("refX", 1.5)
+                .attr("refY", 1.5)
+                .append("circle")
+                .attr("cx", 1.5)
+                .attr("cy", 1.5)
+                .attr("r", 1.5);
+
+            var labelLines = labelGroup.selectAll("path")
+                .data(labelText.data())
+                .enter()
+                .append("path")
+                    .style("fill", "none")
+                    .style("stroke", "black")
+                    .attr("marker-end", "url(#circ)")
+                    .attr("d", function(d) {
+                        if(d.cx > d.ox) {
+                            return "M" + d.sx + "," + d.sy + "L" + d.ox + "," + d.oy + " " + d.cx + "," + d.cy;
+                        } else {
+                            return "M" + d.ox + "," + d.oy + "L" + d.sx + "," + d.sy + " " + d.cx + "," + d.cy;
+                        }
+                    });
+
+            // old labels
+            /* 
             var labels = pieGroup.selectAll("text")
                 .data(pie(data))
                 .enter()
@@ -168,6 +227,7 @@ function pieChart() {
                     .attr("text-anchor", "middle")
                     .style("font-size", "8px")
                     .text(function(d){ return value(d.data) });
+            */
 
             // Legend scale
             xl = d3.scale.ordinal()
@@ -177,7 +237,7 @@ function pieChart() {
             var legend = svg.append("g")
                 .attr("height", margin.bottom)
                 .attr("width", width)
-                .attr("transform", "translate("+margin.left+","+ (height+margin.top) +")");
+                .attr("transform", "translate("+margin.left+","+ (height+margin.top + (margin.bottom*0.5)) +")");
 
             legend.selectAll("rect")
                 .data(data)
