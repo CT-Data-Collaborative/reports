@@ -118,10 +118,13 @@ function pieChart() {
             var labelKey = d3.keys(data[0])[0],
                 valueKey = d3.keys(data[0])[1];
 
-            var label = function(d) { return d[labelKey].value; },
-                value = function(d) {
+            var label = function(d) { return d[labelKey].value; }
+                dataLabel = function(d) {
                     return formatters[d[valueKey].type](d[valueKey].value);
-                }
+                },
+                value = function(d) {
+                    return parseFloat(d[valueKey].value, 10);
+                };
 
             // update pie function object with accessor
             pie.value(value)
@@ -202,7 +205,7 @@ function pieChart() {
                     .data(pie(data))
                     .enter()
                     .append("text")
-                        .text(function(d) { return d.value; })
+                        .text(function(d) {return dataLabel(d.data); })
                         .attr("font-size", "8pt")
                         .attr("x", function(d, i) {
                             midAngle = Math.atan2(arc.centroid(d)[1], arc.centroid(d)[0])

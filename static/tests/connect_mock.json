@@ -3265,11 +3265,11 @@
             "id": "Quarter"
           },
           {
-            "type": "integer",
+            "type": "currency",
             "id": "Income"
           },
           {
-            "type": "integer",
+            "type": "currency",
             "id": "Expenditures"
           },
           {
@@ -3284,12 +3284,12 @@
               "value": "Q1"
             },
             "Income": {
-              "type": "integer",
-              "value": 368
+              "type": "currency",
+              "value": 368123
             },
             "Expenditures": {
-              "type": "integer",
-              "value": 588
+              "type": "currency",
+              "value": 588123
             },
             "_id": {
               "type": "integer",
@@ -3302,12 +3302,12 @@
               "value": "Q2"
             },
             "Income": {
-              "type": "integer",
-              "value": 428
+              "type": "currency",
+              "value": 428123
             },
             "Expenditures": {
-              "type": "integer",
-              "value": 200
+              "type": "currency",
+              "value": 200123
             },
             "_id": {
               "type": "integer",
@@ -3320,12 +3320,12 @@
               "value": "Q3"
             },
             "Income": {
-              "type": "integer",
-              "value": 545
+              "type": "currency",
+              "value": 545123
             },
             "Expenditures": {
-              "type": "integer",
-              "value": 411
+              "type": "currency",
+              "value": 411123
             },
             "_id": {
               "type": "integer",
@@ -3338,12 +3338,12 @@
               "value": "Q4"
             },
             "Income": {
-              "type": "integer",
-              "value": 558
+              "type": "currency",
+              "value": 558123
             },
             "Expenditures": {
-              "type": "integer",
-              "value": 382
+              "type": "currency",
+              "value": 382123
             },
             "_id": {
               "type": "integer",
@@ -3356,12 +3356,12 @@
               "value": "Q5"
             },
             "Income": {
-              "type": "integer",
-              "value": 358
+              "type": "currency",
+              "value": 358123
             },
             "Expenditures": {
-              "type": "integer",
-              "value": 122
+              "type": "currency",
+              "value": 122123
             },
             "_id": {
               "type": "integer",
