@@ -164,6 +164,128 @@ function pieChart() {
 
 
             // Labels
+
+            // var labelDots = labelGroup.selectAll("circle")
+            //         .data(pie(data))
+            //         .enter()
+            //         .append("circle")
+            //             .attr("x", 0)
+            //             .attr("y", 0)
+            //             .attr("r", 2)
+            //             .attr("fill", "black")
+            //             .attr("transform", function(d, i) {
+            //                 return "translate("+arc.centroid(d)+")";
+            //             });
+            var labelLines = labelGroup.selectAll("line")
+                    .data(pie(data))
+                    .enter()
+                    .append("line")
+                        .attr("stroke", "black")
+                        .attr("stroke-width", "0.5px")
+                        .attr("x1", function(d, i) {
+                            return arc.centroid(d)[0];
+                        })
+                        .attr("x2", function(d, i) {
+                            midAngle = Math.atan2(arc.centroid(d)[1], arc.centroid(d)[0])
+                            return Math.cos(midAngle) * outerRadius * 1.25;
+                        })
+                        .attr("y1", function(d, i) {
+                            return arc.centroid(d)[1];
+                        })
+                        .attr("y2", function(d, i) {
+                            midAngle = Math.atan2(arc.centroid(d)[1], arc.centroid(d)[0])
+                            return Math.sin(midAngle) * outerRadius * 1.15;
+                        });
+
+            var textElementsByAnchor = {"start" : [], "end" : []};
+            var labelText = labelGroup.selectAll("text")
+                    .data(pie(data))
+                    .enter()
+                    .append("text")
+                        .text(function(d) { return d.value; })
+                        .attr("font-size", "8pt")
+                        .attr("x", function(d, i) {
+                            midAngle = Math.atan2(arc.centroid(d)[1], arc.centroid(d)[0])
+                            x = Math.cos(midAngle) * outerRadius * 1.25;
+                            sign = (x > 0) ? 1 : -1
+                            return x;
+                        })
+                        .attr("y", function(d, i) {
+                            midAngle = Math.atan2(arc.centroid(d)[1], arc.centroid(d)[0])
+                            y = Math.sin(midAngle) * outerRadius * 1.15;
+                            return y;
+                        })
+                        .attr("text-anchor", function(d, i) {
+                            midAngle = Math.atan2(arc.centroid(d)[1], arc.centroid(d)[0])
+                            anchor = (Math.cos(midAngle) > 0) ? "start" : "end";
+                            textElementsByAnchor[anchor].push(this);
+                            return anchor;
+                        })
+                        .attr("class", function(d, i) {
+                            midAngle = Math.atan2(arc.centroid(d)[1], arc.centroid(d)[0])
+                            anchor = (Math.cos(midAngle) > 0) ? "start" : "end";
+                            textElementsByAnchor[anchor].push(this);
+                            return "anchor-"+anchor;
+                        })
+
+
+            do {
+                again = false;
+                labelText.each(function (d, i) {
+                    a = this;
+                    da = d3.select(a);
+                    y1 = da.attr("y");
+                    labelText.each(function (d, j) {
+                        b = this;
+                        // a & b are the same element and don't collide.
+                        if (a == b) return;
+                        db = d3.select(b);
+                        // a & b are on opposite sides of the chart and
+                        // don't collide
+                        if (da.attr("text-anchor") != db.attr("text-anchor")) return;
+                        // Now let's calculate the distance between
+                        // these elements. 
+                        y2 = db.attr("y");
+                        deltaY = y1 - y2;
+                        
+                        // Our spacing is greater than our specified spacing,
+                        // so they don't collide.
+                        if (Math.abs(deltaY) > 8) return;
+                        
+                        // If the labels collide, we'll push each 
+                        // of the two labels up and down a little bit.
+                        again = true;
+                        sign = deltaY > 0 ? 1 : -1;
+                        adjust = sign * 1;
+                        da.attr("y",+y1 + (adjust * 2));
+                        db.attr("y",+y2 - (adjust / 2));
+                    });
+                });
+                // Adjust our line leaders here
+                // so that they follow the labels. 
+                if(again) {
+                    labelElements = labelText[0];
+                    labelLines.attr("y2",function(d,i) {
+                        labelForLine = d3.select(labelElements[i]);
+                        return labelForLine.attr("y");
+                    });
+                }
+            } while (again == true)
+
+            // var buffer = 0;
+            // textElementsByAnchor["start"].forEach(function(e, i, a) {
+            //     textElementsByAnchor["start"][i].y += buffer*12;
+            //     buffer += 1;
+            // });
+
+            // var buffer = 0;
+            // textElementsByAnchor["end"].forEach(function(e, i, a) {
+            //     textElementsByAnchor["end"][i].y += buffer*8;
+            //     buffer += 1;
+            // })
+
+
+            /* Whisker labels, v 1.0
             var labelText = labelGroup.selectAll("text")
                 .data(pie(data))
                 .enter()
@@ -215,7 +337,7 @@ function pieChart() {
                         } else {
                             return "M" + d.ox + "," + d.oy + "L" + d.sx + "," + d.sy + " " + d.cx + "," + d.cy;
                         }
-                    });
+                    });*/
 
             // old labels
             /* 
