@@ -102,12 +102,7 @@ function pieChart() {
             arc = d3.svg.arc()
                         .innerRadius(innerRadius)
                         .outerRadius(outerRadius),
-            colors = d3.scale.category20()
-            fontSize = d3.scale.threshold()
-                    .domain(d3.range(4).map(function(i){ return i*300; }))
-                    .range(d3.range(4,14,2));
-
-
+            colors = d3.scale.category20();
 
     function chart(selection) {
         selection.each(function(data) {
@@ -118,6 +113,8 @@ function pieChart() {
             // data = data.map(function(d, i) {
             //     return [label.call(data, d, i), value.call(data, d, i)];
             // });
+
+            data = data.concat(data);
 
             // build accessors
             var labelKey = d3.keys(data[0])[0],
@@ -151,7 +148,6 @@ function pieChart() {
                 title.append("text")
                     .attr("text-anchor", "end")
                     .text(config.title)
-                    //.text("ABCDEFGHIJKLMNOPQRSTUVABCDEFGHIJKLMNO")
                     .attr("font-size", "12pt");
             }
 
@@ -170,7 +166,7 @@ function pieChart() {
                 .append("text")
                     .attr("transform", function(d) {return "translate("+arc.centroid(d)+")"})
                     .attr("text-anchor", "middle")
-                    .style("font-size", "10px")
+                    .style("font-size", "8px")
                     .text(function(d){ return value(d.data) });
 
             // Legend scale
@@ -187,8 +183,8 @@ function pieChart() {
                 .data(data)
                 .enter()
                     .append("rect")
-                        .attr("height", fontSize(height)*2)
-                        .attr("width", fontSize(height)*2)
+                        .attr("height", 8)
+                        .attr("width", 8)
                         .attr("x", function(d, i) { return xl(i); })
                         .attr("y", 0)
                         .attr("fill", function(d, i) { return colors(i); });
@@ -197,11 +193,11 @@ function pieChart() {
                 .data(data)
                 .enter()
                     .append("text")
-                        .attr("font-size", fontSize(height)+"pt")
+                        .attr("font-size", 8+"pt")
                         .attr("x", function(d, i) { return xl(i); })
                         .attr("y", 0)
-                        .attr("dy", "1em")
-                        .attr("dx", fontSize(height) * 2)
+                        .attr("dy", 8)
+                        .attr("dx", 8)
                         .text(function(d, i) { return label(d); });
         });
     }

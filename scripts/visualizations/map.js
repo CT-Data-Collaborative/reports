@@ -76,22 +76,15 @@ var body = d3.select(document.body)
 
 console.log(body.html());
 function mapChart() {
-    var margin = {"top" : 30, "left" : 10, "bottom" : 10, "right" : 10}
+    var margin = {"top" : 30, "left" : 10, "bottom" : 30, "right" : 10}
             width = 460 - margin.left - margin.right,
             height = 320 - margin.top - margin.bottom,
-            fontSize = d3.scale.threshold()
-                    .domain(d3.range(4).map(function(i){ return i*300; }))
-                    .range(d3.range(4,14,2)),
-            // margin = 10, // % - should re-implement as standard margin in px {top, right, bottom, left}
             colors = d3.scale.category20(),
             jenks = d3.scale.threshold(),
             numBreaks = 5;
 
     function chart(selection) {
         selection.each(function(data) {
-
-            // console.log(fontSize.domain());
-            // console.log(fontSize.range());
 
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
@@ -188,7 +181,7 @@ function mapChart() {
             var legend = svg.append("g")
                     .attr("height", 0.25*height)
                     .attr("width", 0.5*width)
-                    .attr("transform", "translate(" + (width + margin.left + margin.right) * 0.6 + "," + (height + margin.top + margin.bottom) * 0.78 + ")");
+                    .attr("transform", "translate(" + (width + margin.left + margin.right) * 0.6 + "," + (height + margin.top + margin.bottom) * 0.72 + ")");
 
             var legendData = jenks.range().map(function(color, index) {
                 if (index === 0) {
@@ -212,19 +205,21 @@ function mapChart() {
                     // .attr("fill", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
                     // if using colorbrewer css
                     // .attr("class", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
-                    .attr("height", 0.03*height)
-                    .attr("width", 0.03*height)
+                    .attr("height", 8)
+                    .attr("width", 8)
                     .attr("x", 0)
-                    .attr("y", function(d, i) { return ((i*0.03*height)+((i-1) * 2))+"px"});
+                    //                                              8 px box + 3px padding
+                    .attr("y", function(d, i) { return ((8*i)+(3 * (i-1)))+"px"});
 
             var legendText = legend.selectAll("text")
                 .data(legendData)
                 .enter()
                 .append("text")
-                    .attr("font-size", fontSize(height)+"pt")
-                    // .attr("font-size", "8pt")
-                    .attr("dy", function(d, i) { return (((i+1)*0.03*height)+((i-1) * 2))+"px"})
-                    .attr("dx", 0.03*height+"px")
+                    .attr("font-size", "8pt")
+                    //                                              8 px box + 3px padding
+                    //                                              the extra i+1 is to account for baseline height for text
+                    .attr("dy", function(d, i) { return (8*(i+1)+(3 * (i-1)))+"px"})
+                    .attr("dx", 8+"px")
                     .text(function(d, i) {
                         if (i === 0) {
                             return "Undefined/Suppressed";

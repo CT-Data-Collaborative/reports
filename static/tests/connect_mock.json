@@ -3107,8 +3107,8 @@
         ],
         "records": [
           {
-            "_id": 0,
-            "Year": 2008,
+            "_id": {"value" : 0, "type" : "integer"},
+            "Year": {"value" : 2008, "type" : "string"},
             "Q1": {
               "value": 2636424,
               "type": "currency"
@@ -3127,8 +3127,8 @@
             }
           },
           {
-            "_id": 1,
-            "Year": 2009,
+            "_id": {"value" : 1, "type" : "integer"},
+            "Year": {"value" : 2009, "type" : "string"},
             "Q1": {
               "value": 3738180,
               "type": "currency"
@@ -3147,8 +3147,8 @@
             }
           },
           {
-            "_id": 2,
-            "Year": 2010,
+            "_id": {"value" : 2, "type" : "integer"},
+            "Year": {"value" : 2010, "type" : "string"},
             "Q1": {
               "value": 4887505,
               "type": "currency"
@@ -3167,8 +3167,8 @@
             }
           },
           {
-            "_id": 3,
-            "Year": 2011,
+            "_id": {"value" : 3, "type" : "integer"},
+            "Year": {"value" : 2011, "type" : "string"},
             "Q1": {
               "value": 6506676,
               "type": "currency"
@@ -3187,8 +3187,8 @@
             }
           },
           {
-            "_id": 4,
-            "Year": 2012,
+            "_id": {"value" : 4, "type" : "integer"},
+            "Year": {"value" : 2012, "type" : "string"},
             "Q1": {
               "value": 3629301,
               "type": "currency"
@@ -3207,8 +3207,8 @@
             }
           },
           {
-            "_id": 5,
-            "Year": 2013,
+            "_id": {"value" : 5, "type" : "integer"},
+            "Year": {"value" : 2013, "type" : "string"},
             "Q1": {
               "value": 5104629,
               "type": "currency"
@@ -3227,8 +3227,8 @@
             }
           },
           {
-            "_id": 6,
-            "Year": 2014,
+            "_id": {"value" : 6, "type" : "integer"},
+            "Year": {"value" : 2014, "type" : "string"},
             "Q1": {
               "value": 2797064,
               "type": "currency"

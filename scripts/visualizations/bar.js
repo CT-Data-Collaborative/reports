@@ -76,17 +76,15 @@ function barChart() {
             y = d3.scale.linear()
                     .range([height, 0]),
             color = d3.scale.category20(),
-            fontSize = d3.scale.threshold()
-                    .domain(d3.range(4).map(function(i){ return i*300; }))
-                    .range(d3.range(4,14,2)),
+
+            // format functions - this is used to create y axis tick labels, will need further implementation
+            si = d3.format('$s'),
 
             // axes
             xAxis = d3.svg.axis()
                 .scale(x0)
                 .orient("bottom"),
 
-            // format function
-            si = d3.format('s'),
             yAxis = d3.svg.axis()
                 .scale(y)
                 .orient("left")
@@ -205,7 +203,7 @@ function barChart() {
                             .attr("transform", "rotate(-90)")
                             // .attr("text-anchor", "middle")
                             .attr("text-anchor", "end")
-                            .attr("font-size", "5pt")
+                            .attr("font-size", "8pt")
                             .attr("x", function(d) { return 0-3-y(d.value); })
                             .attr("y", function(d) { return x1(d.name)+x1.rangeBand()-3; })
                             .attr("fill", "white");
