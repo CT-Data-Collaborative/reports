@@ -189,25 +189,40 @@ function barChart() {
                     .data(function(d) { return d.values; })
                     .enter()
                         .append("rect")
+                            .attr("stroke", "white")
                             .attr("width", x1.rangeBand())
                             .attr("x", function(d) { return x1(d.name); })
                             .attr("y", function(d) { return y(d.value); })
                             .attr("height", function(d) { return height - y(d.value); })
                             .style("fill", function(d) { return color(d.name); });
 
+            // text labels v1
+            /*
             groups.selectAll("text")
                     .data(function(d) { return d.values; })
                     .enter()
                         .append("text")
                             .text(function(d) { return d.label; })
                             .attr("transform", "rotate(-90)")
-                            // .attr("text-anchor", "middle")
                             .attr("text-anchor", "end")
                             .attr("font-size", "8pt")
                             .attr("x", function(d) { return 0-3-y(d.value); })
                             .attr("y", function(d) { return x1(d.name)+x1.rangeBand()-3; })
-                            .attr("fill", "white");
+                            .attr("fill", "black");
+            */
 
+            // text labels v2
+            groups.selectAll("text")
+                    .data(function(d) { return d.values; })
+                    .enter()
+                        .append("text")
+                            .text(function(d) { return d.label; })
+                            .attr("transform", "rotate(-90)")
+                            .attr("text-anchor", "start")
+                            .attr("font-size", "8pt")
+                            .attr("x", 3-height)
+                            .attr("y", function(d) { return x1(d.name)+x1.rangeBand()-3; })
+                            .attr("fill", "black");
 
             /* Old Code */
             /*
