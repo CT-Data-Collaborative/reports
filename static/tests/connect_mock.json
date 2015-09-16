@@ -3281,11 +3281,11 @@
           {
             "Quarter": {
               "type": "string",
-              "value": "Q1"
+              "value": "QuarterQuarterQuarter 1"
             },
             "Income": {
               "type": "currency",
-              "value": 368123
+              "value": 1
             },
             "Expenditures": {
               "type": "currency",
@@ -3299,11 +3299,11 @@
           {
             "Quarter": {
               "type": "string",
-              "value": "Q2"
+              "value": "QuarterQuarterQuarter 2"
             },
             "Income": {
               "type": "currency",
-              "value": 428123
+              "value": 4
             },
             "Expenditures": {
               "type": "currency",
@@ -3317,11 +3317,11 @@
           {
             "Quarter": {
               "type": "string",
-              "value": "Q3"
+              "value": "QuarterQuarterQuarter 3"
             },
             "Income": {
               "type": "currency",
-              "value": 545123
+              "value": 9
             },
             "Expenditures": {
               "type": "currency",
@@ -3335,11 +3335,11 @@
           {
             "Quarter": {
               "type": "string",
-              "value": "Q4"
+              "value": "QuarterQuarterQuarter 4"
             },
             "Income": {
               "type": "currency",
-              "value": 558123
+              "value": 27
             },
             "Expenditures": {
               "type": "currency",
@@ -3353,11 +3353,11 @@
           {
             "Quarter": {
               "type": "string",
-              "value": "Q5"
+              "value": "QuarterQuarterQuarter 5"
             },
             "Income": {
               "type": "currency",
-              "value": 358123
+              "value": 256
             },
             "Expenditures": {
               "type": "currency",
