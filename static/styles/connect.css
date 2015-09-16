@@ -1,3 +1,7 @@
+svg {
+    background-color:#EEE;
+}
+
 body {
     height: 600px;
 }
@@ -19,7 +23,7 @@ h2.table_title {
 /* Print-specific rules */
 @media print {
     @page {
-        size: 11in 8.5in;
+        size: 8.5in 11in;
         margin:0.25in;
     }
     body {

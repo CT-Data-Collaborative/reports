@@ -5,7 +5,7 @@ def random_hex_color():
     r = lambda: random.randint(0,255)
     return('#%02X%02X%02X' % (r(),r(),r()))
 
-CONNECT_HEIGHT = 725
+CONNECT_HEIGHT = 1330
 
 def table(visObj):
     global CONNECT_HEIGHT
