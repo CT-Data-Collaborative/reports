@@ -186,14 +186,16 @@ function pieChart() {
                         .attr("stroke", "black")
                         .attr("stroke-width", "0.5px")
                         .attr("x1", function(d, i) {
-                            return arc.centroid(d)[0];
+                            midAngle = Math.atan2(arc.centroid(d)[1], arc.centroid(d)[0])
+                            return Math.cos(midAngle) * outerRadius * 0.9;
                         })
                         .attr("x2", function(d, i) {
                             midAngle = Math.atan2(arc.centroid(d)[1], arc.centroid(d)[0])
                             return Math.cos(midAngle) * outerRadius * 1.25;
                         })
                         .attr("y1", function(d, i) {
-                            return arc.centroid(d)[1];
+                            midAngle = Math.atan2(arc.centroid(d)[1], arc.centroid(d)[0])
+                            return Math.sin(midAngle) * outerRadius * 0.9;
                         })
                         .attr("y2", function(d, i) {
                             midAngle = Math.atan2(arc.centroid(d)[1], arc.centroid(d)[0])
