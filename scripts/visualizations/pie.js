@@ -89,7 +89,7 @@ var body = d3.select(document.body)
 console.log(body.html());
 
 function pieChart() {
-    var margin = {top : 40, left : 10, bottom : 10, right : 10},
+    var margin = {top : 20, left : 10, bottom : 10, right : 10},
             width = 460 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom,
             radius = Math.min(height, width) / 2,
@@ -131,19 +131,28 @@ function pieChart() {
 
             // SVG Container
             var svg = d3.select(this).append("svg")
-                .attr("width", (width + margin.left + margin.right)+"px")
-                .attr("height", (height + margin.top + margin.bottom)+"px")
+                .attr("width", (width + margin.left + margin.right))
+                .attr("height", (height + margin.top + margin.bottom))
                 .attr("xmlns", "http://www.w3.org/2000/svg");
+
+            // modify height, width, radius etc so that it maintains a 1x2 proportion
+            if ((height / width) > 0.5) {
+                height = (width / 2) - margin.top - margin.bottom;
+
+                radius = height / 2;
+                outerRadius = 0.9 * radius;
+                arc.outerRadius(outerRadius);
+            }
 
             var pieGroup = svg.append("g")
                     .attr("width", width)
                     .attr("height", height)
-                    .attr("transform", "translate(" + ((1.5 * radius) + margin.left) + "," + ((height / 2) + margin.top) + ")");
+                    .attr("transform", "translate(" + (((1.5 * radius)) + margin.left) + "," + ((svg.attr("height") / 2) + margin.top) + ")");
 
             var labelGroup = svg.append("g")
                     .attr("width", width)
                     .attr("height", height)
-                    .attr("transform", "translate(" + ((1.5 * radius) + margin.left) + "," + ((height / 2) + margin.top) + ")");
+                    .attr("transform", "translate(" + (((1.5 * radius)) + margin.left) + "," + ((svg.attr("height") / 2) + margin.top) + ")");
 
             if ("title" in config && config.title !== "") {
                 var title = svg.append("g")
@@ -288,7 +297,7 @@ function pieChart() {
             var legend = svg.append("g")
                 .attr("height", height)
                 .attr("width", margin.right)
-                .attr("transform", "translate("+(margin.left+(3 * radius))+","+ margin.top +")");
+                .attr("transform", "translate("+(margin.left+(3 * radius))+","+ (margin.top + ((svg.attr("height")-height) / 2)) +")");
 
             legend.selectAll("rect")
                 .data(data)

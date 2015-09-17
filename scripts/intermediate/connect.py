@@ -5,12 +5,13 @@ def random_hex_color():
     r = lambda: random.randint(0,255)
     return('#%02X%02X%02X' % (r(),r(),r()))
 
-CONNECT_HEIGHT = 1330
+CONNECT_HEIGHT = 1025
+CONNECT_WIDTH = 725
 
 def table(visObj):
     global CONNECT_HEIGHT
     if "width" in visObj["config"] and visObj["config"]["width"] > 0 and visObj["config"]["width"] <= 12:
-        del visObj["config"]["width"]
+        visObj["config"]["width"] = visObj["config"]["width"]*CONNECT_WIDTH/12.0
     if "height" in visObj["config"] and visObj["config"]["height"] > 0 and visObj["config"]["height"] <= 12:
         visObj["config"]["height"] = visObj["config"]["height"]*CONNECT_HEIGHT/12.0
 
@@ -22,7 +23,7 @@ def table(visObj):
 def pie(visObj):
     global CONNECT_HEIGHT
     if "width" in visObj["config"] and visObj["config"]["width"] > 0 and visObj["config"]["width"] <= 12:
-        del visObj["config"]["width"]
+        visObj["config"]["width"] = visObj["config"]["width"]*CONNECT_WIDTH/12.0
     if "height" in visObj["config"] and visObj["config"]["height"] > 0 and visObj["config"]["height"] <= 12:
         visObj["config"]["height"] = visObj["config"]["height"]*CONNECT_HEIGHT/12.0
 
@@ -45,7 +46,7 @@ def pie(visObj):
 def map(visObj):
     global CONNECT_HEIGHT
     if "width" in visObj["config"] and visObj["config"]["width"] > 0 and visObj["config"]["width"] <= 12:
-        del visObj["config"]["width"]
+        visObj["config"]["width"] = visObj["config"]["width"]*CONNECT_WIDTH/12.0
     if "height" in visObj["config"] and visObj["config"]["height"] > 0 and visObj["config"]["height"] <= 12:
         visObj["config"]["height"] = visObj["config"]["height"]*CONNECT_HEIGHT/12.0
 
@@ -57,7 +58,7 @@ def map(visObj):
 def bar(visObj):
     global CONNECT_HEIGHT
     if "width" in visObj["config"] and visObj["config"]["width"] > 0 and visObj["config"]["width"] <= 12:
-        del visObj["config"]["width"]
+        visObj["config"]["width"] = visObj["config"]["width"]*CONNECT_WIDTH/12.0
 
     if "height" in visObj["config"] and visObj["config"]["height"] > 0 and visObj["config"]["height"] <= 12:
         visObj["config"]["height"] = visObj["config"]["height"]*CONNECT_HEIGHT/12.0
