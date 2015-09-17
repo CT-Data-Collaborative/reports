@@ -3281,7 +3281,7 @@
           {
             "Quarter": {
               "type": "string",
-              "value": "QuarterQuarterQuarter 1"
+              "value": "Quarter 1"
             },
             "Income": {
               "type": "currency",
@@ -3299,7 +3299,7 @@
           {
             "Quarter": {
               "type": "string",
-              "value": "QuarterQuarterQuarter 2"
+              "value": "Quarter 2"
             },
             "Income": {
               "type": "currency",
@@ -3317,7 +3317,7 @@
           {
             "Quarter": {
               "type": "string",
-              "value": "QuarterQuarterQuarter 3"
+              "value": "Quarter 3"
             },
             "Income": {
               "type": "currency",
@@ -3335,7 +3335,7 @@
           {
             "Quarter": {
               "type": "string",
-              "value": "QuarterQuarterQuarter 4"
+              "value": "Quarter 4"
             },
             "Income": {
               "type": "currency",
@@ -3353,7 +3353,7 @@
           {
             "Quarter": {
               "type": "string",
-              "value": "QuarterQuarterQuarter 5"
+              "value": "Quarter 5"
             },
             "Income": {
               "type": "currency",
@@ -3373,7 +3373,7 @@
       },
       "config": {
         "title": "Something by Quarter, 2014",
-        "height": 4,
+        "height": 3,
         "width": 6
       }
     },

@@ -17,13 +17,39 @@ var args = minimist(process.argv.slice(2)),
 
 
 // Number formatters
+var si = d3.format("s");
 var formatters = {
+    "string" : function(val) {return val; },
+    "currency" : function(val) {
+        if (val.toString().length > 4) {
+            return d3.format("$.2s")(val).replace(/G/, "B");
+        } else {
+            return d3.format("$,.0f")(val);
+        }
+    },
+    "integer" : function(val) {
+        if (val.toString().length > 4) {
+            return d3.format(".3s")(val).replace(/G/, "B");
+        } else {
+            return d3.format(",0f")(val);
+        }
+    },
+    "decimal" : function(val) {
+        if (val.toString().length > 4) {
+            return d3.format(".2s")(val).replace(/G/, "B");
+        } else {
+            return d3.format(",2f")(val);
+        }
+    },
+    "percent" : d3.format(".1%")
+};
+/*var formatters = {
     "string" : function(val) {return val; },
     "currency" : d3.format("$,.0f"),
     "integer" : d3.format(",0f"),
     "decimal" : d3.format(",2f"),
     "percent" : d3.format(".1%")
-};
+};*/
 
 for (var type in config.formats) {
     formatters[type] = d3.format(config.formats[type]);
@@ -65,7 +91,7 @@ console.log(body.html());
 function barChart() {
             // VARS
             // dims
-    var margin = {top: 30, right: 10, bottom: 20, left: 30},
+    var margin = {top: 30, right: 10, bottom: 20, left: 35},
             width = 480 - margin.left - margin.right,
             height = 250 - margin.top - margin.bottom,
 
@@ -77,9 +103,6 @@ function barChart() {
                     .range([height, 0]),
             color = d3.scale.category20(),
 
-            // format functions - this is used to create y axis tick labels, will need further implementation
-            si = d3.format('$s'),
-
             // axes
             xAxis = d3.svg.axis()
                 .scale(x0)
@@ -88,8 +111,7 @@ function barChart() {
             yAxis = d3.svg.axis()
                 .scale(y)
                 .orient("left")
-                .ticks(8)
-                .tickFormat(function(val) { return si(val).replace(/G/, 'B') }),
+                .ticks(8);
 
             // bar widths
             defaultBarWidth = true,
@@ -97,9 +119,6 @@ function barChart() {
 
     function chart(selection) {
         selection.each(function(data) {
-
-            // updating scales etc?
-            y.range([height, 0])
 
             // Should this be a parameter? passed in config?
             var grouping = "Year";
@@ -109,19 +128,22 @@ function barChart() {
             // This is the step that seems to be the most confused and broken - what shape am i aiming for?
             data.forEach(function(d) {
                 d.values = groupLabels.map(function(label) {
+                    yAxis.tickFormat(formatters[d[label].type]); // there should really only be one of these?
                     return {name: label, label: formatters[d[label].type](d[label].value), value: d[label].value};
                 });
             });
 
             //  set domain for group scale
-            x0.domain(data.map(function(d) { return d[grouping].value; }));
+            x0.domain(data.map(function(d) { return d[grouping].value; }))
+                .rangeRoundBands([0, width], 0.1);
 
             // set domain and range banding for scale for bars within groups
             x1.domain(groupLabels)
                 .rangeRoundBands([0, x0.rangeBand()]);
 
-            // set y-scale domain 
-            y.domain([0, d3.max(data, function(d) { return d3.max(d.values, function(d) { return d.value; }); })]);
+            // set y-scale domain, scaling so there is always a y-axis line above the highest value
+            y.domain([0, 1.1 * d3.max(data, function(d) { return d3.max(d.values, function(d) { return d.value; }); })])
+                .range([height, ((groupLabels.length + 1) * 10)]);
 
             // container, margined interior container
             var svg = d3.select(this).append('svg')
@@ -221,8 +243,35 @@ function barChart() {
                             .attr("text-anchor", "start")
                             .attr("font-size", "8pt")
                             .attr("x", 3-height)
-                            .attr("y", function(d) { return x1(d.name)+x1.rangeBand()-3; })
+                            .attr("y", function(d) { return x1(d.name)+(x1.rangeBand() / 2) + 4; })
                             .attr("fill", "black");
+
+            // legends
+            var legendGroup = svg.append("g")
+                    .attr("height", (10 * (groupLabels.length + 1)))
+                    .attr("width", width * 0.8)
+                    .attr("transform", "translate(" + margin.top + "," + (0.1 * width) +")");
+
+            // legend boxes
+            var legendBoxes = legendGroup.selectAll("rect")
+                .data(groupLabels)
+                .enter()
+                .append("rect")
+                    .attr("height", "8pt")
+                    .attr("width", "8pt")
+                    .attr("y", function(d, i) { return (i * 12) + "pt"; })
+                    .attr("x", 0)
+                    .attr("fill", function(d, i) { return color(d); });
+
+            // legend text
+            var legendText = legendGroup.selectAll("text")
+                .data(groupLabels)
+                .enter()
+                .append("text")
+                    .attr("y", function(d, i) { return (i * 12) + "pt"; })
+                    .attr("x", "10pt")
+                    .attr("dy", "8pt")
+                    .text(function(d, i) { return d; });
 
             /* Old Code */
             /*
