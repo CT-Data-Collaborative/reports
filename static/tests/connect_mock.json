@@ -3107,8 +3107,14 @@
         ],
         "records": [
           {
-            "_id": {"value" : 0, "type" : "integer"},
-            "Year": {"value" : 2008, "type" : "string"},
+            "_id": {
+              "value": 0,
+              "type": "integer"
+            },
+            "Year": {
+              "value": 2008,
+              "type": "string"
+            },
             "Q1": {
               "value": 2636424,
               "type": "currency"
@@ -3127,8 +3133,14 @@
             }
           },
           {
-            "_id": {"value" : 1, "type" : "integer"},
-            "Year": {"value" : 2009, "type" : "string"},
+            "_id": {
+              "value": 1,
+              "type": "integer"
+            },
+            "Year": {
+              "value": 2009,
+              "type": "string"
+            },
             "Q1": {
               "value": 3738180,
               "type": "currency"
@@ -3147,8 +3159,14 @@
             }
           },
           {
-            "_id": {"value" : 2, "type" : "integer"},
-            "Year": {"value" : 2010, "type" : "string"},
+            "_id": {
+              "value": 2,
+              "type": "integer"
+            },
+            "Year": {
+              "value": 2010,
+              "type": "string"
+            },
             "Q1": {
               "value": 4887505,
               "type": "currency"
@@ -3167,8 +3185,14 @@
             }
           },
           {
-            "_id": {"value" : 3, "type" : "integer"},
-            "Year": {"value" : 2011, "type" : "string"},
+            "_id": {
+              "value": 3,
+              "type": "integer"
+            },
+            "Year": {
+              "value": 2011,
+              "type": "string"
+            },
             "Q1": {
               "value": 6506676,
               "type": "currency"
@@ -3187,8 +3211,14 @@
             }
           },
           {
-            "_id": {"value" : 4, "type" : "integer"},
-            "Year": {"value" : 2012, "type" : "string"},
+            "_id": {
+              "value": 4,
+              "type": "integer"
+            },
+            "Year": {
+              "value": 2012,
+              "type": "string"
+            },
             "Q1": {
               "value": 3629301,
               "type": "currency"
@@ -3207,8 +3237,14 @@
             }
           },
           {
-            "_id": {"value" : 5, "type" : "integer"},
-            "Year": {"value" : 2013, "type" : "string"},
+            "_id": {
+              "value": 5,
+              "type": "integer"
+            },
+            "Year": {
+              "value": 2013,
+              "type": "string"
+            },
             "Q1": {
               "value": 5104629,
               "type": "currency"
@@ -3227,8 +3263,14 @@
             }
           },
           {
-            "_id": {"value" : 6, "type" : "integer"},
-            "Year": {"value" : 2014, "type" : "string"},
+            "_id": {
+              "value": 6,
+              "type": "integer"
+            },
+            "Year": {
+              "value": 2014,
+              "type": "string"
+            },
             "Q1": {
               "value": 2797064,
               "type": "currency"
@@ -3251,8 +3293,8 @@
       },
       "config": {
         "title": "Something by Quarter, 2014",
-        "height": 6,
-        "width": 6
+        "height": 8,
+        "width": 8
       }
     },
     {
@@ -3373,8 +3415,8 @@
       },
       "config": {
         "title": "Something by Quarter, 2014",
-        "height": 3,
-        "width": 6
+        "height": 4,
+        "width": 4
       }
     },
     {
@@ -6549,9 +6591,9 @@
         "total": 4
       },
       "config": {
-        "title": "Something by Quarter, 2014",
+        "title": "Children Residing in Region, Children in Need of Treatment, Children Who Will Have Serious Emotional Disturbance in Their Lifetime by Age and Race",
         "height": 4,
-        "width": 6
+        "width": 12
       }
     }
   ]
