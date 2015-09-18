@@ -27,10 +27,10 @@ tr > td:first-child {
 @media print {
     @page {
         size: 8.5in 11in;
-        margin:0.15in;
+        margin:0.15in 0.20in 0.25in;
 
         @bottom-right {
-            font-size: 8pt;
+            font-size: 12pt;
             /*width:35%;*/
             text-align:right;
             vertical-align: top;
@@ -42,7 +42,7 @@ tr > td:first-child {
         font-size:8pt;
         margin:0!important;
 
-        height: 730pt;
+        height: 750pt;
         display: block;
 
         border-bottom: 2px solid #BBB;

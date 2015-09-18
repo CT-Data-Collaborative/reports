@@ -166,7 +166,8 @@ function barChart() {
                     .attr("text-anchor", "end")
                     .text(config.title)
                     //.text("ABCDEFGHIJKLMNOPQRSTUVABCDEFGHIJKLMNO")
-                    .attr("font-size", "12pt");
+                    .attr("font-size", "6pt")
+                    .attr("font-weight", "bold");
             }
 
             // x axis, includes group labels automatically

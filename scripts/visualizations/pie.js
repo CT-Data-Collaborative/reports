@@ -163,7 +163,8 @@ function pieChart() {
                 title.append("text")
                     .attr("text-anchor", "end")
                     .text(config.title)
-                    .attr("font-size", "12pt");
+                    .attr("font-size", "6pt")
+                    .attr("font-weight", "bold");
             }
 
             // Pie slices

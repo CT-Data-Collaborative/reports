@@ -6,7 +6,7 @@ def random_hex_color():
     return('#%02X%02X%02X' % (r(),r(),r()))
 
 CONNECT_HEIGHT = 800
-CONNECT_WIDTH = 650
+CONNECT_WIDTH = 640
 
 def table(visObj):
     global CONNECT_HEIGHT
