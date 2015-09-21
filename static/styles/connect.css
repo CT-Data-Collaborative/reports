@@ -53,19 +53,24 @@ p.table_source {
         }
     }
     body {
-        border-bottom: 2px solid #BBB;
         font-size:8pt;
         margin:0!important;
 
         height: 750pt;
         display: block;
-
-        border-bottom: 2px solid #BBB;
+    }
+    hr.footer_marker {
+        position: fixed;
+        margin: 0;
+        border:1pt solid #BBB;
+        width:99.5%;
+        left: 0;
+        bottom: 0;
     }
     div.header {
         position: fixed;
         height: 50pt;
-        width: 100%;
+        width: 99.5%;
         display: block;
         clear: both;
 
