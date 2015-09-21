@@ -18,7 +18,6 @@ tr > td:first-child {
 }
 
 h2.table_title {
-    border: 1px solid black;
     display: inline-block;
     font-size: 6pt;
     margin: 1% 3%;

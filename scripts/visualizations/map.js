@@ -23,11 +23,30 @@ var args = minimist(process.argv.slice(2)),
         // geography = args.geography;
 
 // Number formatters
+var si = d3.format("s");
 var formatters = {
     "string" : function(val) {return val; },
-    "currency" : d3.format("$,.0f"),
-    "integer" : d3.format(",0f"),
-    "decimal" : d3.format(",2f"),
+    "currency" : function(val) {
+        if (val.toString().length > 7) {
+            return d3.format("$.2s")(val).replace(/G/, "B");
+        } else {
+            return d3.format("$,.0f")(val);
+        }
+    },
+    "integer" : function(val) {
+        if (val.toString().length > 7) {
+            return d3.format(".3s")(val).replace(/G/, "B");
+        } else {
+            return d3.format(",0f")(val);
+        }
+    },
+    "decimal" : function(val) {
+        if (val.toString().length > 7) {
+            return d3.format(".2s")(val).replace(/G/, "B");
+        } else {
+            return d3.format(",2f")(val);
+        }
+    },
     "percent" : d3.format(".1%")
 };
 
@@ -89,6 +108,10 @@ function mapChart() {
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
             data = data;
+
+            data.forEach(function(o, oi, oa) {
+                data[oi].Value.value = 100 * o.Value.value;
+            });
             // reshape data
 
             // SVG Container
@@ -182,7 +205,7 @@ function mapChart() {
             var legend = svg.append("g")
                     .attr("height", 0.25*height)
                     .attr("width", 0.5*width)
-                    .attr("transform", "translate(" + (width + margin.left + margin.right) * 0.6 + "," + (height + margin.top + margin.bottom) * 0.72 + ")");
+                    .attr("transform", "translate(" + (width + margin.left + margin.right) * 0.25 + "," + (height + margin.top + margin.bottom) * 0.72 + ")");
 
             var legendData = jenks.range().map(function(color, index) {
                 if (index === 0) {
