@@ -143,7 +143,7 @@ function barChart() {
 
             // set y-scale domain, scaling so there is always a y-axis line above the highest value
             y.domain([0, 1.1 * d3.max(data, function(d) { return d3.max(d.values, function(d) { return d.value; }); })])
-                .range([height, ((groupLabels.length + 1) * 10)]);
+                .range([height, 0]);
 
             // container, margined interior container
             var svg = d3.select(this).append('svg')
@@ -248,10 +248,14 @@ function barChart() {
                             .attr("fill", "black");
 
             // legends
+            // Legend scale
+            xl = d3.scale.ordinal()
+                    .rangeRoundBands([0, (width + ((margin.left + margin.right) / 2))], 0, 0)
+                    .domain(d3.range(3));
+
+            // legend container
             var legendGroup = svg.append("g")
-                    .attr("height", (10 * (groupLabels.length + 1)))
-                    .attr("width", width * 0.8)
-                    .attr("transform", "translate(" + margin.top + "," + (0.1 * width) +")");
+                    .attr("transform", "translate(" + margin.left + "," + margin.top +")");
 
             // legend boxes
             var legendBoxes = legendGroup.selectAll("rect")
@@ -260,8 +264,8 @@ function barChart() {
                 .append("rect")
                     .attr("height", "8pt")
                     .attr("width", "8pt")
-                    .attr("y", function(d, i) { return (i * 12) + "pt"; })
-                    .attr("x", 0)
+                    .attr("x", function(d, i) { return xl(i % 3); })
+                    .attr("y", function(d, i) { return Math.floor(i/3) * 14; })
                     .attr("fill", function(d, i) { return color(d); });
 
             // legend text
@@ -269,9 +273,10 @@ function barChart() {
                 .data(groupLabels)
                 .enter()
                 .append("text")
-                    .attr("y", function(d, i) { return (i * 12) + "pt"; })
-                    .attr("x", "10pt")
+                    .attr("x", function(d, i) { return xl(i % 3) + 8; })
+                    .attr("y", function(d, i) { return Math.floor(i/3) * 14; })
                     .attr("dy", "8pt")
+                    .attr("dx", "8pt")
                     .text(function(d, i) { return d; });
 
             /* Old Code */

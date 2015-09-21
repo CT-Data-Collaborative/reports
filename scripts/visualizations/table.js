@@ -61,7 +61,9 @@ function tableChart() {
             // });
 
             // outermost container
-            var container = d3.select(this).append("div");
+            var container = d3.select(this).append("div")
+                    .attr("class", "table_container")
+                    .attr("style", "height:"+config.height+"px;");
 
             if ("title" in config && config.title !== "") {
                 var title = container.append("h2")

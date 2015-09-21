@@ -5,6 +5,10 @@ div.row > div > div > table{
     width: 100%;
 }
 
+div.table_container {
+    display: block;
+}
+
 table, thead, tbody, tr, th, td {
   border-collapse: collapse;
 }
