@@ -91,7 +91,7 @@ console.log(body.html());
 function barChart() {
             // VARS
             // dims
-    var margin = {top: 30, right: 10, bottom: 20, left: 35},
+    var margin = {top: 30, right: 10, bottom: 30, left: 35},
             width = 480 - margin.left - margin.right,
             height = 250 - margin.top - margin.bottom,
 
@@ -308,6 +308,18 @@ function barChart() {
                 .attr("fill", "white")
                 .text(function(d) { return d[0].value; });
         */
+            if ("source" in config && config.source !== "") {
+                // source
+                var source = svg.append("text")
+                    .attr("x", width + margin.left + margin.right)
+                    .attr("y", height+margin.top+margin.bottom)
+                    .attr("dy", "-2pt")
+                    .attr("text-anchor", "end")
+                    .attr("font-size", "6pt")
+                    .attr("font-style", "italic")
+                    .attr("fill", "#888")
+                    .text(config.source);
+            }
         });
     }
 

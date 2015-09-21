@@ -108,7 +108,7 @@ var body = d3.select(document.body)
 console.log(body.html());
 
 function pieChart() {
-    var margin = {top : 60, left : 40, bottom : 60, right : 40},
+    var margin = {top : 60, left : 20, bottom : 60, right : 20},
             width = 460 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom,
             radius = Math.min(height, width) / 2,
@@ -301,13 +301,13 @@ function pieChart() {
 
             // Legend scale
             xl = d3.scale.ordinal()
-                    .rangeRoundBands([0, width], 0.5, 0.15)
+                    .rangeRoundBands([0, (width + ((margin.left + margin.right) / 2))], 0, 0)
                     .domain(d3.range(2));
 
             var legend = svg.append("g")
                 .attr("height", margin.bottom)
                 .attr("width", width)
-                .attr("transform", "translate("+margin.left+","+ (height+margin.top + (margin.bottom*0.5)) +")");
+                .attr("transform", "translate("+((margin.left + margin.right) / 2)+","+ (height+margin.top) +")");
 
             legend.selectAll("rect")
                 .data(data)
@@ -328,7 +328,20 @@ function pieChart() {
                         .attr("y", function(d, i) { return Math.floor(i/2) * 10; })
                         .attr("dy", 8)
                         .attr("dx", 10)
-                        .text(function(d, i) { return label(d).substring(0, 16); });
+                        .text(function(d, i) { return label(d); });
+        
+            if ("source" in config && config.source !== "") {
+                // source
+                var source = svg.append("text")
+                    .attr("x", width + margin.left + margin.right)
+                    .attr("y", height+margin.top+margin.bottom)
+                    .attr("dy", "-2pt")
+                    .attr("text-anchor", "end")
+                    .attr("font-size", "6pt")
+                    .attr("font-style", "italic")
+                    .attr("fill", "#888")
+                    .text(config.source);
+            }
         });
     }
 

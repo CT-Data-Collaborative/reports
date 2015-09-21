@@ -230,6 +230,19 @@ function mapChart() {
                             return low+" - "+high;
                         }
                     });
+
+            if ("source" in config && config.source !== "") {
+                // source
+                var source = svg.append("text")
+                    .attr("x", width + margin.left + margin.right)
+                    .attr("y", height+margin.top+margin.bottom)
+                    .attr("dy", "-2pt")
+                    .attr("text-anchor", "end")
+                    .attr("font-size", "6pt")
+                    .attr("font-style", "italic")
+                    .attr("fill", "#888")
+                    .text(config.source);
+            }
         });
     }
 

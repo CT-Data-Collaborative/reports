@@ -1,13 +1,8 @@
 div.row > div > img,
 div.row > div > table,
-div.row > div > div {
+div.row > div > div,
+div.row > div > div > table{
     width: 100%;
-}
-
-h2.table_title {
-    font-size:6pt;
-    float: right;
-    margin:1% 3%;
 }
 
 table, thead, tbody, tr, th, td {
@@ -20,6 +15,23 @@ th, td {
 
 tr > td:first-child {
   font-weight: bold;
+}
+
+h2.table_title {
+    border: 1px solid black;
+    display: inline-block;
+    font-size: 6pt;
+    margin: 1% 3%;
+    position: absolute;
+    right: 0;
+}
+
+p.table_source {
+    font-size: 7pt;
+    color: #888;
+    font-style: italic;
+    position: absolute;
+    right: 20px;
 }
 
 

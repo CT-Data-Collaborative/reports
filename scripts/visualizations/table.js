@@ -60,14 +60,18 @@ function tableChart() {
             //     return [label.call(data, d, i), value.call(data, d, i)];
             // });
 
+            // outermost container
+            var container = d3.select(this).append("div");
+
             if ("title" in config && config.title !== "") {
-                var title = d3.select(this).append("h2")
+                var title = container.append("h2")
                     .attr("class", "table_title")
+                    .attr("style", "top: -"+25+"px")
                     .text(config.title);
             }
 
-            // outermost table Container
-            var table = d3.select(this).append("table")
+            // Table
+            var table = container.append("table");
 
             // Calculate colspan
             // if header cells < data cells, per row.
@@ -121,6 +125,13 @@ function tableChart() {
                 .append("td")
                 .text(function(d) { return d.value; })
                 .attr("colspan", function(d, i) { return colspan && (i > 0 || data.fields[i].value != "") ? 1 : null });
+
+            if ("source" in config && config.source !== "") {
+                // source
+                var source = container.append("p")
+                    .attr("class", "table_source")
+                    .text(config.source);
+            }
         });
     }
 
