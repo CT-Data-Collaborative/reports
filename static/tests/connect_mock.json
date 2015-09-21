@@ -3072,7 +3072,8 @@
       "config": {
         "title": "Something by Town, 2014",
         "height": 6,
-        "width": 6
+        "width": 6,
+        "source": "http://ctdata.org/"
       }
     },
     {
@@ -3294,7 +3295,8 @@
       "config": {
         "title": "Something by Quarter, 2014",
         "height": 8,
-        "width": 8
+        "width": 8,
+        "source": "https://data.ct.gov/Education/District-Enrollment-2013-14/bb6g-79yj"
       }
     },
     {
@@ -3416,7 +3418,8 @@
       "config": {
         "title": "Something by Quarter, 2014",
         "height": 4,
-        "width": 4
+        "width": 4,
+        "source": "https://data.ct.gov/Education/District-Enrollment-2013-14/ba"
       }
     },
     {
@@ -6489,7 +6492,8 @@
       "config": {
         "title": "Something by Town, 2014",
         "height": 4,
-        "width": 6
+        "width": 4,
+        "source": "http://ctdata.org/"
       }
     },
     {
@@ -6593,7 +6597,8 @@
       "config": {
         "title": "Children Residing in Region, Children in Need of Treatment, Children Who Will Have Serious Emotional Disturbance in Their Lifetime by Age and Race",
         "height": 4,
-        "width": 12
+        "width": 12,
+        "source": "http://ctdata.org"
       }
     }
   ]
