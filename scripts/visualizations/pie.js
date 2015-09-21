@@ -4,9 +4,10 @@
  * args - command line arguments, passed to node, processed by minimist
  * jsdom - JSDOM library, for accessing browser-less virtual DOM
  */
-var d3 = require("d3"),
-        minimist = require("minimist"),
-        jsdom = require("jsdom");
+var jsdom = require("jsdom"),
+        d3 = require("d3")
+        jetpack = require("../../node_modules/d3-jetpack/d3-jetpack.js")(d3),
+        minimist = require("minimist");
 
 /**
  * Process arguments from node call using minimist
@@ -19,14 +20,32 @@ var args = minimist(process.argv.slice(2)),
 chart = pieChart();
 
 // Number formatters
+var si = d3.format("s");
 var formatters = {
     "string" : function(val) {return val; },
-    "currency" : d3.format("$,.0f"),
-    "integer" : d3.format(",0f"),
-    "decimal" : d3.format(",2f"),
+    "currency" : function(val) {
+        if (val.toString().length > 4) {
+            return d3.format("$.2s")(val).replace(/G/, "B");
+        } else {
+            return d3.format("$,.0f")(val);
+        }
+    },
+    "integer" : function(val) {
+        if (val.toString().length > 4) {
+            return d3.format(".3s")(val).replace(/G/, "B");
+        } else {
+            return d3.format(",0f")(val);
+        }
+    },
+    "decimal" : function(val) {
+        if (val.toString().length > 4) {
+            return d3.format(".2s")(val).replace(/G/, "B");
+        } else {
+            return d3.format(",2f")(val);
+        }
+    },
     "percent" : d3.format(".1%")
 };
-
 for (var type in config.formats) {
     formatters[type] = d3.format(config.formats[type]);
 }
@@ -89,7 +108,7 @@ var body = d3.select(document.body)
 console.log(body.html());
 
 function pieChart() {
-    var margin = {top : 20, left : 10, bottom : 10, right : 10},
+    var margin = {top : 60, left : 40, bottom : 60, right : 40},
             width = 460 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom,
             radius = Math.min(height, width) / 2,
@@ -134,25 +153,16 @@ function pieChart() {
                 .attr("width", (width + margin.left + margin.right))
                 .attr("height", (height + margin.top + margin.bottom))
                 .attr("xmlns", "http://www.w3.org/2000/svg");
-
-            // modify height, width, radius etc so that it maintains a 1x2 proportion
-            if ((height / width) > 0.5) {
-                height = (width / 2) - margin.top - margin.bottom;
-
-                radius = height / 2;
-                outerRadius = 0.9 * radius;
-                arc.outerRadius(outerRadius);
-            }
-
+                
             var pieGroup = svg.append("g")
                     .attr("width", width)
                     .attr("height", height)
-                    .attr("transform", "translate(" + (((1.5 * radius)) + margin.left) + "," + ((svg.attr("height") / 2) + margin.top) + ")");
+                    .attr("transform", "translate(" + ((width / 2) + margin.left) + "," + ((height / 2) + margin.top) + ")");
 
             var labelGroup = svg.append("g")
                     .attr("width", width)
                     .attr("height", height)
-                    .attr("transform", "translate(" + (((1.5 * radius)) + margin.left) + "," + ((svg.attr("height") / 2) + margin.top) + ")");
+                    .attr("transform", "translate(" + ((width / 2) + margin.left) + "," + ((height / 2) + margin.top) + ")");
 
             if ("title" in config && config.title !== "") {
                 var title = svg.append("g")
@@ -163,8 +173,8 @@ function pieChart() {
                 title.append("text")
                     .attr("text-anchor", "end")
                     .text(config.title)
-                    .attr("font-size", "6pt")
-                    .attr("font-weight", "bold");
+                    .attr("font-weight", "bold")
+                    .attr("font-size", "6pt");
             }
 
             // Pie slices
@@ -173,8 +183,8 @@ function pieChart() {
                 .enter()
                 .append("path")
                     .attr("fill", function(d, i) { return colors(i); })
-                    .attr("stroke-width", 0.5)
                     .attr("stroke", "white")
+                    .attr("stroke-width", 0.5)
                     .attr("d", arc);
 
 
@@ -290,15 +300,14 @@ function pieChart() {
             } while (again == true)
 
             // Legend scale
-            var legendWidth = height,
-                yLegend = d3.scale.ordinal()
-                    .rangeRoundBands([0, height], 0.5, 0.5)
-                    .domain(d3.range(5));
+            xl = d3.scale.ordinal()
+                    .rangeRoundBands([0, width], 0.5, 0.15)
+                    .domain(d3.range(2));
 
             var legend = svg.append("g")
-                .attr("height", height)
-                .attr("width", margin.right)
-                .attr("transform", "translate("+(margin.left+(3 * radius))+","+ (margin.top + ((svg.attr("height")-height) / 2)) +")");
+                .attr("height", margin.bottom)
+                .attr("width", width)
+                .attr("transform", "translate("+margin.left+","+ (height+margin.top + (margin.bottom*0.5)) +")");
 
             legend.selectAll("rect")
                 .data(data)
@@ -306,8 +315,8 @@ function pieChart() {
                     .append("rect")
                         .attr("height", 8)
                         .attr("width", 8)
-                        .attr("x", 0)
-                        .attr("y", function (d, i) { return yLegend(i); })
+                        .attr("x", function(d, i) { return xl(i % 2); })
+                        .attr("y", function(d, i) { return Math.floor(i/2) * 10; })
                         .attr("fill", function(d, i) { return colors(i); });
 
             legend.selectAll("text")
@@ -315,10 +324,11 @@ function pieChart() {
                 .enter()
                     .append("text")
                         .attr("font-size", 8+"pt")
-                        .attr("x", 10)
-                        .attr("y", function (d, i) { return yLegend(i); })
+                        .attr("x", function(d, i) { return xl(i % 2); })
+                        .attr("y", function(d, i) { return Math.floor(i/2) * 10; })
                         .attr("dy", 8)
-                        .text(function(d, i) { return label(d); });
+                        .attr("dx", 10)
+                        .text(function(d, i) { return label(d).substring(0, 16); });
         });
     }
 
