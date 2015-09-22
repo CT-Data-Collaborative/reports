@@ -12,7 +12,8 @@ var d3 = require("d3"),
         minimist = require("minimist"),
         jsdom = require("jsdom"),
         fs = require("fs"),
-        ss = require("simple-statistics");
+        ss = require("simple-statistics")
+        jetpack = require("../../node_modules/d3-jetpack/d3-jetpack.js")(d3);
 
 /**
  * Process arguments from node call using minimist
@@ -77,9 +78,9 @@ if ("width" in config && config.width > 0) {
 }
 
 // margin
-if ("margin" in config && config.margin > 0) {
-    chart.margin(config.margin);
-}
+// if ("margin" in config && config.margin > 0) {
+//     chart.margin(config.margin);
+// }
 
 //Color scale
 if ("colors" in config && config.colors.length > 0) {
@@ -95,7 +96,7 @@ var body = d3.select(document.body)
 
 console.log(body.html());
 function mapChart() {
-    var margin = {"top" : 30, "left" : 10, "bottom" : 30, "right" : 10}
+    var margin = {"top" : 20, "left" : 10, "bottom" : 30, "right" : 10}
             width = 460 - margin.left - margin.right,
             height = 320 - margin.top - margin.bottom,
             colors = d3.scale.category20(),
@@ -104,6 +105,8 @@ function mapChart() {
 
     function chart(selection) {
         selection.each(function(data) {
+
+            var charLimit = (Math.round(Math.floor((width + margin.left + margin.right) / 6) / 5) * 5);
 
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
@@ -196,16 +199,15 @@ function mapChart() {
 
                 title.append("text")
                     .attr("text-anchor", "end")
-                    .text(config.title)
-                    //.text("ABCDEFGHIJKLMNOPQRSTUVABCDEFGHIJKLMNO")
                     .attr("font-size", "6pt")
-                    .attr("font-weight", "bold");
+                    .attr("font-weight", "bold")
+                    .tspans(d3.wordwrap(config.title, charLimit), 8);
             }
 
             var legend = svg.append("g")
                     .attr("height", 0.25*height)
                     .attr("width", 0.5*width)
-                    .attr("transform", "translate(" + (width + margin.left + margin.right) * 0.25 + "," + (height + margin.top + margin.bottom) * 0.72 + ")");
+                    .attr("transform", "translate(" + (width + margin.left + margin.right) * 0.25 + "," + (height + margin.top + margin.bottom) * 0.69 + ")");
 
             var legendData = jenks.range().map(function(color, index) {
                 if (index === 0) {
@@ -257,14 +259,14 @@ function mapChart() {
             if ("source" in config && config.source !== "") {
                 // source
                 var source = svg.append("text")
-                    .attr("x", width + margin.left + margin.right)
+                    .attr("x", width + margin.left)
                     .attr("y", height+margin.top+margin.bottom)
                     .attr("dy", "-2pt")
                     .attr("text-anchor", "end")
                     .attr("font-size", "6pt")
                     .attr("font-style", "italic")
                     .attr("fill", "#888")
-                    .text(config.source);
+                    .text(config.source.substring(0, charLimit));
             }
         });
     }
