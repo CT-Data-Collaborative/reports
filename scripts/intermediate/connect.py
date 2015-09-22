@@ -1,9 +1,5 @@
+import os
 import json
-
-import random
-def random_hex_color():
-    r = lambda: random.randint(0,255)
-    return('#%02X%02X%02X' % (r(),r(),r()))
 
 CONNECT_HEIGHT = 700
 CONNECT_WIDTH = 640
@@ -15,9 +11,12 @@ def table(visObj):
     if "height" in visObj["config"] and visObj["config"]["height"] > 0 and visObj["config"]["height"] <= 12:
         visObj["config"]["height"] = visObj["config"]["height"]*CONNECT_HEIGHT/12.0
 
-    visObj["config"]["color"] = random_hex_color()
-    
     # visObj["data"] = visObj["data"]["records"]
+
+    # print("++ TABLE ++")
+    # print("Height: " + str(visObj["config"]["height"]))
+    # print("Width: " + str(visObj["config"]["width"]))
+
     return visObj
 
 def pie(visObj):
@@ -26,8 +25,6 @@ def pie(visObj):
         visObj["config"]["width"] = visObj["config"]["width"]*CONNECT_WIDTH/12.0
     if "height" in visObj["config"] and visObj["config"]["height"] > 0 and visObj["config"]["height"] <= 12:
         visObj["config"]["height"] = visObj["config"]["height"]*CONNECT_HEIGHT/12.0
-
-    visObj["config"]["color"] = random_hex_color()
 
     if len(visObj["data"]["records"][0]) > 2:
         # trim fields
@@ -41,6 +38,11 @@ def pie(visObj):
 
     
     visObj["data"] = visObj["data"]["records"]
+
+    # print("++ PIE ++")
+    # print("Height: " + str(visObj["config"]["height"]))
+    # print("Width: " + str(visObj["config"]["width"]))
+
     return visObj
 
 def map(visObj):
@@ -50,9 +52,12 @@ def map(visObj):
     if "height" in visObj["config"] and visObj["config"]["height"] > 0 and visObj["config"]["height"] <= 12:
         visObj["config"]["height"] = visObj["config"]["height"]*CONNECT_HEIGHT/12.0
 
-    visObj["config"]["color"] = random_hex_color()
-    
     visObj["data"] = visObj["data"]["records"]
+
+    # print("++ MAP ++")
+    # print("Height: " + str(visObj["config"]["height"]))
+    # print("Width: " + str(visObj["config"]["width"]))
+
     return visObj
 
 def bar(visObj):
@@ -66,15 +71,50 @@ def bar(visObj):
     if "barHeight" not in visObj["config"]:
         visObj["config"]["barHeight"] = visObj["config"]["height"]/len(visObj["data"])
 
-    visObj["config"]["color"] = random_hex_color()
-    
     visObj["data"] = visObj["data"]["records"]
+
+    # print("++ BAR ++")
+    # print("Height: " + str(visObj["config"]["height"]))
+    # print("Width: " + str(visObj["config"]["width"]))
+
     return visObj
 
 transformations = {"table" : table, "pie" : pie, "map" : map, "bar" : bar}
 
 def get_extra_obj(data):
     extra_obj = []
+
+    # region map and town list
+    if "config" in data and "region" in data["config"]:
+        region_map = {"name" : "region_map", "type" : "map", "data" : {"fields" : [], "records" : []}, "config" : {"legend" : False, "height": 2, "width" : 3}}
+        region_map["data"]["fields"] = [{"type" : "string", "id" : "FIPS"}, {"type" : "integer", "id" : "Value"}]
+        
+        town_list = {"name" : "town_list", "type" : "table", "data" : {"fields" : [], "records" : []}, "config" : {"height" : 2, "width" : 9}}
+        town_list["data"]["fields"] = [{"type" : "string", "id" : "Town"}]
+        # go through geojson and take values that are in the right region (for testing, i'm using county)
+        # at the same time, build list of towns by name
+        map_data = []
+        town_data = []
+        
+        with open("/vagrant/static/geography/town_shapes.json") as geoJSON_file:
+            geoJSON = json.load(geoJSON_file)
+
+            for feature in geoJSON["features"]:
+                if feature["properties"]["COUNTYFP10"] == data["config"]["region"]:
+                    map_object = {"FIPS" : {}, "Value" : {}}
+                    map_object["FIPS"] = {"type" : "string", "value" : feature["properties"]["GEOID10"]}
+                    map_object["Value"] = {"type" : "integer", "value" : 1}
+                    map_data.append(map_object)
+
+                    town_object = {"Town" : {}}
+                    town_object["Town"] = {"type" : "string", "value" : feature["properties"]["NAME10"]}
+                    town_data.append(town_object)
+
+        region_map["data"]["records"] = map_data
+        town_list["data"]["records"] = town_data
+
+    extra_obj.append(region_map)
+    extra_obj.append(town_list)
 
     return extra_obj
 

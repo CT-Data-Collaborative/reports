@@ -29,7 +29,8 @@ app.jinja_env.filters['base64encode'] = b64encode
 
 ## Helpful accessor function used in jinja templates to build lists (ul)
 def listValues(l):
-    return [o["value"] for o in l if o["value"] != ""]
+    return [l[k]["value"] for k in l if l[k]["value"] != ""]
+
 app.jinja_env.filters['listValues'] = listValues
 
 ### Routes

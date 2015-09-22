@@ -70,10 +70,8 @@ function tableChart() {
                     .attr("style", "height:"+config.height+"px;");
 
             if ("title" in config && config.title !== "") {
-                    marginBump = d3.wordwrap(config.title+config.title+config.title, charLimit).length-1;
-                var title = container.append("h2")
+                var title = container.append("p")
                     .attr("class", "table_title")
-                    .attr("style", "top: -"+25+"px")
                     .text(config.title);
 
             }

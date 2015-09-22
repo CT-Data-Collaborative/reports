@@ -37,10 +37,26 @@ CONNECT
     </div>
 </div>
 <div class="container-fluid content">
+    {% if objects["region_map"] and objects["town_list"]-%}
+    <div class="row section">
+        <h2>Region 1</h2>
+        <div class="col-xs-3 region_map">
+            {{ objects["region_map"]["output"] | safe }}
+        </div>
+        <div class="col-xs-9">
+            <ul class="float_list town_list">
+                {% for row in objects["town_list"]["data"]["records"] -%}
+                <li>{{ " ".join(row | listValues) }}</li>
+                {% endfor -%}
+            </ul>
+        </div>
+    </div>
+    {% endif -%}
     <div class="row section">
         <h2>Population</h2>
         {% if objects["r3"] %}
         <div class="col-xs-12">
+            {{ objects["r3"]["output"] | safe }}
             {{ objects["r3"]["output"] | safe }}
         </div>
         {% endif %}

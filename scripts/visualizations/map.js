@@ -209,52 +209,54 @@ function mapChart() {
                     .attr("width", 0.5*width)
                     .attr("transform", "translate(" + (width + margin.left + margin.right) * 0.25 + "," + (height + margin.top + margin.bottom) * 0.69 + ")");
 
-            var legendData = jenks.range().map(function(color, index) {
-                if (index === 0) {
-                    return []
-                } else {
-                    return [breaks[index-1][0], breaks[index-1][breaks[index-1].length-1]]
-                }
-            });
+            if (!("legend" in config) || config["legend"]) {
+                var legendData = jenks.range().map(function(color, index) {
+                    if (index === 0) {
+                        return []
+                    } else {
+                        return [breaks[index-1][0], breaks[index-1][breaks[index-1].length-1]]
+                    }
+                });
 
-            var legendBoxes = legend.selectAll("rect")
-                .data(legendData)
-                .enter()
-                .append("rect")
-                    .attr("stroke-width", "0.5px")
-                    .attr("stroke", "black")
-                    // if using predefined color pallette
-                    .attr("fill", function(d) {
-                        return d.length > 0 ? jenks(d[0]) : jenks(null);
-                    })
-                    // if using colorbrewer as JS
-                    // .attr("fill", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
-                    // if using colorbrewer css
-                    // .attr("class", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
-                    .attr("height", 8)
-                    .attr("width", 8)
-                    .attr("x", 0)
-                    //                                              8 px box + 3px padding
-                    .attr("y", function(d, i) { return ((8*i)+(3 * (i-1)))+"px"});
+                var legendBoxes = legend.selectAll("rect")
+                    .data(legendData)
+                    .enter()
+                    .append("rect")
+                        .attr("stroke-width", "0.5px")
+                        .attr("stroke", "black")
+                        // if using predefined color pallette
+                        .attr("fill", function(d) {
+                            return d.length > 0 ? jenks(d[0]) : jenks(null);
+                        })
+                        // if using colorbrewer as JS
+                        // .attr("fill", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
+                        // if using colorbrewer css
+                        // .attr("class", function(d) { return colors(jenks(d.properties.DATAVALUE)); })
+                        .attr("height", 8)
+                        .attr("width", 8)
+                        .attr("x", 0)
+                        //                                              8 px box + 3px padding
+                        .attr("y", function(d, i) { return ((8*i)+(3 * (i-1)))+"px"});
 
-            var legendText = legend.selectAll("text")
-                .data(legendData)
-                .enter()
-                .append("text")
-                    .attr("font-size", "8pt")
-                    //                                              8 px box + 3px padding
-                    //                                              the extra i+1 is to account for baseline height for text
-                    .attr("dy", function(d, i) { return (8*(i+1)+(3 * (i-1)))+"px"})
-                    .attr("dx", 8+"px")
-                    .text(function(d, i) {
-                        if (i === 0) {
-                            return "Undefined/Suppressed";
-                        } else {
-                            var low = formatters[dataType](d[0]),
-                                high = formatters[dataType](d[1]);
-                            return low+" - "+high;
-                        }
-                    });
+                var legendText = legend.selectAll("text")
+                    .data(legendData)
+                    .enter()
+                    .append("text")
+                        .attr("font-size", "8pt")
+                        //                                              8 px box + 3px padding
+                        //                                              the extra i+1 is to account for baseline height for text
+                        .attr("dy", function(d, i) { return (8*(i+1)+(3 * (i-1)))+"px"})
+                        .attr("dx", 8+"px")
+                        .text(function(d, i) {
+                            if (i === 0) {
+                                return "Undefined/Suppressed";
+                            } else {
+                                var low = formatters[dataType](d[0]),
+                                    high = formatters[dataType](d[1]);
+                                return low+" - "+high;
+                            }
+                        });
+            }
 
             if ("source" in config && config.source !== "") {
                 // source
