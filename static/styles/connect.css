@@ -9,6 +9,9 @@ div.table_container {
     display: block;
 }
 
+table {
+    position: relative;
+}
 table, thead, tbody, tr, th, td {
   border-collapse: collapse;
 }
@@ -33,8 +36,9 @@ p.table_source {
     font-size: 7pt;
     color: #888;
     font-style: italic;
-    position: absolute;
-    right: 20px;
+    position: relative;
+    top: 10px;
+    float: right;
 }
 
 

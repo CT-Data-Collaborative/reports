@@ -12,7 +12,7 @@ var d3 = require("d3"),
         minimist = require("minimist"),
         jsdom = require("jsdom"),
         fs = require("fs"),
-        ss = require("simple-statistics")
+        ss = require("simple-statistics"),
         jetpack = require("../../node_modules/d3-jetpack/d3-jetpack.js")(d3);
 
 /**

@@ -6,7 +6,8 @@
  */
 var d3 = require("d3"),
         minimist = require("minimist"),
-        jsdom = require("jsdom");
+        jsdom = require("jsdom"),
+        jetpack = require("../../node_modules/d3-jetpack/d3-jetpack.js")(d3);
 
 /**
  * Process arguments from node call using minimist
@@ -120,6 +121,8 @@ function barChart() {
     function chart(selection) {
         selection.each(function(data) {
 
+            var charLimit = (Math.round(Math.floor((width) / 5) / 6) * 5);
+
             // Should this be a parameter? passed in config?
             var grouping = "Year";
 
@@ -133,6 +136,34 @@ function barChart() {
                 });
             });
 
+            // container, margined interior container
+            var svg = d3.select(this).append('svg')
+                    .attr("xmlns", "http://www.w3.org/2000/svg")
+                    .attr("height", height + margin.top + margin.bottom )
+                    .attr("width", width + margin.left + margin.right );
+
+            if ("title" in config && config.title !== "") {
+                var title = svg.append("g")
+                        .attr("height", margin.top + "px")
+                        .attr("width", width + "px")
+                        .attr("transform", "translate(" + (width + margin.left) + "," + (0.75 * margin.top) + ")");
+
+                title.append("text")
+                    .attr("text-anchor", "end")
+                    .attr("font-size", "6pt")
+                    .attr("font-weight", "bold")
+                    .tspans(d3.wordwrap(config.title, charLimit), 8);
+            }
+
+            // augment margin depending on word-wrapped title
+            margin.top += (title.selectAll("tspan").size()-1) * 10;
+            height = svg.attr("height") - margin.top - margin.bottom;
+
+            var barGroup = svg.append("g")
+                    .attr("height", height)
+                    .attr("width", width)
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
             //  set domain for group scale
             x0.domain(data.map(function(d) { return d[grouping].value; }))
                 .rangeRoundBands([0, width], 0.1);
@@ -144,31 +175,6 @@ function barChart() {
             // set y-scale domain, scaling so there is always a y-axis line above the highest value
             y.domain([0, 1.1 * d3.max(data, function(d) { return d3.max(d.values, function(d) { return d.value; }); })])
                 .range([height, 0]);
-
-            // container, margined interior container
-            var svg = d3.select(this).append('svg')
-                    .attr("xmlns", "http://www.w3.org/2000/svg")
-                    .attr("height", height + margin.top + margin.bottom )
-                    .attr("width", width + margin.left + margin.right );
-
-            var barGroup = svg.append("g")
-                    .attr("height", height)
-                    .attr("width", width)
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-            if ("title" in config && config.title !== "") {
-                var title = svg.append("g")
-                        .attr("height", margin.top + "px")
-                        .attr("width", width + "px")
-                        .attr("transform", "translate(" + (width) + "," + (0.75 * margin.top) + ")");
-
-                title.append("text")
-                    .attr("text-anchor", "end")
-                    .text(config.title)
-                    //.text("ABCDEFGHIJKLMNOPQRSTUVABCDEFGHIJKLMNO")
-                    .attr("font-size", "6pt")
-                    .attr("font-weight", "bold");
-            }
 
             // x axis, includes group labels automatically
             var xAxisGroup = barGroup.append("g")

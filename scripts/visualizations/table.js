@@ -6,7 +6,8 @@
  */
 var d3 = require("d3"),
         minimist = require("minimist"),
-        jsdom = require("jsdom");
+        jsdom = require("jsdom"),
+        jetpack = require("../../node_modules/d3-jetpack/d3-jetpack.js")(d3);
 
 /**
  * Process arguments from node call using minimist
@@ -53,6 +54,9 @@ function tableChart() {
     function chart(selection) {
         selection.each(function(data) {
 
+            var marginBump = 0,
+                    charLimit = (Math.round(Math.floor((config.width) / 5) / 5) * 5);
+
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
             data = data;
@@ -66,14 +70,19 @@ function tableChart() {
                     .attr("style", "height:"+config.height+"px;");
 
             if ("title" in config && config.title !== "") {
+                    marginBump = d3.wordwrap(config.title+config.title+config.title, charLimit).length-1;
                 var title = container.append("h2")
                     .attr("class", "table_title")
                     .attr("style", "top: -"+25+"px")
                     .text(config.title);
+
             }
 
             // Table
             var table = container.append("table");
+
+            // bump down by wordwrap
+            table.attr("style", "top:"+(marginBump * 6)+"px;")
 
             // Calculate colspan
             // if header cells < data cells, per row.

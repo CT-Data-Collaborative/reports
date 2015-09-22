@@ -6,8 +6,8 @@
  */
 var jsdom = require("jsdom"),
         d3 = require("d3")
-        jetpack = require("../../node_modules/d3-jetpack/d3-jetpack.js")(d3),
-        minimist = require("minimist");
+        minimist = require("minimist"),
+        jetpack = require("../../node_modules/d3-jetpack/d3-jetpack.js")(d3);
 
 /**
  * Process arguments from node call using minimist
@@ -108,7 +108,7 @@ var body = d3.select(document.body)
 console.log(body.html());
 
 function pieChart() {
-    var margin = {top : 60, left : 20, bottom : 60, right : 20},
+    var margin = {top : 65, left : 20, bottom : 70, right : 20},
             width = 460 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom,
             radius = Math.min(height, width) / 2,
@@ -125,6 +125,8 @@ function pieChart() {
 
     function chart(selection) {
         selection.each(function(data) {
+
+            var charLimit = (Math.round(Math.floor((width) / 6) / 5) * 5);
 
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
@@ -153,7 +155,24 @@ function pieChart() {
                 .attr("width", (width + margin.left + margin.right))
                 .attr("height", (height + margin.top + margin.bottom))
                 .attr("xmlns", "http://www.w3.org/2000/svg");
-                
+
+            if ("title" in config && config.title !== "") {
+                var title = svg.append("g")
+                        .attr("height", margin.top + "px")
+                        .attr("width", width + "px")
+                        .attr("transform", "translate(" + (width + margin.left) + "," + 24 + ")");
+
+                title.append("text")
+                    .attr("text-anchor", "end")
+                    .attr("font-weight", "bold")
+                    .attr("font-size", "6pt")
+                    .tspans(d3.wordwrap(config.title, charLimit), 8);
+            }
+
+            // augment margin depending on word-wrapped title
+            margin.top += (title.selectAll("tspan").size()-1) * 10;
+            height = svg.attr("height") - margin.top - margin.bottom;
+
             var pieGroup = svg.append("g")
                     .attr("width", width)
                     .attr("height", height)
@@ -163,19 +182,6 @@ function pieChart() {
                     .attr("width", width)
                     .attr("height", height)
                     .attr("transform", "translate(" + ((width / 2) + margin.left) + "," + ((height / 2) + margin.top) + ")");
-
-            if ("title" in config && config.title !== "") {
-                var title = svg.append("g")
-                        .attr("height", margin.top + "px")
-                        .attr("width", width + "px")
-                        .attr("transform", "translate(" + (width) + "," + 24 + ")");
-
-                title.append("text")
-                    .attr("text-anchor", "end")
-                    .text(config.title)
-                    .attr("font-weight", "bold")
-                    .attr("font-size", "6pt");
-            }
 
             // Pie slices
             var slices = pieGroup.selectAll("path")
@@ -305,9 +311,7 @@ function pieChart() {
                     .domain(d3.range(2));
 
             var legend = svg.append("g")
-                .attr("height", margin.bottom)
-                .attr("width", width)
-                .attr("transform", "translate("+((margin.left + margin.right) / 2)+","+ (height+margin.top) +")");
+                .attr("transform", "translate("+((margin.left + margin.right) / 2)+","+ (height+margin.top + (margin.bottom / 2.5)) +")");
 
             legend.selectAll("rect")
                 .data(data)
@@ -335,7 +339,7 @@ function pieChart() {
                 var source = svg.append("text")
                     .attr("x", width + margin.left + margin.right)
                     .attr("y", height+margin.top+margin.bottom)
-                    .attr("dy", "-2pt")
+                    .attr("dy", "-1pt")
                     .attr("text-anchor", "end")
                     .attr("font-size", "6pt")
                     .attr("font-style", "italic")
