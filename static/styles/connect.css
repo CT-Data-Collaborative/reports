@@ -81,7 +81,8 @@ p.table_source {
         margin: 0 auto;
     }
     div.content {
-        padding-top: 70pt;
+        position:relative;
+        top: 70pt;
     }
     div.section,
     div.row {
