@@ -266,7 +266,7 @@ function mapChart() {
                     .attr("font-size", "6pt")
                     .attr("font-style", "italic")
                     .attr("fill", "#888")
-                    .text(config.source.substring(0, charLimit));
+                    .text(config.source);
             }
         });
     }
