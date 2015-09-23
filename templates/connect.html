@@ -8,6 +8,8 @@
         @media print {
             @page {
                 @bottom-left {
+                    font-family: "RobotoCondensed";
+                    color: #4A4A4A;
                     font-size: 12pt;
                     width:25%;
                     text-align:left;
@@ -31,7 +33,7 @@ CONNECT
         </div>
         <div class="col-xs-7">
             <h1>
-                Some Product Name
+                INSERT PRODUCT NAME
             </h1>
         </div>
     </div>
@@ -39,8 +41,8 @@ CONNECT
 <div class="container-fluid content">
     {% if objects["region_map"] and objects["town_list"]-%}
     <div class="row section">
-        <h2>Region 1</h2>
         <div class="col-xs-3 region_map">
+            <p class="region_title">Region 1</p>
             {{ objects["region_map"]["output"] | safe }}
         </div>
         <div class="col-xs-9">
@@ -53,7 +55,7 @@ CONNECT
     </div>
     {% endif -%}
     <div class="row section">
-        <h2>Population</h2>
+        <p class="section_title">Population</p>
         {% if objects["r3"] %}
         <div class="col-xs-12">
             {{ objects["r3"]["output"] | safe }}
@@ -62,7 +64,7 @@ CONNECT
         {% endif %}
     </div>
     <div class="row section">
-        <h2>Treatment</h2>
+        <p class="section_title">Treatment</p>
         {% if objects["l2"] %}
         <div class="col-xs-8">
             {{ objects["l2"]["output"] | safe }}
@@ -76,7 +78,7 @@ CONNECT
         {% endif %}
     </div>
     <div class="row section">
-        <h2>Treatment</h2>
+        <p class="section_title">Treatment</p>
         {% if objects["l1"] %}
         <div class="col-xs-8">
             {{ objects["l1"]["output"] | safe }}
@@ -90,7 +92,7 @@ CONNECT
         {% endif %}
     </div>
     <div class="row section">
-        <h2>Population</h2>
+        <p class="section_title">Population</p>
         {% if objects["r3"] %}
         <div class="col-xs-12">
             {{ objects["r3"]["output"] | safe }}

@@ -86,7 +86,20 @@ def get_extra_obj(data):
 
     # region map and town list
     if "config" in data and "region" in data["config"]:
-        region_map = {"name" : "region_map", "type" : "map", "data" : {"fields" : [], "records" : []}, "config" : {"legend" : False, "height": 2, "width" : 3}}
+        region_map = {
+            "name" : "region_map",
+            "type" : "map",
+            "data" : {
+                "fields" : [],
+                "records" : []
+                },
+            "config" : {
+                "legend" : False,
+                "height": 2,
+                "width" : 3,
+                "margin": {"top" : 15, "right" : 5, "bottom" : 5, "left" : 5}
+                }
+            }
         region_map["data"]["fields"] = [{"type" : "string", "id" : "FIPS"}, {"type" : "integer", "id" : "Value"}]
         
         town_list = {"name" : "town_list", "type" : "table", "data" : {"fields" : [], "records" : []}, "config" : {"height" : 2, "width" : 9}}
@@ -113,8 +126,8 @@ def get_extra_obj(data):
         region_map["data"]["records"] = map_data
         town_list["data"]["records"] = town_data
 
-    extra_obj.append(region_map)
-    extra_obj.append(town_list)
+        extra_obj.append(region_map)
+        extra_obj.append(town_list)
 
     return extra_obj
 

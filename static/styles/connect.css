@@ -1,9 +1,27 @@
+div.header img {
+        width: 97% !important;
+        padding:1%;
+    }
+    div.header h1 {
+        font-weight: 300;
+        /*border: 1px solid green;*/
+        line-height: 50pt;
+        font-size: 34pt;
+        margin:0 auto;
+        display: inline;
+    }
 div.row > div > img,
 div.row > div > table,
 div.row > div > ul,
 div.row > div > div,
 div.row > div > div > table{
     width: 100%;
+    /*border: 1px solid red;*/
+}
+
+.row div[class^="col-"] {
+    padding-left: 0!important;
+    padding-right: 0!important;
 }
 
 ul.float_list {
@@ -16,6 +34,9 @@ ul.float_list li {
     width: 48%;
 }
 
+ul.float_list.town_list {
+    height: 116px;
+}
 ul.float_list.town_list li {
     width: 19%;
 }
@@ -32,7 +53,7 @@ table, thead, tbody, tr, th, td {
 }
 
 th, td {
-  border: 1pt solid #AAA;
+  border: 1px solid #979797;
 }
 
 tr > td:first-child {
@@ -40,31 +61,50 @@ tr > td:first-child {
 }
 
 p.table_title {
+    color: #4a4a4a;
+    display: block;
+    font-size: 8pt;
     font-weight: bold;
-    display: inline-block;
-    float: right;
-    font-size: 6pt;
-    margin: 0;
-    position: relative;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
 }
 
 p.table_source {
     font-size: 7pt;
-    color: #888;
+    color: #C0C0C0;
     font-style: italic;
     position: relative;
-    top: 10px;
+    bottom: 7pt;
     float: right;
+}
+
+p.section_title {
+    font-size: 18pt;
+    margin: 0;
+}
+
+p.region_title {
+    /*border: 1px solid blue;*/
+    float: left;
+    font-size: 20pt;
+    font-weight: bold;
+    margin: 0 25%;
+    position: absolute;
+    width: 50%;
 }
 
 
 /* Print-specific rules */
 @media print {
     @page {
+        font-family: "RobotoCondensed" !important;
         size: 8.5in 11in;
-        margin:0.15in 0.20in 0.35in;
+        margin:0.15in 0.20in 0.5in;
 
         @bottom-right {
+            font-family: "RobotoCondensed";
+            color: #4A4A4A;
             font-size: 12pt;
             text-align:right;
             vertical-align: top;
@@ -72,6 +112,8 @@ p.table_source {
         }
     }
     body {
+        color: #4A4A4A;
+        font-family: "RobotoCondensed" !important;
         font-size:8pt;
         margin:0!important;
 
@@ -81,10 +123,10 @@ p.table_source {
     hr.footer_marker {
         position: fixed;
         margin: 0;
-        border:1pt solid #BBB;
+        border:1pt solid #979797;
         width:99.5%;
         left: 0;
-        bottom: 0;
+        bottom: 10px;
     }
     div.header {
         position: fixed;
@@ -93,15 +135,11 @@ p.table_source {
         display: block;
         clear: both;
 
-        border-bottom: 1px solid #999;
-    }
-    div.header h1 {
-        font-size: 24pt;
-        margin: 0 auto;
+        border-bottom: 1px solid #979797;
     }
     div.content {
         position:relative;
-        top: 70pt;
+        top: 60pt;
     }
     div.section,
     div.row {

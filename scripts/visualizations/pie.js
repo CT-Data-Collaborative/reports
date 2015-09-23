@@ -126,7 +126,7 @@ function pieChart() {
     function chart(selection) {
         selection.each(function(data) {
 
-            var charLimit = (Math.round(Math.floor((width) / 6) / 5) * 5);
+            var charLimit = (Math.round(width / 25) * 5);
 
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
@@ -154,18 +154,21 @@ function pieChart() {
             var svg = d3.select(this).append("svg")
                 .attr("width", (width + margin.left + margin.right))
                 .attr("height", (height + margin.top + margin.bottom))
+                .attr("font-family", "RobotoCondensed")
+                .attr("font-weight", 300)
                 .attr("xmlns", "http://www.w3.org/2000/svg");
 
             if ("title" in config && config.title !== "") {
                 var title = svg.append("g")
                         .attr("height", margin.top + "px")
                         .attr("width", width + "px")
-                        .attr("transform", "translate(" + (width + margin.left) + "," + 24 + ")");
+                        .attr("transform", "translate(" + ((width / 2) + margin.left) + "," + 24 + ")");
 
                 title.append("text")
-                    .attr("text-anchor", "end")
+                    .attr("fill", "#4A4A4A")
+                    .attr("text-anchor", "middle")
                     .attr("font-weight", "bold")
-                    .attr("font-size", "6pt")
+                    .attr("font-size", "7pt")
                     .tspans(d3.wordwrap(config.title, charLimit), 8);
             }
 
@@ -189,7 +192,7 @@ function pieChart() {
                 .enter()
                 .append("path")
                     .attr("fill", function(d, i) { return colors(i); })
-                    .attr("stroke", "white")
+                    .attr("stroke", "#FAFAFA")
                     .attr("stroke-width", 0.5)
                     .attr("d", arc);
 
@@ -236,6 +239,7 @@ function pieChart() {
                     .enter()
                     .append("text")
                         .text(function(d) {return dataLabel(d.data); })
+                        .attr("fill", "#202020")
                         .attr("font-size", "8pt")
                         .attr("x", function(d, i) {
                             midAngle = Math.atan2(arc.centroid(d)[1], arc.centroid(d)[0])
@@ -317,6 +321,8 @@ function pieChart() {
                 .data(data)
                 .enter()
                     .append("rect")
+                        .attr("stroke-width", "0.5px")
+                        .attr("stroke", "#202020")
                         .attr("height", 8)
                         .attr("width", 8)
                         .attr("x", function(d, i) { return xl(i % 2); })
@@ -332,6 +338,7 @@ function pieChart() {
                         .attr("y", function(d, i) { return Math.floor(i/2) * 10; })
                         .attr("dy", 8)
                         .attr("dx", 10)
+                        .attr("fill", "#4A4A4A")
                         .text(function(d, i) { return label(d); });
         
             if ("source" in config && config.source !== "") {
@@ -344,6 +351,7 @@ function pieChart() {
                     .attr("font-size", "6pt")
                     .attr("font-style", "italic")
                     .attr("fill", "#888")
+                    .attr("fill", "#C0C0C0")
                     .text(config.source);
             }
         });

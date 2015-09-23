@@ -55,7 +55,7 @@ function tableChart() {
         selection.each(function(data) {
 
             var marginBump = 0,
-                    charLimit = (Math.round(Math.floor((config.width) / 5) / 5) * 5);
+                    charLimit = (Math.round(config.width / 25) * 5);
 
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
@@ -73,7 +73,6 @@ function tableChart() {
                 var title = container.append("p")
                     .attr("class", "table_title")
                     .text(config.title);
-
             }
 
             // Table

@@ -78,9 +78,15 @@ if ("width" in config && config.width > 0) {
 }
 
 // margin
-// if ("margin" in config && config.margin > 0) {
-//     chart.margin(config.margin);
-// }
+if ("margin" in config) {
+    m = chart.margin();
+    h = chart.height() + m.top + m.bottom;
+    w = chart.width() + m.left + m.right;
+
+    chart.margin(config.margin);
+    chart.height(h - config.margin.top - config.margin.bottom);
+    chart.width(h - config.margin.left - config.margin.right);
+}
 
 //Color scale
 if ("colors" in config && config.colors.length > 0) {
@@ -106,7 +112,7 @@ function mapChart() {
     function chart(selection) {
         selection.each(function(data) {
 
-            var charLimit = (Math.round(Math.floor((width + margin.left + margin.right) / 6) / 5) * 5);
+            var charLimit = (Math.round(width / 25) * 5);
 
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
@@ -121,6 +127,8 @@ function mapChart() {
             var svg = d3.select(this).append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
+                .attr("font-family", "RobotoCondensed")
+                .attr("font-weight", 300)
                 .attr("xmlns", "http://www.w3.org/2000/svg");
                 
             var map = svg.append("g")
@@ -169,7 +177,7 @@ function mapChart() {
             jenks.domain(breaks.map(function(cluster) {return cluster[0];}));
             //Two ways of coloring with Jenks-type breaks
             // Using a predifined (by us, most likely) categorical color pallete
-            jenks.range(["#EEEEEE"].concat(d3.range(numBreaks).map(function(i) { return colors(i); })));
+            jenks.range(["#FAFAFA"].concat(d3.range(numBreaks).map(function(i) { return colors(i); })));
             // OR by using colorbrewer
             // js version of colorbrewer, this would require us to install/include colorbrewer, which doesn't seem to be available from npm
             // jenks.range(colorbrewer.Blues[numBreaks])
@@ -183,7 +191,7 @@ function mapChart() {
                 .append("path")
                     .attr("d", path)
                     .attr("stroke-width", "0.5px")
-                    .attr("stroke", "black")
+                    .attr("stroke", "#202020")
                     // if using predefined color pallette
                     .attr("fill", function(d) { return jenks(d.properties.DATAVALUE); });
                     // if using colorbrewer as JS
@@ -195,12 +203,13 @@ function mapChart() {
                 var title = svg.append("g")
                         .attr("height", margin.top + "px")
                         .attr("width", width + "px")
-                        .attr("transform", "translate(" + (width) + "," + (0.75 * margin.top) + ")");
+                        .attr("transform", "translate(" + ((width / 2) + margin.left) + "," + 24 + ")");
 
                 title.append("text")
-                    .attr("text-anchor", "end")
-                    .attr("font-size", "6pt")
+                    .attr("fill", "#4A4A4A")
+                    .attr("text-anchor", "middle")
                     .attr("font-weight", "bold")
+                    .attr("font-size", "7pt")
                     .tspans(d3.wordwrap(config.title, charLimit), 8);
             }
 
@@ -223,7 +232,7 @@ function mapChart() {
                     .enter()
                     .append("rect")
                         .attr("stroke-width", "0.5px")
-                        .attr("stroke", "black")
+                        .attr("stroke", "#202020")
                         // if using predefined color pallette
                         .attr("fill", function(d) {
                             return d.length > 0 ? jenks(d[0]) : jenks(null);
@@ -242,11 +251,12 @@ function mapChart() {
                     .data(legendData)
                     .enter()
                     .append("text")
+                        .attr("fill", "#4A4A4A")
                         .attr("font-size", "8pt")
                         //                                              8 px box + 3px padding
                         //                                              the extra i+1 is to account for baseline height for text
-                        .attr("dy", function(d, i) { return (8*(i+1)+(3 * (i-1)))+"px"})
-                        .attr("dx", 8+"px")
+                        .attr("dy", function(d, i) { return 8 * (i + 1) + (3 * (i - 1))})
+                        .attr("dx", 10)
                         .text(function(d, i) {
                             if (i === 0) {
                                 return "Undefined/Suppressed";
@@ -261,13 +271,13 @@ function mapChart() {
             if ("source" in config && config.source !== "") {
                 // source
                 var source = svg.append("text")
-                    .attr("x", width + margin.left)
+                    .attr("x", width + margin.left + margin.right)
                     .attr("y", height+margin.top+margin.bottom)
                     .attr("dy", "-2pt")
                     .attr("text-anchor", "end")
                     .attr("font-size", "6pt")
                     .attr("font-style", "italic")
-                    .attr("fill", "#888")
+                    .attr("fill", "#C0C0C0")
                     .text(config.source);
             }
         });

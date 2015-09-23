@@ -121,7 +121,7 @@ function barChart() {
     function chart(selection) {
         selection.each(function(data) {
 
-            var charLimit = (Math.round(Math.floor((width) / 5) / 6) * 5);
+            var charLimit = (Math.round(Math.floor(width / 5) / 6) * 5);
 
             // Should this be a parameter? passed in config?
             var grouping = "Year";
@@ -140,18 +140,20 @@ function barChart() {
             var svg = d3.select(this).append('svg')
                     .attr("xmlns", "http://www.w3.org/2000/svg")
                     .attr("height", height + margin.top + margin.bottom )
+                    .attr("font-family", "RobotoCondensed")
                     .attr("width", width + margin.left + margin.right );
 
             if ("title" in config && config.title !== "") {
                 var title = svg.append("g")
                         .attr("height", margin.top + "px")
                         .attr("width", width + "px")
-                        .attr("transform", "translate(" + (width + margin.left) + "," + (0.75 * margin.top) + ")");
+                        .attr("transform", "translate(" + ((width + margin.left + margin.right) / 2) + "," + 24 + ")");
 
                 title.append("text")
-                    .attr("text-anchor", "end")
-                    .attr("font-size", "6pt")
+                    .attr("fill", "#4A4A4A")
+                    .attr("text-anchor", "middle")
                     .attr("font-weight", "bold")
+                    .attr("font-size", "7pt")
                     .tspans(d3.wordwrap(config.title, charLimit), 8);
             }
 
@@ -184,8 +186,11 @@ function barChart() {
                 .call(function(g) {
                     g.selectAll("path").remove();
                     
+                    g.selectAll("g").selectAll("text")
+                        .attr("fill", "#4A4A4A")
+                        
                     g.selectAll("g").selectAll("line")
-                        .attr("stroke", "#777");
+                        .attr("stroke", "#979797");
                 });
 
             // Y axis
@@ -197,12 +202,13 @@ function barChart() {
                     g.selectAll("path").remove();
 
                     g.selectAll("g").selectAll("text")
+                        .attr("fill", "#4A4A4A")
                         .attr("x", 0);
                     
                     g.selectAll("g").selectAll("line")
                         .attr("x1", 0)
                         .attr("x2", width)
-                        .attr("stroke", "#DDD")
+                        .attr("stroke", "#DEDEDE")
                         .attr("stroke-width", "1px");
                 });
 
@@ -225,8 +231,7 @@ function barChart() {
                             .attr("height", function(d) { return height - y(d.value); })
                             .style("fill", function(d) { return color(d.name); });
 
-            // text labels v1
-            /*
+            // text labels
             groups.selectAll("text")
                     .data(function(d) { return d.values; })
                     .enter()
@@ -235,23 +240,9 @@ function barChart() {
                             .attr("transform", "rotate(-90)")
                             .attr("text-anchor", "end")
                             .attr("font-size", "8pt")
-                            .attr("x", function(d) { return 0-3-y(d.value); })
-                            .attr("y", function(d) { return x1(d.name)+x1.rangeBand()-3; })
-                            .attr("fill", "black");
-            */
-
-            // text labels v2
-            groups.selectAll("text")
-                    .data(function(d) { return d.values; })
-                    .enter()
-                        .append("text")
-                            .text(function(d) { return d.label; })
-                            .attr("transform", "rotate(-90)")
-                            .attr("text-anchor", "start")
-                            .attr("font-size", "8pt")
-                            .attr("x", 3-height)
+                            .attr("x", function(d) { return 0 - y(d.value) - 2; })
                             .attr("y", function(d) { return x1(d.name)+(x1.rangeBand() / 2) + 4; })
-                            .attr("fill", "black");
+                            .attr("fill", "#202020");
 
             // legends
             // Legend scale
@@ -268,6 +259,8 @@ function barChart() {
                 .data(groupLabels)
                 .enter()
                 .append("rect")
+                    .attr("stroke-width", "0.5pt")
+                    .attr("stroke", "#4A4A4A")
                     .attr("height", "8pt")
                     .attr("width", "8pt")
                     .attr("x", function(d, i) { return xl(i % 3); })
@@ -279,46 +272,14 @@ function barChart() {
                 .data(groupLabels)
                 .enter()
                 .append("text")
+                    .attr("fill", "#4A4A4A")
+                    .attr("font-size", "8pt")
                     .attr("x", function(d, i) { return xl(i % 3) + 8; })
                     .attr("y", function(d, i) { return Math.floor(i/3) * 14; })
-                    .attr("dy", "8pt")
-                    .attr("dx", "8pt")
+                    .attr("dy", "6pt")
+                    .attr("dx", "4")
                     .text(function(d, i) { return d; });
 
-            /* Old Code */
-            /*
-            if (defaultBarWidth) {
-                barWidth = width / data.length;
-            }
-
-
-            var svg = d3.select(this).append('svg')
-                    .attr("xmlns", "http://www.w3.org/2000/svg")
-                    .attr("height", height + margin.top + margin.bottom )
-                    .attr("width", width + margin.left + margin.right )
-                .append("g")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");;
-
-            var bar = svg.selectAll("g")
-                .data(data)
-              .enter().append("g")
-                .attr("transform", function(d, i) { return "translate("+ i * barWidth + ", 0)"; });
-
-            bar.append("rect")
-                .attr("height", function(d) { return y(d[1].value); })
-                .attr("width", barWidth - 1)
-                .attr("fill", "steelblue");
-
-            bar.append("text")
-                // .attr("y", function(d) { return y(d) - 3; }) // offset for text labels
-                .attr("x", barWidth / 2)
-                .attr("y", 0)
-                .attr("dy", ".35em")
-                .attr("fill", "white")
-                .text(function(d) { return d[0].value; });
-        */
             if ("source" in config && config.source !== "") {
                 // source
                 var source = svg.append("text")
@@ -328,7 +289,7 @@ function barChart() {
                     .attr("text-anchor", "end")
                     .attr("font-size", "6pt")
                     .attr("font-style", "italic")
-                    .attr("fill", "#888")
+                    .attr("fill", "#C0C0C0")
                     .text(config.source);
             }
         });
