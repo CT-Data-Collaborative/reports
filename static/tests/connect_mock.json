@@ -6600,6 +6600,837 @@
         "width": 12,
         "source": "http://connect.ctdata.org/"
       }
+    },
+    {
+      "name": "town_list",
+      "type": "table",
+      "data": {
+        "fields": [
+          {
+            "id": "town",
+            "type": "string"
+          }
+        ],
+        "records": [
+          {
+            "Town": {
+              "type": "string",
+              "value": " Bozrah"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": " Colchester"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": " East Lyme"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": " Franklin"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": " Griswold"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": " Groton"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": " Lebanon"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": " Ledyard"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": " Lisbon"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Lyme"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Montville"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "New London"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "North Stonington"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Norwich"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Old Lyme"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Preston"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Salem"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Sprague"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Stonington"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Voluntown"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Waterford"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Andover"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Bolton"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Columbia"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Coventry"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Ellington"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Hebron"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Mansfield"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Somers"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Stafford"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Tolland"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Union"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Vernon"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Willington"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Ashford"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Brooklyn"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Canterbury"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Chaplin"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Eastford"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Hampton"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Killingly"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Plainfield"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Pomfret"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Putnam"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Scotland"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Sterling"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Thompson"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Windham"
+            }
+          },
+          {
+            "Town": {
+              "type": "string",
+              "value": "Woodstock"
+            }
+          }
+        ]
+      },
+      "config": {
+        "height": 2,
+        "width": 10
+      }
+    },
+    {
+      "name": "region_map",
+      "type": "map",
+      "data": {
+        "fields": [
+          {
+            "id": "FIPS",
+            "type": "string"
+          },
+          {
+            "id": "Value",
+            "type": "integer"
+          }
+        ],
+        "records": [
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901106820"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901115910"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901123400"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901129910"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901133900"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901134250"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901142390"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901142600"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901143230"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901144210"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901148900"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901152350"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901155500"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901156270"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901157040"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901162150"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901166210"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901171670"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901173770"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901178600"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901180280"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901301080"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901306260"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901316400"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901317800"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901325360"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901337910"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901344910"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901369220"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901372090"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901376290"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901377830"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901378250"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901385950"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901501430"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901509190"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901512130"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901513810"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901521860"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901536000"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901540500"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901559980"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901561030"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901562710"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901567400"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901573420"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901575870"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901586790"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          },
+          {
+            "FIPS": {
+              "type": "string",
+              "value": "0901588190"
+            },
+            "Value": {
+              "type": "integer",
+              "value": 1
+            }
+          }
+        ]
+      },
+      "config": {
+        "legend": false,
+        "height": 2,
+        "width": 4,
+        "margin": {
+          "top": 35,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      }
     }
   ]
 }
