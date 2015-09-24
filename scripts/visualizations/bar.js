@@ -121,7 +121,7 @@ function barChart() {
     function chart(selection) {
         selection.each(function(data) {
 
-            var charLimit = (Math.round(Math.floor(width / 5) / 6) * 5);
+            var charLimit = (Math.round((width + margin.right + margin.left) / 25) * 5);
 
             // Should this be a parameter? passed in config?
             var grouping = "Year";

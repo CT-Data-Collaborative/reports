@@ -1,7 +1,7 @@
 import os
 import json
 
-CONNECT_HEIGHT = 700
+CONNECT_HEIGHT = 680
 CONNECT_WIDTH = 640
 
 def table(visObj):
@@ -96,8 +96,8 @@ def get_extra_obj(data):
             "config" : {
                 "legend" : False,
                 "height": 2,
-                "width" : 3,
-                "margin": {"top" : 15, "right" : 5, "bottom" : 5, "left" : 5}
+                "width" : 4,
+                "margin": {"top" : 30, "right" : 0, "bottom" : 0, "left" : 0}
                 }
             }
         region_map["data"]["fields"] = [{"type" : "string", "id" : "FIPS"}, {"type" : "integer", "id" : "Value"}]

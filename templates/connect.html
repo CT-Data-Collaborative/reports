@@ -29,7 +29,7 @@ CONNECT
 <div class="container-fluid header">
     <div class="row">
         <div class="col-xs-5">
-            <img src="{{ url_for('static', filename='images/connect.jpg') }}" />
+            <img class="logo" src="{{ url_for('static', filename='images/connect.jpg') }}" />
         </div>
         <div class="col-xs-7">
             <h1>
@@ -37,10 +37,9 @@ CONNECT
             </h1>
         </div>
     </div>
-</div>
-<div class="container-fluid content">
+    <!-- <hr class="header_marker" /> -->
     {% if objects["region_map"] and objects["town_list"]-%}
-    <div class="row section">
+    <div class="row section region_container">
         <div class="col-xs-3 region_map">
             <p class="region_title">Region 1</p>
             {{ objects["region_map"]["output"] | safe }}
@@ -54,11 +53,12 @@ CONNECT
         </div>
     </div>
     {% endif -%}
+</div>
+<div class="container-fluid content">
     <div class="row section">
         <p class="section_title">Population</p>
         {% if objects["r3"] %}
         <div class="col-xs-12">
-            {{ objects["r3"]["output"] | safe }}
             {{ objects["r3"]["output"] | safe }}
         </div>
         {% endif %}

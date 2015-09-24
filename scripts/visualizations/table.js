@@ -60,6 +60,7 @@ function tableChart() {
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
             data = data;
+
             // data = data.map(function(d, i) {
             //     return [label.call(data, d, i), value.call(data, d, i)];
             // });
@@ -69,12 +70,16 @@ function tableChart() {
                     .attr("class", "table_container")
                     .attr("style", "height:"+config.height+"px;");
 
+            container = container.append("div");
+
             if ("title" in config && config.title !== "") {
                 var title = container.append("p")
                     .attr("class", "table_title")
                     .text(config.title);
             }
 
+            container = container.append("div");
+            
             // Table
             var table = container.append("table");
 
@@ -125,13 +130,14 @@ function tableChart() {
                 .data(function(d) {
                     row = [];
                     noblankColumns.forEach(function(field) {
-                        row.push({key : field.id, value : formatters[d[field.id].type](d[field.id].value)});
+                        row.push({key : field.id, type: d[field.id].type, value : formatters[d[field.id].type](d[field.id].value)});
                     });
                     return row;
                 })
                 .enter()
                 .append("td")
                 .text(function(d) { return d.value; })
+                .attr("class", function(d) { return d.type; })
                 .attr("colspan", function(d, i) { return colspan && (i > 0 || data.fields[i].value != "") ? 1 : null });
 
             if ("source" in config && config.source !== "") {
