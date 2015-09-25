@@ -112,7 +112,7 @@ function mapChart() {
     function chart(selection) {
         selection.each(function(data) {
 
-            var charLimit = (Math.round((width + margin.right + margin.left) / 25) * 5);
+            var charLimit = Math.round(Math.floor((width + margin.right + margin.left) / 6) / 5) * 5;
 
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.

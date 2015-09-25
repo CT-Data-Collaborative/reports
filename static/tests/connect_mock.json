@@ -3300,6 +3300,229 @@
       }
     },
     {
+      "name": "l2_small",
+      "type": "bar",
+      "data": {
+        "fields": [
+          {
+            "type": "string",
+            "id": "Year"
+          },
+          {
+            "type": "currency",
+            "id": "Quarter 1"
+          },
+          {
+            "type": "currency",
+            "id": "Quarter 2"
+          },
+          {
+            "type": "currency",
+            "id": "Quarter 3"
+          },
+          {
+            "type": "currency",
+            "id": "Quarter 4"
+          },
+          {
+            "type": "integer",
+            "id": "_id"
+          }
+        ],
+        "records": [
+          {
+            "_id": {
+              "value": 0,
+              "type": "integer"
+            },
+            "Year": {
+              "value": 2008,
+              "type": "string"
+            },
+            "Quarter 1": {
+              "value": 2636424,
+              "type": "currency"
+            },
+            "Quarter 2": {
+              "value": 9929904,
+              "type": "currency"
+            },
+            "Quarter 3": {
+              "value": 2650640,
+              "type": "currency"
+            },
+            "Quarter 4": {
+              "value": 6557333,
+              "type": "currency"
+            }
+          },
+          {
+            "_id": {
+              "value": 1,
+              "type": "integer"
+            },
+            "Year": {
+              "value": 2009,
+              "type": "string"
+            },
+            "Quarter 1": {
+              "value": 3738180,
+              "type": "currency"
+            },
+            "Quarter 2": {
+              "value": 6504878,
+              "type": "currency"
+            },
+            "Quarter 3": {
+              "value": 5722807,
+              "type": "currency"
+            },
+            "Quarter 4": {
+              "value": 1063596,
+              "type": "currency"
+            }
+          },
+          {
+            "_id": {
+              "value": 2,
+              "type": "integer"
+            },
+            "Year": {
+              "value": 2010,
+              "type": "string"
+            },
+            "Quarter 1": {
+              "value": 4887505,
+              "type": "currency"
+            },
+            "Quarter 2": {
+              "value": 1207561,
+              "type": "currency"
+            },
+            "Quarter 3": {
+              "value": 3621062,
+              "type": "currency"
+            },
+            "Quarter 4": {
+              "value": 5722971,
+              "type": "currency"
+            }
+          },
+          {
+            "_id": {
+              "value": 3,
+              "type": "integer"
+            },
+            "Year": {
+              "value": 2011,
+              "type": "string"
+            },
+            "Quarter 1": {
+              "value": 6506676,
+              "type": "currency"
+            },
+            "Quarter 2": {
+              "value": 4598748,
+              "type": "currency"
+            },
+            "Quarter 3": {
+              "value": 2255444,
+              "type": "currency"
+            },
+            "Quarter 4": {
+              "value": 1419991,
+              "type": "currency"
+            }
+          },
+          {
+            "_id": {
+              "value": 4,
+              "type": "integer"
+            },
+            "Year": {
+              "value": 2012,
+              "type": "string"
+            },
+            "Quarter 1": {
+              "value": 3629301,
+              "type": "currency"
+            },
+            "Quarter 2": {
+              "value": 9763799,
+              "type": "currency"
+            },
+            "Quarter 3": {
+              "value": 4297256,
+              "type": "currency"
+            },
+            "Quarter 4": {
+              "value": 3094942,
+              "type": "currency"
+            }
+          },
+          {
+            "_id": {
+              "value": 5,
+              "type": "integer"
+            },
+            "Year": {
+              "value": 2013,
+              "type": "string"
+            },
+            "Quarter 1": {
+              "value": 5104629,
+              "type": "currency"
+            },
+            "Quarter 2": {
+              "value": 1815457,
+              "type": "currency"
+            },
+            "Quarter 3": {
+              "value": 8066583,
+              "type": "currency"
+            },
+            "Quarter 4": {
+              "value": 6565474,
+              "type": "currency"
+            }
+          },
+          {
+            "_id": {
+              "value": 6,
+              "type": "integer"
+            },
+            "Year": {
+              "value": 2014,
+              "type": "string"
+            },
+            "Quarter 1": {
+              "value": 2797064,
+              "type": "currency"
+            },
+            "Quarter 2": {
+              "value": 4442157,
+              "type": "currency"
+            },
+            "Quarter 3": {
+              "value": 5628109,
+              "type": "currency"
+            },
+            "Quarter 4": {
+              "value": 9849077,
+              "type": "currency"
+            }
+          }
+        ],
+        "total": 4
+      },
+      "config": {
+        "title": "Children Residing in Region, Children in Need of Treatment, Children Who Will Have Serious Emotional Disturbance in Their Lifetime by Age and Race",
+        "height": 4,
+        "width": 4,
+        "source": "http://connect.ctdata.org/"
+      }
+    },
+    {
       "name": "r1",
       "type": "pie",
       "data": {

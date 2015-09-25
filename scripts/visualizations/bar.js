@@ -44,13 +44,6 @@ var formatters = {
     },
     "percent" : d3.format(".1%")
 };
-/*var formatters = {
-    "string" : function(val) {return val; },
-    "currency" : d3.format("$,.0f"),
-    "integer" : d3.format(",0f"),
-    "decimal" : d3.format(",2f"),
-    "percent" : d3.format(".1%")
-};*/
 
 for (var type in config.formats) {
     formatters[type] = d3.format(config.formats[type]);
@@ -121,12 +114,11 @@ function barChart() {
     function chart(selection) {
         selection.each(function(data) {
 
-            var charLimit = (Math.round((width + margin.right + margin.left) / 25) * 5);
-
+            var charLimit = Math.round(Math.floor((width + margin.right + margin.left) / 6) / 5) * 5;
             // Should this be a parameter? passed in config?
             var grouping = "Year";
 
-            var groupLabels = d3.keys(data[0]).filter(function(key) { return key !== grouping && key !== "_id"; });
+            var groupLabels = d3.keys(data[0]).filter(function(key) { return key !== grouping && key !== "_id"; }).sort();
 
             // This is the step that seems to be the most confused and broken - what shape am i aiming for?
             data.forEach(function(d) {
@@ -160,6 +152,42 @@ function barChart() {
             // augment margin depending on word-wrapped title
             margin.top += (title.selectAll("tspan").size()-1) * 10;
             height = svg.attr("height") - margin.top - margin.bottom;
+
+            // legends
+            // Legend scale
+            xl = d3.scale.ordinal()
+                    .rangeRoundBands([0, (width + ((margin.left + margin.right) / 2))], 0, 0)
+                    .domain(d3.range(3));
+
+            // legend container
+            var legendGroup = svg.append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top +")");
+
+            // legend boxes
+            var legendBoxes = legendGroup.selectAll("rect")
+                .data(groupLabels)
+                .enter()
+                .append("rect")
+                    .attr("stroke-width", "0.5pt")
+                    .attr("stroke", "#4A4A4A")
+                    .attr("height", "8pt")
+                    .attr("width", "8pt")
+                    .attr("x", function(d, i) { return xl(i % 3); })
+                    .attr("y", function(d, i) { return Math.floor(i/3) * 14; })
+                    .attr("fill", function(d, i) { return color(d); });
+
+            // legend text
+            var legendText = legendGroup.selectAll("text")
+                .data(groupLabels)
+                .enter()
+                .append("text")
+                    .attr("fill", "#4A4A4A")
+                    .attr("font-size", "8pt")
+                    .attr("x", function(d, i) { return xl(i % 3) + 8; })
+                    .attr("y", function(d, i) { return Math.floor(i/3) * 14; })
+                    .attr("dy", "6pt")
+                    .attr("dx", "4")
+                    .text(function(d, i) { return d; });
 
             var barGroup = svg.append("g")
                     .attr("height", height)
@@ -231,54 +259,21 @@ function barChart() {
                             .attr("height", function(d) { return height - y(d.value); })
                             .style("fill", function(d) { return color(d.name); });
 
-            // text labels
-            groups.selectAll("text")
-                    .data(function(d) { return d.values; })
-                    .enter()
-                        .append("text")
-                            .text(function(d) { return d.label; })
-                            .attr("transform", "rotate(-90)")
-                            .attr("text-anchor", "end")
-                            .attr("font-size", "8pt")
-                            .attr("x", function(d) { return 0 - y(d.value) - 2; })
-                            .attr("y", function(d) { return x1(d.name)+(x1.rangeBand() / 2) + 4; })
-                            .attr("fill", "#202020");
 
-            // legends
-            // Legend scale
-            xl = d3.scale.ordinal()
-                    .rangeRoundBands([0, (width + ((margin.left + margin.right) / 2))], 0, 0)
-                    .domain(d3.range(3));
-
-            // legend container
-            var legendGroup = svg.append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top +")");
-
-            // legend boxes
-            var legendBoxes = legendGroup.selectAll("rect")
-                .data(groupLabels)
-                .enter()
-                .append("rect")
-                    .attr("stroke-width", "0.5pt")
-                    .attr("stroke", "#4A4A4A")
-                    .attr("height", "8pt")
-                    .attr("width", "8pt")
-                    .attr("x", function(d, i) { return xl(i % 3); })
-                    .attr("y", function(d, i) { return Math.floor(i/3) * 14; })
-                    .attr("fill", function(d, i) { return color(d); });
-
-            // legend text
-            var legendText = legendGroup.selectAll("text")
-                .data(groupLabels)
-                .enter()
-                .append("text")
-                    .attr("fill", "#4A4A4A")
-                    .attr("font-size", "8pt")
-                    .attr("x", function(d, i) { return xl(i % 3) + 8; })
-                    .attr("y", function(d, i) { return Math.floor(i/3) * 14; })
-                    .attr("dy", "6pt")
-                    .attr("dx", "4")
-                    .text(function(d, i) { return d; });
+            if (x1.rangeBand() > 10) {
+                // text labels
+                groups.selectAll("text")
+                        .data(function(d) { return d.values; })
+                        .enter()
+                            .append("text")
+                                .text(function(d) { return d.label; })
+                                .attr("transform", "rotate(-90)")
+                                .attr("text-anchor", "end")
+                                .attr("font-size", "8pt")
+                                .attr("x", function(d) { return 0 - y(d.value) - 2; })
+                                .attr("y", function(d) { return x1(d.name)+(x1.rangeBand() / 2) + 4; })
+                                .attr("fill", "#202020");
+            }
 
             if ("source" in config && config.source !== "") {
                 // source

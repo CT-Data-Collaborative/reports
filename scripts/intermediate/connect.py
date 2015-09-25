@@ -1,7 +1,7 @@
 import os
 import json
 
-CONNECT_HEIGHT = 680
+CONNECT_HEIGHT = 700
 CONNECT_WIDTH = 640
 
 def table(visObj):
