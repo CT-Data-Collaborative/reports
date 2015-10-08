@@ -130,21 +130,20 @@ function pieChart() {
 
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
-            data = data;
-            // data = data.map(function(d, i) {
-            //     return [label.call(data, d, i), value.call(data, d, i)];
-            // });
+            data = data[0];
+            
+            data = d3.keys(data).map(function(d) {
+                return {"label" : d, "type" : data[d].type, "value": data[d].value};
+            });
+
 
             // build accessors
-            var labelKey = d3.keys(data[0])[0],
-                valueKey = d3.keys(data[0])[1];
-
-            var label = function(d) { return d[labelKey].value; }
+            var label = function(d) { return d.label; }
                 dataLabel = function(d) {
-                    return formatters[d[valueKey].type](d[valueKey].value);
+                    return formatters[d.type](d.value);
                 },
                 value = function(d) {
-                    return parseFloat(d[valueKey].value, 10);
+                    return parseFloat(d.value, 10);
                 };
 
             // update pie function object with accessor

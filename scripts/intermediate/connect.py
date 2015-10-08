@@ -26,14 +26,14 @@ def pie(visObj):
     if "height" in visObj["config"] and visObj["config"]["height"] > 0 and visObj["config"]["height"] <= 12:
         visObj["config"]["height"] = visObj["config"]["height"]*CONNECT_HEIGHT/12.0
 
-    if len(visObj["data"]["records"][0]) > 2:
-        # trim fields
-        visObj["data"]["fields"] = visObj["data"]["fields"][0:2]
-        # get field names, these are the keys in the records that we will keep, and remove all other keys
-        toKeep = [field["id"] for field in visObj["data"]["fields"]]
-        # iterate through records, modifying data in place, only keeping first two values
-        for i in range(0, len(visObj["data"]["records"])):
-            visObj["data"]["records"][i] = {key : visObj["data"]["records"][i][key] for key in toKeep}
+    # if len(visObj["data"]["records"][0]) > 2:
+    #     # trim fields
+    #     visObj["data"]["fields"] = visObj["data"]["fields"][0:2]
+    #     # get field names, these are the keys in the records that we will keep, and remove all other keys
+    #     toKeep = [field["id"] for field in visObj["data"]["fields"]]
+    #     # iterate through records, modifying data in place, only keeping first two values
+    #     for i in range(0, len(visObj["data"]["records"])):
+    #         visObj["data"]["records"][i] = {key : visObj["data"]["records"][i][key] for key in toKeep}
 
 
     
@@ -113,7 +113,7 @@ def get_extra_obj(data):
             geoJSON = json.load(geoJSON_file)
 
             for feature in geoJSON["features"]:
-                if feature["properties"]["COUNTYFP10"] == data["config"]["region"]:
+                if feature["properties"]["REGION"] == data["config"]["region"]:
                     map_object = {"FIPS" : {}, "Value" : {}}
                     map_object["FIPS"] = {"type" : "string", "value" : feature["properties"]["GEOID10"]}
                     map_object["Value"] = {"type" : "integer", "value" : 1}
