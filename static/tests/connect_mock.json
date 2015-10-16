@@ -3546,93 +3546,25 @@
         ],
         "records": [
           {
-            "Quarter": {
-              "type": "string",
-              "value": "Quarter 1"
+            "Fighting and Battery": {
+              "value": "2951",
+              "type": "integer"
             },
-            "Income": {
-              "type": "currency",
-              "value": 1
+            "Other": {
+              "value": "1451",
+              "type": "integer"
             },
-            "Expenditures": {
-              "type": "currency",
-              "value": 588123
+            "Personal Threatening Behavior": {
+              "value": "1073",
+              "type": "integer"
             },
-            "_id": {
-              "type": "integer",
-              "value": 1
-            }
-          },
-          {
-            "Quarter": {
-              "type": "string",
-              "value": "Quarter 2"
+            "Physical and Verbal Confrontation": {
+              "value": "1971",
+              "type": "integer"
             },
-            "Income": {
-              "type": "currency",
-              "value": 4
-            },
-            "Expenditures": {
-              "type": "currency",
-              "value": 200123
-            },
-            "_id": {
-              "type": "integer",
-              "value": 2
-            }
-          },
-          {
-            "Quarter": {
-              "type": "string",
-              "value": "Quarter 3"
-            },
-            "Income": {
-              "type": "currency",
-              "value": 9
-            },
-            "Expenditures": {
-              "type": "currency",
-              "value": 411123
-            },
-            "_id": {
-              "type": "integer",
-              "value": 3
-            }
-          },
-          {
-            "Quarter": {
-              "type": "string",
-              "value": "Quarter 4"
-            },
-            "Income": {
-              "type": "currency",
-              "value": 27
-            },
-            "Expenditures": {
-              "type": "currency",
-              "value": 382123
-            },
-            "_id": {
-              "type": "integer",
-              "value": 4
-            }
-          },
-          {
-            "Quarter": {
-              "type": "string",
-              "value": "Quarter 5"
-            },
-            "Income": {
-              "type": "currency",
-              "value": 256
-            },
-            "Expenditures": {
-              "type": "currency",
-              "value": 122123
-            },
-            "_id": {
-              "type": "integer",
-              "value": 5
+            "School Policy Violations": {
+              "value": "15835",
+              "type": "integer"
             }
           }
         ],
@@ -6726,92 +6658,684 @@
         "fields": [
           {
             "type": "string",
-            "id": "Quarter"
+            "id": "Race"
+          },
+          {
+            "type": "string",
+            "id": "Age"
           },
           {
             "type": "integer",
-            "id": "Income"
+            "id": "Pop"
           },
           {
             "type": "integer",
-            "id": "Expenditures"
+            "id": "Tx"
           },
           {
             "type": "integer",
-            "id": "_id"
+            "id": "Life"
           }
         ],
         "records": [
           {
-            "Quarter": {
+            "Race": {
               "type": "string",
-              "value": "Q1"
+              "value": "White"
             },
-            "Income": {
-              "type": "integer",
-              "value": 368
+            "Age": {
+              "type": "string",
+              "value": "0 to 21"
             },
-            "Expenditures": {
+            "Pop": {
               "type": "integer",
-              "value": 588
+              "value": "110484"
             },
-            "_id": {
+            "Tx": {
               "type": "integer",
-              "value": 1
+              "value": "7844"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "22097"
             }
           },
           {
-            "Quarter": {
+            "Race": {
               "type": "string",
-              "value": "Q2"
+              "value": "Black"
             },
-            "Income": {
-              "type": "integer",
-              "value": 428
+            "Age": {
+              "type": "string",
+              "value": "0 to 21"
             },
-            "Expenditures": {
+            "Pop": {
               "type": "integer",
-              "value": 200
+              "value": "28872"
             },
-            "_id": {
+            "Tx": {
               "type": "integer",
-              "value": 2
+              "value": "2050"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "5774"
             }
           },
           {
-            "Quarter": {
+            "Race": {
               "type": "string",
-              "value": "Q3"
+              "value": "Hispanic"
             },
-            "Income": {
-              "type": "integer",
-              "value": 545
+            "Age": {
+              "type": "string",
+              "value": "0 to 21"
             },
-            "Expenditures": {
+            "Pop": {
               "type": "integer",
-              "value": 411
+              "value": "46879"
             },
-            "_id": {
+            "Tx": {
               "type": "integer",
-              "value": 3
+              "value": "3328"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "9376"
             }
           },
           {
-            "Quarter": {
+            "Race": {
               "type": "string",
-              "value": "Q4"
+              "value": "Other"
             },
-            "Income": {
-              "type": "integer",
-              "value": 558
+            "Age": {
+              "type": "string",
+              "value": "0 to 21"
             },
-            "Expenditures": {
+            "Pop": {
               "type": "integer",
-              "value": 382
+              "value": "15922"
             },
-            "_id": {
+            "Tx": {
               "type": "integer",
-              "value": 4
+              "value": "1130"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "3184"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Total"
+            },
+            "Age": {
+              "type": "string",
+              "value": "0 to 21"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "202157"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "14353"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "40431"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "White"
+            },
+            "Age": {
+              "type": "string",
+              "value": "0 to 5"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "27439"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "1948"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "5488"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Black"
+            },
+            "Age": {
+              "type": "string",
+              "value": "0 to 5"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "6852"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "486"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "1370"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Hispanic"
+            },
+            "Age": {
+              "type": "string",
+              "value": "0 to 5"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "13612"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "966"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "2722"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Other"
+            },
+            "Age": {
+              "type": "string",
+              "value": "0 to 5"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "5494"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "390"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "1099"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Total"
+            },
+            "Age": {
+              "type": "string",
+              "value": "0 to 5"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "53397"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "3791"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "10679"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "White"
+            },
+            "Age": {
+              "type": "string",
+              "value": "6 to 9"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "21644"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "1537"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "4329"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Black"
+            },
+            "Age": {
+              "type": "string",
+              "value": "6 to 9"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "4887"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "347"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "977"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Hispanic"
+            },
+            "Age": {
+              "type": "string",
+              "value": "6 to 9"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "8311"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "590"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "1662"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Other"
+            },
+            "Age": {
+              "type": "string",
+              "value": "6 to 9"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "3279"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "233"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "656"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Total"
+            },
+            "Age": {
+              "type": "string",
+              "value": "6 to 9"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "38121"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "2707"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "7624"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "White"
+            },
+            "Age": {
+              "type": "string",
+              "value": "10 to 15"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "34728"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "2466"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "6946"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Black"
+            },
+            "Age": {
+              "type": "string",
+              "value": "10 to 15"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "8336"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "592"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "1667"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Hispanic"
+            },
+            "Age": {
+              "type": "string",
+              "value": "10 to 15"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "12373"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "878"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "2475"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Other"
+            },
+            "Age": {
+              "type": "string",
+              "value": "10 to 15"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "4163"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "296"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "833"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Total"
+            },
+            "Age": {
+              "type": "string",
+              "value": "10 to 15"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "59600"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "4232"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "11920"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "White"
+            },
+            "Age": {
+              "type": "string",
+              "value": "16 to 19"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "19720"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "1400"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "3944"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Black"
+            },
+            "Age": {
+              "type": "string",
+              "value": "16 to 19"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "6092"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "433"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "1218"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Hispanic"
+            },
+            "Age": {
+              "type": "string",
+              "value": "16 to 19"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "8374"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "595"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "1675"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Other"
+            },
+            "Age": {
+              "type": "string",
+              "value": "16 to 19"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "2153"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "153"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "431"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Total"
+            },
+            "Age": {
+              "type": "string",
+              "value": "16 to 19"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "36339"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "2580"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "7268"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "White"
+            },
+            "Age": {
+              "type": "string",
+              "value": "20 to 21"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "6953"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "494"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "1390"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Black"
+            },
+            "Age": {
+              "type": "string",
+              "value": "20 to 21"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "2705"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "192"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "541"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Hispanic"
+            },
+            "Age": {
+              "type": "string",
+              "value": "20 to 21"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "4209"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "299"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "842"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Other"
+            },
+            "Age": {
+              "type": "string",
+              "value": "20 to 21"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "833"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "59"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "167"
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Total"
+            },
+            "Age": {
+              "type": "string",
+              "value": "20 to 21"
+            },
+            "Pop": {
+              "type": "integer",
+              "value": "14700"
+            },
+            "Tx": {
+              "type": "integer",
+              "value": "1043"
+            },
+            "Life": {
+              "type": "integer",
+              "value": "2940"
             }
           }
         ],
