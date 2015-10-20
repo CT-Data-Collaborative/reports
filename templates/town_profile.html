@@ -94,7 +94,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         {% if objects["employers"] -%}
         <h4>Major Employers (2014)</h4>
         <ul class="float_list">
-            {% for row in objects["employers"]["data"]["rows"] -%}
+            {% for row in objects["employers"]["data"] -%}
             <li>{{ " ".join(row|listValues) }}</li>
             {% endfor -%}
         </ul>
@@ -278,7 +278,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
             {% if objects["electric"] -%}
             <ul class="indent_list">
                 <h4>Electric Provider</h4>
-                {% for row in objects["electric"]["data"]["rows"] if row != "" -%}
+                {% for row in objects["electric"]["data"] if row != "" -%}
                 <li>{{ " ".join(row|listValues) }}</li>
                 {% endfor -%}
             </ul>
@@ -286,7 +286,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
             {% if objects["gas"] -%}
             <ul class="indent_list">
                 <h4>Gas Provider</h4>
-                {% for row in objects["gas"]["data"]["rows"] if row != "" -%}
+                {% for row in objects["gas"]["data"] if row != "" -%}
                 <li>{{ " ".join(row|listValues) }}</li>
                 {% endfor -%}
             </ul>
@@ -294,7 +294,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
             {% if objects["water"] -%}
             <ul class="indent_list">
                 <h4>Water Provider</h4>
-                {% for row in objects["water"]["data"]["rows"] if row != "" -%}
+                {% for row in objects["water"]["data"] if row != "" -%}
                 <li>{{ " ".join(row|listValues) }}</li>
                 {% endfor -%}
             </ul>
@@ -302,7 +302,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
             {% if objects["cable"] -%}
             <ul class="indent_list">
                 <h4>Cable Provider</h4>
-                {% for row in objects["cable"]["data"]["rows"] if row != "" -%}
+                {% for row in objects["cable"]["data"] if row != "" -%}
                 <li>{{ " ".join(row|listValues) }}</li>
                 {% endfor -%}
             </ul>

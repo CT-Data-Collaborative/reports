@@ -1,24 +1,26 @@
 import json
 
 def table(visObj):
-    if ("header" not in visObj["config"] or visObj["config"]["header"] == True):
-            columns = visObj["data"].pop(0)
-            rows = visObj["data"]
-            visObj["data"] = {"columns" : columns, "rows" : rows}
-    else:
-            visObj["data"] = {"columns" : [], "rows" : visObj["data"]}
+    visObj["data"] = visObj["data"]["records"]
+    return visObj
+
+def simpletable(visObj):
+    visObj["data"] = visObj["data"]["records"]
     return visObj
 
 def pie(visObj):
+    visObj["data"] = visObj["data"]["records"]
     return visObj
 
 def map(visObj):
+    visObj["data"] = visObj["data"]["records"]
     return visObj
 
 def bar(visObj):
+    visObj["data"] = visObj["data"]["records"]
     return visObj
 
-transformations = {"table" : table, "pie" : pie, "map" : map, "bar" : bar}
+transformations = {"table" : table, "simpletable" : simpletable, "pie" : pie, "map" : map, "bar" : bar}
 
 def get_extra_obj(data):
     extra_obj = []
@@ -26,28 +28,18 @@ def get_extra_obj(data):
     header_map = {
         "type": "map",
         "name": "header_map",
-        "data": [
-            [
-                {
-                    "value": "FIPS",
-                    "type": "string"
-                },
-                {
-                    "value": "Statistic",
-                    "type": "string"
-                }
+        "data": {
+            "fields" : [
+                {"id" : "FIPS", "type" : "integer"},
+                {"id" : "Statistic", "type" : "integer"}
             ],
-            [
+            "records" : [
                 {
-                    "value": "0900337070",
-                    "type": "FIPS"
-                },
-                {
-                    "value": 1,
-                    "type": "decimal"
+                    "Statistic" : {"value" : 1, "type" : "integer"},
+                    "FIPS" : {"value" : "0900337070", "type" : "integer"}
                 }
             ]
-        ],
+        },
         "config": {
             "margin": 10,
             "width" : 275,

@@ -78,7 +78,7 @@ function tableChart() {
                                     return config.order[key].indexOf(a) - config.order[key].indexOf(b);
                                 });
                     } else {
-                        nestedData.key(function (d) { return d[key]; });
+                        nestedData.key(function (d) { return formatters[d[key].type](d[key].value); });
                     }
                 });
 
@@ -89,21 +89,21 @@ function tableChart() {
                             delete leaf[key];
                         }
                     }
+                    if ("order" in config && "leaf" in config.order) {
+                        newLeaf = {};
+                        config.order.leaf
+                                .filter(function(key) { return key in leaf; })
+                                .forEach(function(key, keyI, keyA) {
+                                    newLeaf[key] = leaf[key];
+                                });
+                        leaf = newLeaf;
+                    }
                     return leaf;
                 });
 
-                data = nestedData.map(data.records)
-            }
 
-            var countCols = function(nest) {
-                if (typeof nest === "object") {
-                    return d3.keys(nest).length * countCols(nest[d3.keys(nest)[0]]);
-                } else {
-                    return 1;
-                }
+                data = nestedData.map(data)
             }
-            var nrows = d3.keys(data).length,
-                    ncols = countCols(data) / (2 * nrows);
 
             // useful debugging of nest functions
             // var container = d3.select(this).append("pre")
@@ -134,33 +134,34 @@ function tableChart() {
             // table header
             var thead = table.append("thead");
 
-            // now populate thead with th cells appropriately
-
             // tbody element
             var tbody = table.append("tbody");
 
-            populateHeader = function(data, thead, level) {
-                if (data instanceof Object && data[d3.keys(data)[0]] instanceof Object) {
-                    var theadTR = thead.selectAll("tr#level_"+level);
-                    if (theadTR.empty()) {
-                        theadTR = thead.append("tr")
-                                                    .attr("id", "level_"+level);
-                        theadTR.append("th");
+            if (!("header" in config) || config.header == true) {
+                // now populate thead with th cells appropriately
+                populateHeader = function(data, thead, level) {
+                    if (data instanceof Object && data[d3.keys(data)[0]] instanceof Object) {
+                        var theadTR = thead.selectAll("tr#level_"+level);
+                        if (theadTR.empty()) {
+                            theadTR = thead.append("tr")
+                                                        .attr("id", "level_"+level);
+                            theadTR.append("th");
+                        }
+                        for (var key in data) {
+                            theadTR.append("th")
+                                .text(key)
+                                .attr("colspan", d3.keys(data[key]).length);
+                                populateHeader(data[key], thead, level + 1)
+                        }
+                    } else {
+                        thead.selectAll("tr#level_"+(level-1)).selectAll("th")
+                                .attr("colspan", 1);
+                        return
                     }
-                    for (var key in data) {
-                        theadTR.append("th")
-                            .text(key)
-                            .attr("colspan", d3.keys(data[key]).length);
-                            populateHeader(data[key], thead, level + 1)
-                    }
-                } else {
-                    thead.selectAll("tr#level_"+(level-1)).selectAll("th")
-                            .attr("colspan", 1);
-                    return
                 }
-            }
 
-            populateHeader(data[d3.keys(data)[0]], thead, 0);
+                populateHeader(data[d3.keys(data)[0]], thead, 0);
+            }
 
             // populate body
             populateCells = function(data, thead, tr, level) {

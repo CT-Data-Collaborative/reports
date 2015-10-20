@@ -8,1124 +8,3423 @@
     {
       "type": "table",
       "name": "population",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "County", "type" : "string"},
-          {"value" : "State", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "type": "string",
+            "id": "Year"
+          },
+          {
+            "type": "integer",
+            "id": "Town"
+          },
+          {
+            "type": "integer",
+            "id": "County"
+          },
+          {
+            "type": "numeric",
+            "id": "State"
+          }
         ],
-        [
-          {"value" : "2000", "type" : "string"},
-          {"value" : 121578, "type" : "integer"},
-          {"value" : 857183, "type" : "integer"},
-          {"value" : 3405565, "type" : "integer"}
-        ],
-        [
-          {"value" : "2010", "type" : "string"},
-          {"value" : 124760, "type" : "integer"},
-          {"value" : 887976, "type" : "integer"},
-          {"value" : 3545837, "type" : "integer"}
-        ],
-        [
-          {"value" : "2012", "type" : "string"},
-          {"value" : 124879, "type" : "integer"},
-          {"value" : 893504, "type" : "integer"},
-          {"value" : 3572213, "type" : "integer"}
-        ],
-        [
-          {"value" : "2020", "type" : "string"},
-          {"value" : 126656, "type" : "integer"},
-          {"value" : 922085, "type" : "integer"},
-          {"value" : 3690997, "type" : "integer"}
-        ],
-        [
-          {"value" : "'12 - '20 Growth / Yr", "type" : "string"},
-          {"value" : 0.002, "type" : "percent"},
-          {"value" : 0.004, "type" : "percent"},
-          {"value" : 0.004, "type" : "percent"}
+        "records": [
+          {
+            "Year": {
+              "type": "string",
+              "value": "2000"
+            },
+            "Town": {
+              "type": "integer",
+              "value": 121578
+            },
+            "County": {
+              "type": "integer",
+              "value": 857183
+            },
+            "State": {
+              "type": "integer",
+              "value": 3405565
+            }
+          },
+          {
+            "Year": {
+              "type": "string",
+              "value": "2010"
+            },
+            "Town": {
+              "type": "integer",
+              "value": 124760
+            },
+            "County": {
+              "type": "integer",
+              "value": 887976
+            },
+            "State": {
+              "type": "integer",
+              "value": 3545837
+            }
+          },
+          {
+            "Year": {
+              "type": "string",
+              "value": "2012"
+            },
+            "Town": {
+              "type": "integer",
+              "value": 124879
+            },
+            "County": {
+              "type": "integer",
+              "value": 893504
+            },
+            "State": {
+              "type": "integer",
+              "value": 3572213
+            }
+          },
+          {
+            "Year": {
+              "type": "string",
+              "value": "2020"
+            },
+            "Town": {
+              "type": "integer",
+              "value": 126656
+            },
+            "County": {
+              "type": "integer",
+              "value": 922085
+            },
+            "State": {
+              "type": "integer",
+              "value": 3690997
+            }
+          },
+          {
+            "Year": {
+              "type": "string",
+              "value": "'12 - '20 Growth / Yr"
+            },
+            "Town": {
+              "type": "percent",
+              "value": 0.002
+            },
+            "County": {
+              "type": "percent",
+              "value": 0.004
+            },
+            "State": {
+              "type": "percent",
+              "value": 0.004
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "formats" : {
-          "percent" : ".1%"
+        "nest": [
+          "Year"
+        ],
+        "order": {
+          "Year": [
+            "2000",
+            "2010",
+            "2012",
+            "2020",
+            "'12 - '20 Growth / Yr"
+          ]
+        },
+        "formats": {
+          "percent": ".1%"
         }
       }
     },
     {
       "type": "table",
       "name": "race",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "County", "type" : "string"},
-          {"value" : "State", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "type": "string",
+            "id": "Race"
+          },
+          {
+            "type": "integer",
+            "id": "Town"
+          },
+          {
+            "type": "integer",
+            "id": "County"
+          },
+          {
+            "type": "numeric",
+            "id": "State"
+          }
         ],
-        [
-          {"value" : "White", "type" : "string"},
-          {"value" : 43106, "type" : "integer"},
-          {"value" : 654726, "type" : "integer"},
-          {"value" : 2802217, "type" : "integer"}
-        ],
-        [
-          {"value" : "Black", "type" : "string"},
-          {"value" : 47019, "type" : "integer"},
-          {"value" : 117181, "type" : "integer"},
-          {"value" : 355660, "type" : "integer"}
-        ],
-        [
-          {"value" : "Asian Pacific", "type" : "string"},
-          {"value" : 3284, "type" : "integer"},
-          {"value" : 39220, "type" : "integer"},
-          {"value" : 139827, "type" : "integer"}
-        ],
-        [
-          {"value" : "Native American", "type" : "string"},
-          {"value" : 895, "type" : "integer"},
-          {"value" : 2327, "type" : "integer"},
-          {"value" : 8531, "type" : "integer"}
-        ],
-        [
-          {"value" : "Other/Multi-Race", "type" : "string"},
-          {"value" : 30575, "type" : "integer"},
-          {"value" : 80050, "type" : "integer"},
-          {"value" : 265978, "type" : "integer"}
-        ],
-        [
-          {"value" : "Hispanic (Any Race)", "type" : "string"},
-          {"value" : 53755, "type" : "integer"},
-          {"value" : 137155, "type" : "integer"},
-          {"value" : 480185, "type" : "integer"}
+        "records": [
+          {
+            "Race": {
+              "type": "string",
+              "value": "White"
+            },
+            "Town": {
+              "type": "integer",
+              "value": 43106
+            },
+            "County": {
+              "type": "integer",
+              "value": 654726
+            },
+            "State": {
+              "type": "integer",
+              "value": 2802217
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Black"
+            },
+            "Town": {
+              "type": "integer",
+              "value": 47019
+            },
+            "County": {
+              "type": "integer",
+              "value": 117181
+            },
+            "State": {
+              "type": "integer",
+              "value": 355660
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Asian Pacific"
+            },
+            "Town": {
+              "type": "integer",
+              "value": 3284
+            },
+            "County": {
+              "type": "integer",
+              "value": 39220
+            },
+            "State": {
+              "type": "integer",
+              "value": 139827
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Native American"
+            },
+            "Town": {
+              "type": "integer",
+              "value": 895
+            },
+            "County": {
+              "type": "integer",
+              "value": 2327
+            },
+            "State": {
+              "type": "integer",
+              "value": 8531
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Other/Multi-Race"
+            },
+            "Town": {
+              "type": "integer",
+              "value": 30575
+            },
+            "County": {
+              "type": "integer",
+              "value": 80050
+            },
+            "State": {
+              "type": "integer",
+              "value": 265978
+            }
+          },
+          {
+            "Race": {
+              "type": "string",
+              "value": "Hispanic (Any Race)"
+            },
+            "Town": {
+              "type": "integer",
+              "value": 53755
+            },
+            "County": {
+              "type": "integer",
+              "value": 137155
+            },
+            "State": {
+              "type": "integer",
+              "value": 480185
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Race"
+        ],
+        "order": {
+          "Race": [
+            "White",
+            "Black",
+            "Asian Pacific",
+            "Native American",
+            "Other/Multi-Race",
+            "Hispanic (Any Race)"
+          ]
+        }
+      }
     },
     {
       "type": "table",
       "name": "poverty",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "County", "type" : "string"},
-          {"value" : "State", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Measure",
+            "type": "string"
+          },
+          {
+            "id": "Town",
+            "type": "percent"
+          },
+          {
+            "id": "County",
+            "type": "percent"
+          },
+          {
+            "id": "State",
+            "type": "percent"
+          }
         ],
-        [
-          {"value" : "Poverty Rate (2012)", "type" : "string"},
-          {"value" : 0.339, "type" : "percent"},
-          {"value" : 0.115, "type" : "percent"},
-          {"value" : 0.100, "type" : "percent"}
+        "records": [
+          {
+            "Measure": {
+              "value": "Poverty Rate (2012)",
+              "type": "string"
+            },
+            "Town": {
+              "value": 0.339,
+              "type": "percent"
+            },
+            "County": {
+              "value": 0.115,
+              "type": "percent"
+            },
+            "State": {
+              "value": 0.1,
+              "type": "percent"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "formats" : {}
+        "nest": [
+          "Measure"
+        ],
+        "formats": {}
       }
     },
     {
       "type": "table",
       "name": "demog_facts",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "County", "type" : "string"},
-          {"value" : "State", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Fact",
+            "type": "string"
+          },
+          {
+            "id": "Town",
+            "type": "integer"
+          },
+          {
+            "id": "County",
+            "type": "string"
+          },
+          {
+            "id": "State",
+            "type": "string"
+          }
         ],
-        [
-          {"value" : "Land Area (sq. miles)", "type" : "string"},
-          {"value" : 17, "type" : "integer"},
-          {"value" : 735, "type" : "integer"},
-          {"value" : 4845, "type" : "integer"}
-        ],
-        [
-          {"value" : "Pop./Sq. Mile (2012)", "type" : "string"},
-          {"value" : 7218, "type" : "integer"},
-          {"value" : 1215, "type" : "integer"},
-          {"value" : 737, "type" : "integer"}
-        ],
-        [
-          {"value" : "Median Age (2012)", "type" : "string"},
-          {"value" : 30, "type" : "integer"},
-          {"value" : 40, "type" : "integer"},
-          {"value" : 40, "type" : "integer"}
-        ],
-        [
-          {"value" : "Households (2012)", "type" : "string"},
-          {"value" : 45895, "type" : "integer"},
-          {"value" : 349158, "type" : "integer"},
-          {"value" : 1360184, "type" : "integer"}
-        ],
-        [
-          {"value" : "Med. HH Inc. (2012)", "type" : "string"},
-          {"value" : 28931, "type" : "currency"},
-          {"value" : 64752, "type" : "currency"},
-          {"value" : 69519, "type" : "currency"}
+        "records": [
+          {
+            "Fact": {
+              "type": "string",
+              "value": "Land Area (sq. miles)"
+            },
+            "Town": {
+              "type": "integer",
+              "value": 17
+            },
+            "County": {
+              "type": "integer",
+              "value": 735
+            },
+            "State": {
+              "type": "integer",
+              "value": 4845
+            }
+          },
+          {
+            "Fact": {
+              "type": "string",
+              "value": "Pop./Sq. Mile (2012)"
+            },
+            "Town": {
+              "type": "integer",
+              "value": 7218
+            },
+            "County": {
+              "type": "integer",
+              "value": 1215
+            },
+            "State": {
+              "type": "integer",
+              "value": 737
+            }
+          },
+          {
+            "Fact": {
+              "type": "string",
+              "value": "Median Age (2012)"
+            },
+            "Town": {
+              "type": "integer",
+              "value": 30
+            },
+            "County": {
+              "type": "integer",
+              "value": 40
+            },
+            "State": {
+              "type": "integer",
+              "value": 40
+            }
+          },
+          {
+            "Fact": {
+              "type": "string",
+              "value": "Households (2012)"
+            },
+            "Town": {
+              "type": "integer",
+              "value": 45895
+            },
+            "County": {
+              "type": "integer",
+              "value": 349158
+            },
+            "State": {
+              "type": "integer",
+              "value": 1360184
+            }
+          },
+          {
+            "Fact": {
+              "type": "string",
+              "value": "Med. HH Inc. (2012)"
+            },
+            "Town": {
+              "type": "currency",
+              "value": 28931
+            },
+            "County": {
+              "type": "currency",
+              "value": 64752
+            },
+            "State": {
+              "type": "currency",
+              "value": 69519
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Fact"
+        ],
+        "order": {
+          "Fact": [
+            "Land Area (sq. miles)",
+            "Pop./Sq. Mile (2012)",
+            "Median Age (2012)",
+            "Households (2012)",
+            "Med. HH Inc. (2012)"
+          ]
+        }
+      }
     },
     {
       "type": "table",
       "name": "educational_attainment",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "%", "type" : "string"},
-          {"value" : "State", "type" : "string"},
-          {"value" : "%", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Attainment",
+            "type": "string"
+          },
+          {
+            "id": "Geography",
+            "type": "string"
+          },
+          {
+            "id": "Number",
+            "type": "integer"
+          },
+          {
+            "id": "Percent",
+            "type": "percent"
+          }
         ],
-        [
-          {"value" : "High School Graduate", "type" : "string"},
-          {"value" : 21507, "type" : "integer"},
-          {"value" : 0.30, "type" : "percent"},
-          {"value" : 677253, "type" : "integer"},
-          {"value" : 0.28, "type" : "percent"}
-        ],
-        [
-          {"value" : "Associates Degree", "type" : "string"},
-          {"value" : 3936, "type" : "integer"},
-          {"value" : 0.05, "type" : "percent"},
-          {"value" : 177531, "type" : "integer"},
-          {"value" : 0.07, "type" : "percent"}
-        ],
-        [
-          {"value" : "Bachelors or Higher", "type" : "string"},
-          {"value" : 10709, "type" : "integer"},
-          {"value" : 0.1500, "type" : "percent"},
-          {"value" : 879089, "type" : "integer"},
-          {"value" : 0.3600, "type" : "percent"}
+        "records": [
+          {
+            "Attainment": {
+              "value": "High School Graduate",
+              "type": "string"
+            },
+            "Geography": {
+              "value": "State",
+              "type": "string"
+            },
+            "Number": {
+              "value": 21507,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.3,
+              "type": "percent"
+            }
+          },
+          {
+            "Attainment": {
+              "value": "High School Graduate",
+              "type": "string"
+            },
+            "Geography": {
+              "value": "Town",
+              "type": "string"
+            },
+            "Number": {
+              "value": 677253,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.28,
+              "type": "percent"
+            }
+          },
+          {
+            "Attainment": {
+              "value": "Associates Degree",
+              "type": "string"
+            },
+            "Geography": {
+              "value": "State",
+              "type": "string"
+            },
+            "Number": {
+              "value": 3936,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.05,
+              "type": "percent"
+            }
+          },
+          {
+            "Attainment": {
+              "value": "Associates Degree",
+              "type": "string"
+            },
+            "Geography": {
+              "value": "Town",
+              "type": "string"
+            },
+            "Number": {
+              "value": 177531,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.07,
+              "type": "percent"
+            }
+          },
+          {
+            "Attainment": {
+              "value": "Bachelors or Higher",
+              "type": "string"
+            },
+            "Geography": {
+              "value": "State",
+              "type": "string"
+            },
+            "Number": {
+              "value": 10709,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.15,
+              "type": "percent"
+            }
+          },
+          {
+            "Attainment": {
+              "value": "Bachelors or Higher",
+              "type": "string"
+            },
+            "Geography": {
+              "value": "Town",
+              "type": "string"
+            },
+            "Number": {
+              "value": 879089,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.36,
+              "type": "percent"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "formats" : {
-          "percent" : ".0%"
+        "nest": [
+          "Attainment",
+          "Geography"
+        ],
+        "order": {
+          "Attainment": [
+            "High School Graduate",
+            "Associates Degree",
+            "Bachelors or Higher"
+          ],
+          "Geography": [
+            "Town",
+            "State"
+          ]
+        },
+        "formats": {
+          "percent": ".0%"
         }
       }
     },
     {
       "type": "table",
       "name": "age",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "0-4", "type" : "string"},
-          {"value" : "5-17", "type" : "string"},
-          {"value" : "18-24", "type" : "string"},
-          {"value" : "25-49", "type" : "string"},
-          {"value" : "50-64", "type" : "string"},
-          {"value" : "65+", "type" : "string"},
-          {"value" : "Total", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Cohort",
+            "type": "string"
+          },
+          {
+            "id": "Age",
+            "type": "string"
+          },
+          {
+            "id": "Number",
+            "type": "integer"
+          },
+          {
+            "id": "Percent",
+            "type": "percent"
+          }
         ],
-        [
-         {"value" : "Male", "type" : "string"},
-          {"value" : 4865, "type" : "integer"},
-          {"value" : 0.0400, "type" : "percent"},
-          {"value" : 12034, "type" : "integer"},
-          {"value" : 0.1000, "type" : "percent"},
-          {"value" : 9585, "type" : "integer"},
-          {"value" : 0.0800, "type" : "percent"},
-          {"value" : 20337, "type" : "integer"},
-          {"value" : 0.1600, "type" : "percent"},
-          {"value" : 8377, "type" : "integer"},
-          {"value" : 0.0700, "type" : "percent"},
-          {"value" : 4825, "type" : "integer"},
-          {"value" : 0.0400, "type" : "percent"},
-          {"value" : 60023, "type" : "integer"}
-        ],
-        [
-         {"value" : "Female", "type" : "string"},
-          {"value" : 3927, "type" : "integer"},
-          {"value" : 0.0300, "type" : "percent"},
-          {"value" : 12069, "type" : "integer"},
-          {"value" : 0.1000, "type" : "percent"},
-          {"value" : 9869, "type" : "integer"},
-          {"value" : 0.0800, "type" : "percent"},
-          {"value" : 22427, "type" : "integer"},
-          {"value" : 0.1800, "type" : "percent"},
-          {"value" : 9782, "type" : "integer"},
-          {"value" : 0.0800, "type" : "percent"},
-          {"value" : 6782, "type" : "integer"},
-          {"value" : 0.0500, "type" : "percent"},
-          {"value" : 64856, "type" : "integer"}
-        ],
-        [
-          {"value" : "County Total", "type" : "string"},
-          {"value" : 40352, "type" : "integer"},
-          {"value" : 0.0600, "type" : "percent"},
-          {"value" : 152709, "type" : "integer"},
-          {"value" : 0.1700, "type" : "percent"},
-          {"value" : 79468, "type" : "integer"},
-          {"value" : 0.0900, "type" : "percent"},
-          {"value" : 299428, "type" : "integer"},
-          {"value" : 0.3400, "type" : "percent"},
-          {"value" : 180710, "type" : "integer"},
-          {"value" : 0.2000, "type" : "percent"},
-          {"value" : 130837, "type" : "integer"},
-          {"value" : 0.1500, "type" : "percent"},
-          {"value" : 893504, "type" : "integer"}
-        ],
-        [
-          {"value" : "State Total", "type" : "string"},
-          {"value" : 200031, "type" : "integer"},
-          {"value" : 0.0600, "type" : "percent"},
-          {"value" : 612181, "type" : "integer"},
-          {"value" : 0.1700, "type" : "percent"},
-          {"value" : 328661, "type" : "integer"},
-          {"value" : 0.0900, "type" : "percent"},
-          {"value" : 1194793, "type" : "integer"},
-          {"value" : 0.3300, "type" : "percent"},
-          {"value" : 726725, "type" : "integer"},
-          {"value" : 0.2000, "type" : "percent"},
-          {"value" : 509822, "type" : "integer"},
-          {"value" : 0.1400, "type" : "percent"},
-          {"value" : 3572213, "type" : "integer"}
+        "records": [
+          {
+            "Cohort": {
+              "value": "Male",
+              "type": "string"
+            },
+            "Age": {
+              "value": "0-4",
+              "type": "string"
+            },
+            "Number": {
+              "value": 4865,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.04,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Male",
+              "type": "string"
+            },
+            "Age": {
+              "value": "5-17",
+              "type": "string"
+            },
+            "Number": {
+              "value": 12034,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.1,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Male",
+              "type": "string"
+            },
+            "Age": {
+              "value": "18-24",
+              "type": "string"
+            },
+            "Number": {
+              "value": 9585,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.08,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Male",
+              "type": "string"
+            },
+            "Age": {
+              "value": "25-49",
+              "type": "string"
+            },
+            "Number": {
+              "value": 20337,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.16,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Male",
+              "type": "string"
+            },
+            "Age": {
+              "value": "50-64",
+              "type": "string"
+            },
+            "Number": {
+              "value": 8377,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.07,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Male",
+              "type": "string"
+            },
+            "Age": {
+              "value": "65+",
+              "type": "string"
+            },
+            "Number": {
+              "value": 4825,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.04,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Male",
+              "type": "string"
+            },
+            "Age": {
+              "value": "Total",
+              "type": "string"
+            },
+            "Number": {
+              "value": 60023,
+              "type": "integer"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Female",
+              "type": "string"
+            },
+            "Age": {
+              "value": "0-4",
+              "type": "string"
+            },
+            "Number": {
+              "value": 3927,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.03,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Female",
+              "type": "string"
+            },
+            "Age": {
+              "value": "5-17",
+              "type": "string"
+            },
+            "Number": {
+              "value": 12069,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.1,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Female",
+              "type": "string"
+            },
+            "Age": {
+              "value": "18-24",
+              "type": "string"
+            },
+            "Number": {
+              "value": 9869,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.08,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Female",
+              "type": "string"
+            },
+            "Age": {
+              "value": "25-49",
+              "type": "string"
+            },
+            "Number": {
+              "value": 22427,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.18,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Female",
+              "type": "string"
+            },
+            "Age": {
+              "value": "50-64",
+              "type": "string"
+            },
+            "Number": {
+              "value": 9782,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.08,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Female",
+              "type": "string"
+            },
+            "Age": {
+              "value": "65+",
+              "type": "string"
+            },
+            "Number": {
+              "value": 6782,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.05,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Female",
+              "type": "string"
+            },
+            "Age": {
+              "value": "Total",
+              "type": "string"
+            },
+            "Number": {
+              "value": 64856,
+              "type": "integer"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "County Total",
+              "type": "string"
+            },
+            "Age": {
+              "value": "0-4",
+              "type": "string"
+            },
+            "Number": {
+              "value": 40352,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.06,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "County Total",
+              "type": "string"
+            },
+            "Age": {
+              "value": "5-17",
+              "type": "string"
+            },
+            "Number": {
+              "value": 152709,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.17,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "County Total",
+              "type": "string"
+            },
+            "Age": {
+              "value": "18-24",
+              "type": "string"
+            },
+            "Number": {
+              "value": 79468,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.09,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "County Total",
+              "type": "string"
+            },
+            "Age": {
+              "value": "25-49",
+              "type": "string"
+            },
+            "Number": {
+              "value": 299428,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.34,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "County Total",
+              "type": "string"
+            },
+            "Age": {
+              "value": "50-64",
+              "type": "string"
+            },
+            "Number": {
+              "value": 180710,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.2,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "County Total",
+              "type": "string"
+            },
+            "Age": {
+              "value": "65+",
+              "type": "string"
+            },
+            "Number": {
+              "value": 130837,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.15,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "County Total",
+              "type": "string"
+            },
+            "Age": {
+              "value": "Total",
+              "type": "string"
+            },
+            "Number": {
+              "value": 893504,
+              "type": "integer"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "State Total",
+              "type": "string"
+            },
+            "Age": {
+              "value": "0-4",
+              "type": "string"
+            },
+            "Number": {
+              "value": 200031,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.06,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "State Total",
+              "type": "string"
+            },
+            "Age": {
+              "value": "5-17",
+              "type": "string"
+            },
+            "Number": {
+              "value": 612181,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.17,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "State Total",
+              "type": "string"
+            },
+            "Age": {
+              "value": "18-24",
+              "type": "string"
+            },
+            "Number": {
+              "value": 328661,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.09,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "State Total",
+              "type": "string"
+            },
+            "Age": {
+              "value": "25-49",
+              "type": "string"
+            },
+            "Number": {
+              "value": 1194793,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.33,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "State Total",
+              "type": "string"
+            },
+            "Age": {
+              "value": "50-64",
+              "type": "string"
+            },
+            "Number": {
+              "value": 726725,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.2,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "State Total",
+              "type": "string"
+            },
+            "Age": {
+              "value": "65+",
+              "type": "string"
+            },
+            "Number": {
+              "value": 509822,
+              "type": "integer"
+            },
+            "Percent": {
+              "value": 0.14,
+              "type": "percent"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "State Total",
+              "type": "string"
+            },
+            "Age": {
+              "value": "Total",
+              "type": "string"
+            },
+            "Number": {
+              "value": 3572213,
+              "type": "integer"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "formats" : {
-          "percent" : "0%"
+        "nest": [
+          "Cohort",
+          "Age"
+        ],
+        "order": {
+          "Cohort": [
+            "Male",
+            "Female",
+            "County Total",
+            "State Total"
+          ],
+          "Age": [
+            "0-4",
+            "5-17",
+            "18-24",
+            "25-49",
+            "50-64",
+            "65+",
+            "Total"
+          ]
+        },
+        "formats": {
+          "percent": "0%"
         }
       }
     },
     {
       "type": "table",
       "name": "business",
-      "data": [
-        [
-          {"value" : "Sector", "type" : "string"},
-          {"value" : "Units", "type" : "string"},
-          {"value" : "Employment", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Sector",
+            "type": "string"
+          },
+          {
+            "id": "Units",
+            "type": "integer"
+          },
+          {
+            "id": "Employment",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Total - All Industries", "type" : "string"},
-          {"value" : 3526, "type" : "integer"},
-          {"value" : 112709, "type" : "integer"}
-        ],
-        [
-          {"value" : "23 - Construction", "type" : "string"},
-          {"value" : 157, "type" : "integer"},
-          {"value" : 1310, "type" : "integer"}
-        ],
-        [
-          {"value" : "31 - Manufacturing", "type" : "string"},
-          {"value" : 68, "type" : "integer"},
-          {"value" : 1236, "type" : "integer"}
-        ],
-        [
-          {"value" : "44 - Retail Trade", "type" : "string"},
-          {"value" : 376, "type" : "integer"},
-          {"value" : 3547, "type" : "integer"}
-        ],
-        [
-          {"value" : "52 - Finance and Insurance", "type" : "string"},
-          {"value" : 241, "type" : "integer"},
-          {"value" : 23074, "type" : "integer"}
-        ],
-        [
-          {"value" : "62 - Health Care and Social Assistance", "type" : "string"},
-          {"value" : 394, "type" : "integer"},
-          {"value" : 25745, "type" : "integer"}
-        ],
-        [
-          {"value" : "Total Government", "type" : "string"},
-          {"value" : 169, "type" : "integer"},
-          {"value" : 19846, "type" : "integer"}
-        ],
-        [
-          {"value" : "State Government", "type" : "string"},
-          {"value" : 105, "type" : "integer"},
-          {"value" : 11409, "type" : "integer"}
+        "records": [
+          {
+            "Sector": {
+              "value": "Total - All Industries",
+              "type": "string"
+            },
+            "Units": {
+              "value": 3526,
+              "type": "integer"
+            },
+            "Employment": {
+              "value": 112709,
+              "type": "integer"
+            }
+          },
+          {
+            "Sector": {
+              "value": "23 - Construction",
+              "type": "string"
+            },
+            "Units": {
+              "value": 157,
+              "type": "integer"
+            },
+            "Employment": {
+              "value": 1310,
+              "type": "integer"
+            }
+          },
+          {
+            "Sector": {
+              "value": "31 - Manufacturing",
+              "type": "string"
+            },
+            "Units": {
+              "value": 68,
+              "type": "integer"
+            },
+            "Employment": {
+              "value": 1236,
+              "type": "integer"
+            }
+          },
+          {
+            "Sector": {
+              "value": "44 - Retail Trade",
+              "type": "string"
+            },
+            "Units": {
+              "value": 376,
+              "type": "integer"
+            },
+            "Employment": {
+              "value": 3547,
+              "type": "integer"
+            }
+          },
+          {
+            "Sector": {
+              "value": "52 - Finance and Insurance",
+              "type": "string"
+            },
+            "Units": {
+              "value": 241,
+              "type": "integer"
+            },
+            "Employment": {
+              "value": 23074,
+              "type": "integer"
+            }
+          },
+          {
+            "Sector": {
+              "value": "62 - Health Care and Social Assistance",
+              "type": "string"
+            },
+            "Units": {
+              "value": 394,
+              "type": "integer"
+            },
+            "Employment": {
+              "value": 25745,
+              "type": "integer"
+            }
+          },
+          {
+            "Sector": {
+              "value": "Total Government",
+              "type": "string"
+            },
+            "Units": {
+              "value": 169,
+              "type": "integer"
+            },
+            "Employment": {
+              "value": 19846,
+              "type": "integer"
+            }
+          },
+          {
+            "Sector": {
+              "value": "State Government",
+              "type": "string"
+            },
+            "Units": {
+              "value": 105,
+              "type": "integer"
+            },
+            "Employment": {
+              "value": 11409,
+              "type": "integer"
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Sector"
+        ],
+        "Order": {
+          "Sector": [
+            "Total - All Industries",
+            "23 - Construction",
+            "31 - Manufacturing",
+            "44 - Retail Trade",
+            "52 - Finance and Insurance",
+            "62 - Health Care and Social Assistance",
+            "Total Government",
+            "State Government"
+          ]
+        }
+      }
     },
     {
       "type": "table",
       "name": "grand_list",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Amount", "type" : "string"},
-          {"value" : "% of Net", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Sector",
+            "type": "string"
+          },
+          {
+            "id": "Units",
+            "type": "integer"
+          },
+          {
+            "id": "Employment",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Connecticut Light & Power", "type" : "string"},
-          {"value" : 139442670, "type" : "currency"},
-          {"value" : 0.039, "type" : "percent"}
-        ],
-        [
-          {"value" : "Travelers Indemnity Co", "type" : "string"},
-          {"value" : 130705740, "type" : "currency"},
-          {"value" : 0.037, "type" : "percent"}
-        ],
-        [
-          {"value" : "Hartford Fire Insurance & Twin City Ins", "type" : "string"},
-          {"value" : 118704090, "type" : "currency"},
-          {"value" : 0.034, "type" : "percent"}
-        ],
-        [
-          {"value" : "Aetna Life Insurance Co", "type" : "string"},
-          {"value" : 105487280, "type" : "currency"},
-          {"value" : 0.030, "type" : "percent"}
-        ],
-        [
-          {"value" : "HUB Properties Trust", "type" : "string"},
-          {"value" : 48977640, "type" : "currency"},
-          {"value" : 0.014, "type" : "percent"}
-        ],
-        [
-          {"value" : "Net Grand List (2013)", "type" : "string"},
-          {"value" : 3535402755, "type" : "currency"},
-          {"value" : "", "type" : "string"}
+        "records": [
+          {
+            "Company": {
+              "value": "Connecticut Light & Power",
+              "type": "string"
+            },
+            "Amount": {
+              "value": 139442670,
+              "type": "currency"
+            },
+            "% of Net": {
+              "value": 0.039,
+              "type": "percent"
+            }
+          },
+          {
+            "Company": {
+              "value": "Travelers Indemnity Co",
+              "type": "string"
+            },
+            "Amount": {
+              "value": 130705740,
+              "type": "currency"
+            },
+            "% of Net": {
+              "value": 0.037,
+              "type": "percent"
+            }
+          },
+          {
+            "Company": {
+              "value": "Hartford Fire Insurance & Twin City Ins",
+              "type": "string"
+            },
+            "Amount": {
+              "value": 118704090,
+              "type": "currency"
+            },
+            "% of Net": {
+              "value": 0.034,
+              "type": "percent"
+            }
+          },
+          {
+            "Company": {
+              "value": "Aetna Life Insurance Co",
+              "type": "string"
+            },
+            "Amount": {
+              "value": 105487280,
+              "type": "currency"
+            },
+            "% of Net": {
+              "value": 0.03,
+              "type": "percent"
+            }
+          },
+          {
+            "Company": {
+              "value": "HUB Properties Trust",
+              "type": "string"
+            },
+            "Amount": {
+              "value": 48977640,
+              "type": "currency"
+            },
+            "% of Net": {
+              "value": 0.014,
+              "type": "percent"
+            }
+          },
+          {
+            "Company": {
+              "value": "Net Grand List (2013)",
+              "type": "string"
+            },
+            "Amount": {
+              "value": 3535402755,
+              "type": "currency"
+            },
+            "% of Net": {
+              "value": "",
+              "type": "string"
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Company"
+        ]
+      }
     },
     {
       "type": "table",
       "name": "employers",
-      "data": [
-        [
-          {"value" : "Northeast Utilities", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Company",
+            "type": "string"
+          }
         ],
-        [
-          {"value" : "Travelers Indemnity Co", "type" : "string"}
-        ],
-        [
-          {"value" : "Hartford Financial Svcs Group", "type" : "string"}
-        ],
-        [
-          {"value" : "Aetna Inc", "type" : "string"}
-        ],
-        [
-          {"value" : "The Hartford", "type" : "string"}
+        "records": [
+          {
+            "Company": {
+              "value": "Northeast Utilities",
+              "type": "string"
+            }
+          },
+          {
+            "Company": {
+              "value": "Travelers Indemnity Co",
+              "type": "string"
+            }
+          },
+          {
+            "Company": {
+              "value": "Hartford Financial Svcs Group",
+              "type": "string"
+            }
+          },
+          {
+            "Company": {
+              "value": "Aetna Inc",
+              "type": "string"
+            }
+          },
+          {
+            "Company": {
+              "value": "The Hartford",
+              "type": "string"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "header" : false
+        "header": false
       }
     },
     {
       "type": "table",
       "name": "enrollment",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "State", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Town",
+            "type": "string"
+          },
+          {
+            "id": "State",
+            "type": "string"
+          }
         ],
-        [
-          {"value" : "Total Town School Enrollment", "type" : "string"},
-          {"value" : 21318, "type" : "integer"},
-          {"value" : 548313, "type" : "integer"}
+        "records": [
+          {
+            "Indicator": {
+              "value": "Total Town School Enrollment",
+              "type": "string"
+            },
+            "Town": {
+              "value": 21318,
+              "type": "integer"
+            },
+            "State": {
+              "value": 548313,
+              "type": "integer"
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Indicator"
+        ]
+      }
     },
     {
       "type": "table",
       "name": "cmt",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Grade 4", "type" : "string"},
-          {"value" : "Grade 6", "type" : "string"},
-          {"value" : "Grade 8", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Grade",
+            "type": "string"
+          },
+          {
+            "id": "Subject",
+            "type": "string"
+          },
+          {
+            "id": "Town",
+            "type": "string"
+          },
+          {
+            "id": "State",
+            "type": "string"
+          }
         ],
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "State", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "State", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "State", "type" : "string"}
-        ],
-        [
-          {"value" : "Reading", "type" : "string"},
-          {"value" : 29, "type" : "integer"},
-          {"value" : 63, "type" : "integer"},
-          {"value" : 48, "type" : "integer"},
-          {"value" : 76, "type" : "integer"},
-          {"value" : 44, "type" : "integer"},
-          {"value" : 75, "type" : "integer"}
-        ],
-        [
-          {"value" : "Math", "type" : "string"},
-          {"value" : 32, "type" : "integer"},
-          {"value" : 67, "type" : "integer"},
-          {"value" : 42, "type" : "integer"},
-          {"value" : 72, "type" : "integer"},
-          {"value" : 32, "type" : "integer"},
-          {"value" : 67, "type" : "integer"}
-        ],
-        [
-          {"value" : "Writing", "type" : "string"},
-          {"value" : 35, "type" : "integer"},
-          {"value" : 67, "type" : "integer"},
-          {"value" : 39, "type" : "integer"},
-          {"value" : 65, "type" : "integer"},
-          {"value" : 30, "type" : "integer"},
-          {"value" : 65, "type" : "integer"}
+        "records": [
+          {
+            "Grade": {
+              "type": "string",
+              "value": "Grade 4"
+            },
+            "Subject": {
+              "value": "Reading",
+              "type": "string"
+            },
+            "Town": {
+              "value": 29,
+              "type": "integer"
+            },
+            "State": {
+              "value": 63,
+              "type": "integer"
+            }
+          },
+          {
+            "Grade": {
+              "type": "string",
+              "value": "Grade 6"
+            },
+            "Subject": {
+              "value": "Reading",
+              "type": "string"
+            },
+            "Town": {
+              "value": 48,
+              "type": "integer"
+            },
+            "State": {
+              "value": 76,
+              "type": "integer"
+            }
+          },
+          {
+            "Grade": {
+              "type": "string",
+              "value": "Grade 8"
+            },
+            "Subject": {
+              "value": "Reading",
+              "type": "string"
+            },
+            "Town": {
+              "value": 44,
+              "type": "integer"
+            },
+            "State": {
+              "value": 75,
+              "type": "integer"
+            }
+          },
+          {
+            "Grade": {
+              "type": "string",
+              "value": "Grade 4"
+            },
+            "Subject": {
+              "value": "Math",
+              "type": "string"
+            },
+            "Town": {
+              "value": 32,
+              "type": "integer"
+            },
+            "State": {
+              "value": 67,
+              "type": "integer"
+            }
+          },
+          {
+            "Grade": {
+              "type": "string",
+              "value": "Grade 6"
+            },
+            "Subject": {
+              "value": "Math",
+              "type": "string"
+            },
+            "Town": {
+              "value": 42,
+              "type": "integer"
+            },
+            "State": {
+              "value": 72,
+              "type": "integer"
+            }
+          },
+          {
+            "Grade": {
+              "type": "string",
+              "value": "Grade 8"
+            },
+            "Subject": {
+              "value": "Math",
+              "type": "string"
+            },
+            "Town": {
+              "value": 32,
+              "type": "integer"
+            },
+            "State": {
+              "value": 67,
+              "type": "integer"
+            }
+          },
+          {
+            "Grade": {
+              "type": "string",
+              "value": "Grade 4"
+            },
+            "Subject": {
+              "value": "Writing",
+              "type": "string"
+            },
+            "Town": {
+              "value": 35,
+              "type": "integer"
+            },
+            "State": {
+              "value": 67,
+              "type": "integer"
+            }
+          },
+          {
+            "Grade": {
+              "type": "string",
+              "value": "Grade 6"
+            },
+            "Subject": {
+              "value": "Writing",
+              "type": "string"
+            },
+            "Town": {
+              "value": 39,
+              "type": "integer"
+            },
+            "State": {
+              "value": 65,
+              "type": "integer"
+            }
+          },
+          {
+            "Grade": {
+              "type": "string",
+              "value": "Grade 8"
+            },
+            "Subject": {
+              "value": "Writing",
+              "type": "string"
+            },
+            "Town": {
+              "value": 30,
+              "type": "integer"
+            },
+            "State": {
+              "value": 65,
+              "type": "integer"
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Subject",
+          "Grade"
+        ],
+        "order": {
+          "Subject": [
+            "Reading",
+            "Math",
+            "Writing"
+          ],
+          "Grade": [
+            "Grade 4",
+            "Grade 6",
+            "Grade 8"
+          ]
+        }
+      }
     },
     {
       "type": "table",
       "name": "computers",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "State", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Grade",
+            "type": "string"
+          },
+          {
+            "id": "Town",
+            "type": "integer"
+          },
+          {
+            "id": "State",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Elementary", "type" : "string"},
-          {"value" : 3.8, "type" : "decimal"},
-          {"value" : 4.1, "type" : "decimal"}
-        ],
-        [
-          {"value" : "Middle", "type" : "string"},
-          {"value" : 1.5, "type" : "decimal"},
-          {"value" : 2.7, "type" : "decimal"}
-        ],
-        [
-          {"value" : "Secondary", "type" : "string"},
-          {"value" : 9.0, "type" : "decimal"},
-          {"value" : 2.9, "type" : "decimal"}
+        "records": [
+          {
+            "Grade": {
+              "value": "Elementary",
+              "type": "string"
+            },
+            "Town": {
+              "value": 3.8,
+              "type": "decimal"
+            },
+            "State": {
+              "value": 4.1,
+              "type": "decimal"
+            }
+          },
+          {
+            "Grade": {
+              "value": "Middle",
+              "type": "string"
+            },
+            "Town": {
+              "value": 1.5,
+              "type": "decimal"
+            },
+            "State": {
+              "value": 2.7,
+              "type": "decimal"
+            }
+          },
+          {
+            "Grade": {
+              "value": "Secondary",
+              "type": "string"
+            },
+            "Town": {
+              "value": 9,
+              "type": "decimal"
+            },
+            "State": {
+              "value": 2.9,
+              "type": "decimal"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "formats" : {
-          "decimal" : ",.1f"
+        "nest": [
+          "Grade"
+        ],
+        "order": {
+          "Grade": [
+            "Elementary",
+            "Middle",
+            "Secondary"
+          ]
+        },
+        "formats": {
+          "decimal": ",.1f"
         }
       }
     },
     {
       "type": "table",
       "name": "class_size",
-      "data": [
-        [
-          {"value" : "Grade K", "type" : "string"},
-          {"value" : 17.9, "type" : "decimal"}
+      "data": {
+        "fields": [
+          {
+            "id": "Grade",
+            "type": "string"
+          },
+          {
+            "id": "Class Size",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Grade 2", "type" : "string"},
-          {"value" : 19.7, "type" : "decimal"}
-        ],
-        [
-          {"value" : "Grade 5", "type" : "string"},
-          {"value" : 19.6, "type" : "decimal"}
-        ],
-        [
-          {"value" : "Grade 7", "type" : "string"},
-          {"value" : 21.5, "type" : "decimal"}
-        ],
-        [
-          {"value" : "High School", "type" : "string"},
-          {"value" : 19.7, "type" : "decimal"}
+        "records": [
+          {
+            "Grade": {
+              "value": "Grade K",
+              "type": "string"
+            },
+            "Class Size": {
+              "value": 17.9,
+              "type": "decimal"
+            }
+          },
+          {
+            "Grade": {
+              "value": "Grade 2",
+              "type": "string"
+            },
+            "Class Size": {
+              "value": 19.7,
+              "type": "decimal"
+            }
+          },
+          {
+            "Grade": {
+              "value": "Grade 5",
+              "type": "string"
+            },
+            "Class Size": {
+              "value": 19.6,
+              "type": "decimal"
+            }
+          },
+          {
+            "Grade": {
+              "value": "Grade 7",
+              "type": "string"
+            },
+            "Class Size": {
+              "value": 21.5,
+              "type": "decimal"
+            }
+          },
+          {
+            "Grade": {
+              "value": "High School",
+              "type": "string"
+            },
+            "Class Size": {
+              "value": 19.7,
+              "type": "decimal"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "header" : false,
-        "formats" : {
-          "decimal" : ",.1f"
+        "nest": [
+          "Grade"
+        ],
+        "order": {
+          "Grade": [
+            "Grade K",
+            "Grade 2",
+            "Grade 5",
+            "Grade 7",
+            "High School"
+          ]
+        },
+        "header": false,
+        "formats": {
+          "decimal": ",.1f"
         }
       }
     },
     {
       "type": "table",
       "name": "sat",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "State", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Subject",
+            "type": "string"
+          },
+          {
+            "id": "Town",
+            "type": "integer"
+          },
+          {
+            "id": "State",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Reading", "type" : "string"},
-          {"value" : 402, "type" : "integer"},
-          {"value" : 502, "type" : "integer"}
-        ],
-        [
-          {"value" : "Writing", "type" : "string"},
-          {"value" : 400, "type" : "integer"},
-          {"value" : 506, "type" : "integer"}
-        ],
-        [
-          {"value" : "Math", "type" : "string"},
-          {"value" : 392, "type" : "integer"},
-          {"value" : 506, "type" : "integer"}
+        "records": [
+          {
+            "Subject": {
+              "value": "Reading",
+              "type": "string"
+            },
+            "Town": {
+              "value": 402,
+              "type": "integer"
+            },
+            "State": {
+              "value": 502,
+              "type": "integer"
+            }
+          },
+          {
+            "Subject": {
+              "value": "Writing",
+              "type": "string"
+            },
+            "Town": {
+              "value": 400,
+              "type": "integer"
+            },
+            "State": {
+              "value": 506,
+              "type": "integer"
+            }
+          },
+          {
+            "Subject": {
+              "value": "Math",
+              "type": "string"
+            },
+            "Town": {
+              "value": 392,
+              "type": "integer"
+            },
+            "State": {
+              "value": 506,
+              "type": "integer"
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Subject"
+        ],
+        "order": {
+          "Subject": [
+            "Reading",
+            "Writing",
+            "Math"
+          ]
+        }
+      }
     },
     {
       "type": "table",
       "name": "revenue",
-      "data": [
-        [
-          {"value" : "Total Revenue (2012)", "type" : "string"},
-          {"value" : 573734000, "type" : "currency"}
+      "data": {
+        "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Value",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Tax Revenue", "type" : "string"},
-          {"value" : 277245000, "type" : "currency"}
-        ],
-        [
-          {"value" : "Non-tax Revenue", "type" : "string"},
-          {"value" : 296489000, "type" : "currency"}
-        ],
-        [
-          {"value" : "Intergovernmental", "type" : "string"},
-          {"value" : 280582000, "type" : "currency"}
+        "records": [
+          {
+            "Indicator": {
+              "value": "Total Revenue (2012)",
+              "type": "string"
+            },
+            "Value": {
+              "value": 573734000,
+              "type": "currency"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Tax Revenue",
+              "type": "string"
+            },
+            "Value": {
+              "value": 277245000,
+              "type": "currency"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Non-tax Revenue",
+              "type": "string"
+            },
+            "Value": {
+              "value": 296489000,
+              "type": "currency"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Intergovernmental",
+              "type": "string"
+            },
+            "Value": {
+              "value": 280582000,
+              "type": "currency"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "header" : false
+        "nest": [
+          "Indicator"
+        ],
+        "order": {
+          "Indicator": [
+            "Total Revenue (2012)",
+            "Tax Revenue",
+            "Non-tax Revenue",
+            "Intergovernmental"
+          ]
+        },
+        "header": false
       }
     },
     {
       "type": "table",
       "name": "tax",
-      "data": [
-        [
-          {"value" : "Per Capita Tax (2012)", "type" : "string"},
-          {"value" : 2200, "type" : "currency"}
+      "data": {
+        "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Value",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "As % of State Average", "type" : "string"},
-          {"value" : 0.86, "type" : "percent"}
+        "records": [
+          {
+            "Indicator": {
+              "value": "Per Capita Tax (2012)",
+              "type": "string"
+            },
+            "Value": {
+              "value": 2200,
+              "type": "currency"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "As % of State Average",
+              "type": "string"
+            },
+            "Value": {
+              "value": 0.86,
+              "type": "percent"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "header" : false
+        "nest": [
+          "Indicator"
+        ],
+        "order": {
+          "Indicator": [
+            "Per Capita Tax (2012)",
+            "As % of State Average"
+          ]
+        },
+        "header": false
       }
     },
     {
       "type": "table",
       "name": "expenditures",
-      "data": [
-        [
-          {"value" : "Total Expenditures (2012)", "type" : "string"},
-          {"value" : 532626000, "type" : "currency"}
+      "data": {
+        "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Value",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Education", "type" : "string"},
-          {"value" : 313069000, "type" : "currency"}
-        ],
-        [
-          {"value" : "Other", "type" : "string"},
-          {"value" : 219557000, "type" : "currency"}
+        "records": [
+          {
+            "Indicator": {
+              "value": "Total Expenditures (2012)",
+              "type": "string"
+            },
+            "Value": {
+              "value": 532626000,
+              "type": "currency"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Education",
+              "type": "string"
+            },
+            "Value": {
+              "value": 313069000,
+              "type": "currency"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Other",
+              "type": "string"
+            },
+            "Value": {
+              "value": 219557000,
+              "type": "currency"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "header" : false
+        "nest": [
+          "Indicator"
+        ],
+        "order": {
+          "Indicator": [
+            "Total Expenditures (2012)",
+            "Education",
+            "Other"
+          ]
+        },
+        "header": false
       }
     },
     {
       "type": "table",
       "name": "indebtedness",
-      "data": [
-        [
-          {"value" : "Total Indebtedness (2012)", "type" : "string"},
-          {"value" : 337080000, "type" : "currency"}
+      "data": {
+        "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Value",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "As % of Expenditures", "type" : "string"},
-          {"value" : 0.633, "type" : "percent"}
-        ],
-        [
-          {"value" : "Per Capita", "type" : "string"},
-          {"value" : 2699, "type" : "currency"}
-        ],
-        [
-          {"value" : "As % of State Average", "type" : "string"},
-          {"value" : 1.196, "type" : "percent"}
+        "records": [
+          {
+            "Indicator": {
+              "value": "Total Indebtedness (2012)",
+              "type": "string"
+            },
+            "Value": {
+              "value": 337080000,
+              "type": "currency"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "As % of Expenditures",
+              "type": "string"
+            },
+            "Value": {
+              "value": 0.633,
+              "type": "percent"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Per Capita",
+              "type": "string"
+            },
+            "Value": {
+              "value": 2699,
+              "type": "currency"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "As % of State Average",
+              "type": "string"
+            },
+            "Value": {
+              "value": 1.196,
+              "type": "percent"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "header" : false
+        "nest": [
+          "Indicator"
+        ],
+        "order": {
+          "Indicator": [
+            "Total Indebtedness (2012)",
+            "As % of Expenditures",
+            "Per Capita",
+            "As % of State Average"
+          ]
+        },
+        "header": false
       }
     },
     {
       "type": "table",
       "name": "debt_service",
-      "data": [
-        [
-          {"value" : "Annual Debt Service (2012)", "type" : "string"},
-          {"value" : 39647000, "type" : "currency"}
+      "data": {
+        "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Value",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "As % of Expenditures", "type" : "string"},
-          {"value" : 0.074, "type" : "percent"}
+        "records": [
+          {
+            "Indicator": {
+              "value": "Annual Debt Service (2012)",
+              "type": "string"
+            },
+            "Value": {
+              "value": 39647000,
+              "type": "currency"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "As % of Expenditures",
+              "type": "string"
+            },
+            "Value": {
+              "value": 0.074,
+              "type": "percent"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "header" : false
+        "nest": [
+          "Indicator"
+        ],
+        "order": {
+          "Indicator": [
+            "Annual Debt Service (2012)",
+            "As % of Expenditures"
+          ]
+        },
+        "header": false
       }
     },
     {
       "type": "table",
       "name": "eq_grand_list",
-      "data": [
-        [
-          {"value" : "Eq. Net Grand List (2010)", "type" : "string"},
-          {"value" : 7147577757, "type" : "currency"}
+      "data": {
+        "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Value",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Per Capita", "type" : "string"},
-          {"value" : 57236, "type" : "currency"}
-        ],
-        [
-          {"value" : "As % of State Average", "type" : "string"},
-          {"value" : 0.39, "type" : "percent"}
+        "records": [
+          {
+            "Indicator": {
+              "value": "Eq. Net Grand List (2010)",
+              "type": "string"
+            },
+            "Value": {
+              "value": 7147577757,
+              "type": "currency"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Per Capita",
+              "type": "string"
+            },
+            "Value": {
+              "value": 57236,
+              "type": "currency"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "As % of State Average",
+              "type": "string"
+            },
+            "Value": {
+              "value": 0.39,
+              "type": "percent"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "header" : false
+        "nest": [
+          "Indicator"
+        ],
+        "order": {
+          "Indicator": [
+            "Eq. Net Grand List (2010)",
+            "Per Capita",
+            "As % of State Average"
+          ]
+        },
+        "header": false
       }
     },
     {
       "type": "table",
       "name": "bond_mill",
-      "data": [
-        [
-          {"value" : "Moody's Bond Rating (2012)", "type" : "string"},
-          {"value" : "A1", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Value",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Actual Mill Rate (2012)", "type" : "string"},
-          {"value" : 71.79, "type" : "decimal"}
-        ],
-        [
-          {"value" : "Equalized Mill Rate (2012)", "type" : "string"},
-          {"value" : 38.96, "type" : "decimal"}
-        ],
-        [
-          {"value" : "% of Grand List Com/Ind (2012)", "type" : "string"},
-          {"value" : 0.412, "type" : "percent"}
+        "records": [
+          {
+            "Indicator": {
+              "value": "Moody's Bond Rating (2012)",
+              "type": "string"
+            },
+            "Value": {
+              "value": "A1",
+              "type": "string"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Actual Mill Rate (2012)",
+              "type": "string"
+            },
+            "Value": {
+              "value": 71.79,
+              "type": "decimal"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Equalized Mill Rate (2012)",
+              "type": "string"
+            },
+            "Value": {
+              "value": 38.96,
+              "type": "decimal"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "% of Grand List Com/Ind (2012)",
+              "type": "string"
+            },
+            "Value": {
+              "value": 0.412,
+              "type": "percent"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "header" : false
+        "nest": [
+          "Indicator"
+        ],
+        "order": {
+          "Indicator": [
+            "Moody's Bond Rating (2012)",
+            "Actual Mill Rate (2012)",
+            "Equalized Mill Rate (2012)",
+            "% of Grand List Com/Ind (2012)"
+          ]
+        },
+        "header": false
       }
     },
     {
       "type": "table",
       "name": "housing",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "County", "type" : "string"},
-          {"value" : "State", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Value",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Total Units", "type" : "string"},
-          {"value" : 54182, "type" : "integer"},
-          {"value" : 373676, "type" : "integer"},
-          {"value" : 1485445, "type" : "integer"}
-        ],
-        [
-          {"value" : "% Single Unit", "type" : "string"},
-          {"value" : 0.180, "type" : "percent"},
-          {"value" : 0.612, "type" : "percent"},
-          {"value" : 0.646, "type" : "percent"}
-        ],
-        [
-          {"value" : "New Permits Auth (2012)", "type" : "string"},
-          {"value" : 24, "type" : "integer"},
-          {"value" : 838, "type" : "integer"},
-          {"value" : 4669, "type" : "integer"}
-        ],
-        [
-          {"value" : "As % Existing Units", "type" : "string"},
-          {"value" : 0.0004, "type" : "percent"},
-          {"value" : 0.0022, "type" : "percent"},
-          {"value" : 0.0031, "type" : "percent"}
-        ],
-        [
-          {"value" : "Demolitions (2012)", "type" : "string"},
-          {"value" : 44, "type" : "integer"},
-          {"value" : 192, "type" : "integer"},
-          {"value" : 955, "type" : "integer"}
-        ],
-        [
-          {"value" : "House Sales (2011)", "type" : "string"},
-          {"value" : "NA", "type" : "string"},
-          {"value" : 2789, "type" : "integer"},
-          {"value" : 13847, "type" : "integer"}
-        ],
-        [
-          {"value" : "Median Price", "type" : "string"},
-          {"value" : "NA", "type" : "string"},
-          {"value" : 256000, "type" : "currency"},
-          {"value" : 291000, "type" : "currency"}
-        ],
-        [
-          {"value" : "Built Pre-1950 share (2012)", "type" : "string"},
-          {"value" : 0.523, "type" : "percent"},
-          {"value" : 0.291, "type" : "percent"},
-          {"value" : 0.302, "type" : "percent"}
-        ],
-        [
-          {"value" : "Owner Occupied Dwellings (2012)", "type" : "string"},
-          {"value" : 11322, "type" : "integer"},
-          {"value" : 230060, "type" : "integer"},
-          {"value" : 929560, "type" : "integer"}
-        ],
-        [
-          {"value" : "As % Total Dwellings", "type" : "string"},
-          {"value" : 0.21, "type" : "percent"},
-          {"value" : 0.62, "type" : "percent"},
-          {"value" : 0.63, "type" : "percent"}
-        ],
-        [
-          {"value" : "Subsidized Housing (2012)", "type" : "string"},
-          {"value" : 19245, "type" : "integer"},
-          {"value" : 52064, "type" : "integer"},
-          {"value" : 161379, "type" : "integer"}
+        "records": [
+          {
+            "Indicator": {
+              "value": "",
+              "type": "string"
+            },
+            "Value": {
+              "value": "Town",
+              "type": "string"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Total Units",
+              "type": "string"
+            },
+            "Value": {
+              "value": 54182,
+              "type": "integer"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "% Single Unit",
+              "type": "string"
+            },
+            "Value": {
+              "value": 0.18,
+              "type": "percent"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "New Permits Auth (2012)",
+              "type": "string"
+            },
+            "Value": {
+              "value": 24,
+              "type": "integer"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "As % Existing Units",
+              "type": "string"
+            },
+            "Value": {
+              "value": 0.0004,
+              "type": "percent"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Demolitions (2012)",
+              "type": "string"
+            },
+            "Value": {
+              "value": 44,
+              "type": "integer"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "House Sales (2011)",
+              "type": "string"
+            },
+            "Value": {
+              "value": "NA",
+              "type": "string"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Median Price",
+              "type": "string"
+            },
+            "Value": {
+              "value": "NA",
+              "type": "string"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Built Pre-1950 share (2012)",
+              "type": "string"
+            },
+            "Value": {
+              "value": 0.523,
+              "type": "percent"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Owner Occupied Dwellings (2012)",
+              "type": "string"
+            },
+            "Value": {
+              "value": 11322,
+              "type": "integer"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "As % Total Dwellings",
+              "type": "string"
+            },
+            "Value": {
+              "value": 0.21,
+              "type": "percent"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Subsidized Housing (2012)",
+              "type": "string"
+            },
+            "Value": {
+              "value": 19245,
+              "type": "integer"
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Indicator"
+        ],
+        "order": {
+          "Indicator": [
+            "Total Units",
+            "% Single Unit",
+            "New Permits Auth (2012)",
+            "As % Existing Units",
+            "Demolitions (2012)",
+            "House Sales (2011)",
+            "Median Price",
+            "Built Pre-1950 share (2012)",
+            "Owner Occupied Dwellings (2012)",
+            "As % Total Dwellings",
+            "Subsidized Housing (2012)"
+          ]
+        }
+      }
     },
     {
       "type": "table",
       "name": "house_sales",
-      "data": [
-        [
-          {"value" : "Number of Sales", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "County", "type" : "string"},
-          {"value" : "State", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Price Range",
+            "type": "string"
+          },
+          {
+            "id": "Town",
+            "type": "integer"
+          },
+          {
+            "id": "County",
+            "type": "integer"
+          },
+          {
+            "id": "State",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Less than $100,000", "type" : "string"},
-          {"value" : "NA", "type" : "string"},
-          {"value" : 36, "type" : "integer"},
-          {"value" : 392, "type" : "integer"}
-        ],
-        [
-          {"value" : "$100,000-$199,999", "type" : "string"},
-          {"value" : "NA", "type" : "string"},
-          {"value" : 777, "type" : "integer"},
-          {"value" : 3205, "type" : "integer"}
-        ],
-        [
-          {"value" : "$200,000-$299,999", "type" : "string"},
-          {"value" : "NA", "type" : "string"},
-          {"value" : 899, "type" : "integer"},
-          {"value" : 3494, "type" : "integer"}
-        ],
-        [
-          {"value" : "$300,000-$399,999", "type" : "string"},
-          {"value" : "NA", "type" : "string"},
-          {"value" : 503, "type" : "integer"},
-          {"value" : 2086, "type" : "integer"}
-        ],
-        [
-          {"value" : "$400,000 or More", "type" : "string"},
-          {"value" : "NA", "type" : "string"},
-          {"value" : 574, "type" : "integer"},
-          {"value" : 4670, "type" : "integer"}
+        "records": [
+          {
+            "Price Range": {
+              "value": "Less than $100,000",
+              "type": "string"
+            },
+            "Town": {
+              "value": "NA",
+              "type": "string"
+            },
+            "County": {
+              "value": 36,
+              "type": "integer"
+            },
+            "State": {
+              "value": 392,
+              "type": "integer"
+            }
+          },
+          {
+            "Price Range": {
+              "value": "$100,000-$199,999",
+              "type": "string"
+            },
+            "Town": {
+              "value": "NA",
+              "type": "string"
+            },
+            "County": {
+              "value": 777,
+              "type": "integer"
+            },
+            "State": {
+              "value": 3205,
+              "type": "integer"
+            }
+          },
+          {
+            "Price Range": {
+              "value": "$200,000-$299,999",
+              "type": "string"
+            },
+            "Town": {
+              "value": "NA",
+              "type": "string"
+            },
+            "County": {
+              "value": 899,
+              "type": "integer"
+            },
+            "State": {
+              "value": 3494,
+              "type": "integer"
+            }
+          },
+          {
+            "Price Range": {
+              "value": "$300,000-$399,999",
+              "type": "string"
+            },
+            "Town": {
+              "value": "NA",
+              "type": "string"
+            },
+            "County": {
+              "value": 503,
+              "type": "integer"
+            },
+            "State": {
+              "value": 2086,
+              "type": "integer"
+            }
+          },
+          {
+            "Price Range": {
+              "value": "$400,000 or More",
+              "type": "string"
+            },
+            "Town": {
+              "value": "NA",
+              "type": "string"
+            },
+            "County": {
+              "value": 574,
+              "type": "integer"
+            },
+            "State": {
+              "value": 4670,
+              "type": "integer"
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Price Range"
+        ],
+        "order": {
+          "Price Range": [
+            "Less than $100,000",
+            "$100,000-$199,999",
+            "$200,000-$299,999",
+            "$300,000-$399,999",
+            "$400,000 or More"
+          ]
+        }
+      }
     },
     {
       "type": "table",
       "name": "place_of_residence",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "County", "type" : "string"},
-          {"value" : "State", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Cohort",
+            "type": "string"
+          },
+          {
+            "id": "Town",
+            "type": "integer"
+          },
+          {
+            "id": "County",
+            "type": "integer"
+          },
+          {
+            "id": "State",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Labor Force", "type" : "string"},
-          {"value" : 49677, "type" :"integer"},
-          {"value" : 457617, "type" :"integer"},
-          {"value" : 1859934, "type" :"integer"}
-        ],
-        [
-          {"value" : "Employed", "type" : "string"},
-          {"value" : 42396, "type" :"integer"},
-          {"value" : 420586, "type" :"integer"},
-          {"value" : 1715398, "type" :"integer"}
-        ],
-        [
-          {"value" : "Unemployed", "type" : "string"},
-          {"value" : 7281, "type" :"integer"},
-          {"value" : 37031, "type" :"integer"},
-          {"value" : 144536, "type" :"integer"}
-        ],
-        [
-          {"value" : "Unemployment Rate", "type" : "string"},
-          {"value" : 0.147, "type" : "percent"},
-          {"value" : 0.081, "type" : "percent"},
-          {"value" : 0.078, "type" : "percent"}
+        "records": [
+          {
+            "Cohort": {
+              "value": "Labor Force",
+              "type": "string"
+            },
+            "Town": {
+              "value": 49677,
+              "type": "integer"
+            },
+            "County": {
+              "value": 457617,
+              "type": "integer"
+            },
+            "State": {
+              "value": 1859934,
+              "type": "integer"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Employed",
+              "type": "string"
+            },
+            "Town": {
+              "value": 42396,
+              "type": "integer"
+            },
+            "County": {
+              "value": 420586,
+              "type": "integer"
+            },
+            "State": {
+              "value": 1715398,
+              "type": "integer"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Unemployed",
+              "type": "string"
+            },
+            "Town": {
+              "value": 7281,
+              "type": "integer"
+            },
+            "County": {
+              "value": 37031,
+              "type": "integer"
+            },
+            "State": {
+              "value": 144536,
+              "type": "integer"
+            }
+          },
+          {
+            "Cohort": {
+              "value": "Unemployment Rate",
+              "type": "string"
+            },
+            "Town": {
+              "value": 0.147,
+              "type": "percent"
+            },
+            "County": {
+              "value": 0.081,
+              "type": "percent"
+            },
+            "State": {
+              "value": 0.078,
+              "type": "percent"
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Cohort"
+        ],
+        "order": {
+          "Cohort": [
+            "Labor Force",
+            "Employed",
+            "Unemployed",
+            "Unemployment Rate"
+          ]
+        }
+      }
     },
     {
       "type": "table",
       "name": "place_of_work",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "County", "type" : "string"},
-          {"value" : "State", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Town",
+            "type": "integer"
+          },
+          {
+            "id": "County",
+            "type": "integer"
+          },
+          {
+            "id": "State",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Units", "type" : "string"},
-          {"value" : 3526, "type" : "integer"},
-          {"value" : 26224, "type" : "integer"},
-          {"value" : 113697, "type" : "integer"}
-        ],
-        [
-          {"value" : "Total Employment", "type" : "string"},
-          {"value" : 112709, "type" : "integer"},
-          {"value" : 495009, "type" : "integer"},
-          {"value" : 1640223, "type" : "integer"}
-        ],
-        [
-          {"value" : "200-'13 AAGR", "type" : "string"},
-          {"value" : -0.0070, "type" : "percent"},
-          {"value" : -0.0010, "type" : "percent"},
-          {"value" : 0.0020, "type" : "percent"}
-        ],
-        [
-          {"value" : "Mfg Employment", "type" : "string"},
-          {"value" : 1236, "type" : "integer"},
-          {"value" : 53045, "type" : "integer"},
-          {"value" : 163828, "type" : "integer"}
+        "records": [
+          {
+            "Indicator": {
+              "value": "Units",
+              "type": "string"
+            },
+            "Town": {
+              "value": 3526,
+              "type": "integer"
+            },
+            "County": {
+              "value": 26224,
+              "type": "integer"
+            },
+            "State": {
+              "value": 113697,
+              "type": "integer"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Total Employment",
+              "type": "string"
+            },
+            "Town": {
+              "value": 112709,
+              "type": "integer"
+            },
+            "County": {
+              "value": 495009,
+              "type": "integer"
+            },
+            "State": {
+              "value": 1640223,
+              "type": "integer"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "200-'13 AAGR",
+              "type": "string"
+            },
+            "Town": {
+              "value": -0.007,
+              "type": "percent"
+            },
+            "County": {
+              "value": -0.001,
+              "type": "percent"
+            },
+            "State": {
+              "value": 0.002,
+              "type": "percent"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Mfg Employment",
+              "type": "string"
+            },
+            "Town": {
+              "value": 1236,
+              "type": "integer"
+            },
+            "County": {
+              "value": 53045,
+              "type": "integer"
+            },
+            "State": {
+              "value": 163828,
+              "type": "integer"
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Indicator"
+        ],
+        "order": {
+          "Indicator": [
+            "Units",
+            "Total Employment",
+            "2000-'13 AAGR",
+            "Mfg Employment"
+          ]
+        }
+      }
     },
     {
-      "type": "table",
+      "type": "simpletable",
       "name": "commuters",
-      "data": [
-        [
-          {"value" : "Commuters Into Town From:", "type" : "string"},
-          {"value" : "Town Residents Commuting To:", "type" : "string"}
-        ],
-        [
-          {"value" : "Hartford", "type" : "string"},
-          {"value" : 14661, "type" : "integer"},
-          {"value" : "Hartford", "type" : "string"},
-          {"value" : 14661, "type" : "integer"}
-        ],
-        [
-          {"value" : "West Hartford", "type" : "string"},
-          {"value" : 7687, "type" : "integer"},
-          {"value" : "West Hartford", "type" : "string"},
-          {"value" : 2981, "type" : "integer"}
-        ],
-        [
-          {"value" : "Manchester", "type" : "string"},
-          {"value" : 5223, "type" : "integer"},
-          {"value" : "East Hartford", "type" : "string"},
-          {"value" : 1949, "type" : "integer"}
-        ],
-        [
-          {"value" : "East Hartford", "type" : "string"},
-          {"value" : 5174, "type" : "integer"},
-          {"value" : "Bloomfield", "type" : "string"},
-          {"value" : 1854, "type" : "integer"}
-        ],
-        [
-          {"value" : "Windsor", "type" : "string"},
-          {"value" : 3613, "type" : "integer"},
-          {"value" : "Farmington", "type" : "string"},
-          {"value" : 1680, "type" : "integer"}
-        ],
-        [
-          {"value" : "New Britain", "type" : "string"},
-          {"value" : 3494, "type" : "integer"},
-          {"value" : "Windsor", "type" : "string"},
-          {"value" : 1433, "type" : "integer"}
-        ],
-        [
-          {"value" : "Wethersfield", "type" : "string"},
-          {"value" : 3463, "type" : "integer"},
-          {"value" : "Manchester", "type" : "string"},
-          {"value" : 1404, "type" : "integer"}
-        ],
-        [
-          {"value" : "Glastonbury", "type" : "string"},
-          {"value" : 3392, "type" : "integer"},
-          {"value" : "New Britain", "type" : "string"},
-          {"value" : 1104, "type" : "integer"}
-        ],
-        [
-          {"value" : "Newington", "type" : "string"},
-          {"value" : 3369, "type" : "integer"},
-          {"value" : "Newington", "type" : "string"},
-          {"value" : 1024, "type" : "integer"}
+      "data": {
+        "fields": [],
+        "records": [
+          [
+            {
+              "value": "Commuters Into Town From:",
+              "type": "string"
+            },
+            {
+              "value": "Town Residents Commuting To:",
+              "type": "string"
+            }
+          ],
+          [
+            {
+              "value": "Hartford",
+              "type": "string"
+            },
+            {
+              "value": 14661,
+              "type": "integer"
+            },
+            {
+              "value": "Hartford",
+              "type": "string"
+            },
+            {
+              "value": 14661,
+              "type": "integer"
+            }
+          ],
+          [
+            {
+              "value": "West Hartford",
+              "type": "string"
+            },
+            {
+              "value": 7687,
+              "type": "integer"
+            },
+            {
+              "value": "West Hartford",
+              "type": "string"
+            },
+            {
+              "value": 2981,
+              "type": "integer"
+            }
+          ],
+          [
+            {
+              "value": "Manchester",
+              "type": "string"
+            },
+            {
+              "value": 5223,
+              "type": "integer"
+            },
+            {
+              "value": "East Hartford",
+              "type": "string"
+            },
+            {
+              "value": 1949,
+              "type": "integer"
+            }
+          ],
+          [
+            {
+              "value": "East Hartford",
+              "type": "string"
+            },
+            {
+              "value": 5174,
+              "type": "integer"
+            },
+            {
+              "value": "Bloomfield",
+              "type": "string"
+            },
+            {
+              "value": 1854,
+              "type": "integer"
+            }
+          ],
+          [
+            {
+              "value": "Windsor",
+              "type": "string"
+            },
+            {
+              "value": 3613,
+              "type": "integer"
+            },
+            {
+              "value": "Farmington",
+              "type": "string"
+            },
+            {
+              "value": 1680,
+              "type": "integer"
+            }
+          ],
+          [
+            {
+              "value": "New Britain",
+              "type": "string"
+            },
+            {
+              "value": 3494,
+              "type": "integer"
+            },
+            {
+              "value": "Windsor",
+              "type": "string"
+            },
+            {
+              "value": 1433,
+              "type": "integer"
+            }
+          ],
+          [
+            {
+              "value": "Wethersfield",
+              "type": "string"
+            },
+            {
+              "value": 3463,
+              "type": "integer"
+            },
+            {
+              "value": "Manchester",
+              "type": "string"
+            },
+            {
+              "value": 1404,
+              "type": "integer"
+            }
+          ],
+          [
+            {
+              "value": "Glastonbury",
+              "type": "string"
+            },
+            {
+              "value": 3392,
+              "type": "integer"
+            },
+            {
+              "value": "New Britain",
+              "type": "string"
+            },
+            {
+              "value": 1104,
+              "type": "integer"
+            }
+          ],
+          [
+            {
+              "value": "Newington",
+              "type": "string"
+            },
+            {
+              "value": 3369,
+              "type": "integer"
+            },
+            {
+              "value": "Newington",
+              "type": "string"
+            },
+            {
+              "value": 1024,
+              "type": "integer"
+            }
+          ]
         ]
-      ],
+      },
       "config": {}
     },
     {
       "type": "table",
       "name": "crime",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"},
-          {"value" : "State", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Town",
+            "type": "integer"
+          },
+          {
+            "id": "County",
+            "type": "integer"
+          },
+          {
+            "id": "State",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Per 100,000 Residents", "type" : "string"},
-          {"value" : 5441, "type" : "integer"},
-          {"value" : 2433, "type" : "integer"}
+        "records": [
+          {
+            "Indicator": {
+              "value": "Per 100,000 Residents",
+              "type": "string"
+            },
+            "Town": {
+              "value": 5441,
+              "type": "integer"
+            },
+            "County": {
+              "value": 2433,
+              "type": "integer"
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Indicator"
+        ]
+      }
     },
     {
       "type": "table",
       "name": "library",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Town",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Public Web Computers", "type" : "string"},
-          {"value" : 243, "type" : "integer"}
-        ],
-        [
-          {"value" : "Circulation per Capita", "type" : "string"},
-          {"value" : 4, "type" : "integer"}
+        "records": [
+          {
+            "Indicator": {
+              "value": "Public Web Computers",
+              "type": "string"
+            },
+            "Town": {
+              "value": 243,
+              "type": "integer"
+            }
+          },
+          {
+            "Indicator": {
+              "value": "Circulation per Capita",
+              "type": "string"
+            },
+            "Town": {
+              "value": 4,
+              "type": "integer"
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Indicator"
+        ],
+        "order": {
+          "Indicator": [
+            "Public Web Computers",
+            "Circulation per Capita"
+          ]
+        }
+      }
     },
     {
       "type": "table",
       "name": "family_assistance",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Town",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Temporary Assistance", "type" : "string"},
-          {"value" : 5772, "type" : "integer"}
+        "records": [
+          {
+            "Indicator": {
+              "value": "Temporary Assistance",
+              "type": "string"
+            },
+            "Town": {
+              "value": 5772,
+              "type": "integer"
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Indicator"
+        ]
+      }
     },
     {
       "type": "table",
-      "name": "population_assitance",
-      "data": [
-        [
-          {"value" : "", "type" : "string"},
-          {"value" : "Town", "type" : "string"}
+      "name": "population_assistance",
+      "data": {
+        "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Town",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Food Stamps", "type" : "string"},
-          {"value" : 51969, "type" : "integer"}
+        "records": [
+          {
+            "Indicator": {
+              "value": "Food Stamps",
+              "type": "string"
+            },
+            "Town": {
+              "value": 51969,
+              "type": "integer"
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "Indicator"
+        ]
+      }
     },
     {
       "type": "table",
       "name": "city_distance",
-      "data": [
-        [
-          {"value" : "City", "type" : "string"},
-          {"value" : "Miles", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "City",
+            "type": "string"
+          },
+          {
+            "id": "Miles",
+            "type": "integer"
+          }
         ],
-        [
-          {"value" : "Hartford", "type" : "string"},
-          {"value" : 0, "type" : "integer"}
-        ],
-        [
-          {"value" : "Boston", "type" : "string"},
-          {"value" : 94, "type" : "integer"}
-        ],
-        [
-          {"value" : "New York", "type" : "string"},
-          {"value" : 100, "type" : "integer"}
-        ],
-        [
-          {"value" : "Providence", "type" : "string"},
-          {"value" : 66, "type" : "integer"}
+        "records": [
+          {
+            "City": {
+              "value": "Hartford",
+              "type": "string"
+            },
+            "Miles": {
+              "value": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "City": {
+              "value": "Boston",
+              "type": "string"
+            },
+            "Miles": {
+              "value": 94,
+              "type": "integer"
+            }
+          },
+          {
+            "City": {
+              "value": "New York",
+              "type": "string"
+            },
+            "Miles": {
+              "value": 100,
+              "type": "integer"
+            }
+          },
+          {
+            "City": {
+              "value": "Providence",
+              "type": "string"
+            },
+            "Miles": {
+              "value": 66,
+              "type": "integer"
+            }
+          }
         ]
-      ],
-      "config": {}
+      },
+      "config": {
+        "nest": [
+          "City"
+        ]
+      }
     },
     {
       "type": "table",
       "name": "electric",
-      "data": [
-        [
-          {"value" : "Connecticut Light & Power", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Info",
+            "type": "string"
+          }
         ],
-        [
-          {"value" : "(800) 286-2000", "type" : "string"}
+        "records": [
+          {
+            "Info": {
+              "value": "Connecticut Light & Power",
+              "type": "string"
+            }
+          },
+          {
+            "Info": {
+              "value": "(800) 286-2000",
+              "type": "string"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "header" : false
+        "header": false
       }
     },
     {
       "type": "table",
       "name": "gas",
-      "data": [
-        [
-          {"value" : "CNG Corp", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Info",
+            "type": "string"
+          }
         ],
-        [
-          {"value" : "(860) 727-3000", "type" : "string"}
+        "records": [
+          {
+            "Info": {
+              "value": "CNG Corp",
+              "type": "string"
+            }
+          },
+          {
+            "Info": {
+              "value": "(860) 727-3000",
+              "type": "string"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "header" : "false"
+        "header": "false"
       }
     },
     {
       "type": "table",
       "name": "water",
-      "data": [
-        [
-          {"value" : "Municipal Provider", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Info",
+            "type": "string"
+          }
         ],
-        [
-          {"value" : "Local Contact", "type" : "string"}
+        "records": [
+          {
+            "Info": {
+              "value": "Municipal Provider",
+              "type": "string"
+            }
+          },
+          {
+            "Info": {
+              "value": "Local Contact",
+              "type": "string"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "header" : "false"
+        "header": "false"
       }
     },
     {
       "type": "table",
       "name": "cable",
-      "data": [
-        [
-          {"value" : "Comcast Hartford", "type" : "string"}
+      "data": {
+        "fields": [
+          {
+            "id": "Info",
+            "type": "string"
+          }
         ],
-        [
-          {"value" : "(800) 266-2278", "type" : "string"}
+        "records": [
+          {
+            "Info": {
+              "value": "Comcast Hartford",
+              "type": "string"
+            }
+          },
+          {
+            "Info": {
+              "value": "(800) 266-2278",
+              "type": "string"
+            }
+          }
         ]
-      ],
+      },
       "config": {
-        "header" : "false"
+        "header": "false"
       }
     }
   ]

@@ -4,14 +4,6 @@ body {
 div {
     box-sizing: border-box;
 }
-
-th[colspan] {
-    /*border: 1px solid red;*/
-    text-align: center!important;
-}
-td[colspan] {
-    padding-right: 3%;
-}
 div#commuters table td {
     padding:0 5%;
 }
@@ -128,6 +120,9 @@ div.vis_container > * {
 div.vis_container > p {
     width: 95%
 }
+div.vis_container table {
+    width: 100%;
+}
 div.vis_container table td:not(:first-child),
 div.vis_container table th:not(:first-child) {
     max-width: 40pt;
@@ -154,6 +149,17 @@ th {
 }
 th, td {
     padding:0.5pt 0;
+}
+
+th[colspan] {
+    /*border: 1px solid red;*/
+    text-align: center!important;
+}
+td[colspan] {
+    padding-right: 3%;
+}
+th[colspan="1"] {
+    text-align: right!important;
 }
 div.vis_container > img {
     display: block;
