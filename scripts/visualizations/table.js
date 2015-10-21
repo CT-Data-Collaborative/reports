@@ -112,8 +112,10 @@ function tableChart() {
 
             // outermost container
             var container = d3.select(this).append("div")
-                    .attr("class", "table_container")
-                    .attr("style", "height:"+config.height+"px;");
+                    .attr("class", "table_container");
+            if ("height" in config && config.height > 0) {
+                    container.attr("style", "height:"+config.height+"px;");
+            }
 
             container = container.append("div");
 
@@ -139,28 +141,42 @@ function tableChart() {
 
             if (!("header" in config) || config.header == true) {
                 // now populate thead with th cells appropriately
-                populateHeader = function(data, thead, level) {
+                populateHeader = function(data, thead, header_zero, level) {
                     if (data instanceof Object && data[d3.keys(data)[0]] instanceof Object) {
                         var theadTR = thead.selectAll("tr#level_"+level);
                         if (theadTR.empty()) {
                             theadTR = thead.append("tr")
                                                         .attr("id", "level_"+level);
                             theadTR.append("th");
+                            if (header_zero !== false) {
+                                theadTR.select("th")
+                                    .text(header_zero);
+                            }
                         }
                         for (var key in data) {
                             theadTR.append("th")
                                 .text(key)
                                 .attr("colspan", d3.keys(data[key]).length);
-                                populateHeader(data[key], thead, level + 1)
+                                populateHeader(data[key], thead, header_zero, level + 1)
                         }
                     } else {
-                        thead.selectAll("tr#level_"+(level-1)).selectAll("th")
-                                .attr("colspan", 1);
+                        if (level <= 1 || "header_leaf" in config && config.header_leaf == true) {
+                            // Remove colspan from lowest level (leaf-level) <th> elements
+                            thead.selectAll("tr#level_"+(level-1)).selectAll("th")
+                                    .attr("colspan", null);
+                        } else {
+                            // remove leaf level headers altogether
+                            thead.selectAll("tr#level_"+(level-1)).remove();
+                        }
                         return
                     }
                 }
 
-                populateHeader(data[d3.keys(data)[0]], thead, 0);
+                var header_zero = false;
+                if ("header_zero" in config && config.header_zero == true) {
+                    header_zero = config.nest[0];
+                }
+                populateHeader(data[d3.keys(data)[0]], thead, header_zero, 0);
             }
 
             // populate body
@@ -181,6 +197,14 @@ function tableChart() {
                     .text(rowKey);
                 populateCells(data[rowKey], thead, tr, 0);
             }
+
+            // Some cleanup.
+            table.selectAll("th[colspan], td[colspan]")
+                .attr("colspan", function() {
+                    return (d3.select(this).attr("colspan") < 2 ? null : d3.select(this).attr("colspan"));
+                })
+
+
         });
     }
 

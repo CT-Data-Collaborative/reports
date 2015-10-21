@@ -11,7 +11,7 @@ def table(visObj):
     if "height" in visObj["config"] and visObj["config"]["height"] > 0 and visObj["config"]["height"] <= 12:
         visObj["config"]["height"] = visObj["config"]["height"]*CONNECT_HEIGHT/12.0
 
-    # visObj["data"] = visObj["data"]["records"]
+    visObj["data"] = visObj["data"]["records"]
 
     # print("++ TABLE ++")
     # print("Height: " + str(visObj["config"]["height"]))

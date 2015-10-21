@@ -606,6 +606,10 @@
           "Geography"
         ],
         "order": {
+          "leaf": [
+            "Number",
+            "Percent"
+          ],
           "Attainment": [
             "High School Graduate",
             "Associates Degree",
@@ -1140,6 +1144,10 @@
           "Age"
         ],
         "order": {
+          "leaf": [
+            "Number",
+            "Percent"
+          ],
           "Cohort": [
             "Male",
             "Female",
@@ -1295,10 +1303,11 @@
         ]
       },
       "config": {
+        "header_zero" : true,
         "nest": [
           "Sector"
         ],
-        "Order": {
+        "order": {
           "Sector": [
             "Total - All Industries",
             "23 - Construction",
@@ -1420,7 +1429,13 @@
       "config": {
         "nest": [
           "Company"
-        ]
+        ],
+        "order": {
+          "leaf": [
+            "Amount",
+            "% of Net"
+          ]
+        }
       }
     },
     {
@@ -1699,6 +1714,7 @@
         ]
       },
       "config": {
+        "header_leaf" : true,
         "nest": [
           "Subject",
           "Grade"
@@ -2406,28 +2422,34 @@
             "type": "string"
           },
           {
-            "id": "Value",
+            "id": "Town",
+            "type": "integer"
+          },
+          {
+            "id": "County",
+            "type": "integer"
+          },
+          {
+            "id": "State",
             "type": "integer"
           }
         ],
         "records": [
           {
             "Indicator": {
-              "value": "",
-              "type": "string"
-            },
-            "Value": {
-              "value": "Town",
-              "type": "string"
-            }
-          },
-          {
-            "Indicator": {
               "value": "Total Units",
               "type": "string"
             },
-            "Value": {
+            "Town": {
               "value": 54182,
+              "type": "integer"
+            },
+            "County": {
+              "value": 373676,
+              "type": "integer"
+            },
+            "State": {
+              "value": 1485445,
               "type": "integer"
             }
           },
@@ -2436,8 +2458,16 @@
               "value": "% Single Unit",
               "type": "string"
             },
-            "Value": {
+            "Town": {
               "value": 0.18,
+              "type": "percent"
+            },
+            "County": {
+              "value": 0.612,
+              "type": "percent"
+            },
+            "State": {
+              "value": 0.646,
               "type": "percent"
             }
           },
@@ -2446,8 +2476,16 @@
               "value": "New Permits Auth (2012)",
               "type": "string"
             },
-            "Value": {
+            "Town": {
               "value": 24,
+              "type": "integer"
+            },
+            "County": {
+              "value": 838,
+              "type": "integer"
+            },
+            "State": {
+              "value": 4669,
               "type": "integer"
             }
           },
@@ -2456,8 +2494,16 @@
               "value": "As % Existing Units",
               "type": "string"
             },
-            "Value": {
+            "Town": {
               "value": 0.0004,
+              "type": "percent"
+            },
+            "County": {
+              "value": 0.0022,
+              "type": "percent"
+            },
+            "State": {
+              "value": 0.0031,
               "type": "percent"
             }
           },
@@ -2466,8 +2512,16 @@
               "value": "Demolitions (2012)",
               "type": "string"
             },
-            "Value": {
+            "Town": {
               "value": 44,
+              "type": "integer"
+            },
+            "County": {
+              "value": 192,
+              "type": "integer"
+            },
+            "State": {
+              "value": 955,
               "type": "integer"
             }
           },
@@ -2476,9 +2530,17 @@
               "value": "House Sales (2011)",
               "type": "string"
             },
-            "Value": {
+            "Town": {
               "value": "NA",
               "type": "string"
+            },
+            "County": {
+              "value": 2789,
+              "type": "integer"
+            },
+            "State": {
+              "value": 13847,
+              "type": "integer"
             }
           },
           {
@@ -2486,9 +2548,17 @@
               "value": "Median Price",
               "type": "string"
             },
-            "Value": {
+            "Town": {
               "value": "NA",
               "type": "string"
+            },
+            "County": {
+              "value": 256000,
+              "type": "currency"
+            },
+            "State": {
+              "value": 291000,
+              "type": "currency"
             }
           },
           {
@@ -2496,8 +2566,16 @@
               "value": "Built Pre-1950 share (2012)",
               "type": "string"
             },
-            "Value": {
+            "Town": {
               "value": 0.523,
+              "type": "percent"
+            },
+            "County": {
+              "value": 0.291,
+              "type": "percent"
+            },
+            "State": {
+              "value": 0.302,
               "type": "percent"
             }
           },
@@ -2506,8 +2584,16 @@
               "value": "Owner Occupied Dwellings (2012)",
               "type": "string"
             },
-            "Value": {
+            "Town": {
               "value": 11322,
+              "type": "integer"
+            },
+            "County": {
+              "value": 230060,
+              "type": "integer"
+            },
+            "State": {
+              "value": 929560,
               "type": "integer"
             }
           },
@@ -2516,8 +2602,16 @@
               "value": "As % Total Dwellings",
               "type": "string"
             },
-            "Value": {
+            "Town": {
               "value": 0.21,
+              "type": "percent"
+            },
+            "County": {
+              "value": 0.62,
+              "type": "percent"
+            },
+            "State": {
+              "value": 0.63,
               "type": "percent"
             }
           },
@@ -2526,8 +2620,16 @@
               "value": "Subsidized Housing (2012)",
               "type": "string"
             },
-            "Value": {
+            "Town": {
               "value": 19245,
+              "type": "integer"
+            },
+            "County": {
+              "value": 52064,
+              "type": "integer"
+            },
+            "State": {
+              "value": 161379,
               "type": "integer"
             }
           }
@@ -2560,7 +2662,7 @@
       "data": {
         "fields": [
           {
-            "id": "Price Range",
+            "id": "Number of Sales",
             "type": "string"
           },
           {
@@ -2578,7 +2680,7 @@
         ],
         "records": [
           {
-            "Price Range": {
+            "Number of Sales": {
               "value": "Less than $100,000",
               "type": "string"
             },
@@ -2596,7 +2698,7 @@
             }
           },
           {
-            "Price Range": {
+            "Number of Sales": {
               "value": "$100,000-$199,999",
               "type": "string"
             },
@@ -2614,7 +2716,7 @@
             }
           },
           {
-            "Price Range": {
+            "Number of Sales": {
               "value": "$200,000-$299,999",
               "type": "string"
             },
@@ -2632,7 +2734,7 @@
             }
           },
           {
-            "Price Range": {
+            "Number of Sales": {
               "value": "$300,000-$399,999",
               "type": "string"
             },
@@ -2650,7 +2752,7 @@
             }
           },
           {
-            "Price Range": {
+            "Number of Sales": {
               "value": "$400,000 or More",
               "type": "string"
             },
@@ -2670,11 +2772,12 @@
         ]
       },
       "config": {
+        "header_zero" : true,
         "nest": [
-          "Price Range"
+          "Number of Sales"
         ],
         "order": {
-          "Price Range": [
+          "Number of Sales": [
             "Less than $100,000",
             "$100,000-$199,999",
             "$200,000-$299,999",

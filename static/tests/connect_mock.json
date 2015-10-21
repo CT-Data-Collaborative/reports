@@ -7342,6 +7342,12 @@
         "total": 4
       },
       "config": {
+        "header_leaf" : true,
+        "nest" : ["Race", "Age"],
+        "order" : {
+          "Race" : ["White", "Black", "Hispanic", "Other", "Total"],
+          "Age" : ["0 to 21", "0 to 5", "6 to 9", "10 to 15", "16 to 19", "20 to 21"]
+        },
         "title": "Children Residing in Region, Children in Need of Treatment, Children Who Will Have Serious Emotional Disturbance in Their Lifetime by Age and Race",
         "height": 3,
         "width": 12,

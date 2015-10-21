@@ -67,16 +67,6 @@ geoData = JSON.parse(geojson);
 chart = mapChart();
 
 // use available config parameters to override defaults
-// height
-if ("height" in config && config.height > 0) {
-    chart.height(config.height);
-}
-
-// width
-if ("width" in config && config.width > 0) {
-    chart.width(config.width);
-}
-
 // margin
 if ("margin" in config) {
     m = chart.margin();
@@ -88,11 +78,20 @@ if ("margin" in config) {
     chart.width(h - config.margin.left - config.margin.right);
 }
 
+// height
+if ("height" in config && config.height > 0) {
+    chart.height(config.height);
+}
+
+// width
+if ("width" in config && config.width > 0) {
+    chart.width(config.width);
+}
+
 //Color scale
 if ("colors" in config && config.colors.length > 0) {
     chart.colors(config.colors);
 }
-
 // get body from jsdom, call chart function
 var document = jsdom.jsdom();
 var body = d3.select(document.body)
@@ -111,17 +110,17 @@ function mapChart() {
 
     function chart(selection) {
         selection.each(function(data) {
-
             var charLimit = Math.round(Math.floor((width + margin.right + margin.left) / 6) / 5) * 5;
 
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
             data = data;
 
-            data.forEach(function(o, oi, oa) {
-                data[oi].Value.value = 100 * o.Value.value;
-            });
-            // reshape data
+            // number of breaks must not be greater than number of data values
+            numBreaks = data.length < numBreaks ? data.length : numBreaks;
+
+            // get key for "value" being presented
+            datakey = d3.keys(data[0]).filter(function(k) { return k !== "FIPS"; }).pop();
 
             // SVG Container
             var svg = d3.select(this).append("svg")
@@ -161,8 +160,8 @@ function mapChart() {
                     return d.FIPS.value == feature.properties.GEOID10;
                 }).pop();
                 if (dataForLocation) {
-                    geoData.features[index].properties.DATAVALUE = dataForLocation.Value.value;
-                    dataType = dataForLocation.Value.type; // we only have one type, really
+                    geoData.features[index].properties.DATAVALUE = dataForLocation[datakey].value;
+                    dataType = dataForLocation[datakey].type; // we only have one type, really
                 } else {
                     geoData.features[index].properties.DATAVALUE = null;
                 }
@@ -171,7 +170,7 @@ function mapChart() {
 
             // define domain, range scale by jenks-type clustered breaks
             breaks = ss.ckmeans(
-                    data.map(function(d) { return d.Value.value }),
+                    data.map(function(d) { return d[datakey].value }),
                     numBreaks
                 );
             jenks.domain(breaks.map(function(cluster) {return cluster[0];}));

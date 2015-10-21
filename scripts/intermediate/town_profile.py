@@ -41,7 +41,14 @@ def get_extra_obj(data):
             ]
         },
         "config": {
-            "margin": 10,
+            "legend" : False,
+            "margin": {
+                "top": 10,
+                "right": 10,
+                "bottom": 10,
+                "left": 10
+            },
+            "colors" : ["#000000"],
             "width" : 275,
             "height" : 150
         }

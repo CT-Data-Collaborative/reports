@@ -46,7 +46,7 @@ CONNECT
         </div>
         <div class="col-xs-9">
             <ul class="float_list town_list">
-                {% for row in objects["town_list"]["data"]["records"] -%}
+                {% for row in objects["town_list"]["data"] -%}
                 <li>{{ " ".join(row | listValues) }}</li>
                 {% endfor -%}
             </ul>
