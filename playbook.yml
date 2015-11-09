@@ -1,0 +1,81 @@
+---
+- hosts: all
+  sudo: yes
+
+  tasks:
+    - name: run `apt-cache update`
+      apt: update_cache=yes
+
+    # - name: run `apt-cache upgrade`
+    #   apt: upgrade=yes
+
+    - name: install packages
+      apt: pkg={{item}} state=installed
+      with_items:
+        - g++
+        - libxml2-dev
+        - libxslt1-dev
+        - zlib1g-dev
+        - python-dev
+        - python-pip
+        - python-lxml
+        - libcairo2
+        - libpango1.0-0
+        - libgdk-pixbuf2.0-0
+        - libffi-dev
+        - shared-mime-info
+        - git
+        - unzip
+
+    - name: Download pdf report repository from git
+      git: repo=https://github.com/CT-Data-Collaborative/reports.git
+            dest=/var/www/reports
+            version=connect-mock # ONLY FOR DEVELOPMENT!!!
+
+    - name: Change permissions of code repo
+      command: chmod -R 0775 /var/www/reports
+
+    - name: Change owner of code repo
+      command: chown -R vagrant:vagrant /var/www/reports
+
+    - name: Download node deb source - comes with NPM
+      get_url: url="https://deb.nodesource.com/setup" dest=/tmp/nodedeb.sh
+      register: download_node_source
+
+    - name: run Node deb source installer
+      shell: bash /tmp/nodedeb.sh
+      when: download_node_source.changed
+
+    - name: Install nodejs and build-essential
+      apt: pkg={{item}} state=installed
+      with_items:
+        - nodejs
+        - build-essential
+
+    - name: install npm requirements
+      npm: path=/var/www/reports/node_modules/
+
+    - name: install virtualenv with pip
+      pip: name=virtualenv state=present
+
+    - name: install pip requirements - automagically (ansible) creates virtualenv
+      pip: chdir=/var/www/reports
+            virtualenv=venv
+            virtualenv_site_packages=yes
+            requirements=requirements.txt
+
+    # install fonts
+    # - name: List font zip files in repository font directory
+    #   shell: chdir=/var/www/reports/static/fonts ls -1 *.zip
+    #   register: font_files
+
+    # - name: Create necessary font directory
+    #   command: sudo mkdir /usr/share/fonts/truetype/{{item}} creates=/usr/share/fonts/truetype/{{item}}
+    #   with_items: font_files.stdout_lines
+
+    # - name: Unzip font into directory
+    #   command: unzip /var/www/reports/static/fonts/{{item}} -d /usr/share/fonts/truetype/{{item}}
+    #   with_items: font_files.stdout_lines
+
+    # - name: Update font cache
+    #   command: sudo fc-cache -fv
