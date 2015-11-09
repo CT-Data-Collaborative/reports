@@ -12,3 +12,20 @@ echo "Y" | sudo apt-get install g++ libxml2-dev libxslt1-dev zlib1g-dev python-d
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 echo "Y" | sudo apt-get install nodejs build-essential
 
+# install fonts
+# sudo apt-get install fonts-liberation fonts-roboto
+
+
+## THIS SHOULD WORK, BUT DOESN'T MAKE FONTS AVAILABLE.
+# Need unzip
+echo "Y" | sudo apt-get install unzip
+
+# Roboto
+sudo mkdir /usr/share/fonts/truetype/Roboto
+sudo unzip /vagrant/static/fonts/roboto.zip -d /usr/share/fonts/truetype/Roboto
+sudo fc-cache -fv
+
+# Liberation-Serif
+sudo mkdir /usr/share/fonts/truetype/Liberation-Serif
+sudo unzip /vagrant/static/fonts/Liberation-Serif.zip -d /usr/share/fonts/truetype/Liberation-Serif
+sudo fc-cache -fv
