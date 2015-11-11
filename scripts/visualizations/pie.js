@@ -175,6 +175,64 @@ function pieChart() {
             margin.top += (title.selectAll("tspan").size()-1) * 10;
             height = svg.attr("height") - margin.top - margin.bottom;
 
+            // Legend
+            // Legend scale
+            xl = d3.scale.ordinal()
+                    .rangeRoundBands([0, (width + ((margin.left + margin.right) / 2))], 0, 0)
+                    .domain(d3.range(2));
+
+            var legend = svg.append("g")
+                .attr("transform", "translate("+((margin.left + margin.right) / 2)+","+ (height+margin.top + (margin.bottom / 2.5)) +")");
+
+            var legendEntries = legend.selectAll(".entry")
+                .data(data)
+                .enter()
+                    .append("g")
+                    .attr("class", function(d, i) {
+                        var side = (i % 2 == 0 ? "left" : "right");
+                        return "entry " + side;
+                    });
+
+            legendEntries.each(function(d, i) {
+                d3.select(this).attr("transform", function() {
+                    var tx = xl(i % 2),
+                            ty = (Math.floor(i/2) * 10),
+                            side = (i % 2 == 0 ? "left" : "right"),
+                            yGroups = svg.selectAll("g."+side).size(),
+                            yOffset = svg.selectAll("g."+side).selectAll("tspan").size();// - yGroups;
+                    return "translate(" + tx + "," + (ty + (yOffset*8)) + ")";
+                });
+
+                d3.select(this).append("rect")
+                    .attr("stroke-width", "0.5px")
+                    .attr("stroke", "#202020")
+                    .attr("height", 8)
+                    .attr("width", 8)
+                    .attr("x", 0)
+                    .attr("y", -8)
+                    .attr("fill", colors(i));
+
+                var charLimit = Math.floor(Math.round(Math.floor((width + margin.right + margin.left) / 6) / 5) * 2.5);
+
+                d3.select(this).append("text")
+                    .attr("transform", "translate(10,0)")
+                    .attr("font-size", 8+"pt")
+                    .attr("fill", "#4A4A4A")
+                    .tspans(d3.wordwrap(d.label, charLimit), '8pt');
+            });
+
+            // augment margins based on legend entry tspans
+            var yOffset = d3.max([
+                svg.selectAll("g.left").selectAll("tspan").size(),
+                svg.selectAll("g.right").selectAll("tspan").size()
+            ]);
+
+            margin.bottom += (yOffset-1) * 8;
+            height = svg.attr("height") - margin.top - margin.bottom;
+
+            // augment legend position based on new margins
+            legend.attr("transform", "translate("+((margin.left + margin.right) / 2)+","+ (height+margin.top + (margin.bottom / 2.5)) +")");
+
             var pieGroup = svg.append("g")
                     .attr("width", width)
                     .attr("height", height)
@@ -308,38 +366,6 @@ function pieChart() {
                 }
             } while (again == true)
 
-            // Legend scale
-            xl = d3.scale.ordinal()
-                    .rangeRoundBands([0, (width + ((margin.left + margin.right) / 2))], 0, 0)
-                    .domain(d3.range(2));
-
-            var legend = svg.append("g")
-                .attr("transform", "translate("+((margin.left + margin.right) / 2)+","+ (height+margin.top + (margin.bottom / 2.5)) +")");
-
-            legend.selectAll("rect")
-                .data(data)
-                .enter()
-                    .append("rect")
-                        .attr("stroke-width", "0.5px")
-                        .attr("stroke", "#202020")
-                        .attr("height", 8)
-                        .attr("width", 8)
-                        .attr("x", function(d, i) { return xl(i % 2); })
-                        .attr("y", function(d, i) { return Math.floor(i/2) * 10; })
-                        .attr("fill", function(d, i) { return colors(i); });
-
-            legend.selectAll("text")
-                .data(data)
-                .enter()
-                    .append("text")
-                        .attr("font-size", 8+"pt")
-                        .attr("x", function(d, i) { return xl(i % 2); })
-                        .attr("y", function(d, i) { return Math.floor(i/2) * 10; })
-                        .attr("dy", 8)
-                        .attr("dx", 10)
-                        .attr("fill", "#4A4A4A")
-                        .text(function(d, i) { return label(d); });
-        
             if ("source" in config && config.source !== "") {
                 // source
                 var source = svg.append("text")

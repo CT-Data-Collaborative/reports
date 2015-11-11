@@ -150,44 +150,64 @@ function barChart() {
             }
 
             // augment margin depending on word-wrapped title
-            margin.top += (title.selectAll("tspan").size()-1) * 10;
+            margin.top += (title.selectAll("tspan").size()-1) * 8;
             height = svg.attr("height") - margin.top - margin.bottom;
 
             // legends
+            var legendWrap = d3.min([groupLabels.length, (width > 300 ? 5 : 3)]),
             // Legend scale
-            xl = d3.scale.ordinal()
+                xl = d3.scale.ordinal()
                     .rangeRoundBands([0, (width + ((margin.left + margin.right) / 2))], 0, 0)
-                    .domain(d3.range(3));
+                    .domain(d3.range(legendWrap));
 
             // legend container
-            var legendGroup = svg.append("g")
+            var legend = svg.append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top +")");
 
-            // legend boxes
-            var legendBoxes = legendGroup.selectAll("rect")
+            var legendEntries = legend.selectAll(".entry")
                 .data(groupLabels)
                 .enter()
-                .append("rect")
+                    .append("g")
+                    .attr("class", function(d, i) {
+                        var col = "col_" + (i % legendWrap);
+                        return "entry " + col;
+                    });
+
+            legendEntries.each(function(d, i) {
+                d3.select(this).attr("transform", function() {
+                    var tx = xl(i % legendWrap),
+                            ty = (Math.floor(i/legendWrap) * 10),
+                            col = "col_" + (i % legendWrap),
+                            yGroups = svg.selectAll("g."+col).size(),
+                            yOffset = svg.selectAll("g."+col).selectAll("tspan").size();// - yGroups;
+                    return "translate(" + tx + "," + (ty + (yOffset*8)) + ")";
+                });
+
+                d3.select(this).append("rect")
                     .attr("stroke-width", "0.5pt")
                     .attr("stroke", "#4A4A4A")
                     .attr("height", "8pt")
                     .attr("width", "8pt")
-                    .attr("x", function(d, i) { return xl(i % 3); })
-                    .attr("y", function(d, i) { return Math.floor(i/3) * 14; })
-                    .attr("fill", function(d, i) { return color(d); });
+                    .attr("fill", color(d));
 
-            // legend text
-            var legendText = legendGroup.selectAll("text")
-                .data(groupLabels)
-                .enter()
-                .append("text")
+                var charLimit = Math.floor(Math.round(Math.floor((width + margin.right + margin.left) / 6) / 5) * (legendWrap / 2));
+
+                d3.select(this).append("text")
+                    // .attr("transform", "translate(0,10)")
                     .attr("fill", "#4A4A4A")
                     .attr("font-size", "8pt")
-                    .attr("x", function(d, i) { return xl(i % 3) + 8; })
-                    .attr("y", function(d, i) { return Math.floor(i/3) * 14; })
                     .attr("dy", "6pt")
-                    .attr("dx", "4")
-                    .text(function(d, i) { return d; });
+                    .attr("dx", "10pt")
+                    .tspans(d3.wordwrap(d, charLimit));
+                });
+
+            // augment margins for new wordwraps
+            var maxSpans = d3.max(d3.range(legendWrap).map(function(n) {
+                return legend.selectAll(".col_" + n + " tspan").size()
+            }));
+
+            margin.top += (maxSpans) * 10;
+            height = svg.attr("height") - margin.top - margin.bottom;
 
             var barGroup = svg.append("g")
                     .attr("height", height)

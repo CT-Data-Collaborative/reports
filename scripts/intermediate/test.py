@@ -7,6 +7,8 @@ def pie(visObj):
     return visObj
 
 def map(visObj):
+    visObj["data"] = visObj["data"]["records"]
+
     return visObj
 
 def bar(visObj):
