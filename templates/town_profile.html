@@ -109,7 +109,6 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         <h4>2010-2011 School Year</h4>
         {{ objects["enrollment"]["output"] | safe }}
         {% endif -%}
-        <p>Most public school studnets in {{ config["town"] }} attend {{ info["enrollment_info"]["district"] }}, which has {{ info["enrollment_info"]["enrollment"] }} students.</p>
     </div>
     <div id="cmt" class="vis_container right">
         {% if objects["cmt"] -%}
@@ -117,26 +116,23 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         {{ objects["cmt"]["output"] | safe }}
         {% endif -%}
     </div>
-    <div id="computers" class="vis_container left">
-        {% if objects["computers"] -%}
-        <h4>Students Per Computer</h4>
-        {{ objects["computers"]["output"] | safe }}
+    <div id="graduation" class="vis_container left">
+        {% if objects["graduation"] -%}
+        <h4>4-Year Cohort Graduation Rate</h4>
+        {{ objects["graduation"]["output"] | safe }}
         {% endif -%}
     </div>
-    <div id="class_size" class="vis_container right quarter">
-        {% if objects["class_size"] -%}
-        <h4>Average Class Size</h4>
-        {{ objects["class_size"]["output"] | safe }}
+    <div id="absenteeism" class="vis_container right">
+        {% if objects["absenteeism"] -%}
+        <h4>Rate of Chronic Absenteeism</h4>
+        {{ objects["absenteeism"]["output"] | safe }}
         {% endif -%}
     </div>
-    <div id="sat" class="vis_container right quarter">
-        {% if objects["sat"] -%}
-        <h4>Average SAT Score</h4>
-        {{ objects["sat"]["output"] | safe }}
+    <div id="psis" class="vis_container left">
+        {% if objects["psis"] -%}
+        <h4>Pre-K Enrollment (PSIS)</h4>
+        {{ objects["psis"]["output"] | safe }}
         {% endif -%}
-    </div>
-    <div id="education_link" class="vis_container left">
-        <p>For more education data see: <a href="http://sdeportal.ct.gov/Cedar/WEB/ResearchandReports/SSPReports.aspx">http://sdeportal.ct.gov/Cedar/WEB/ResearchandReports/SSPReports.aspx</a></p>
     </div>
     <div class="anchor"></div>
 </div>

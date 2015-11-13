@@ -1303,7 +1303,7 @@
         ]
       },
       "config": {
-        "header_zero" : true,
+        "header_zero": true,
         "nest": [
           "Sector"
         ],
@@ -1483,47 +1483,6 @@
       },
       "config": {
         "header": false
-      }
-    },
-    {
-      "type": "table",
-      "name": "enrollment",
-      "data": {
-        "fields": [
-          {
-            "id": "Indicator",
-            "type": "string"
-          },
-          {
-            "id": "Town",
-            "type": "string"
-          },
-          {
-            "id": "State",
-            "type": "string"
-          }
-        ],
-        "records": [
-          {
-            "Indicator": {
-              "value": "Total Town School Enrollment",
-              "type": "string"
-            },
-            "Town": {
-              "value": 21318,
-              "type": "integer"
-            },
-            "State": {
-              "value": 548313,
-              "type": "integer"
-            }
-          }
-        ]
-      },
-      "config": {
-        "nest": [
-          "Indicator"
-        ]
       }
     },
     {
@@ -1714,7 +1673,7 @@
         ]
       },
       "config": {
-        "header_leaf" : true,
+        "header_leaf": true,
         "nest": [
           "Subject",
           "Grade"
@@ -1735,241 +1694,350 @@
     },
     {
       "type": "table",
-      "name": "computers",
+      "name": "enrollment",
       "data": {
         "fields": [
+          {
+            "id": "Indicator",
+            "type": "string"
+          },
+          {
+            "id": "Town",
+            "type": "string"
+          },
+          {
+            "id": "State",
+            "type": "string"
+          }
+        ],
+        "records": [
+          {
+            "Indicator": {
+              "value": "Total Town School Enrollment",
+              "type": "string"
+            },
+            "Town": {
+              "value": 21318,
+              "type": "integer"
+            },
+            "State": {
+              "value": 548313,
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "config": {
+        "nest": [
+          "Indicator"
+        ]
+      }
+    },
+    {
+      "type": "table",
+      "name": "graduation",
+      "data": {
+        "fields": [
+          {
+            "id": "Gender",
+            "type": "string"
+          },
+          {
+            "id": "Location",
+            "type": "string"
+          },
+          {
+            "id": "Value",
+            "type": "percent"
+          }
+        ],
+        "records": [
+          {
+            "Gender": {
+              "type": "string",
+              "value": "All"
+            },
+            "Location": {
+              "type": "string",
+              "value": "Connecticut"
+            },
+            "Value": {
+              "type": "percent",
+              "value": 0.87
+            }
+          },
+          {
+            "Gender": {
+              "type": "string",
+              "value": "Male"
+            },
+            "Location": {
+              "type": "string",
+              "value": "Connecticut"
+            },
+            "Value": {
+              "type": "percent",
+              "value": 0.841
+            }
+          },
+          {
+            "Gender": {
+              "type": "string",
+              "value": "Female"
+            },
+            "Location": {
+              "type": "string",
+              "value": "Connecticut"
+            },
+            "Value": {
+              "type": "percent",
+              "value": 0.901
+            }
+          },
+          {
+            "Gender": {
+              "type": "string",
+              "value": "All"
+            },
+            "Location": {
+              "type": "string",
+              "value": "Hartford School District"
+            },
+            "Value": {
+              "type": "percent",
+              "value": 0.715
+            }
+          },
+          {
+            "Gender": {
+              "type": "string",
+              "value": "Male"
+            },
+            "Location": {
+              "type": "string",
+              "value": "Hartford School District"
+            },
+            "Value": {
+              "type": "percent",
+              "value": 0.671
+            }
+          },
+          {
+            "Gender": {
+              "type": "string",
+              "value": "Female"
+            },
+            "Location": {
+              "type": "string",
+              "value": "Hartford School District"
+            },
+            "Value": {
+              "type": "percent",
+              "value": 0.762
+            }
+          }
+        ]
+      },
+      "config": {
+        "nest": [
+          "Location",
+          "Gender"
+        ],
+        "order": {
+          "Gender": [
+            "All",
+            "Female",
+            "Male"
+          ]
+        },
+        "formats": {}
+      }
+    },
+    {
+      "type": "table",
+      "name": "psis",
+      "data": {
+        "fields": [
+          {
+            "id": "District",
+            "type": "string"
+          },{
+            "id": "Year",
+            "type": "string"
+          },
+          {
+            "id": "Value",
+            "type": "integer"
+          }
+        ],
+        "records": [
+          {
+            "District": {
+              "value": "Hartford School District",
+              "type": "string"
+            },
+            "Year": {
+              "value": "2011-2012",
+              "type": "string"
+            },
+            "Value": {
+              "value": 932,
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "config": {
+        "nest": [
+          "District",
+          "Year"
+        ]
+      }
+    },
+    {
+      "type": "table",
+      "name": "absenteeism",
+      "data": {
+        "fields": [
+          {
+            "id": "Location",
+            "type": "string"
+          },
           {
             "id": "Grade",
             "type": "string"
           },
           {
-            "id": "Town",
-            "type": "integer"
-          },
-          {
-            "id": "State",
-            "type": "integer"
+            "id": "Value",
+            "type": "percent"
           }
         ],
         "records": [
           {
-            "Grade": {
-              "value": "Elementary",
+            "Location": {
+              "value": "Connecticut",
               "type": "string"
             },
-            "Town": {
-              "value": 3.8,
-              "type": "decimal"
+            "Grade": {
+              "value": "4 - 8",
+              "type": "string"
             },
-            "State": {
-              "value": 4.1,
-              "type": "decimal"
+            "Value": {
+              "value": 0.084,
+              "type": "percent"
             }
           },
           {
-            "Grade": {
-              "value": "Middle",
+            "Location": {
+              "value": "Connecticut",
               "type": "string"
             },
-            "Town": {
-              "value": 1.5,
-              "type": "decimal"
+            "Grade": {
+              "value": "9 - 12",
+              "type": "string"
             },
-            "State": {
-              "value": 2.7,
-              "type": "decimal"
+            "Value": {
+              "value": 0.154,
+              "type": "percent"
             }
           },
           {
-            "Grade": {
-              "value": "Secondary",
+            "Location": {
+              "value": "Connecticut",
               "type": "string"
             },
-            "Town": {
-              "value": 9,
-              "type": "decimal"
+            "Grade": {
+              "value": "All",
+              "type": "string"
             },
-            "State": {
-              "value": 2.9,
-              "type": "decimal"
+            "Value": {
+              "value": 0.107,
+              "type": "percent"
+            }
+          },
+          {
+            "Location": {
+              "value": "Connecticut",
+              "type": "string"
+            },
+            "Grade": {
+              "value": "K - 3",
+              "type": "string"
+            },
+            "Value": {
+              "value": 0.086,
+              "type": "percent"
+            }
+          },
+          {
+            "Location": {
+              "value": "Hartford School District",
+              "type": "string"
+            },
+            "Grade": {
+              "value": "4 - 8",
+              "type": "string"
+            },
+            "Value": {
+              "value": 0.19899999999999998,
+              "type": "percent"
+            }
+          },
+          {
+            "Location": {
+              "value": "Hartford School District",
+              "type": "string"
+            },
+            "Grade": {
+              "value": "9 - 12",
+              "type": "string"
+            },
+            "Value": {
+              "value": 0.38,
+              "type": "percent"
+            }
+          },
+          {
+            "Location": {
+              "value": "Hartford School District",
+              "type": "string"
+            },
+            "Grade": {
+              "value": "All",
+              "type": "string"
+            },
+            "Value": {
+              "value": 0.257,
+              "type": "percent"
+            }
+          },
+          {
+            "Location": {
+              "value": "Hartford School District",
+              "type": "string"
+            },
+            "Grade": {
+              "value": "K - 3",
+              "type": "string"
+            },
+            "Value": {
+              "value": 0.221,
+              "type": "percent"
             }
           }
         ]
       },
       "config": {
         "nest": [
+          "Location",
           "Grade"
         ],
         "order": {
           "Grade": [
-            "Elementary",
-            "Middle",
-            "Secondary"
-          ]
-        },
-        "formats": {
-          "decimal": ",.1f"
-        }
-      }
-    },
-    {
-      "type": "table",
-      "name": "class_size",
-      "data": {
-        "fields": [
-          {
-            "id": "Grade",
-            "type": "string"
-          },
-          {
-            "id": "Class Size",
-            "type": "integer"
-          }
-        ],
-        "records": [
-          {
-            "Grade": {
-              "value": "Grade K",
-              "type": "string"
-            },
-            "Class Size": {
-              "value": 17.9,
-              "type": "decimal"
-            }
-          },
-          {
-            "Grade": {
-              "value": "Grade 2",
-              "type": "string"
-            },
-            "Class Size": {
-              "value": 19.7,
-              "type": "decimal"
-            }
-          },
-          {
-            "Grade": {
-              "value": "Grade 5",
-              "type": "string"
-            },
-            "Class Size": {
-              "value": 19.6,
-              "type": "decimal"
-            }
-          },
-          {
-            "Grade": {
-              "value": "Grade 7",
-              "type": "string"
-            },
-            "Class Size": {
-              "value": 21.5,
-              "type": "decimal"
-            }
-          },
-          {
-            "Grade": {
-              "value": "High School",
-              "type": "string"
-            },
-            "Class Size": {
-              "value": 19.7,
-              "type": "decimal"
-            }
-          }
-        ]
-      },
-      "config": {
-        "nest": [
-          "Grade"
-        ],
-        "order": {
-          "Grade": [
-            "Grade K",
-            "Grade 2",
-            "Grade 5",
-            "Grade 7",
-            "High School"
-          ]
-        },
-        "header": false,
-        "formats": {
-          "decimal": ",.1f"
-        }
-      }
-    },
-    {
-      "type": "table",
-      "name": "sat",
-      "data": {
-        "fields": [
-          {
-            "id": "Subject",
-            "type": "string"
-          },
-          {
-            "id": "Town",
-            "type": "integer"
-          },
-          {
-            "id": "State",
-            "type": "integer"
-          }
-        ],
-        "records": [
-          {
-            "Subject": {
-              "value": "Reading",
-              "type": "string"
-            },
-            "Town": {
-              "value": 402,
-              "type": "integer"
-            },
-            "State": {
-              "value": 502,
-              "type": "integer"
-            }
-          },
-          {
-            "Subject": {
-              "value": "Writing",
-              "type": "string"
-            },
-            "Town": {
-              "value": 400,
-              "type": "integer"
-            },
-            "State": {
-              "value": 506,
-              "type": "integer"
-            }
-          },
-          {
-            "Subject": {
-              "value": "Math",
-              "type": "string"
-            },
-            "Town": {
-              "value": 392,
-              "type": "integer"
-            },
-            "State": {
-              "value": 506,
-              "type": "integer"
-            }
-          }
-        ]
-      },
-      "config": {
-        "nest": [
-          "Subject"
-        ],
-        "order": {
-          "Subject": [
-            "Reading",
-            "Writing",
-            "Math"
+            "All",
+            "4 - 8",
+            "K - 3",
+            "9 - 12"
           ]
         }
       }
@@ -2772,7 +2840,7 @@
         ]
       },
       "config": {
-        "header_zero" : true,
+        "header_zero": true,
         "nest": [
           "Number of Sales"
         ],
@@ -3253,22 +3321,21 @@
         "records": [
           {
             "Indicator": {
-              "value": "Public Web Computers",
+              "value": "Circulation per capita",
               "type": "string"
             },
             "Town": {
-              "value": 243,
-              "type": "integer"
+              "value": 4.25,
+              "type": "decimal"
             }
-          },
-          {
+          },{
             "Indicator": {
-              "value": "Circulation per Capita",
+              "value": "Internet Use per capita",
               "type": "string"
             },
             "Town": {
-              "value": 4,
-              "type": "integer"
+              "value": 1.2,
+              "type": "decimal"
             }
           }
         ]
@@ -3277,11 +3344,8 @@
         "nest": [
           "Indicator"
         ],
-        "order": {
-          "Indicator": [
-            "Public Web Computers",
-            "Circulation per Capita"
-          ]
+        "order" : {
+          "Indicator" : ["Circulation per capita", "Internet Use per capita"]
         }
       }
     },
