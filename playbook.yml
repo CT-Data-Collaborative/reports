@@ -13,19 +13,21 @@
       apt: pkg={{item}} state=installed
       with_items:
         - g++
+        - git
+        - libcairo2
+        - libffi-dev
+        - libgdk-pixbuf2.0-0
+        - libpango1.0-0
         - libxml2-dev
         - libxslt1-dev
-        - zlib1g-dev
+        - nginx
         - python-dev
-        - python-pip
         - python-lxml
-        - libcairo2
-        - libpango1.0-0
-        - libgdk-pixbuf2.0-0
-        - libffi-dev
+        - python-pip
         - shared-mime-info
-        - git
+        - supervisor
         - unzip
+        - zlib1g-dev
 
     - name: Download pdf report repository from git
       git: repo=https://github.com/CT-Data-Collaborative/reports.git
@@ -36,7 +38,7 @@
       command: chmod -R 0775 /var/www/reports
 
     - name: Change owner of code repo
-      command: chown -R vagrant:vagrant /var/www/reports
+      command: chown -R vagrant:www-data /var/www/reports
 
     - name: Download node deb source - comes with NPM
       get_url: url="https://deb.nodesource.com/setup" dest=/tmp/nodedeb.sh
@@ -79,3 +81,29 @@
 
     - name: Update font cache
       command: sudo fc-cache -fv
+
+    - name: Remove default nginx site
+      file: path=/etc/nginx/sites-enabled/default state=absent
+
+    - name: create supervisor program config
+      template: src=deploy/pdf_server_supervisor.ini dest=/etc/supervisor/pdf_server.ini
+      notify:
+        - restart app
+
+    - name: create nginx site config
+      template: src=deploy/nginx_site.conf dest=/etc/nginx/sites-available/pdf_server.conf
+
+    - name: link nginx config
+      file: src=/etc/nginx/sites-available/pdf_server.conf dest=/etc/nginx/sites-enabled/pdf_server.conf state=link
+      notify:
+        - restart nginx
+
+    - name: start app
+      supervisorctl: name=pdf_server state=started
+
+  handlers:
+    - name: restart app
+      supervisorctl: name=pdf_server state=restarted
+
+    - name: restart nginx
+      service: name=nginx state=restarted
