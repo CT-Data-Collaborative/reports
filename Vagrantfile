@@ -16,7 +16,7 @@ Vagrant.configure(2) do |config|
 # Ansible config
     config.vm.provision "ansible" do |ansible|
         ansible.host_key_checking = false
-        ansible.playbook = "playbook.yml"
+        ansible.playbook = "deploy/playbook.yml"
     end # end ansible
 
 end # end configure
