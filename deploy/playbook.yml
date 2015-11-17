@@ -1,13 +1,18 @@
 ---
 - hosts: all
   sudo: yes
+  vars:
+    app_dir: /var/www/reports
+    app_name: pdf_server
+    server_name: localhost
+    user: vagrant
 
   tasks:
     - name: run `apt-cache update`
       apt: update_cache=yes
 
-    - name: run `apt-cache upgrade`
-      apt: upgrade=yes
+    # - name: run `apt-cache upgrade`
+    #   apt: upgrade=yes
 
     - name: install packages
       apt: pkg={{item}} state=installed
@@ -33,6 +38,9 @@
       git: repo=https://github.com/CT-Data-Collaborative/reports.git
             dest=/var/www/reports
             version=connect-mock # ONLY FOR DEVELOPMENT!!!
+
+    - name: Create log directory in report repository
+      file: path=/var/www/reports/logs state=directory
 
     - name: Change permissions of code repo
       command: chmod -R 0775 /var/www/reports
@@ -67,43 +75,43 @@
             requirements=requirements.txt
 
     # install fonts
-    - name: List font zip files in repository font directory
-      shell: chdir=/var/www/reports/static/fonts ls -1 *.zip
-      register: font_files
+    # - name: List font zip files in repository font directory
+    #   shell: chdir=/var/www/reports/static/fonts ls -1 *.zip
+    #   register: font_files
 
-    - name: Create necessary font directory
-      command: sudo mkdir /usr/share/fonts/truetype/{{item}} creates=/usr/share/fonts/truetype/{{item}}
-      with_items: font_files.stdout_lines
+    # - name: Create necessary font directory
+    #   command: sudo mkdir /usr/share/fonts/truetype/{{item}} creates=/usr/share/fonts/truetype/{{item}}
+    #   with_items: font_files.stdout_lines
 
-    - name: Unzip font into directory
-      command: unzip /var/www/reports/static/fonts/{{item}} -d /usr/share/fonts/truetype/{{item}}
-      with_items: font_files.stdout_lines
+    # - name: Unzip font into directory
+    #   command: unzip /var/www/reports/static/fonts/{{item}} -d /usr/share/fonts/truetype/{{item}}
+    #   with_items: font_files.stdout_lines
 
-    - name: Update font cache
-      command: sudo fc-cache -fv
+    # - name: Update font cache
+    #   command: sudo fc-cache -fv
 
     - name: Remove default nginx site
       file: path=/etc/nginx/sites-enabled/default state=absent
 
     - name: create supervisor program config
-      template: src=deploy/pdf_server_supervisor.ini dest=/etc/supervisor/pdf_server.ini
+      template: src=templates/supervisor_program.conf dest=/etc/supervisor/conf.d/pdf_server.conf
       notify:
-        - restart app
+        - start app
 
     - name: create nginx site config
-      template: src=deploy/nginx_site.conf dest=/etc/nginx/sites-available/pdf_server.conf
+      template: src=templates/nginx_site.conf dest=/etc/nginx/sites-available/pdf_server.conf
 
     - name: link nginx config
       file: src=/etc/nginx/sites-available/pdf_server.conf dest=/etc/nginx/sites-enabled/pdf_server.conf state=link
       notify:
         - restart nginx
 
+  handlers:
+    - name: add app
+      supervisorctl: name=pdf_server state=present
+
     - name: start app
       supervisorctl: name=pdf_server state=started
-
-  handlers:
-    - name: restart app
-      supervisorctl: name=pdf_server state=restarted
 
     - name: restart nginx
       service: name=nginx state=restarted

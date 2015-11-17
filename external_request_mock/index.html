@@ -10,8 +10,8 @@
     <body>
     <h2>Simulation of calling pdf api from an external site.</h2>
     <p>This application posts a request through to the application server. If you're running the application from the included vagrant box, this will work as is. Otherwise, you'll need to tweak the href and action settings to point correctly.</p>
-        <a href="http://192.168.33.101:9999/form"><h2>Clear Request</h2></a>
-        <form method="POST" action="http://192.168.33.101:9999/form">
+        <a href="http://192.168.33.101/form"><h2>Clear Request</h2></a>
+        <form method="POST" action="http://192.168.33.101/form">
             <textarea name="data" id="data" style="width:80%;height:500px;margin: 0 10%;"></textarea>
             <!-- <input type="submit" name="submit" title="Submit" style="margin:0 10%;"/> -->
             <button type="button" name="submit" id="submit" style="margin:0 10%;">Submit</button>
@@ -29,7 +29,7 @@
         $(document).ready(function() {
             $("button#submit").click(function() {
                 $.fileDownload(
-                    "http://192.168.33.101:9999/download",
+                    "http://192.168.33.101/download",
                     {
                         preparingMessageHtml: "We are preparing your report, please wait...",
                         failMessageHtml: "There was a problem generating your report, please try again.",
