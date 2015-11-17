@@ -11,8 +11,8 @@
     - name: run `apt-cache update`
       apt: update_cache=yes
 
-    # - name: run `apt-cache upgrade`
-    #   apt: upgrade=yes
+    - name: run `apt-cache upgrade`
+      apt: upgrade=yes
 
     - name: install packages
       apt: pkg={{item}} state=installed
@@ -75,20 +75,20 @@
             requirements=requirements.txt
 
     # install fonts
-    # - name: List font zip files in repository font directory
-    #   shell: chdir=/var/www/reports/static/fonts ls -1 *.zip
-    #   register: font_files
+    - name: List font zip files in repository font directory
+      shell: chdir=/var/www/reports/static/fonts ls -1 *.zip
+      register: font_files
 
-    # - name: Create necessary font directory
-    #   command: sudo mkdir /usr/share/fonts/truetype/{{item}} creates=/usr/share/fonts/truetype/{{item}}
-    #   with_items: font_files.stdout_lines
+    - name: Create necessary font directory
+      command: sudo mkdir /usr/share/fonts/truetype/{{item}} creates=/usr/share/fonts/truetype/{{item}}
+      with_items: font_files.stdout_lines
 
-    # - name: Unzip font into directory
-    #   command: unzip /var/www/reports/static/fonts/{{item}} -d /usr/share/fonts/truetype/{{item}}
-    #   with_items: font_files.stdout_lines
+    - name: Unzip font into directory
+      command: unzip /var/www/reports/static/fonts/{{item}} -d /usr/share/fonts/truetype/{{item}}
+      with_items: font_files.stdout_lines
 
-    # - name: Update font cache
-    #   command: sudo fc-cache -fv
+    - name: Update font cache
+      command: sudo fc-cache -fv
 
     - name: Remove default nginx site
       file: path=/etc/nginx/sites-enabled/default state=absent
@@ -96,7 +96,7 @@
     - name: create supervisor program config
       template: src=templates/supervisor_program.conf dest=/etc/supervisor/conf.d/pdf_server.conf
       notify:
-        - start app
+        - add app
 
     - name: create nginx site config
       template: src=templates/nginx_site.conf dest=/etc/nginx/sites-available/pdf_server.conf
