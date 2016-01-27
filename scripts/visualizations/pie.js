@@ -34,14 +34,14 @@ var formatters = {
         if (val.toString().length > 4) {
             return d3.format(".3s")(val).replace(/G/, "B");
         } else {
-            return d3.format(",0f")(val);
+            return d3.format(",.0f")(val);
         }
     },
     "decimal" : function(val) {
         if (val.toString().length > 4) {
             return d3.format(".2s")(val).replace(/G/, "B");
         } else {
-            return d3.format(",2f")(val);
+            return d3.format(",.2f")(val);
         }
     },
     "percent" : d3.format(".1%")

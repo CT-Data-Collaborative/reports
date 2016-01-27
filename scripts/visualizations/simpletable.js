@@ -19,8 +19,8 @@ var args = minimist(process.argv.slice(2)),
 var formatters = {
     "string" : function(val) {return val; },
     "currency" : d3.format("$,.0f"),
-    "integer" : d3.format(",0f"),
-    "decimal" : d3.format(",2f"),
+    "integer" : d3.format(",.0f"),
+    "decimal" : d3.format(",.2f"),
     "percent" : d3.format(".1%")
 };
 
