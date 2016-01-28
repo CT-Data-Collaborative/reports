@@ -90,8 +90,8 @@ function tableChart() {
             // if header cells < data cells, per row.
             var noblankColumns = headerData.filter(function(col) { return col.id !== "" & col.id !== "_id"})
 
-            if (noblankColumns.length < data.pop().length-1 && noblankColumns.length > 0) {
-                colspan = Math.floor((data.pop().length)/(noblankColumns.length))
+            if (noblankColumns.length < data[0].length-1 && noblankColumns.length > 0) {
+                colspan = Math.floor((data[0].length)/(noblankColumns.length))
                 colspan = (colspan > 1 ? colspan : null)
             }
             
@@ -114,14 +114,16 @@ function tableChart() {
             var rows = tbody.selectAll("tr")
                 .data(data)
                 .enter()
-                .append("tr");
+                .append("tr")
+                    .datum(function(d) {return d;});
 
-            var cells = rows.selectAll("td")
-                    .data(function (d) { return d; })
+            rows.forEach(function(rowData) {
+                d3.select(this).selectAll("td")
+                    .data(rowData)
                     .enter()
                     .append("td")
                         .text(function(d) { return formatters[d.type](d.value); })
-        });
+            })
     }
 
     /**
