@@ -117,13 +117,14 @@ function tableChart() {
                 .append("tr")
                     .datum(function(d) {return d;});
 
-            rows.forEach(function(rowData) {
+            rows.each(function(rowData) {
                 d3.select(this).selectAll("td")
                     .data(rowData)
                     .enter()
                     .append("td")
                         .text(function(d) { return formatters[d.type](d.value); })
             })
+
         });
     }
 
