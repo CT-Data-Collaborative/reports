@@ -108,6 +108,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         {% if objects["enrollment"] -%}
         <h4>2010-2011 School Year</h4>
         {{ objects["enrollment"]["output"] | safe }}
+        <p>{{ config["info"]["enrollment_callout"] }}</p>
         {% endif -%}
     </div>
     <div id="cmt" class="vis_container right">
@@ -115,7 +116,6 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         <h4>Connecticut Mastery Test Percent Above Goal</h4>
         {{ objects["cmt"]["output"] | safe }}
         {% endif -%}
-        <p>{{ config["info"]["enrollment_callout"] }}</p>
     </div>
     <div id="graduation" class="vis_container left">
         {% if objects["graduation"] -%}
