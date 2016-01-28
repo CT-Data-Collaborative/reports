@@ -36,7 +36,7 @@ def get_extra_obj(data):
             "records" : [
                 {
                     "Statistic" : {"value" : 1, "type" : "integer"},
-                    "FIPS" : {"value" : obj.config.FIPS, "type" : "integer"}
+                    "FIPS" : {"value" : data["config"]["FIPS"], "type" : "integer"}
                 }
             ]
         },
@@ -61,12 +61,12 @@ def get_extra_obj(data):
 def get_info(data):
     info = {}
 
-    info["address"] = data.config.info["address"]
-    info["belongs_to"] = data.config.info["municipalorgs"]
-    info["incorporated"] = data.config.info["incorporation"]
+    info["address"] = data["config"]["info"]["address"]
+    info["belongs_to"] = data["config"]["info"]["municipalorgs"]
+    info["incorporated"] = data["config"]["info"]["incorporation"]
 
-    info["enrollment_info"] = data.config.info["enrollmentcallout"]
+    info["enrollment_info"] = data["config"]["info"]["enrollmentcallout"]
 
-    info["government_form"] = data.config.info["governmentform"]
+    info["government_form"] = data["config"]["info"]["governmentform"]
 
     return info
