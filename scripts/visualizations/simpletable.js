@@ -124,6 +124,7 @@ function tableChart() {
                     .append("td")
                         .text(function(d) { return formatters[d.type](d.value); })
             })
+        });
     }
 
     /**
