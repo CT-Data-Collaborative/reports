@@ -36,7 +36,7 @@ def get_extra_obj(data):
             "records" : [
                 {
                     "Statistic" : {"value" : 1, "type" : "integer"},
-                    "FIPS" : {"value" : "0900337070", "type" : "integer"}
+                    "FIPS" : {"value" : obj.config.FIPS, "type" : "integer"}
                 }
             ]
         },
@@ -61,13 +61,12 @@ def get_extra_obj(data):
 def get_info(data):
     info = {}
 
-    # This info should be sourced according to the data object, probably based on FIPS or town name
-    info["address"] = ["Town Hall", "550 Main Street", "Hartford, CT 06103", "(860) 543-8500"]
-    info["belongs_to"] = ["Hartford County", "LMA Hartford", "Capitol Area Economic Dev. Region", "Capitol Region Planning Area"]
-    info["incorporated"] = 1784
+    info["address"] = data.config.info["address"]
+    info["belongs_to"] = data.config.info["municipalorgs"]
+    info["incorporated"] = data.config.info["incorporation"]
 
-    info["enrollment_info"] = {"district" : "Hartford School District", "enrollment" : 20390}
+    info["enrollment_info"] = data.config.info["enrollmentcallout"]
 
-    info["government_form"] = "Council-Manager"
+    info["government_form"] = data.config.info["governmentform"]
 
     return info
