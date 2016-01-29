@@ -1,4 +1,5 @@
 import json
+from datetime import date
 
 def table(visObj):
     visObj["data"] = visObj["data"]["records"]
@@ -61,6 +62,8 @@ def get_extra_obj(data):
 def get_info(data):
     info = {}
 
+    info["current_year"] = date.today().year;
+    
     info["years"] = data["config"]["info"]["datayears"]
 
     info["address"] = data["config"]["info"]["address"]
