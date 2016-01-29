@@ -61,6 +61,8 @@ def get_extra_obj(data):
 def get_info(data):
     info = {}
 
+    info["years"] = data["config"]["info"]["datayears"]
+
     info["address"] = data["config"]["info"]["address"]
     info["belongs_to"] = data["config"]["info"]["municipalorgs"]
     info["incorporated"] = data["config"]["info"]["incorporation"]
