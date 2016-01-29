@@ -42,13 +42,13 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
     <h3 class="section_header">Demographics</h3>
     <div id="population" class="vis_container left">
         {% if objects["population"] -%}
-        <h4>Population{% if info["years"]["population"] -%} ({{info["years"]["population"]}}){% endif -%}</h4>
+        <h4>Population{% if info["years"]["population"] %} ({{info["years"]["population"]}}){% endif %}</h4>
         {{ objects["population"]["output"] | safe }}
         {% endif -%}
     </div>
     <div id="race" class="vis_container right">
         {% if objects["race"] -%}
-        <h4>Race/Ethnicity{% if info["years"]["race"] -%} ({{info["years"]["race"]}}){% endif -%}</h4>
+        <h4>Race/Ethnicity{% if info["years"]["race"] %} ({{info["years"]["race"]}}){% endif %}</h4>
         {{ objects["race"]["output"] | safe }}
         {% endif -%}
     </div>
@@ -64,13 +64,13 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
     </div>
     <div id="educational_attainment" class="vis_container right">
         {% if objects["educational_attainment"] -%}
-        <h4>Educational Attainment{% if info["years"]["educational_attainment"] -%} ({{info["years"]["educational_attainment"]}}){% endif -%}</h4>
+        <h4>Educational Attainment{% if info["years"]["educational_attainment"] %} ({{info"years"]["educational_attainment"]}}){% endif -%}</h4>
         {{ objects["educational_attainment"]["output"] | safe }}
         {% endif -%}
     </div>
     <div id="age" class="vis_container span">
         {% if objects["age"] -%}
-        <h4>Age Distribution{% if info["years"]["age"] -%} ({{info["years"]["age"]}}){% endif -%}</h4>
+        <h4>Age Distribution{% if info["years"]["age"] %} ({{info["years"]["age"]}}){% endif %}</h4>
         {{ objects["age"]["output"] | safe }}
         {% endif -%}
     </div>
@@ -80,19 +80,19 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
     <h3 class="section_header">Economics</h3>
     <div id="business" class="vis_container left">
         {% if objects["business"] -%}
-        <h4>Business Profile{% if info["years"]["business"] -%} ({{info["years"]["business"]}}){% endif -%}</h4>
+        <h4>Business Profile{% if info["years"]["business"] %} ({{info["years"]["business"]}}){% endif %}</h4>
         {{ objects["business"]["output"] | safe }}
         {% endif -%}
     </div>
     <div id="grand_list" class="vis_container right">
         {% if objects["grand_list"] -%}
-        <h4>Top Five Grand List{% if info["years"]["grand_list"] -%} ({{info["years"]["grand_list"]}}){% endif -%}</h4>
+        <h4>Top Five Grand List{% if info["years"]["grand_list"] %} ({{info["years"]["grand_list"]}}){% ndif -%}</h4>
         {{ objects["grand_list"]["output"] | safe }}
         {% endif -%}
     </div>
     <div id="employers" class="vis_container right">
         {% if objects["employers"] -%}
-        <h4>Major Employers{% if info["years"]["employers"] -%} ({{info["years"]["employers"]}}){% endif -%}</h4>
+        <h4>Major Employers{% if info["years"]["employers"] %} ({{info["years"]["employers"]}}){% ndif -%}</h4>
         <ul class="float_list">
             {% for row in objects["employers"]["data"] -%}
             <li>{{ " ".join(row|listValues) }}</li>
@@ -113,25 +113,25 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
     </div>
     <div id="cmt" class="vis_container right">
         {% if objects["cmt"] -%}
-        <h4>Connecticut Mastery Test Percent Above Goal{% if info["years"]["cmt"] -%} ({{info["years"]["cmt"]}}){% endif -%}</h4>
+        <h4>Connecticut Mastery Test Percent Above Goal{% if info["years"]["cmt"] %} ({{info["years]["cmt"]}}){% endif -%}</h4>
         {{ objects["cmt"]["output"] | safe }}
         {% endif -%}
     </div>
     <div id="graduation" class="vis_container left">
         {% if objects["graduation"] -%}
-        <h4>4-Year Cohort Graduation Rate{% if info["years"]["graduation"] -%} ({{info["years"]["graduation"]}}){% endif -%}</h4>
+        <h4>4-Year Cohort Graduation Rate{% if info["years"]["graduation"] %} ({{info["years]["graduation"]}}){% endif -%}</h4>
         {{ objects["graduation"]["output"] | safe }}
         {% endif -%}
     </div>
     <div id="absenteeism" class="vis_container right">
         {% if objects["absenteeism"] -%}
-        <h4>Rate of Chronic Absenteeism{% if info["years"]["absenteeism"] -%} ({{info["years"]["absenteeism"]}}){% endif -%}</h4>
+        <h4>Rate of Chronic Absenteeism{% if info["years"]["absenteeism"] %} ({{info["years]["absenteeism"]}}){% endif -%}</h4>
         {{ objects["absenteeism"]["output"] | safe }}
         {% endif -%}
     </div>
     <div id="psis" class="vis_container left">
         {% if objects["psis"] -%}
-        <h4>Pre-K Enrollment (PSIS){% if info["years"]["psis"] -%} ({{info["years"]["psis"]}}){% endif -%}</h4>
+        <h4>Pre-K Enrollment (PSIS){% if info["years"]["psis"] %} ({{info["years"]["psis"]}}){% endif %}</h4>
         {{ objects["psis"]["output"] | safe }}
         {% endif -%}
     </div>
@@ -199,13 +199,13 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
     <h3 class="section_header">Housing/Real Estate</h3>
     <div id="housing" class="vis_container left">
         {% if objects["housing"] -%}
-        <h4>Housing Stock{% if info["years"]["housing"] -%} ({{info["years"]["housing"]}}){% endif -%}</h4>
+        <h4>Housing Stock{% if info["years"]["housing"] %} ({{info["years"]["housing"]}}){% endif %}</h4>
         {{ objects["housing"]["output"] | safe }}
         {% endif -%}
     </div>
     <div id="house_sales" class="vis_container right">
         {% if objects["house_sales"] -%}
-        <h4>Distribution of House Sales{% if info["years"]["house_sales"] -%} ({{info["years"]["house_sales"]}}){% endif -%}</h4>
+        <h4>Distribution of House Sales{% if info["years"]["house_sales"] %} ({{info["years]["house_sales"]}}){% endif -%}</h4>
         {{ objects["house_sales"]["output"] | safe }}
         {% endif -%}
     </div>
@@ -215,19 +215,19 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
     <h3 class="section_header">Labor Force</h3>
     <div id="place_of_residence" class="vis_container left">
         {% if objects["place_of_residence"] -%}
-        <h4>Place of Residence{% if info["years"]["place_of_residence"] -%} ({{info["years"]["place_of_residence"]}}){% endif -%}</h4>
+        <h4>Place of Residence{% if info["years"]["place_of_residence"] %} ({{info["years]["place_of_residence"]}}){% endif -%}</h4>
         {{ objects["place_of_residence"]["output"] | safe }}
         {% endif -%}
     </div>
     <div id="commuters" class="vis_container right">
         {% if objects["commuters"] -%}
-        <h4>Connecticut Commuters{% if info["years"]["commuters"] -%} ({{info["years"]["commuters"]}}){% endif -%}</h4>
+        <h4>Connecticut Commuters{% if info["years"]["commuters"] %} ({{info["years"]["commuters]}}){% endif -%}</h4>
         {{ objects["commuters"]["output"] | safe }}
         {% endif -%}
     </div>
     <div id="place_of_work" class="vis_container left">
         {% if objects["place_of_work"] -%}
-        <h4>Place of Work{% if info["years"]["place_of_work"] -%} ({{info["years"]["place_of_work"]}}){% endif -%}</h4>
+        <h4>Place of Work{% if info["years"]["place_of_work"] %} ({{info["years"]["place_of_work]}}){% endif -%}</h4>
         {{ objects["place_of_work"]["output"] | safe }}
         {% endif -%}
     </div>
@@ -238,25 +238,25 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
     <div class="vis_container thirds">
         <div id="crime" class="vis_container">
             {% if objects["crime"] -%}
-            <h4>Crime Rate{% if info["years"]["crime"] -%} ({{info["years"]["crime"]}}){% endif -%}</h4>
+            <h4>Crime Rate{% if info["years"]["crime"] %} ({{info["years"]["crime"]}}){% endif %}</h4>
             {{ objects["crime"]["output"] | safe }}
             {% endif -%}
         </div>
         <div id="library" class="vis_container">
             {% if objects["library"] -%}
-            <h4>Library{% if info["years"]["library"] -%} ({{info["years"]["library"]}}){% endif -%}</h4>
+            <h4>Library{% if info["years"]["library"] %} ({{info["years"]["library"]}}){% endif %}</h4>
             {{ objects["library"]["output"] | safe }}
             {% endif -%}
         </div>
         <div id="family_assistance" class="vis_container">
             {% if objects["family_assistance"] -%}
-            <h4>Families Receiving{% if info["years"]["family_assistance"] -%} ({{info["years"]["family_assistance"]}}){% endif -%}</h4>
+            <h4>Families Receiving{% if info["years"]["family_assistance"] %} ({{info["years]["family_assistance"]}}){% endif -%}</h4>
             {{ objects["family_assistance"]["output"] | safe }}
             {% endif -%}
         </div>
         <div id="population_assistance" class="vis_container">
             {% if objects["population_assistance"] -%}
-            <h4>Population Receiving{% if info["years"]["population_assistance"] -%} ({{info["years"]["population_assistance"]}}){% endif -%}</h4>
+            <h4>Population Receiving{% if info["years"]["population_assistance"] %} ({{info"years"]["population_assistance"]}}){% endif -%}</h4>
             {{ objects["population_assistance"]["output"] | safe }}
             {% endif -%}
         </div>
