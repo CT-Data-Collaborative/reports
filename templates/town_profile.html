@@ -131,7 +131,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
     </div>
     <div id="psis" class="vis_container left">
         {% if objects["psis"] -%}
-        <h4>Pre-K Enrollment (PSIS){% if info["years"]["psis"] %} ({{info["years"]["psis"]}}){% endif %}</h4>
+        <h4>Pre-K Enrollment (PSIS)</h4>
         {{ objects["psis"]["output"] | safe }}
         {% endif -%}
     </div>
