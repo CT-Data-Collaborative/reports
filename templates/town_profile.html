@@ -108,7 +108,6 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         {% if objects["enrollment"] -%}
         <h4>{% if info["years"]["enrollment"] -%}{{info["years"]["enrollment"]}} {% endif -%}School Year</h4>
         {{ objects["enrollment"]["output"] | safe }}
-        <p>{{ info["enrollment_callout"] }}</p>
         {% endif -%}
     </div>
     <div id="cmt" class="vis_container right">

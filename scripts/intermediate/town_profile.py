@@ -70,8 +70,6 @@ def get_info(data):
     info["belongs_to"] = data["config"]["info"]["municipalorgs"]
     info["incorporated"] = data["config"]["info"]["incorporation"]
 
-    info["enrollment_callout"] = data["config"]["info"]["enrollmentcallout"]
-
     info["government_form"] = data["config"]["info"]["governmentform"]
 
     return info
