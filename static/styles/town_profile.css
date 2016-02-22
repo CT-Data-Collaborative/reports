@@ -159,6 +159,9 @@ table {
 #business table {
     line-height: 14pt!important;
 }
+#enrollment {
+    min-height: 60pt;
+}
 div.vis_container > img {
     display: block;
     margin: auto;
