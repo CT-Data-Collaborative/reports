@@ -15,8 +15,10 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         {% if config["town"] -%}{{ config["town"] }}, {% endif -%}
         Connecticut
     </h1>
-    <h2>CERC Town Profile {{ info["current_year"] }}</h2>
-    <h5>Produced by The Connecticut Data Collaborative</h5>
+    <h2>
+        CERC Town Profile {{ info["current_year"] }}
+        <span>Produced by The Connecticut Data Collaborative</span>
+    </h2>
     {% if info["address"] -%}
         <ul class="header_list">
             {% for item in info["address"] -%}
