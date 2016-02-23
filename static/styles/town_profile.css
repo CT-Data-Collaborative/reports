@@ -19,6 +19,8 @@ div#city_distance table tr {
     line-height: 14pt!important;
 }
 
+div.container:last-child h4 {}
+
 h3 {
     background-color: rgba(255, 255, 255, 1);
     border: 2px solid black;
@@ -45,6 +47,13 @@ div.title_header {
     margin-bottom: 14pt;
     position: relative;
 }
+
+div.title_header h2 > span.attribution {
+    font-size: 10pt;
+    font-style: italic;
+    padding-left: 6pt;
+}
+
 div.container:not(.first-container) {
     border-top: medium none;
 }
@@ -249,7 +258,7 @@ div#age td:not(:first-child) {
             width:30%;
             text-align: center;
             vertical-align: top;
-            content: "www.cerc.com";
+            content: "profiles.ctdata.com";
         }
         @bottom-right {
             font-size: 7pt;

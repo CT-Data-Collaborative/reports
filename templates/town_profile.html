@@ -16,6 +16,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         Connecticut
     </h1>
     <h2>CERC Town Profile {{ info["current_year"] }}</h2>
+    <h5>Produced by The Connecticut Data Collaborative</h5>
     {% if info["address"] -%}
         <ul class="header_list">
             {% for item in info["address"] -%}
@@ -234,7 +235,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
 </div>
 <div class="container">
     <h3 class="section_header">Other Information</h3>
-    <div class="vis_container thirds">
+    <div class="vis_container thirds left">
         <div id="crime" class="vis_container">
             {% if objects["crime"] -%}
             <h4>Crime Rate{% if info["years"]["crime"] %} ({{info["years"]["crime"]}}){% endif %}</h4>
@@ -247,20 +248,8 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
             {{ objects["library"]["output"] | safe }}
             {% endif -%}
         </div>
-        <div id="family_assistance" class="vis_container">
-            {% if objects["family_assistance"] -%}
-            <h4>Families Receiving{% if info["years"]["family_assistance"] %} ({{info["years"]["family_assistance"]}}){% endif %}</h4>
-            {{ objects["family_assistance"]["output"] | safe }}
-            {% endif -%}
-        </div>
-        <div id="population_assistance" class="vis_container">
-            {% if objects["population_assistance"] -%}
-            <h4>Population Receiving{% if info["years"]["population_assistance"] %} ({{info["years"]["population_assistance"]}}){% endif %}</h4>
-            {{ objects["population_assistance"]["output"] | safe }}
-            {% endif -%}
-        </div>
     </div>
-    <div class="vis_container thirds">
+    <div class="vis_container thirds left">
         <div id="city_distance" class="vis_container">
             {% if objects["city_distance"] -%}
             <h4>Distance to Major Cities</h4>
@@ -268,7 +257,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
             {% endif -%}
         </div>
     </div>
-    <div class="vis_container thirds">
+    <div class="vis_container thirds right">
         <div id="utilities" class="vis_container">
             <h4>Residential Utilities</h4>
             {% if objects["electric"] -%}
@@ -302,6 +291,20 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
                 <li>{{ " ".join(row|listValues) }}</li>
                 {% endfor -%}
             </ul>
+            {% endif -%}
+        </div>
+    </div>
+    <div class="vis_container left">
+        <div id="family_assistance" class="vis_container">
+            {% if objects["family_assistance"] -%}
+            <h4>Families Receiving{% if info["years"]["family_assistance"] %} ({{info["years"]["family_assistance"]}}){% endif %}</h4>
+            {{ objects["family_assistance"]["output"] | safe }}
+            {% endif -%}
+        </div>
+        <div id="population_assistance" class="vis_container">
+            {% if objects["population_assistance"] -%}
+            <h4>Population Receiving{% if info["years"]["population_assistance"] %} ({{info["years"]["population_assistance"]}}){% endif %}</h4>
+            {{ objects["population_assistance"]["output"] | safe }}
             {% endif -%}
         </div>
     </div>
