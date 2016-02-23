@@ -16,7 +16,7 @@ div#commuters table td:nth-child(odd){
 }
 
 div#city_distance table tr {
-    line-height: 14pt!important;
+    line-height: 12pt!important;
 }
 
 div.container:last-child h4 {}
@@ -190,6 +190,7 @@ ul > h4 {
     top:0!important;
 }
 h4 {
+    width: inherit;
     background: rgba(255, 255, 255, 0) none repeat scroll 0 0;
     box-sizing: border-box;
     display: inline-block;
