@@ -21,6 +21,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
     </h2>
     {% if info["address"] -%}
         <ul class="header_list">
+            <li><b>Town Hall</b></li>
             {% for item in info["address"] -%}
             <li>{{ item }}</li>
             {% endfor -%}
@@ -146,7 +147,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
     </h1>
     <h2>CERC Town Profile {{ info["current_year"] -}}</h2>
     <div id="logo">
-        <img src="{{ url_for("static", filename="images/cerc.png") }}" />
+        <img src="{{ url_for("static", filename="images/cerc.jpg") }}" />
     </div>
 </div>
 <div class="container first-container">
