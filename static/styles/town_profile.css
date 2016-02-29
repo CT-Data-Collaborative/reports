@@ -22,7 +22,9 @@ div#city_distance table tr {
     line-height: 12pt!important;
 }
 
-div.container:last-child h4 {}
+div.container#education {
+    min-height: 110pt;
+}
 
 h3 {
     background-color: rgba(255, 255, 255, 1);
@@ -84,7 +86,7 @@ div#small_map {
     right: 0pt;
     top: 0;
 }
-div.title_header ul.town_address.header_list:first-of-type {
+div.title_header ul.town_address.header_list li:first-child {
     font-weight: bold;
 }
 div.title_header ul.header_list:first-of-type {
