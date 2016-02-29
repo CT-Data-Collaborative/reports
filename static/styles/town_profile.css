@@ -4,8 +4,11 @@ body {
 div {
     box-sizing: border-box;
 }
+div#grand_list {
+    min-height: 60pt;
+}
 div#commuters table td {
-    padding:0 5%;
+    padding:0 5% 0 1%;
 }
 div#commuters table td:nth-child(even){
     width: 20%!important;
@@ -80,6 +83,9 @@ div#small_map {
     position: absolute;
     right: 0pt;
     top: 0;
+}
+div.title_header ul.town_address.header_list:first-of-type {
+    font-weight: bold;
 }
 div.title_header ul.header_list:first-of-type {
     padding: 0;

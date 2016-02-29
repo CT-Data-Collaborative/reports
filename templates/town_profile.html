@@ -20,8 +20,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         <span class="attribution">Produced by The CT Data Collaborative</span>
     </h2>
     {% if info["address"] -%}
-        <ul class="header_list">
-            <li><b>Town Hall</b></li>
+        <ul class="header_list town_address">
             {% for item in info["address"] -%}
             <li>{{ item }}</li>
             {% endfor -%}
@@ -120,10 +119,10 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         {{ objects["cmt"]["output"] | safe }}
         {% endif -%}
     </div>
-    <div id="graduation" class="vis_container left">
-        {% if objects["graduation"] -%}
-        <h4>4-Year Cohort Graduation Rate{% if info["years"]["graduation"] %} ({{info["years"]["graduation"]}}){% endif %}</h4>
-        {{ objects["graduation"]["output"] | safe }}
+    <div id="psis" class="vis_container left">
+        {% if objects["psis"] -%}
+        <h4>Pre-K Enrollment (PSIS)</h4>
+        {{ objects["psis"]["output"] | safe }}
         {% endif -%}
     </div>
     <div id="absenteeism" class="vis_container right">
@@ -132,10 +131,10 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         {{ objects["absenteeism"]["output"] | safe }}
         {% endif -%}
     </div>
-    <div id="psis" class="vis_container left">
-        {% if objects["psis"] -%}
-        <h4>Pre-K Enrollment (PSIS)</h4>
-        {{ objects["psis"]["output"] | safe }}
+    <div id="graduation" class="vis_container left">
+        {% if objects["graduation"] -%}
+        <h4>4-Year Cohort Graduation Rate{% if info["years"]["graduation"] %} ({{info["years"]["graduation"]}}){% endif %}</h4>
+        {{ objects["graduation"]["output"] | safe }}
         {% endif -%}
     </div>
     <div class="anchor"></div>
