@@ -1,10 +1,27 @@
 import os
 import json
+# used for date time stamps
+from datetime import datetime
 
 CONNECT_HEIGHT = 700
 CONNECT_WIDTH = 640
 
 def table(visObj):
+    global CONNECT_HEIGHT
+    if "width" in visObj["config"] and visObj["config"]["width"] > 0 and visObj["config"]["width"] <= 12:
+        visObj["config"]["width"] = visObj["config"]["width"]*CONNECT_WIDTH/12.0
+    if "height" in visObj["config"] and visObj["config"]["height"] > 0 and visObj["config"]["height"] <= 12:
+        visObj["config"]["height"] = visObj["config"]["height"]*CONNECT_HEIGHT/12.0
+
+    visObj["data"] = visObj["data"]["records"]
+
+    # print("++ TABLE ++")
+    # print("Height: " + str(visObj["config"]["height"]))
+    # print("Width: " + str(visObj["config"]["width"]))
+
+    return visObj
+
+def simpletable(visObj):
     global CONNECT_HEIGHT
     if "width" in visObj["config"] and visObj["config"]["width"] > 0 and visObj["config"]["width"] <= 12:
         visObj["config"]["width"] = visObj["config"]["width"]*CONNECT_WIDTH/12.0
@@ -79,7 +96,26 @@ def bar(visObj):
 
     return visObj
 
-transformations = {"table" : table, "pie" : pie, "map" : map, "bar" : bar}
+def groupedbar(visObj):
+    global CONNECT_HEIGHT
+    if "width" in visObj["config"] and visObj["config"]["width"] > 0 and visObj["config"]["width"] <= 12:
+        visObj["config"]["width"] = visObj["config"]["width"]*CONNECT_WIDTH/12.0
+
+    if "height" in visObj["config"] and visObj["config"]["height"] > 0 and visObj["config"]["height"] <= 12:
+        visObj["config"]["height"] = visObj["config"]["height"]*CONNECT_HEIGHT/12.0
+
+    if "barHeight" not in visObj["config"]:
+        visObj["config"]["barHeight"] = visObj["config"]["height"]/len(visObj["data"])
+
+    visObj["data"] = visObj["data"]["records"]
+
+    # print("++ GROUPED BAR ++")
+    # print("Height: " + str(visObj["config"]["height"]))
+    # print("Width: " + str(visObj["config"]["width"]))
+
+    return visObj
+
+transformations = {"table" : table, "simpletable" : simpletable, "pie" : pie, "map" : map, "bar" : bar, "groupedbar" : groupedbar}
 
 def get_extra_obj(data):
     extra_obj = []
@@ -134,7 +170,18 @@ def get_extra_obj(data):
 def get_info(data):
     info = {}
 
-    info["month"] = "September"
-    info["year"] = "2015"
+    now = datetime.now()
+    info["month"] = now.strftime("%B")
+    info["year"] = now.strftime("%Y")
+
+    # Region Title
+    info["region_title"] = {
+        "1" : "Region 1: Southwest",
+        "2" : "Region 2: South Central",
+        "3" : "Region 3: Eastern",
+        "4" : "Region 4: North Central",
+        "5" : "Region 5: Western",
+        "6" : "Region 6: Central",
+    }[data["config"]["region"]]
 
     return info

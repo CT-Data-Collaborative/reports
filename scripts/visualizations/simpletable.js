@@ -98,6 +98,10 @@ function tableChart() {
             // populate header - simpletable assumes row 1 is header cells
             tr = thead.append("tr");
 
+            if (config.header_offset == true) {
+                headerData.unshift({"type" : "string", "value" : ""});
+            }
+
             tr.selectAll("th")
                     .data(headerData)
                     .enter()
@@ -105,7 +109,13 @@ function tableChart() {
                         .text(function(d) {
                             return formatters[d.type](d.value);
                         })
-                        .attr("colspan", colspan);
+                        .attr("colspan", function(d, i) {
+                            if (config.header_offset && i === 0) {
+                                return 1;
+                            } else {
+                                return colspan
+                            }
+                        });
 
             // tbody element
             var tbody = table.append("tbody");
