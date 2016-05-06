@@ -75,18 +75,8 @@ CONNECT
             {% endif %}
         </div>
     </div> -->
-    <!-- <div class="section">
-        <p class="section_title">Education</p>
-        <div class="row">
-            {% if objects["x"] %}
-            <div class="col-xs-6">
-                {{ objects["x"]["output"] | safe }}
-            </div>
-            {% endif %}
-        </div>
-    </div> -->
     <div class="section">
-        <p class="section_title">Behavioral Health</p>
+        <p class="section_title">Education</p>
         <div class="row">
             {% if objects["Sanctions by Substance"] %}
             <div class="col-xs-6">
@@ -105,8 +95,23 @@ CONNECT
                 {{ objects["Percent Incidents by Race"]["output"] | safe }}
             </div>
             {% endif %}
+            {% if objects["School Incidents Pie"] %}
+            <div class="col-xs-6">
+                {{ objects["School Incidents Pie"]["output"] | safe }}
+            </div>
+            {% endif %}
         </div>
     </div>
+    <!-- <div class="section">
+        <p class="section_title">Behavioral Health</p>
+        <div class="row">
+            {% if objects["x"] %}
+            <div class="col-xs-6">
+                {{ objects["x"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+    </div> -->
     <div class="section">
         <p class="section_title">Child Welfare</p>
         <div class="row">
@@ -118,8 +123,34 @@ CONNECT
         </div>
         <div class="row">
             {% if objects["Treatment Chart"] %}
-            <div class="col-xs-6">
+            <div class="col-xs-12">
                 {{ objects["Treatment Chart"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="row">
+            {% if objects["Treatment Age Pie"] %}
+            <div class="col-xs-6">
+                {{ objects["Treatment Age Pie"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["Treatment Race Pie"] %}
+            <div class="col-xs-6">
+                {{ objects["Treatment Race Pie"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="row">
+            {% if objects["In State Placement by Age"] %}
+            <div class="col-xs-12">
+                {{ objects["In State Placement by Age"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="row">
+            {% if objects["Out of State Placement by Age"] %}
+            <div class="col-xs-12">
+                {{ objects["Out of State Placement by Age"]["output"] | safe }}
             </div>
             {% endif %}
         </div>

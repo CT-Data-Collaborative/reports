@@ -93,6 +93,11 @@ if ("endAngle" in config && config.endAngle > 0) {
     chart.endAngle(config.endAngle);
 }
 
+// slice order
+if ("order" in config && config.order.length > 0) {
+    chart.order(config.order);
+}
+
 //Color scale
 if ("colors" in config && config.colors.length > 0) {
     chart.colors(config.colors);
@@ -121,7 +126,8 @@ function pieChart() {
             arc = d3.svg.arc()
                         .innerRadius(innerRadius)
                         .outerRadius(outerRadius),
-            colors = d3.scale.category20();
+            colors = d3.scale.category20(),
+            order = false;
 
     function chart(selection) {
         selection.each(function(data) {
@@ -149,6 +155,19 @@ function pieChart() {
             // update pie function object with accessor
             pie.value(value)
 
+            // if we have a sort order
+            if (order !== false) {
+                // update pie function
+                pie.sort(function(a, b) {
+                    return order.indexOf(a.label) > order.indexOf(b.label) ? 1 : -1;
+                })
+
+                // also sort data
+                data = data.sort(function(a, b) {
+                    return order.indexOf(a.label) > order.indexOf(b.label) ? 1 : -1;
+                });
+            }
+
             // SVG Container
             var svg = d3.select(this).append("svg")
                 .attr("width", (width + margin.left + margin.right))
@@ -167,7 +186,7 @@ function pieChart() {
                     .attr("fill", "#4A4A4A")
                     .attr("text-anchor", "middle")
                     .attr("font-weight", "bold")
-                    .attr("font-size", "7pt")
+                    .attr("font-size", "8pt")
                     .tspans(d3.wordwrap(config.title, charLimit), 8);
             }
 
@@ -366,19 +385,19 @@ function pieChart() {
                 }
             } while (again == true)
 
-            if ("source" in config && config.source !== "") {
-                // source
-                var source = svg.append("text")
-                    .attr("x", width + margin.left + margin.right)
-                    .attr("y", height+margin.top+margin.bottom)
-                    .attr("dy", "-1pt")
-                    .attr("text-anchor", "end")
-                    .attr("font-size", "6pt")
-                    .attr("font-style", "italic")
-                    .attr("fill", "#888")
-                    .attr("fill", "#C0C0C0")
-                    .text(config.source);
-            }
+            // if ("source" in config && config.source !== "") {
+            //     // source
+            //     var source = svg.append("text")
+            //         .attr("x", width + margin.left + margin.right)
+            //         .attr("y", height+margin.top+margin.bottom)
+            //         .attr("dy", "-1pt")
+            //         .attr("text-anchor", "end")
+            //         .attr("font-size", "6pt")
+            //         .attr("font-style", "italic")
+            //         .attr("fill", "#888")
+            //         .attr("fill", "#C0C0C0")
+            //         .text(config.source);
+            // }
         });
     }
 
@@ -433,6 +452,12 @@ function pieChart() {
       if (!arguments.length) return endAngle;
       endAngle = _;
       pie.endAngle(endAngle);
+      return chart;  
+    };
+
+    chart.order = function(_) {
+      if (!arguments.length) return order;
+      order = _;
       return chart;  
     };
 

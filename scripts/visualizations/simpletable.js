@@ -98,8 +98,11 @@ function tableChart() {
             // populate header - simpletable assumes row 1 is header cells
             tr = thead.append("tr");
 
-            if (config.header_offset == true) {
-                headerData.unshift({"type" : "string", "value" : ""});
+            if (config.header_offset) {
+                headerData.unshift({
+                    "type" : "string",
+                    "value" : (config.header_offset === true ? "" : config.header_offset)
+                });
             }
 
             tr.selectAll("th")

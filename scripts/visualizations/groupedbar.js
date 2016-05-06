@@ -150,7 +150,7 @@ function groupedBarChart() {
                     .attr("fill", "#4A4A4A")
                     .attr("text-anchor", "middle")
                     .attr("font-weight", "bold")
-                    .attr("font-size", "7pt")
+                    .attr("font-size", "8pt")
                     .tspans(d3.wordwrap(config.title, charLimit), 8);
             }
 
@@ -201,10 +201,25 @@ function groupedBarChart() {
                     // .attr("transform", "translate(0,10)")
                     .attr("fill", "#4A4A4A")
                     .attr("font-size", "8pt")
-                    .attr("dy", "6pt")
+                    .attr("y", "6pt")
                     .attr("dx", "10pt")
-                    .tspans(d3.wordwrap(d, charLimit/data.length, 8));
-                });
+                    .tspans(function(d) {
+                        return d3.wordwrap(d, charLimit, 8)
+                    })
+                    .selectAll("tspan");
+
+                d3.select(this).selectAll("tspan:empty")
+                    .remove();
+
+                d3.select(this).selectAll("tspan")
+                    .each(function(d, i){
+                        d3.select(this)
+                            .attr("dx", "10pt")
+                            .attr("dy", function() {
+                                return (i > 0 ? "8pt" : 0)
+                            })
+                    })
+            });
 
             // augment margins for new wordwraps
             var maxSpans = d3.max(d3.range(legendWrap).map(function(n) {
@@ -244,13 +259,30 @@ function groupedBarChart() {
             // x axis, includes group labels automatically
             var xAxisGroup = barGroup.append("g")
                 .attr("transform", "translate(0," + height + ")")
-                .attr("font-size", "8pt")
+                .attr("font-size", "7pt")
                 .call(xAxis)
                 .call(function(g) {
                     g.selectAll("path").remove();
                     
-                    g.selectAll("g").selectAll("text")
-                        .attr("fill", "#4A4A4A")
+                    g.selectAll(".tick text")
+                        .each(function() {
+                            var text = d3.select(this).text();
+
+                            d3.select(this)
+                                .text(null)
+                                .tspans(d3.wordwrap(text, charLimit/(data.length)), 8);
+
+                            d3.select(this).selectAll("tspan:empty").remove();
+
+                            d3.select(this).selectAll("tspan")
+                                .each(function(d, i){
+                                    d3.select(this)
+                                        // .attr("dx", "10pt")
+                                        .attr("dy", function() {
+                                            return (i > 0 ? "8pt" : 0)
+                                        })
+                                })
+                        })
                         
                     g.selectAll("g").selectAll("line")
                         .attr("stroke", "#979797");
@@ -301,27 +333,49 @@ function groupedBarChart() {
                         .data(function(d) { return d.values; })
                         .enter()
                             .append("text")
+                                .filter(function(d) { return d.value > 0; })
                                 .text(function(d) { return d.label; })
                                 .attr("transform", "rotate(-90)")
-                                .attr("text-anchor", "end")
                                 .attr("font-size", "8pt")
-                                .attr("x", function(d) { return 0 - y(d.value) - 2; })
                                 .attr("y", function(d) { return x1(d.name)+(x1.rangeBand() / 2) + 4; })
-                                .attr("fill", "#202020");
+                                .attr("fill", "#202020")
+                                .each(function(d, i) {
+                                    var text = d3.select(this);
+                                    var textLength = text.text().length + 1;
+
+                                    var anchor = "end";
+                                    var xOffset = 3;
+
+                                    // basically, use the same formula for wrapping width of chart title
+                                    // but apply it to the height of the bar that corresponds to this text label
+                                    // and if the text label is too long, adjust positioning.
+                                    if (textLength > Math.round(Math.floor((height - y(d.value)) / 6) / 5) * 5 ) {
+                                        anchor = "start";
+                                        xOffset = 0;
+                                    }
+
+                                    text
+                                        .attr("text-anchor", function(d) {
+                                            return anchor;
+                                        })
+                                        .attr("x", function(d) {
+                                            return 0 - y(d.value) - xOffset;
+                                        })
+                                })
             }
 
-            if ("source" in config && config.source !== "") {
-                // source
-                var source = svg.append("text")
-                    .attr("x", width + margin.left + margin.right)
-                    .attr("y", height+margin.top+margin.bottom)
-                    .attr("dy", "-2pt")
-                    .attr("text-anchor", "end")
-                    .attr("font-size", "6pt")
-                    .attr("font-style", "italic")
-                    .attr("fill", "#C0C0C0")
-                    .text(config.source);
-            }
+            // if ("source" in config && config.source !== "") {
+            //     // source
+            //     var source = svg.append("text")
+            //         .attr("x", width + margin.left + margin.right)
+            //         .attr("y", height+margin.top+margin.bottom)
+            //         .attr("dy", "-2pt")
+            //         .attr("text-anchor", "end")
+            //         .attr("font-size", "6pt")
+            //         .attr("font-style", "italic")
+            //         .attr("fill", "#C0C0C0")
+            //         .text(config.source);
+            // }
         });
     }
 

@@ -139,7 +139,7 @@ function barChart() {
                     .attr("fill", "#4A4A4A")
                     .attr("text-anchor", "middle")
                     .attr("font-weight", "bold")
-                    .attr("font-size", "7pt")
+                    .attr("font-size", "8pt")
                     .tspans(d3.wordwrap(config.title, charLimit), 8);
             }
 
@@ -172,7 +172,7 @@ function barChart() {
             // x axis, includes group labels automatically
             var xAxisGroup = barGroup.append("g")
                 .attr("transform", "translate(0," + height + ")")
-                .attr("font-size", "8pt")
+                .attr("font-size", "7pt")
                 .call(xAxis)
                 .call(function(g) {
                     g.selectAll("path").remove();
@@ -187,6 +187,17 @@ function barChart() {
                             d3.select(this)
                                 .text(null)
                                 .tspans(d3.wordwrap(text, charLimit/(data.length)), 8);
+
+                            d3.select(this).selectAll("tspan:empty").remove();
+
+                            d3.select(this).selectAll("tspan")
+                                .each(function(d, i){
+                                    d3.select(this)
+                                        // .attr("dx", "10pt")
+                                        .attr("dy", function() {
+                                            return (i > 0 ? "8pt" : 0)
+                                        })
+                                })
                         })
 
                     g.selectAll("g").selectAll("line")
@@ -234,31 +245,32 @@ function barChart() {
 
             if (x.rangeBand() > 10) {
                 // text labels
-                barGroup.selectAll("text")
+                barGroup.selectAll("text.value_label")
                         .data(data)
                         .enter()
                             .append("text")
+                                .classed("value_label", true)
                                 .text(function(d) { return d.values.label; })
-                                .attr("transform", "rotate(-90)")
-                                .attr("text-anchor", "end")
+                                // .attr("transform", "rotate(-90)")
+                                .attr("text-anchor", "middle")
                                 .attr("font-size", "8pt")
-                                .attr("x", function(d) { return 0 - y(+d.values.value) - 2; })
-                                .attr("y", function(d) { return x(d.values.name)+(x.rangeBand() / 2) + 4; })
+                                .attr("y", function(d) { return y(+d.values.value) - 2; })
+                                .attr("x", function(d) { return x(d.values.name) + (x.rangeBand()/2); })
                                 .attr("fill", "#202020");
             }
 
-            if ("source" in config && config.source !== "") {
-                // source
-                var source = svg.append("text")
-                    .attr("x", width + margin.left + margin.right)
-                    .attr("y", height+margin.top+margin.bottom)
-                    .attr("dy", "-2pt")
-                    .attr("text-anchor", "end")
-                    .attr("font-size", "6pt")
-                    .attr("font-style", "italic")
-                    .attr("fill", "#C0C0C0")
-                    .text(config.source);
-            }
+            // if ("source" in config && config.source !== "") {
+            //     // source
+            //     var source = svg.append("text")
+            //         .attr("x", width + margin.left + margin.right)
+            //         .attr("y", height+margin.top+margin.bottom)
+            //         .attr("dy", "-2pt")
+            //         .attr("text-anchor", "end")
+            //         .attr("font-size", "6pt")
+            //         .attr("font-style", "italic")
+            //         .attr("fill", "#C0C0C0")
+            //         .text(config.source);
+            // }
         });
     }
 
