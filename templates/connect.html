@@ -55,16 +55,16 @@ CONNECT
     {% endif -%}
 </div>
 <div class="container-fluid content">
-    <div class="section">
+    <!-- <div class="section">
         <p class="section_title">Demographics</p>
         <div class="row">
-            {% if objects["Student Characteristics"] %}
+            {% if objects["x"] %}
             <div class="col-xs-6">
-                {{ objects["Student Characteristics"]["output"] | safe }}
+                {{ objects["x"]["output"] | safe }}
             </div>
             {% endif %}
         </div>
-    </div>
+    </div> -->
     <!-- <div class="section">
         <p class="section_title">Early Childhood</p>
         <div class="row">
@@ -79,13 +79,18 @@ CONNECT
         <p class="section_title">Education</p>
         <div class="row">
             {% if objects["Sanctions by Substance"] %}
-            <div class="col-xs-6">
+            <div class="col-xs-4">
                 {{ objects["Sanctions by Substance"]["output"] | safe }}
             </div>
             {% endif %}
             {% if objects["Sanctions by Type"] %}
-            <div class="col-xs-6">
+            <div class="col-xs-4">
                 {{ objects["Sanctions by Type"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["Student Characteristics"] %}
+            <div class="col-xs-4">
+                {{ objects["Student Characteristics"]["output"] | safe }}
             </div>
             {% endif %}
         </div>
