@@ -140,6 +140,8 @@ function pieChart() {
             
             data = d3.keys(data).map(function(d) {
                 return {"label" : d, "type" : data[d].type, "value": data[d].value};
+            }).filter(function(o) {
+                return o.value > 0;
             });
 
 
