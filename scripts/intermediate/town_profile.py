@@ -21,7 +21,15 @@ def bar(visObj):
     visObj["data"] = visObj["data"]["records"]
     return visObj
 
-transformations = {"table" : table, "simpletable" : simpletable, "pie" : pie, "map" : map, "bar" : bar}
+def groupedbar(visObj):
+    visObj["data"] = visObj["data"]["records"]
+    return visObj
+
+def stackedbar(visObj):
+    visObj["data"] = visObj["data"]["records"]
+    return visObj
+
+transformations = {"table" : table, "simpletable" : simpletable, "pie" : pie, "map" : map, "bar" : bar, "groupedbar" : groupedbar, "stackedbar" : stackedbar}
 
 def get_extra_obj(data):
     extra_obj = []
