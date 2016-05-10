@@ -37,6 +37,7 @@ div.header h1 {
     font-size: 34pt;
     margin:0 auto;
     display: inline;
+    float: right;
 }
 
 p.section_title {

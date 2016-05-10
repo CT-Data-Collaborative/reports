@@ -146,16 +146,26 @@ CONNECT
             {% endif %}
         </div>
         <div class="row">
-            {% if objects["In State Placement by Age"] %}
-            <div class="col-xs-12">
-                {{ objects["In State Placement by Age"]["output"] | safe }}
+            {% if objects["CIP In State Age Table"] %}
+            <div class="col-xs-8">
+                {{ objects["CIP In State Age Table"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["CIP Out of State Pie"] %}
+            <div class="col-xs-4">
+                {{ objects["CIP Out of State Pie"]["output"] | safe }}
             </div>
             {% endif %}
         </div>
         <div class="row">
-            {% if objects["Out of State Placement by Age"] %}
+            {% if objects["In State Placement by Gender"] %}
             <div class="col-xs-12">
-                {{ objects["Out of State Placement by Age"]["output"] | safe }}
+                {{ objects["In State Placement by Gender"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["In State Placement by Race"] %}
+            <div class="col-xs-12">
+                {{ objects["In State Placement by Race"]["output"] | safe }}
             </div>
             {% endif %}
         </div>
