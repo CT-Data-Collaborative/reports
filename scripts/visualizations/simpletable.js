@@ -16,12 +16,48 @@ var args = minimist(process.argv.slice(2)),
         config = JSON.parse(args.config);
 
 // Number formatters
+const SUBSCRIPT = [
+    "\u2080",
+    "\u2081",
+    "\u2082",
+    "\u2083",
+    "\u2084",
+    "\u2085",
+    "\u2086",
+    "\u2087",
+    "\u2088",
+    "\u2089"
+];
+const SUPERSCRIPT = [
+    "\u2070",
+    "\u00B9",
+    "\u00B2",
+    "\u00B3",
+    "\u2074",
+    "\u2075",
+    "\u2076",
+    "\u2077",
+    "\u2078",
+    "\u2079"
+];
 var formatters = {
     "string" : function(val) {return val; },
     "currency" : d3.format("$,.0f"),
     "integer" : d3.format(",.0f"),
     "decimal" : d3.format(",.2f"),
-    "percent" : d3.format(".1%")
+    "percent" : d3.format(".1%"),
+    "superscript" : function(val) {
+        return val.toString()
+            .split("")
+            .map(function(character) { return SUPERSCRIPT[+character]})
+            .join("");
+    },
+    "subscript" : function(val) {
+        return val.toString()
+            .split("")
+            .map(function(character) { return SUBSCRIPT[+character]})
+            .join("");
+    }
 };
 
 for (var type in config.formats) {
@@ -74,7 +110,7 @@ function tableChart() {
 
                 if ("footnote_number" in config && config.footnote_number != "") {
                     title.text(
-                        config.title + " (" + config.footnote_number + ")"
+                        config.title + formatters["superscript"](config.footnote_number)
                     );
                 }
             }

@@ -18,6 +18,30 @@ var args = minimist(process.argv.slice(2)),
 
 
 // Number formatters
+const SUBSCRIPT = [
+    "\u2080",
+    "\u2081",
+    "\u2082",
+    "\u2083",
+    "\u2084",
+    "\u2085",
+    "\u2086",
+    "\u2087",
+    "\u2088",
+    "\u2089"
+];
+const SUPERSCRIPT = [
+    "\u2070",
+    "\u00B9",
+    "\u00B2",
+    "\u00B3",
+    "\u2074",
+    "\u2075",
+    "\u2076",
+    "\u2077",
+    "\u2078",
+    "\u2079"
+];
 var si = d3.format("s");
 var formatters = {
     "string" : function(val) {return val; },
@@ -42,7 +66,44 @@ var formatters = {
             return d3.format(",.2f")(val);
         }
     },
-    "percent" : d3.format(".1%")
+    "percent" : d3.format(".1%"),
+    "superscript" : function(val) {
+        return val.toString()
+            .split("")
+            .map(function(character) { return SUPERSCRIPT[+character]})
+            .join("");
+    },
+    "subscript" : function(val) {
+        return val.toString()
+            .split("")
+            .map(function(character) { return SUBSCRIPT[+character]})
+            .join("");
+    }
+};
+var tickFormatters = {
+    "string" : function(val) {return val; },
+    "currency" : function(val) {
+        if (val.toString().length > 4) {
+            return d3.format("$.0s")(val).replace(/G/, "B");
+        } else {
+            return d3.format("$,.0f")(val);
+        }
+    },
+    "integer" : function(val) {
+        if (val.toString().length > 4) {
+            return d3.format(".1s")(val).replace(/G/, "B");
+        } else {
+            return d3.format(",.0f")(val);
+        }
+    },
+    "decimal" : function(val) {
+        if (val.toString().length > 4) {
+            return d3.format(".1s")(val).replace(/G/, "B");
+        } else {
+            return d3.format(",.1f")(val);
+        }
+    },
+    "percent" : d3.format(".0%")
 };
 
 for (var type in config.formats) {
@@ -127,7 +188,7 @@ function groupedBarChart() {
             // This is the step that seems to be the most confused and broken - what shape am i aiming for?
             data.forEach(function(d) {
                 d.values = groupLabels.map(function(label) {
-                    yAxis.tickFormat(formatters[d[label].type]); // there should really only be one of these?
+                    yAxis.tickFormat(tickFormatters[d[label].type]); // there should really only be one of these?
                     return {name: label, label: formatters[d[label].type](d[label].value), value: +d[label].value};
                 });
             });
@@ -156,16 +217,8 @@ function groupedBarChart() {
                     var lastSpan = title.select("text").node().lastChild;
                     lastSpan = d3.select(lastSpan)
 
-                    // lastSpan.append("tspan")
-                    //     .attr("dx", 0)
-                    //     .attr("dy", 0)
-                    //     .attr("x", function() {
-                    //         /*This needs to return (this.getComputedTextLength() / 2)*/
-                    //     })
-                    //     .text(config.footnote_number)
-
                     lastSpan.text(
-                        lastSpan.text() + " (" + config.footnote_number + ")"
+                        lastSpan.text() + formatters["superscript"](config.footnote_number)
                     );
                 }
             }

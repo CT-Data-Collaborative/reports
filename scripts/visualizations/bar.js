@@ -201,7 +201,7 @@ function barChart() {
                     .attr("text-anchor", "middle")
                     .attr("font-weight", "bold")
                     .attr("font-size", "8pt")
-                    .tspans(d3.wordwrap(config.title, charLimit), 8);
+                    .tspans(d3.wordwrap(config.title, charLimit), 10);
 
                 if ("footnote_number" in config && config.footnote_number != "") {
                     var lastSpan = title.select("text").node().lastChild;
@@ -210,17 +210,6 @@ function barChart() {
                     lastSpan.text(
                         lastSpan.text() + formatters["superscript"](config.footnote_number)
                     );
-
-                    // lastSpan.append("tspan")
-                    //     .attr("font-size", "4pt")
-                    //     .attr("baseline-shift", "super")
-                    //     .attr("dx", 0)
-                    //     .attr("dy", 0)
-                    //     .attr("x", function() {
-                    //         /*This needs to return (this.getComputedTextLength() / 2)*/
-                    //         return ((lastSpan.text().length / 2) * 4.5)
-                    //     })
-                    //     .text(config.footnote_number)
                 }
             }
 

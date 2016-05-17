@@ -20,6 +20,30 @@ var args = minimist(process.argv.slice(2)),
 chart = pieChart();
 
 // Number formatters
+const SUBSCRIPT = [
+    "\u2080",
+    "\u2081",
+    "\u2082",
+    "\u2083",
+    "\u2084",
+    "\u2085",
+    "\u2086",
+    "\u2087",
+    "\u2088",
+    "\u2089"
+];
+const SUPERSCRIPT = [
+    "\u2070",
+    "\u00B9",
+    "\u00B2",
+    "\u00B3",
+    "\u2074",
+    "\u2075",
+    "\u2076",
+    "\u2077",
+    "\u2078",
+    "\u2079"
+];
 var si = d3.format("s");
 var formatters = {
     "string" : function(val) {return val; },
@@ -44,7 +68,19 @@ var formatters = {
             return d3.format(",.2f")(val);
         }
     },
-    "percent" : d3.format(".1%")
+    "percent" : d3.format(".1%"),
+    "superscript" : function(val) {
+        return val.toString()
+            .split("")
+            .map(function(character) { return SUPERSCRIPT[+character]})
+            .join("");
+    },
+    "subscript" : function(val) {
+        return val.toString()
+            .split("")
+            .map(function(character) { return SUBSCRIPT[+character]})
+            .join("");
+    }
 };
 for (var type in config.formats) {
     formatters[type] = d3.format(config.formats[type]);
@@ -195,16 +231,8 @@ function pieChart() {
                     var lastSpan = title.select("text").node().lastChild;
                     lastSpan = d3.select(lastSpan)
 
-                    // lastSpan.append("tspan")
-                    //     .attr("dx", 0)
-                    //     .attr("dy", 0)
-                    //     .attr("x", function() {
-                    //         /*This needs to return (this.getComputedTextLength() / 2)*/
-                    //     })
-                    //     .text(config.footnote_number)
-
                     lastSpan.text(
-                        lastSpan.text() + " (" + config.footnote_number + ")"
+                        lastSpan.text() + formatters["superscript"](config.footnote_number)
                     );
                 }
             }

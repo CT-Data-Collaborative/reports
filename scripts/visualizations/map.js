@@ -24,6 +24,30 @@ var args = minimist(process.argv.slice(2)),
         // geography = args.geography;
 
 // Number formatters
+const SUBSCRIPT = [
+    "\u2080",
+    "\u2081",
+    "\u2082",
+    "\u2083",
+    "\u2084",
+    "\u2085",
+    "\u2086",
+    "\u2087",
+    "\u2088",
+    "\u2089"
+];
+const SUPERSCRIPT = [
+    "\u2070",
+    "\u00B9",
+    "\u00B2",
+    "\u00B3",
+    "\u2074",
+    "\u2075",
+    "\u2076",
+    "\u2077",
+    "\u2078",
+    "\u2079"
+];
 var si = d3.format("s");
 var formatters = {
     "string" : function(val) {return val; },
@@ -48,7 +72,19 @@ var formatters = {
             return d3.format(",.2f")(val);
         }
     },
-    "percent" : d3.format(".1%")
+    "percent" : d3.format(".1%"),
+    "superscript" : function(val) {
+        return val.toString()
+            .split("")
+            .map(function(character) { return SUPERSCRIPT[+character]})
+            .join("");
+    },
+    "subscript" : function(val) {
+        return val.toString()
+            .split("")
+            .map(function(character) { return SUBSCRIPT[+character]})
+            .join("");
+    }
 };
 
 for (var type in config.formats) {
@@ -209,7 +245,16 @@ function mapChart() {
                     .attr("text-anchor", "middle")
                     .attr("font-weight", "bold")
                     .attr("font-size", "7pt")
-                    .tspans(d3.wordwrap(config.title, charLimit), 8);
+                    .tspans(d3.wordwrap(config.title, charLimit), 10);
+
+                if ("footnote_number" in config && config.footnote_number != "") {
+                    var lastSpan = title.select("text").node().lastChild;
+                    lastSpan = d3.select(lastSpan)
+
+                    lastSpan.text(
+                        lastSpan.text() + formatters["superscript"](config.footnote_number)
+                    );
+                }
             }
 
             var legend = svg.append("g")
