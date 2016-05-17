@@ -17,6 +17,10 @@ from pipes import quote
 import imp
 ##
 
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 # configure debug mode
 DEBUG = True
 
