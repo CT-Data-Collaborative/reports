@@ -55,26 +55,35 @@ CONNECT
     {% endif -%}
 </div>
 <div class="container-fluid content">
-    <!-- <div class="section">
-        <p class="section_title">Demographics</p>
+    <div class="section">
+        <p class="section_title">Behavioral Health</p>
         <div class="row">
-            {% if objects["x"] %}
-            <div class="col-xs-6">
-                {{ objects["x"]["output"] | safe }}
+            {% if objects["Treatment Table"] %}
+            <div class="col-xs-12 treatment_table">
+                {{ objects["Treatment Table"]["output"] | safe }}
             </div>
             {% endif %}
         </div>
-    </div> -->
-    <!-- <div class="section">
-        <p class="section_title">Early Childhood</p>
         <div class="row">
-            {% if objects["x"] %}
-            <div class="col-xs-6">
-                {{ objects["x"]["output"] | safe }}
+            {% if objects["Treatment Chart"] %}
+            <div class="col-xs-12">
+                {{ objects["Treatment Chart"]["output"] | safe }}
             </div>
             {% endif %}
         </div>
-    </div> -->
+        <div class="row">
+            {% if objects["Treatment Age Pie"] %}
+            <div class="col-xs-6">
+                {{ objects["Treatment Age Pie"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["Treatment Race Pie"] %}
+            <div class="col-xs-6">
+                {{ objects["Treatment Race Pie"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
     <div class="section">
         <p class="section_title">Education</p>
         <div class="row">
@@ -107,44 +116,8 @@ CONNECT
             {% endif %}
         </div>
     </div>
-    <!-- <div class="section">
-        <p class="section_title">Behavioral Health</p>
-        <div class="row">
-            {% if objects["x"] %}
-            <div class="col-xs-6">
-                {{ objects["x"]["output"] | safe }}
-            </div>
-            {% endif %}
-        </div>
-    </div> -->
     <div class="section">
         <p class="section_title">Child Welfare</p>
-        <div class="row">
-            {% if objects["Treatment Table"] %}
-            <div class="col-xs-12 treatment_table">
-                {{ objects["Treatment Table"]["output"] | safe }}
-            </div>
-            {% endif %}
-        </div>
-        <div class="row">
-            {% if objects["Treatment Chart"] %}
-            <div class="col-xs-12">
-                {{ objects["Treatment Chart"]["output"] | safe }}
-            </div>
-            {% endif %}
-        </div>
-        <div class="row">
-            {% if objects["Treatment Age Pie"] %}
-            <div class="col-xs-6">
-                {{ objects["Treatment Age Pie"]["output"] | safe }}
-            </div>
-            {% endif %}
-            {% if objects["Treatment Race Pie"] %}
-            <div class="col-xs-6">
-                {{ objects["Treatment Race Pie"]["output"] | safe }}
-            </div>
-            {% endif %}
-        </div>
         <div class="row">
             {% if objects["B23 Number"] %}
             <div class="col-xs-12">
@@ -181,6 +154,9 @@ CONNECT
             </div>
             {% endif %}
         </div>
+    </div>
+    <div class="section">
+        <p class="section_title">Health</p>
         <div class="row">
             {% if objects["Fetal Mortality"] %}
             <div class="col-xs-6">
@@ -195,7 +171,7 @@ CONNECT
         </div>
     </div>
     <!-- <div class="section">
-        <p class="section_title">Juvenile Justice</p>
+        <p class="section_title">Section Name</p>
         <div class="row">
             {% if objects["x"] %}
             <div class="col-xs-6">
