@@ -73,6 +73,7 @@ function tableChart() {
 
                 config.nest.forEach(function(key, keyInd, keyArr) {
                     if ("order" in config && key in config.order) {
+                        console.log("ordering by " + key.toUpperCase());
                         nestedData.key(function (d) { return formatters[d[key].type](d[key].value); })
                                 .sortKeys(function(a, b) {
                                     return config.order[key].indexOf(a) - config.order[key].indexOf(b);
@@ -123,6 +124,12 @@ function tableChart() {
                 var title = container.append("p")
                     .attr("class", "table_title")
                     .text(config.title);
+
+                if ("footnote_number" in config && config.footnote_number != "") {
+                    title.text(
+                        config.title + " (" + config.footnote_number + ")"
+                    );
+                }
             }
 
             container = container.append("div");

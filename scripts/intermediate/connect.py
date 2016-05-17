@@ -152,14 +152,15 @@ def get_extra_obj(data):
                 "legend" : False,
                 "height": 2,
                 "width" : 4,
-                "margin": {"top" : 30, "right" : 0, "bottom" : 0, "left" : 0}
+                "margin": {"top" : 10, "right" : 10, "bottom" : 0, "left" : 0}
                 }
             }
         region_map["data"]["fields"] = [{"type" : "string", "id" : "FIPS"}, {"type" : "integer", "id" : "Value"}]
         
         town_list = {"name" : "town_list", "type" : "table", "data" : {"fields" : [], "records" : []}, "config" : {"height" : 2, "width" : 9}}
         town_list["data"]["fields"] = [{"type" : "string", "id" : "Town"}]
-        # go through geojson and take values that are in the right region (for testing, i'm using county)
+
+        # go through geojson and take values that are in the right region
         # at the same time, build list of towns by name
         map_data = []
         town_data = []
@@ -183,6 +184,38 @@ def get_extra_obj(data):
 
         extra_obj.append(region_map)
         extra_obj.append(town_list)
+
+        # sources
+        sources = {
+            "name" : "sources",
+            "type" : "table",
+            "data" : {
+                "records" : []
+                },
+            "config" : {
+                "height": 12,
+                "width" : 12
+                }
+            }
+
+        counter = 1
+        for i in range(0, len(data["objects"])):
+            obj = data["objects"][i]
+            if "source" in obj["config"] and obj["config"]["source"] != False  and obj["config"]["source"] != "" and obj["config"]["source"] != []:
+                # put number in config of viz
+                obj["config"]["footnote_number"] = counter
+                
+                # add source to metadata list
+                sources["data"]["records"].append({"Source" : {"type" : "string", "value" : obj["config"]["source"]}})
+
+                if "footnotes" in obj["config"] and obj["config"]["footnotes"] != "":
+                    sources["data"]["records"][-1]["footnotes"] = {"type" : "string", "value" : obj["config"]["footnotes"]};
+
+                # increment
+                counter += 1
+
+            data["objects"][i] = obj
+        extra_obj.append(sources)
 
     return extra_obj
 

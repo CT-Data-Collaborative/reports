@@ -47,6 +47,9 @@ p.section_title {
     margin-left: -15px;
     margin-right: -15px;
 }
+div#sources p.section_title {
+    font-size: 14pt;
+}
 .row div[class*="col-xs"],
 .section {
     padding-left: 0!important;
@@ -65,16 +68,25 @@ ul.float_list {
     padding: 0;
 }
 ul.float_list li {
-    display: inline-block;
+    /*display: inline-block;*/
+    float: left;
     width: 48%;
+    margin: 0 0 0 -3pt;
+    padding:0;
 }
 
 div.table_container {
     display: block;
     overflow: hidden;
+    padding-top: 10pt;
+    width: 100%;
+}
+div.table_container div {
+    width: 100%;
 }
 
 div.table_container table {
+    width: 100%;
     position: relative;
 }
 table, thead, tbody, tr, th, td {
@@ -94,6 +106,7 @@ div.table_container table td {
     text-align: right;
 }
 
+div.table_container table tr > th:first-child,
 div.table_container table tr > td:first-child {
     text-align: left !important;
     font-weight: bold;
@@ -169,8 +182,11 @@ p.table_source {
         position:relative;
         top: 135pt;
     }
-    /*div.section,*/
+    div.section,
     div.section div.row {
+        page-break-inside: avoid;
+    }
+    div.section#sources {
         page-break-inside: avoid;
     }
     .noprint {

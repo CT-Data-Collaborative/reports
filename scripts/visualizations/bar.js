@@ -18,6 +18,30 @@ var args = minimist(process.argv.slice(2)),
 
 
 // Number formatters
+const SUBSCRIPT = [
+    "\u2080",
+    "\u2081",
+    "\u2082",
+    "\u2083",
+    "\u2084",
+    "\u2085",
+    "\u2086",
+    "\u2087",
+    "\u2088",
+    "\u2089"
+];
+const SUPERSCRIPT = [
+    "\u2070",
+    "\u00B9",
+    "\u00B2",
+    "\u00B3",
+    "\u2074",
+    "\u2075",
+    "\u2076",
+    "\u2077",
+    "\u2078",
+    "\u2079"
+];
 var si = d3.format("s");
 var formatters = {
     "string" : function(val) {return val; },
@@ -42,7 +66,44 @@ var formatters = {
             return d3.format(",.2f")(val);
         }
     },
-    "percent" : d3.format(".1%")
+    "percent" : d3.format(".1%"),
+    "superscript" : function(val) {
+        return val.toString()
+            .split("")
+            .map(function(character) { return SUPERSCRIPT[+character]})
+            .join("");
+    },
+    "subscript" : function(val) {
+        return val.toString()
+            .split("")
+            .map(function(character) { return SUBSCRIPT[+character]})
+            .join("");
+    }
+};
+var tickFormatters = {
+    "string" : function(val) {return val; },
+    "currency" : function(val) {
+        if (val.toString().length > 4) {
+            return d3.format("$.0s")(val).replace(/G/, "B");
+        } else {
+            return d3.format("$,.0f")(val);
+        }
+    },
+    "integer" : function(val) {
+        if (val.toString().length > 4) {
+            return d3.format(".1s")(val).replace(/G/, "B");
+        } else {
+            return d3.format(",.0f")(val);
+        }
+    },
+    "decimal" : function(val) {
+        if (val.toString().length > 4) {
+            return d3.format(".1s")(val).replace(/G/, "B");
+        } else {
+            return d3.format(",.1f")(val);
+        }
+    },
+    "percent" : d3.format(".0%")
 };
 
 for (var type in config.formats) {
@@ -118,7 +179,7 @@ function barChart() {
             data.map(function(d) {
                 key = Object.keys(d)[0];
                 d.values = {name: key, label: formatters[d[key].type](d[key].value), value: (d[key].value)}
-                yAxis.tickFormat(formatters[d[key].type]); // there should really only be one of these?
+                yAxis.tickFormat(tickFormatters[d[key].type]); // there should really only be one of these?
                 return d;
             });
 
@@ -131,8 +192,8 @@ function barChart() {
 
             if ("title" in config && config.title !== "") {
                 var title = svg.append("g")
-                        .attr("height", margin.top + "px")
-                        .attr("width", width + "px")
+                        .attr("height", margin.top)
+                        .attr("width", width)
                         .attr("transform", "translate(" + ((width + margin.left + margin.right) / 2) + "," + 24 + ")");
 
                 title.append("text")
@@ -141,6 +202,26 @@ function barChart() {
                     .attr("font-weight", "bold")
                     .attr("font-size", "8pt")
                     .tspans(d3.wordwrap(config.title, charLimit), 8);
+
+                if ("footnote_number" in config && config.footnote_number != "") {
+                    var lastSpan = title.select("text").node().lastChild;
+                    lastSpan = d3.select(lastSpan)
+
+                    lastSpan.text(
+                        lastSpan.text() + formatters["superscript"](config.footnote_number)
+                    );
+
+                    // lastSpan.append("tspan")
+                    //     .attr("font-size", "4pt")
+                    //     .attr("baseline-shift", "super")
+                    //     .attr("dx", 0)
+                    //     .attr("dy", 0)
+                    //     .attr("x", function() {
+                    //         /*This needs to return (this.getComputedTextLength() / 2)*/
+                    //         return ((lastSpan.text().length / 2) * 4.5)
+                    //     })
+                    //     .text(config.footnote_number)
+                }
             }
 
             // augment margin depending on word-wrapped title

@@ -152,6 +152,23 @@ function groupedBarChart() {
                     .attr("font-weight", "bold")
                     .attr("font-size", "8pt")
                     .tspans(d3.wordwrap(config.title, charLimit), 8);
+                    
+                if ("footnote_number" in config && config.footnote_number != "") {
+                    var lastSpan = title.select("text").node().lastChild;
+                    lastSpan = d3.select(lastSpan)
+
+                    // lastSpan.append("tspan")
+                    //     .attr("dx", 0)
+                    //     .attr("dy", 0)
+                    //     .attr("x", function() {
+                    //         /*This needs to return (this.getComputedTextLength() / 2)*/
+                    //     })
+                    //     .text(config.footnote_number)
+
+                    lastSpan.text(
+                        lastSpan.text() + " (" + config.footnote_number + ")"
+                    );
+                }
             }
 
             // augment margin depending on word-wrapped title

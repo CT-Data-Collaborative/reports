@@ -71,6 +71,12 @@ function tableChart() {
                 var title = container.append("p")
                     .attr("class", "table_title")
                     .text(config.title);
+
+                if ("footnote_number" in config && config.footnote_number != "") {
+                    title.text(
+                        config.title + " (" + config.footnote_number + ")"
+                    );
+                }
             }
 
             container = container.append("div");
