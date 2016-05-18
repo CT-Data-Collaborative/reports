@@ -49,7 +49,13 @@ p.section_title {
     margin-right: -15px;
 }
 div#sources p.section_title {
-    font-size: 14pt;
+    font-size: 12pt;
+}
+div#sources ol {
+    font-size: 10pt;
+}
+div#sources ul {
+    font-size: 8pt;
 }
 .row div[class*="col-xs"],
 .section {
@@ -203,7 +209,7 @@ p.table_source {
 
 /* Viz-specific styles */
 div.treatment_table table {
-    font-size: 9pt!important;
+    font-size: 8pt!important;
 }
 div.treatment_table table tbody tr:first-child td:not(:first-child) {
     text-align: center!important;

@@ -169,12 +169,13 @@ def get_extra_obj(data):
             geoJSON = json.load(geoJSON_file)
 
             for feature in geoJSON["features"]:
-                if feature["properties"]["REGION"] == data["config"]["region"]:
+                if feature["properties"]["REGION"] == data["config"]["region"] or data["config"]["region"] == "State":
                     map_object = {"FIPS" : {}, "Value" : {}}
                     map_object["FIPS"] = {"type" : "string", "value" : feature["properties"]["GEOID10"]}
                     map_object["Value"] = {"type" : "integer", "value" : 1}
                     map_data.append(map_object)
 
+                if feature["properties"]["REGION"] == data["config"]["region"]:
                     town_object = {"Town" : {}}
                     town_object["Town"] = {"type" : "string", "value" : feature["properties"]["NAME10"]}
                     town_data.append(town_object)
@@ -234,6 +235,7 @@ def get_info(data):
         "4" : "North Central",
         "5" : "Western",
         "6" : "Central",
+        "State" : "Connecticut",
     }[data["config"]["region"]]
 
     return info
