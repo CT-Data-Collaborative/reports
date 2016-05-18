@@ -30,6 +30,7 @@ div.region_container ul.town_list li {
 div.header img.logo {
     width: 97% !important;
     padding:1%;
+    margin-top: 4pt;
 }
 div.header h1 {
     font-weight: 300;

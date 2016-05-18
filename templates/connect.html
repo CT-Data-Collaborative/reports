@@ -55,7 +55,7 @@ CONNECT
     {% endif -%}
 </div>
 <div class="container-fluid content">
-    <div class="section">
+    <div class="section" id="behavioral_health">
         <p class="section_title">Behavioral Health</p>
         <div class="row">
             {% if objects["Treatment Table"] %}
@@ -84,7 +84,7 @@ CONNECT
             {% endif %}
         </div>
     </div>
-    <div class="section">
+    <div class="section" id="education">
         <p class="section_title">Education</p>
         <div class="row">
             {% if objects["Student Characteristics"] %}
@@ -116,20 +116,23 @@ CONNECT
             {% endif %}
         </div>
     </div>
-    <div class="section">
-        <p class="section_title">Child Welfare</p>
-        <div class="row">
-            {% if objects["B23 Number"] %}
-            <div class="col-xs-12">
-                {{ objects["B23 Number"]["output"] | safe }}
+    <div class="section" id="early_childhood">
+            <p class="section_title">Early Childhood</p>
+            <div class="row">
+                {% if objects["B23 Number"] %}
+                <div class="col-xs-12">
+                    {{ objects["B23 Number"]["output"] | safe }}
+                </div>
+                {% endif %}
+                {% if objects["B23 Percent"] %}
+                <div class="col-xs-12">
+                    {{ objects["B23 Percent"]["output"] | safe }}
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
-            {% if objects["B23 Percent"] %}
-            <div class="col-xs-12">
-                {{ objects["B23 Percent"]["output"] | safe }}
-            </div>
-            {% endif %}
         </div>
+    <div class="section" id="child_welfare">
+        <p class="section_title">Child Welfare</p>
         <div class="row">
             {% if objects["CIP In State Age Table"] %}
             <div class="col-xs-8">
@@ -148,6 +151,8 @@ CONNECT
                 {{ objects["In State Placement by Gender"]["output"] | safe }}
             </div>
             {% endif %}
+        </div>
+        <div class="row">
             {% if objects["In State Placement by Race"] %}
             <div class="col-xs-12">
                 {{ objects["In State Placement by Race"]["output"] | safe }}
@@ -155,7 +160,7 @@ CONNECT
             {% endif %}
         </div>
     </div>
-    <div class="section">
+    <div class="section" id="health">
         <p class="section_title">Health</p>
         <div class="row">
             {% if objects["Fetal Mortality"] %}
