@@ -109,7 +109,6 @@ function tableChart() {
 
                 config.nest.forEach(function(key, keyInd, keyArr) {
                     if ("order" in config && key in config.order) {
-                        console.log("ordering by " + key.toUpperCase());
                         nestedData.key(function (d) { return formatters[d[key].type](d[key].value); })
                                 .sortKeys(function(a, b) {
                                     return config.order[key].indexOf(a) - config.order[key].indexOf(b);
