@@ -175,6 +175,43 @@ CONNECT
             {% endif %}
         </div>
     </div>
+    <div class="section">
+        <p class="section_title">Demographics</p>
+        <div class="row">
+            {% if objects["Population Age Pie"] %}
+            <div class="col-xs-6">
+                {{ objects["Population Age Pie"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["Population Race Bar"] %}
+            <div class="col-xs-6">
+                {{ objects["Population Race Bar"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="row">
+            {% if objects["Population Age Race Table"] %}
+            <div class="col-xs-12">
+                {{ objects["Population Age Race Table"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="section">
+        <p class="section_title">Juvenile Justice</p>
+        <div class="row">
+            {% if objects["Juvenile Arrest Rate"] %}
+            <div class="col-xs-6">
+                {{ objects["Juvenile Arrest Rate"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["Juvenile Arrests"] %}
+            <div class="col-xs-6">
+                {{ objects["Juvenile Arrests"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
     <!-- <div class="section">
         <p class="section_title">Section Name</p>
         <div class="row">
@@ -190,25 +227,49 @@ CONNECT
         <p class="section_title">Notes</p>
         <div class="row">
             <div class="col-xs-12">
-                <ol>
-                    {% for row in objects["sources"]["data"] -%}
+                <ul>
+                    {% for i in range(0, 16) -%}
                         <li>
-                            {{ row["Source"]["value"] }}
-                            {% if row["footnotes"] %}
+                            {{ i+1 }}. {{ objects["sources"]["data"][i]["Source"]["value"] }}
+                            {% if objects["sources"]["data"][i]["footnotes"] %}
                             <ul>
-                                {% for footnote in row["footnotes"]["value"] -%}
+                                {% for footnote in objects["sources"]["data"][i]["footnotes"]["value"] -%}
                                     <li>{{ footnote }}</li>
                                 {% endfor -%}
                             </ul>
                             {% endif -%}
                         </li>
                     {% endfor -%}
-                </ol>
+                </ul>
             </div>
         </div>
     </div>
     {% endif %}
-    <hr class="footer_marker"/>
+    {% if objects["sources"] and objects["sources"]["data"] | length > 16 %}
+    <div class="section" id="sources">
+        <p class="section_title">Notes</p>
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    {% for i in range(16, 32) -%}
+                        {%- if i >= objects["sources"]["data"]|length %}{%- break %}{%- endif %}
+                        <li>
+                            {{ i+1 }}. {{ objects["sources"]["data"][i]["Source"]["value"] }}
+                            {% if objects["sources"]["data"][i]["footnotes"] %}
+                            <ul>
+                                {% for footnote in objects["sources"]["data"][i]["footnotes"]["value"] -%}
+                                    <li>{{ footnote }}</li>
+                                {% endfor -%}
+                            </ul>
+                            {% endif -%}
+                        </li>
+                    {% endfor -%}
+                </ul>
+            </div>
+        </div>
+        <hr class="footer_marker"/>
+    </div>
+    {% endif %}
 </div>
 <div class="container-fluid footer"></div>
 
