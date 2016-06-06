@@ -28,6 +28,14 @@ DEBUG = True
 app = Flask(__name__)
 app.config.from_object(__name__)
 
+app.jinja_options = {
+    'extensions': [
+        'jinja2.ext.autoescape',
+        'jinja2.ext.with_',
+        'jinja2.ext.loopcontrols'
+    ]
+}
+
 ## Pass base64encode function to jinja as a filter
 app.jinja_env.filters['base64encode'] = b64encode
 

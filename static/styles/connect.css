@@ -51,10 +51,10 @@ p.section_title {
 div#sources p.section_title {
     font-size: 12pt;
 }
-div#sources ol {
+div#sources ul {
     font-size: 10pt;
 }
-div#sources ul {
+div#sources ul ul {
     font-size: 8pt;
 }
 .row div[class*="col-xs"],
@@ -191,9 +191,6 @@ p.table_source {
     }
     div.section,
     div.section div.row {
-        page-break-inside: avoid;
-    }
-    div.section#sources {
         page-break-inside: avoid;
     }
     .noprint {
