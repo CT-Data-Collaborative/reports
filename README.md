@@ -1,7 +1,10 @@
 ## PDF Serving Application
 
 #### Installation Instructions
+##### Local Deployment
+The easiest way to get the report server running is simply to run it locally. To do so, it is as simple as cloning the repository, navigating to the directory, and running `vagrant up`.
 
+##### Other Deployment
 If you are deploying this application to an existing server or vagrantbox, you will need to ensure that all the required system package dependencies are installed via step 1. If you using the included Vagrantfile to build an isolated vagrant box, the existing provision.sh script will install all the necessary requirements including node (step 7).
 
 1. Install dependencies:    
@@ -40,6 +43,7 @@ If you are deploying this application to an existing server or vagrantbox, you w
 1. If you are using the vagrant box provisioned by the included script, no additional configuration should be required. Otherwise, you should add a port forward command to your vagrant file the makes the application, which serves on port 9999, available via an available port. 
 
 #### Run Instructions
+If you deployed this locally using vagrant, the application will already be running as a `gunicorn` service in `supervisor`. Otherwise:
 
 1. Switch to project directory ('/vagrant' if you are provisioning a distinct vagrant box for the project)
 
@@ -49,8 +53,12 @@ If you are deploying this application to an existing server or vagrantbox, you w
 3. Run flask server
 `python pdf_server.py`
 
+#### Useful Debugging helpers and tools
++  When developing on a deployed server, git will read the file permission mode changes on every single file in the repository as different, rendering `git status` useless. Instead, use `git -c core.filemode=false status`, which will run as you expect it to, ignoring file mode changes.
++  If you're connected to the server over SSH while making requests, you can use the debugging code in `pdf_server.py`, lines x-y to get output about each visualization created, or use the `if` clause in line z to filter to just a specific type. When looking for this output, use `sudo tail -f /var/www/reports/logs/gunicorn_stdout.log` to get a look at the output. This set of debugging tools is very helpful, as errors in the visualization scripts will be invisible otherwise!
+
 #### Testing The Application  
-This application has a testing file, using Flask and python UnitTest based functions. To run this test, and any future test that get implemented, simply follow the instructions above for running activating the virtualenv, and execute `python pdf_server_tests.py` to run the testing script.  The output should illustrate if any changes to the current working repository have broken the functionality for the tests involved. Currently, only a file comparison for the Town Profiles is implemented.
+This application has a testing file, using Flask and python UnitTest based functions. To run this test, and any future test that get implemented, simply follow the instructions above for running activating the virtualenv, and execute `python pdf_server_tests.py` to run the testing script.  The output should illustrate if any changes to the current working repository have broken the functionality for the tests involved. When moving to testing, please make sure that there is an appropriate example PDF to match against, as well as the corresponding request JSON. The testing works by calling for a new PDF from the given JSON, and asserting it is as equivalent to the supplied PDF.
   
 #### Testing External Calls
 
@@ -71,28 +79,35 @@ The following examples will produce variations of town profile reports, however 
 
 #### Application Directory Structure  
 Once installed, the application directory will be laid out as the tree below details. Some structural points of note:
++ `deploy` - contains scripts and configuration files used in the automated (vagrant) deployment.
 + `external_request_mock` - This is intended to be run completely outside of the `pdf_server` application as detailed above.  
 + `node_modules`, `venv` - These will only exist after correct installation of the application and are not included in the repository itself.
 + `scripts` - With the exception of the main application file, this is where all the scripts reside, including intermediary processing and visualization scripts.
++ `templates` - This folder contains the Jinja2 templates used to first render each visualization individually, and finally the report templates that have these visualizations put into them.
 + `static` - 
    + `static/geography` - GeoJSON files will be stored here for use with maps
    + `static/images` - Images used in all reports live here
+   + `static/fonts` - contains any fonts used and deployed with this server.
    + `static/template_config` - report-specific configurations are stored as JSON files in this directory. These are _template level_ configuration parameters and will be applied to every visualization for that request. These configurations are the first level to a kind of override hierarchy. See [the readme on Visualiztion configuration parameters](https://github.com/CT-Data-Collaborative/reports/blob/master/scripts/visualizations/README.md) for more information.
    + `static/tests` - "Standards" (ie a file used as the definitive outcome to compare against) and other required material for running automated tests live here.
-+ `old` - Outdated testing scripts have been placed here, most likely removed in the near future.
+   + `static/jquery.fileDownload.js` - this is used in the external request mock page to trigger an automatic download of a produced pdf from the supplied "arbitrary" request.
 
 The completely installed application directory will be structured as follows.  
 ```
 ├── external_request_mock
 │   ├── index.html
+│   ├── view.html
 │   └── static
 │       └── jquery.fileDownload.js
 ├── node_modules
 │   ├── d3
+│   ├── d3-jetpack
 │   ├── jsdom
 │   └── minimist
+│   └── simple-statistics
 ├── package.json
 ├── pdf_server.py
+├── pdf_server.ini
 ├── pdf_server_tests.py
 ├── provision.sh
 ├── README.md
@@ -100,37 +115,57 @@ The completely installed application directory will be structured as follows.
 ├── scripts
 │   ├── intermediate
 │   │   ├── intermediate_skeleton.py
+│   │   └── test.md
 │   │   └── town_profile.py
-│   ├── old
-│   │   └── ...
+│   │   └── connect.py
+│   │   └── README.md
+│   └── old
 │   └── visualizations
 │       ├── bar.js
+│       ├── groupedbar.js
+│       ├── stackedbar.js
 │       ├── map.js
 │       ├── pie.js
 │       ├── README.md
 │       └── table.js
+│       └── simpletable.js
 ├── static
+│   ├── fonts
+│   │   └── ...
 │   ├── geography
 │   │   └── town_shapes.json
 │   ├── images
 │   │   └── ... 
 │   ├── jquery.fileDownload.js
-│   ├── style.css
+│   ├── styles
+│   │   ├── bootstrap
+│   │   │   └── . . .
+│   │   ├── base.css
+│   │   ├── town_profile.css
+│   │   └── connect.css
 │   ├── template_config
 │   │   ├── config_skeleton.json
 │   │   └── town_profile.json
 │   └── tests
+│       ├── connect.pdf
+│       ├── connect_mock.json
 │       ├── town_profile.pdf
 │       └── town_profile_mock.json
 ├── temp
 ├── templates
-│   ├── bar.html
 │   ├── base.html
+│   ├── bar.html
+│   ├── groupedbar.html
+│   ├── stackedbar.html
 │   ├── map.html
 │   ├── pie.html
 │   ├── table.html
-│   └── town_profile.html
+│   ├── simpletable.html
+│   ├── test.html
+│   ├── town_profile.html
+│   └── connect.html
 ├── Vagrantfile
+├── wsgi.py
 └── venv
     ├── bin
     │  ├── activate
