@@ -95,7 +95,7 @@ for (var type in config.formats) {
 // ie --data="" --config="" --geography="/full/path/to/geometry/file"
 // var geojson = fs.readFileSync(geographyFile, {encoding : "utf8"})
 
-var geojson = fs.readFileSync("/vagrant/static/geography/town_shapes.json", {encoding : "utf8"})
+var geojson = fs.readFileSync("./static/geography/town_shapes.json", {encoding : "utf8"})
 geoData = JSON.parse(geojson);
 
 

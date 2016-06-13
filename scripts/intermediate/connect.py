@@ -165,7 +165,7 @@ def get_extra_obj(data):
         map_data = []
         town_data = []
         
-        with open("/vagrant/static/geography/town_shapes.json") as geoJSON_file:
+        with open("static/geography/town_shapes.json") as geoJSON_file:
             geoJSON = json.load(geoJSON_file)
 
             for feature in geoJSON["features"]:
