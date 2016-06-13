@@ -5,11 +5,27 @@
 The easiest way to get the report server running is simply to run it locally. To do so, it is as simple as cloning the repository, navigating to the directory, and running `vagrant up`.
 
 ##### Other Deployment
-If you are deploying this application to an existing server or vagrantbox, you will need to ensure that all the required system package dependencies are installed via step 1. If you using the included Vagrantfile to build an isolated vagrant box, the existing provision.sh script will install all the necessary requirements including node (step 7).
+Follow the steps below if you are trying to deploy to an existing server (such as an existing production server, etc.). By all accounts, this process is simply the manual way of doing the same things the automated Ansible playbook does, without the one or two steps specific to deploying to vagrant, such as changing file ownership to the vagrant user.
 
-1. Install dependencies:    
-'sudo apt-get install python-dev python-pip python-lxml libcairo2 libpango1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info g++'
-
+1. Install dependencies - you will need to have permission to do so on your server (ie `sudo` authority). Make sure you have udpated your apt!  
+```
+sudo apt-get install g++ \
+git \
+libcairo2 \
+libffi-dev \
+libgdk-pixbuf2.0-0 \
+libpango1.0-0 \
+libxml2-dev \
+libxslt1-dev \
+nginx \
+python-dev \
+python-lxml \
+python-pip \
+shared-mime-info \
+supervisor \
+unzip \
+zlib1g-dev
+```
 
 2. Navigate to project directory  
    + If you've already got a copy of the repository (ie our usual vagrant M.O.) -  
@@ -19,63 +35,94 @@ If you are deploying this application to an existing server or vagrantbox, you w
    `git clone https://github.com/CT-Data-Collaborative/reports.git`  
    `cd reports`
 
-3. install Python VirtualEnvironment  
-`pip install virtualenv`  
-
-4. Create virtualenv  
-`virtualenv venv`  
-
-5. Activate virtualenv  
-`. venv/bin/activate`  
-
-6. Install application python requirements  
-`pip install -r requirements.txt`  
-
-7. Install nodejs from Nodesource PPA  
+3. Install nodejs from Nodesource PPA  
 `curl -sL https://deb.nodesource.com/setup | sudo bash -`  
 `sudo apt-get install nodejs build-essential`  
 
-8. Install application nodejs requirements  
+4. Install application nodejs requirements  
 `npm install`  
 
-#### Local Server Configuration Parameters
+5. install Python VirtualEnvironment, you may need `sudo` permissons:  
+`pip install virtualenv`  
 
-1. If you are using the vagrant box provisioned by the included script, no additional configuration should be required. Otherwise, you should add a port forward command to your vagrant file the makes the application, which serves on port 9999, available via an available port. 
+6. Create virtualenv  
+`virtualenv venv`  
 
-#### Run Instructions
-If you deployed this locally using vagrant, the application will already be running as a `gunicorn` service in `supervisor`. Otherwise:
-
-1. Switch to project directory ('/vagrant' if you are provisioning a distinct vagrant box for the project)
-
-2. Activate virtualenv  
+7. Activate virtualenv  
 `. venv/bin/activate`  
 
-3. Run flask server
-`python pdf_server.py`
+8. Install application python requirements  
+`pip install -r requirements.txt`  
+
+9. Install Fonts - this command is a little complicated.  
+First navigate to font directory in repository  
+`cd /path/to/directory/static/fonts`  
+then execute the following  
+`ls /path/to/directory/static/fonts/*.zip | xargs -L 1 echo | cut -d "." -f 1 | while read filename; do sudo mkdir /usr/share/fonts/truetype/$filename; done;`  
+lastly, update the font cache  
+`sudo fc-cache -fv`  
+**To explain the large command above:**
+   +   the `ls` command lists all the zip files in the font directory
+   +   `echo` will pipe the results of the `ls` command into `cut` as strings, not file paths
+   +   `cut` will trim the zip file name to just the font title, without the extension.
+   +   the last `while; do; done;` will make a new folder in the appropriate place for each font included with the application.  
+
+
+10. Remove default Nginx site - **N.B.** If you are already running deployed sites with Nginx, you may skip this step.  
+`sudo rm /etc/nginx/sites-enabled/defualt`
+
+11. Create Log directory  
+`mkdir /path/to/directory/logs`
+
+12. Create supervisor configuration - **N.B.** if you are already using supervisor, you will need to manually update your configuration with whatever is necessary. See the template file included in the repository in `templates/supervisor_program.conf`. Otherwise, it's safe to copy the template into the appropriate directory:  
+`sudo cp /path/to/directory/deploy/templates/supervisor_program.conf /etc/supervisor/conf.d/pdf_server.conf`
+
+Now you'll have to fill in the pieces of this configuration. Edit the file you just created at `/etc/supervisor/conf.d/pdf_server.conf` and fill in the following placeholders:  
+   +   `{{ user }}` - the username of the unix user that will be running this application
+   +   `{{ app_name }}` - the name of the application for `supervisor`'s purposes. usually "pdf_server"
+   +   `{{ app_dir }}` - the path to your directory, such as "/var/www/reports"
+
+13. Restart supervisor so it will read the new configuration and start the appropriate process daemon.    
+`sudo service supervisor restart`  
+If you'd like to make sure the process is running, you can execute:  
+`sudo supervisorctl status pdf_server`  
+You should see something like:  
+`pdf_server            RUNNING         pid 1234, uptime 0:00:01`
+
+14. Create the Nginx site configuration. First copy the template in:  
+`sudo cp /path/to/directory/deploy/templates/nginx_site.conf /etc/nginx/sites-available/pdf_server.conf`  
+Once again, you'll have to manually fill in the template pieces that would normally be dealt with by Ansible in an automated deployment
+   +   `{{ server_name }}` - most likely "localhost", but could FQDN etc as required by your Nginx setup.
+   +   `{{ app_dir }}` - the path to your directory, such as "/var/www/reports"
+
+15. Link Nginx configuration from `sites-available` to `sites-enabled`  
+`sudo ln /etc/nginx/sites-available/pdf_server.conf /etc/nginx/sites-enabled/pdf_server.conf`
+
+16. Restart Nginx  
+`sudo service nginx restart`
+
+The service should now be running. If you'd like to make sure, you can See below on how to test it out, or start sending requests to the appropriate endpoint, such as a POST request to `http://ip-or-fqdn/download` with an appropriate payload.
+
 
 #### Useful Debugging helpers and tools
-+  When developing on a deployed server, git will read the file permission mode changes on every single file in the repository as different, rendering `git status` useless. Instead, use `git -c core.filemode=false status`, which will run as you expect it to, ignoring file mode changes.
-+  If you're connected to the server over SSH while making requests, you can use the debugging code in `pdf_server.py`, lines x-y to get output about each visualization created, or use the `if` clause in line z to filter to just a specific type. When looking for this output, use `sudo tail -f /var/www/reports/logs/gunicorn_stdout.log` to get a look at the output. This set of debugging tools is very helpful, as errors in the visualization scripts will be invisible otherwise!
++  When developing on a deployed server, git will read the file permission mode changes on every single file in the repository as different, rendering `git status` useless. Instead, use:  
+`git -c core.filemode=false status`  
+which will run as you expect it to, ignoring file mode changes.
++  If you're connected to the server over SSH while making requests, you can use the debugging code in `pdf_server.py`, lines x-y to get output about each visualization created, or use the `if` clause in line z to filter to just a specific type. When looking for this output, use  
+`sudo tail -f /var/www/reports/logs/gunicorn_stdout.log`  
+to get a look at the output. This set of debugging tools is very helpful, as errors in the visualization scripts will be invisible otherwise!
 
-#### Testing The Application  
+#### Unit Testing The Application  
 This application has a testing file, using Flask and python UnitTest based functions. To run this test, and any future test that get implemented, simply follow the instructions above for running activating the virtualenv, and execute `python pdf_server_tests.py` to run the testing script.  The output should illustrate if any changes to the current working repository have broken the functionality for the tests involved. When moving to testing, please make sure that there is an appropriate example PDF to match against, as well as the corresponding request JSON. The testing works by calling for a new PDF from the given JSON, and asserting it is as equivalent to the supplied PDF.
   
 #### Testing External Calls
 
-The `index.html` in the `external_call_mock/` directory is intended to be run outside of the virtualenv using something like
+The subdirectory `external_call_mock/` is intended to be run outside of the virtualenv using something like  
 `python -m SimpleHTTPServer`.
 
 Visiting the resulting page will give you a form in to which you can paste "arbitrary" json data. The structure for this data can be found in the [wiki page for JSON format](https://github.com/CT-Data-Collaborative/reports/wiki/JSON-Format)
 
-For a full town profile mockup, copy the contents of the `static/town_profile_mock.json` file into the external mock form.
-
-The following examples will produce variations of town profile reports, however they are at this point less instructive than generating a full report as mentioned above.
-
-`{"template":"town_profile","config":{},"objects":[{"type":"pie","name":"population","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"map","name":"race","data":[],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}`
-
-`{"template":"town_profile","config":{},"objects":[{"type":"table","name":"race","data":[["","Hartford","Connecticut"],["Native American",596,8770],["Black",47786,361668],["Hispanic (any race)",54289,496939],["White",43660,2792554]],"config":{}},{"type":"table","name":"population","data":[["","Hartford","Connecticut"],[2015,125999,3644545],[2020,126656,3702469],[2025,126185,3746181]],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}`
-
-`{"template":"town_profile","config":{},"objects":[{"type":"pie","name":"race","data":[["Q1",26],["Q2",58],["Q3",46],["Q4",32]],"config":{}},{"type":"table","name":"population","data":[["","Hartford","Connecticut"],[2015,125999,3644545],[2020,126656,3702469],[2025,126185,3746181]],"config":{}},{"type":"table","name":"age","data":[["","0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-44","...","Total"],["Hartford",8487,9184,8613,12832,12571,10721,9165,14801,"...",125130],["Connecticut",197395,220139,236742,255816,229708,217169,211089,469746,"...",3583561]],"config":{}}]}`
+For a full town profile mockup, copy the contents of the `static/town_profile_mock.json` file into the external mock form. There is also a version for a CONNECT pdf mockup.
 
 #### Application Directory Structure  
 Once installed, the application directory will be laid out as the tree below details. Some structural points of note:
