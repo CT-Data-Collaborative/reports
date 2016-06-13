@@ -3,6 +3,15 @@
 {% block head %}
     {{ super() }}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/town_profile.css') }}">
+    <style>
+        @media print {
+            @page {
+                @bottom-left {
+                    content: "Town Profiles Generated on {{ info["generation_date"] }} - Page " counter(page);
+                }
+            }
+        }
+    </style>
 {% endblock head %}
 
 {% block title -%}

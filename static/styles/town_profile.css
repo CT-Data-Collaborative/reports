@@ -259,7 +259,6 @@ div#age td:not(:first-child) {
             width:35%;
             text-align:left;
             vertical-align: top;
-            content: "Town Profiles - Page " counter(page);
         }
         @bottom-center {
             font-size: 9pt;
