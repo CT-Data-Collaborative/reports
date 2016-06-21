@@ -70,7 +70,11 @@ def get_extra_obj(data):
 def get_info(data):
     info = {}
 
-    info["current_year"] = date.today().year;
+    today = date.today()
+
+    info["generation_date"] = today.strftime("%d/%m/%Y");
+
+    info["current_year"] = today.year;
     
     info["years"] = data["config"]["info"]["datayears"]
 
