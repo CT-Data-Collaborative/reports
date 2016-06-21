@@ -37,7 +37,6 @@
     - name: Download pdf report repository from git
       git: repo=https://github.com/CT-Data-Collaborative/reports.git
             dest=/var/www/reports
-            version=connect-mock # ONLY FOR DEVELOPMENT!!!
 
     - name: Create log directory in report repository
       file: path=/var/www/reports/logs state=directory
