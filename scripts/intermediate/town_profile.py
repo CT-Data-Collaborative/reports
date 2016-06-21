@@ -72,7 +72,7 @@ def get_info(data):
 
     today = date.today()
 
-    info["generation_date"] = today.strftime("%d/%m/%Y");
+    info["generation_date"] = today.strftime("%x");
 
     info["current_year"] = today.year;
     
