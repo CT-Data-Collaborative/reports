@@ -111,7 +111,7 @@ for (var type in config.formats) {
 }
 
 // get chart function object
-chart = barChart();
+chart = groupedBarChart();
 
 // use available config parameters to override defaults
 // height
@@ -130,8 +130,13 @@ if ("barWidth" in config && config.barWidth > 0) {
 }
 
 //Color scale
-if ("colors" in config && config.colors.length > 0) {
-    chart.colors(config.colors);
+if ("color" in config && config.color.length > 0) {
+    chart.color(config.color);
+}
+
+// bar grouping
+if ("grouping" in config && config.grouping != "") {
+    chart.grouping(config.grouping);
 }
 
 // get body from jsdom, call chart function
@@ -143,7 +148,7 @@ var body = d3.select(document.body)
 
 console.log(body.html());
 
-function barChart() {
+function groupedBarChart() {
             // VARS
             // dims
     var margin = {top: 30, right: 10, bottom: 30, left: 35},
@@ -152,7 +157,7 @@ function barChart() {
 
             // scales
             x = d3.scale.ordinal()
-                    .rangeRoundBands([0, width], 0.1),
+                        .rangeRoundBands([0, width], 0.1),
             y = d3.scale.linear()
                     .range([height, 0]),
             color = d3.scale.category20(),
@@ -169,18 +174,23 @@ function barChart() {
 
             // bar widths
             defaultBarWidth = true,
-            barWidth = 20;
+            barWidth = 20,
+
+            grouping = "Year";
 
     function chart(selection) {
         selection.each(function(data) {
 
             var charLimit = Math.round(Math.floor((width + margin.right + margin.left) / 6) / 5) * 5;
 
-            data.map(function(d) {
-                key = Object.keys(d)[0];
-                d.values = {name: key, label: formatters[d[key].type](d[key].value), value: (d[key].value)}
-                yAxis.tickFormat(tickFormatters[d[key].type]); // there should really only be one of these?
-                return d;
+            var groupLabels = d3.keys(data[0]).filter(function(key) { return key !== grouping && key !== "_id"; }).sort();
+
+            // This is the step that seems to be the most confused and broken - what shape am i aiming for?
+            data.forEach(function(d) {
+                d.values = groupLabels.map(function(label) {
+                    yAxis.tickFormat(tickFormatters[d[label].type]); // there should really only be one of these?
+                    return {name: label, label: formatters[d[label].type](d[label].value), value: +d[label].value};
+                });
             });
 
             // container, margined interior container
@@ -192,8 +202,8 @@ function barChart() {
 
             if ("title" in config && config.title !== "") {
                 var title = svg.append("g")
-                        .attr("height", margin.top)
-                        .attr("width", width)
+                        .attr("height", margin.top + "px")
+                        .attr("width", width + "px")
                         .attr("transform", "translate(" + ((width + margin.left + margin.right) / 2) + "," + 24 + ")");
 
                 title.append("text")
@@ -201,7 +211,7 @@ function barChart() {
                     .attr("text-anchor", "middle")
                     .attr("font-weight", "bold")
                     .attr("font-size", "8pt")
-                    .tspans(d3.wordwrap(config.title, charLimit), 10);
+                    .tspans(d3.wordwrap(config.title, charLimit), 8);
 
                 if ("footnote_number" in config && config.footnote_number != "") {
                     var lastSpan = title.select("text").node().lastChild;
@@ -217,19 +227,91 @@ function barChart() {
             margin.top += (title.selectAll("tspan").size()-1) * 8;
             height = svg.attr("height") - margin.top - margin.bottom;
 
+            // legends
+            var legendWrap = d3.min([groupLabels.length, (width > 300 ? 5 : 3)]),
+            // Legend scale
+                xl = d3.scale.ordinal()
+                    .rangeRoundBands([0, (width + ((margin.left + margin.right) / 2))], 0, 0)
+                    .domain(d3.range(legendWrap));
+
+            // legend container
+            var legend = svg.append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top +")");
+
+            var legendEntries = legend.selectAll(".entry")
+                .data(groupLabels)
+                .enter()
+                    .append("g")
+                    .attr("class", function(d, i) {
+                        var col = "col_" + (i % legendWrap);
+                        return "entry " + col;
+                    });
+
+            legendEntries.each(function(d, i) {
+                d3.select(this).attr("transform", function() {
+                    var tx = xl(i % legendWrap),
+                            ty = (Math.floor(i/legendWrap) * 10),
+                            col = "col_" + (i % legendWrap),
+                            yGroups = svg.selectAll("g."+col).size(),
+                            yOffset = svg.selectAll("g."+col).selectAll("tspan").size();// - yGroups;
+                    return "translate(" + tx + "," + (ty + (yOffset*8)) + ")";
+                });
+
+                d3.select(this).append("rect")
+                    .attr("stroke-width", "0.5pt")
+                    .attr("stroke", "#4A4A4A")
+                    .attr("height", "8pt")
+                    .attr("width", "8pt")
+                    .attr("fill", color(d));
+
+                var charLimit = Math.floor(Math.round(Math.floor((width + margin.right + margin.left) / 6) / 5) * (legendWrap / 2));
+
+                d3.select(this).append("text")
+                    // .attr("transform", "translate(0,10)")
+                    .attr("fill", "#4A4A4A")
+                    .attr("font-size", "8pt")
+                    .attr("y", "6pt")
+                    .attr("dx", "10pt")
+                    .tspans(function(d) {
+                        return d3.wordwrap(d, charLimit, 8)
+                    })
+                    .selectAll("tspan");
+
+                d3.select(this).selectAll("tspan:empty")
+                    .remove();
+
+                d3.select(this).selectAll("tspan")
+                    .each(function(d, i){
+                        d3.select(this)
+                            .attr("dx", "10pt")
+                            .attr("dy", function() {
+                                return (i > 0 ? "8pt" : 0)
+                            })
+                    })
+            });
+
+            // augment margins for new wordwraps
+            var maxSpans = d3.max(d3.range(legendWrap).map(function(n) {
+                return legend.selectAll(".col_" + n + " tspan").size()
+            }));
+
+            margin.top += (maxSpans) * 10;
+            height = svg.attr("height") - margin.top - margin.bottom;
+
             var barGroup = svg.append("g")
                     .attr("height", height)
                     .attr("width", width)
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
             //  set domain for group scale
-            x.rangeRoundBands([0, width], 0.1)
-                .domain(data.map(function(d) { return Object.keys(d)[0]; }));
+            x.domain(data.map(function(d) { return d[grouping].value; }))
+                .rangeRoundBands([0, width], 0.1);
 
             // set y-scale domain, scaling so there is always a y-axis line above the highest value
             var maxVal = d3.max(data, function(d) {
-                return +d.values.value;
+                return d3.sum(d.values, function(d) { return +d.value; });
             });
+
 
             if (maxVal < 1.0) {
                 y.domain([0,1]);
@@ -247,9 +329,6 @@ function barChart() {
                 .call(function(g) {
                     g.selectAll("path").remove();
                     
-                    g.selectAll("g").selectAll("text")
-                        .attr("fill", "#4A4A4A");
-                        
                     g.selectAll(".tick text")
                         .each(function() {
                             var text = d3.select(this).text();
@@ -269,7 +348,7 @@ function barChart() {
                                         })
                                 })
                         })
-
+                        
                     g.selectAll("g").selectAll("line")
                         .attr("stroke", "#979797");
                 });
@@ -294,40 +373,75 @@ function barChart() {
                 });
 
             // group containers
-            // var groups = barGroup.selectAll(".group")
-            //         .data(data)
-            //         .enter()
-            //             .append("g")
-            //             .attr("transform", function(d) { return "translate(" + x(d.values.name) + ", 0)"});
-
-            // bars within groups
-            barGroup.selectAll("rect")
+            var groups = barGroup.selectAll(".group")
                     .data(data)
                     .enter()
-                        .append("rect")
-                            .attr("stroke", "white")
-                            .attr("width", x.rangeBand())
-                            .attr("x", function(d) { return x(d.values.name); })
-                            .attr("y", function(d) { return y(+d.values.value); })
-                            .attr("height", function(d) { return height - y(+d.values.value); })
-                            .style("fill", function(d) { return color(d.name); });
+                        .append("g")
+                        .attr("transform", function(d) { return "translate(" + x(d[grouping].value) + ", 0)"})
+                        .datum(function(d) { return d.values; })
+                        .each(function(barData, barIndex) {
+                            group = d3.select(this);
 
+                            offset = 0
+                            barData.map(function(d) {
+                                d.height = y(0) - y(d.value);
+                                d.y = y(offset) - d.height;
 
-            if (x.rangeBand() > 10) {
-                // text labels
-                barGroup.selectAll("text.value_label")
-                        .data(data)
-                        .enter()
-                            .append("text")
-                                .classed("value_label", true)
-                                .text(function(d) { return d.values.label; })
-                                // .attr("transform", "rotate(-90)")
-                                .attr("text-anchor", "middle")
-                                .attr("font-size", "8pt")
-                                .attr("y", function(d) { return y(+d.values.value) - 2; })
-                                .attr("x", function(d) { return x(d.values.name) + (x.rangeBand()/2); })
-                                .attr("fill", "#202020");
-            }
+                                offset += d.value;
+                                return d;
+                            })
+
+                            group.selectAll("rect")
+                                .data(barData)
+                                .enter()
+                                .append("rect") 
+                                    .attr("x", 0)
+                                    .attr("width", x.rangeBand())
+                                    .attr("y", function(d) { return d.y; })
+                                    .attr("height", function(d) { return d.height; })
+                                    .attr("fill", function(d) { return color(d.name); })
+                                    .attr("stroke", "white")
+                                    .attr("stroke-width", "0.1pt")
+                        })
+
+    
+            // LABELS ???
+            // if (x.rangeBand() > 10) {
+            //     // text labels
+            //     groups.selectAll("text")
+            //             .data(function(d) { return d.values; })
+            //             .enter()
+            //                 .append("text")
+            //                     .filter(function(d) { return d.value > 0; })
+            //                     .text(function(d) { return d.label; })
+            //                     .attr("transform", "rotate(-90)")
+            //                     .attr("font-size", "8pt")
+            //                     .attr("y", function(d) { return x1(d.name)+(x1.rangeBand() / 2) + 4; })
+            //                     .attr("fill", "#202020")
+            //                     .each(function(d, i) {
+            //                         var text = d3.select(this);
+            //                         var textLength = text.text().length + 1;
+
+            //                         var anchor = "end";
+            //                         var xOffset = 3;
+
+            //                         // basically, use the same formula for wrapping width of chart title
+            //                         // but apply it to the height of the bar that corresponds to this text label
+            //                         // and if the text label is too long, adjust positioning.
+            //                         if (textLength > Math.round(Math.floor((height - y(d.value)) / 6) / 5) * 5 ) {
+            //                             anchor = "start";
+            //                             xOffset = 0;
+            //                         }
+
+            //                         text
+            //                             .attr("text-anchor", function(d) {
+            //                                 return anchor;
+            //                             })
+            //                             .attr("x", function(d) {
+            //                                 return 0 - y(d.value) - xOffset;
+            //                             })
+            //                     })
+            // }
 
             // if ("source" in config && config.source !== "") {
             //     // source
@@ -365,10 +479,15 @@ function barChart() {
         return chart;
     };
 
-    chart.colors = function(_) {
-      if (!arguments.length) return colors;
-      colors = d3.scale.ordinal()
-                        .range(_);
+    chart.color = function(_) {
+      if (!arguments.length) return color;
+      color.range(_);
+      return chart;  
+    };
+
+    chart.grouping = function(_) {
+      if (!arguments.length) return grouping;
+      grouping = _;
       return chart;  
     };
 

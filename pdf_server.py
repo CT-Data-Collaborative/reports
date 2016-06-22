@@ -17,6 +17,10 @@ from pipes import quote
 import imp
 ##
 
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 # configure debug mode
 DEBUG = True
 
@@ -24,12 +28,21 @@ DEBUG = True
 app = Flask(__name__)
 app.config.from_object(__name__)
 
+app.jinja_options = {
+    'extensions': [
+        'jinja2.ext.autoescape',
+        'jinja2.ext.with_',
+        'jinja2.ext.loopcontrols'
+    ]
+}
+
 ## Pass base64encode function to jinja as a filter
 app.jinja_env.filters['base64encode'] = b64encode
 
 ## Helpful accessor function used in jinja templates to build lists (ul)
 def listValues(l):
-    return [o["value"] for o in l if o["value"] != ""]
+    return [l[k]["value"] for k in l if l[k]["value"] != ""]
+
 app.jinja_env.filters['listValues'] = listValues
 
 ### Routes
@@ -88,7 +101,7 @@ def renderRequest(request):
         obj = {}
 
         # Every intermediary script should have one transformation method for each type of viz [pie, map, bar, table]
-        requestObj["data"] = intermediary.transformations[requestObj["type"]](requestObj)
+        requestObj = intermediary.transformations[requestObj["type"]](requestObj)
 
         # take a copy of the template-level config and update with visualization-level configs for this object
         config = templateConfig.copy()
@@ -118,6 +131,7 @@ def renderRequest(request):
         obj["output"] = render_template(requestObj["type"]+".html", data = nodeResponse.stdout)
 
         obj["className"] = requestObj["type"];
+        obj["config"] = requestObj["config"];
         obj["dump"] = nodeResponse.stdout
         obj["data"] = requestObj["data"]
         objects[requestObj["name"]] = obj
@@ -130,4 +144,5 @@ def renderRequest(request):
 
 # run the application to public server
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=9999, debug=True)
+    app.run(host="0.0.0.0", debug=False)
+    # app.run(host="0.0.0.0", port=9999, debug=True)

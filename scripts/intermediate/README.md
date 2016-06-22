@@ -8,7 +8,7 @@ One function should be defined for each type of visualization. This step is inte
   
 > `requestObj["data"] = intermediary.transformations[requestObj["type"]](requestObj)`  
 
-The four functions are passed in the entirety of a visualization request object (__not__ the whole report request object!), but only return the corresponding data. These behaviour may be altered in the future to pass and return a consistent type of object, ie to be passed and to return the whole visualization request object.
+The four functions are passed in the entirety of a visualization request object (__not__ the whole report request object!) and return the object, with any data or configuration adjusted and processed.
   
 
 ### Add Extra Objects to Request

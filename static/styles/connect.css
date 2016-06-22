@@ -1,0 +1,270 @@
+div.region_container {
+    height: 80pt !important;
+}
+div.region_map {
+    height: 80pt !important;
+}
+div.region_container div.region_map img {
+    height: 80pt !important;
+    width: auto !important;
+    /*margin: 0 12pt;*/
+}
+div.region_container div.region_map p {
+    float: left;
+    font-size: 20pt;
+    font-weight: bold;
+    margin-top: 0;
+    /*margin: 0 12pt;*/
+    position: absolute;
+}
+div.region_container ul.town_list {
+    margin:0;
+    padding: 5pt 0 0 0;
+    font-size: 8pt;
+}
+div.region_container ul.town_list li {
+    width: 13%;
+}
+
+
+div.header img.logo {
+    width: 97% !important;
+    padding:1%;
+    margin-top: 4pt;
+}
+div.header h1 {
+    font-weight: 300;
+    line-height: 50pt;
+    font-size: 34pt;
+    margin:0 auto;
+    display: inline;
+    float: right;
+}
+
+p.section_title {
+    font-size: 18pt;
+    margin: 0;
+    clear: both;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+div#sources p.section_title {
+    font-size: 12pt;
+}
+div#sources ul {
+    font-size: 10pt;
+}
+div#sources ul ul {
+    font-size: 8pt;
+}
+.row div[class*="col-xs"],
+.section {
+    padding-left: 0!important;
+    padding-right: 0!important;
+}
+div.row > div > img,
+div.row > div > table,
+div.row > div > ul,
+div.row > div > div {
+    width: 100%;
+}
+
+ul.float_list {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+ul.float_list li {
+    /*display: inline-block;*/
+    float: left;
+    width: 48%;
+    margin: 0 0 0 -3pt;
+    padding:0;
+}
+
+div.table_container {
+    display: block;
+    overflow: hidden;
+    padding-top: 10pt;
+    width: 100%;
+}
+div.table_container div {
+    width: 100%;
+}
+
+div.table_container table {
+    width: 100%;
+    position: relative;
+}
+table, thead, tbody, tr, th, td {
+  border-collapse: collapse;
+}
+
+div.table_container table td {
+    border: 1px solid #979797;
+    padding:0 4px;
+}
+div.table_container table th {
+    border: 1px solid #979797;
+    padding:0 4px;
+    text-align: center;
+}
+div.table_container table td {
+    text-align: right;
+}
+
+div.table_container table tr > th:first-child,
+div.table_container table tr > td:first-child {
+    text-align: left !important;
+    font-weight: bold;
+}
+
+p.table_title {
+    color: #4a4a4a;
+    display: inline;
+    font-size: 9pt;
+    font-weight: bold;
+    margin: 0 auto;
+    padding: 0 0 2px 0;
+    text-align: center;
+    width: 100%;
+}
+
+p.table_source {
+    bottom: 7pt;
+    color: #c0c0c0;
+    float: right;
+    font-size: 7pt;
+    font-style: italic;
+    position: relative;
+}
+
+.table_container > div > div {
+    display: table;
+}
+
+
+/* Print-specific rules */
+@media print {
+    @page {
+        font-family: "RobotoCondensed" !important;
+        size: 8.5in 11in;
+        margin:0.15in 0.20in 0.5in;
+
+        @bottom-right {
+            font-family: "RobotoCondensed";
+            color: #4A4A4A;
+            font-size: 12pt;
+            text-align:right;
+            vertical-align: top;
+            content: "Created by the Connecticut Data Collaborative | connect.ctdata.org";
+        }
+    }
+    body {
+        color: #4A4A4A;
+        font-family: "RobotoCondensed" !important;
+        font-size:8pt;
+        margin:0!important;
+        display: block;
+    }
+    hr.header_marker,
+    hr.footer_marker {
+        position: fixed;
+        margin: 0;
+        border:1pt solid #979797;
+        width:99.5%;
+        left: 0;
+        bottom: 10px;
+    }
+    div.header {
+        position: fixed;
+        height: 50pt;
+        width: 99.5%;
+        display: block;
+        clear: both;
+
+        border-bottom: 1px solid #979797;
+    }
+    div.content {
+        position:relative;
+        top: 135pt;
+    }
+    div.section,
+    div.section div.row {
+        page-break-inside: avoid;
+    }
+    .noprint {
+        display: none;
+    }
+}
+
+@media screen {
+    body {
+        height:800px;
+    }
+}
+
+/* Viz-specific styles */
+div.treatment_table table {
+    font-size: 8pt!important;
+}
+div.treatment_table table tbody tr:first-child td:not(:first-child) {
+    text-align: center!important;
+}
+
+div.treatment_table table tbody tr td:nth-child(2),
+div.treatment_table table thead tr th:nth-child(2),
+div.treatment_table table tbody tr td:nth-child(17) {
+    background-color: #9CC2E5;
+}
+div.treatment_table table tbody tr td:nth-child(3),
+div.treatment_table table tbody tr td:nth-child(18) {
+    background-color: #BDD7EE;
+}
+div.treatment_table table tbody tr td:nth-child(4),
+div.treatment_table table tbody tr td:nth-child(19) {
+    background-color: #DDEBF7;
+}
+div.treatment_table table tbody tr td:nth-child(5),
+div.treatment_table table thead tr th:nth-child(3) {
+    background-color: #F4B083;
+}
+div.treatment_table table tbody tr td:nth-child(6) {
+    background-color: #F7CAAC;
+}
+div.treatment_table table tbody tr td:nth-child(7) {
+    background-color: #FBE4D5;
+}
+div.treatment_table table tbody tr td:nth-child(8),
+div.treatment_table table thead tr th:nth-child(4) {
+    background-color: #FFD966;
+}
+div.treatment_table table tbody tr td:nth-child(9) {
+    background-color: #FFE599;
+}
+div.treatment_table table tbody tr td:nth-child(10) {
+    background-color: #FFF2CC;
+}
+div.treatment_table table tbody tr td:nth-child(11),
+div.treatment_table table thead tr th:nth-child(5) {
+    background-color: #C9C9C9;
+}
+div.treatment_table table tbody tr td:nth-child(12) {
+    background-color: #DCDCDC;
+}
+div.treatment_table table tbody tr td:nth-child(13) {
+    background-color: #EDEDED;
+}
+div.treatment_table table tbody tr td:nth-child(14),
+div.treatment_table table thead tr th:nth-child(6) {
+    background-color: #A8D08D;
+}
+div.treatment_table table tbody tr td:nth-child(15) {
+    background-color: #C5E0B3;
+}
+div.treatment_table table tbody tr td:nth-child(16) {
+    background-color: #E2EFD9;
+}
+div.treatment_table table thead tr th:nth-child(7) {
+    background-color: #5B9BD5;
+}

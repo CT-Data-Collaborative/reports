@@ -4,16 +4,11 @@ body {
 div {
     box-sizing: border-box;
 }
-
-th[colspan] {
-    /*border: 1px solid red;*/
-    text-align: center!important;
-}
-td[colspan] {
-    padding-right: 3%;
+div#grand_list {
+    min-height: 60pt;
 }
 div#commuters table td {
-    padding:0 5%;
+    padding:0 5% 0 1%;
 }
 div#commuters table td:nth-child(even){
     width: 20%!important;
@@ -24,7 +19,11 @@ div#commuters table td:nth-child(odd){
 }
 
 div#city_distance table tr {
-    line-height: 14pt!important;
+    line-height: 12pt!important;
+}
+
+div.container#education {
+    min-height: 110pt;
 }
 
 h3 {
@@ -53,6 +52,13 @@ div.title_header {
     margin-bottom: 14pt;
     position: relative;
 }
+
+div.title_header h2 > span.attribution {
+    font-size: 9pt;
+    font-style: italic;
+    padding-left: 6pt;
+}
+
 div.container:not(.first-container) {
     border-top: medium none;
 }
@@ -80,10 +86,14 @@ div#small_map {
     right: 0pt;
     top: 0;
 }
+div.title_header ul.town_address.header_list li:first-child {
+    font-weight: bold;
+}
 div.title_header ul.header_list:first-of-type {
     padding: 0;
 }
 ul.header_list {
+    white-space: nowrap;
     display: inline-block;
     font-size: 8pt;
     list-style: outside none none;
@@ -120,7 +130,7 @@ div.vis_container {
 }
 div.vis_container > * {
     max-width: 100%;
-    padding: 1pt 5pt 0;
+    padding:0.5pt 5pt 0;
     width: 100%;
     margin-bottom: 0;
     margin-top:1pt;
@@ -128,18 +138,37 @@ div.vis_container > * {
 div.vis_container > p {
     width: 95%
 }
+div.vis_container table thead tr th {
+    font-style: italic;
+    line-height: 1.1em;
+}
+div.vis_container table thead tr th,
+div.vis_container table tbody tr td {
+    padding:0.5pt 0;
+}
+div.vis_container table thead tr th[colspan]:not(:first-child) {
+    text-align: center;
+}
+div.vis_container table tbody tr td[colspan] {
+    padding-right: 3%;
+}
+/*div.vis_container table thead tr th[colspan="1"] {
+    text-align: right;
+}*/
+div.vis_container table {
+    width: 100%;
+}
 div.vis_container table td:not(:first-child),
 div.vis_container table th:not(:first-child) {
     max-width: 40pt;
-    /*overflow: hidden;*/
 }
-
-div.vis_container table tbody tr th:first-child,
+div.vis_container table thead tr th:first-child,
 div.vis_container table tbody tr td:first-child {
+    text-align: left;
 }
 div.vis_container table thead tr th:not(:first-child),
 div.vis_container table tbody tr td:not(:first-child) {
-  text-align:right;
+    text-align:right;
 }
 table {
     border-collapse: collapse;
@@ -148,12 +177,8 @@ table {
 #business table {
     line-height: 14pt!important;
 }
-th {
-    font-style: italic;
-    line-height: 1.1em;
-}
-th, td {
-    padding:0.5pt 0;
+#enrollment {
+    min-height: 60pt;
 }
 div.vis_container > img {
     display: block;
@@ -174,6 +199,7 @@ ul > h4 {
     top:0!important;
 }
 h4 {
+    width: inherit;
     background: rgba(255, 255, 255, 0) none repeat scroll 0 0;
     box-sizing: border-box;
     display: inline-block;
@@ -209,6 +235,13 @@ ul.indent_list li {
     width: 32% !important;
 }
 
+div#age td:nth-child(2n+1):not(:first-child) {
+    text-align: center;
+}
+div#age td:not(:first-child) {
+    width: 6.5%;
+}
+
 @media screen {
     body {
         margin: 2% 10%;
@@ -220,13 +253,12 @@ ul.indent_list li {
 @media print {
     @page {
         size: 8.5in 11in;
-        margin:0.2in 0.4in .85in;
+        margin:0.2in 0.4in .6in;
         @bottom-left {
             font-size: 7pt;
             width:35%;
             text-align:left;
             vertical-align: top;
-            content: "Town Profiles - Page " counter(page);
         }
         @bottom-center {
             font-size: 9pt;
@@ -235,7 +267,7 @@ ul.indent_list li {
             width:30%;
             text-align: center;
             vertical-align: top;
-            content: "www.cerc.com";
+            content: "profiles.ctdata.com";
         }
         @bottom-right {
             font-size: 7pt;

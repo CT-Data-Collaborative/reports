@@ -3,13 +3,12 @@ import json
 def table(visObj):
     return visObj
 
-def simpletable(visObj):
-    return visObj
-
 def pie(visObj):
     return visObj
 
 def map(visObj):
+    visObj["data"] = visObj["data"]["records"]
+
     return visObj
 
 def bar(visObj):
@@ -21,7 +20,7 @@ def groupedbar(visObj):
 def stackedbar(visObj):
     return visObj
 
-transformations = {"table" : table, "simpletable" : simpletable, "pie" : pie, "map" : map, "bar" : bar, "groupedbar" : groupedbar, "stackedbar" : stackedbar}
+transformations = {"table" : table, "pie" : pie, "map" : map, "bar" : bar, "groupedbar" : groupedbar, "stackedbar" : stackedbar}
 
 def get_extra_obj(data):
     extra_obj = []

@@ -16,12 +16,48 @@ var args = minimist(process.argv.slice(2)),
         config = JSON.parse(args.config);
 
 // Number formatters
+const SUBSCRIPT = [
+    "\u2080",
+    "\u2081",
+    "\u2082",
+    "\u2083",
+    "\u2084",
+    "\u2085",
+    "\u2086",
+    "\u2087",
+    "\u2088",
+    "\u2089"
+];
+const SUPERSCRIPT = [
+    "\u2070",
+    "\u00B9",
+    "\u00B2",
+    "\u00B3",
+    "\u2074",
+    "\u2075",
+    "\u2076",
+    "\u2077",
+    "\u2078",
+    "\u2079"
+];
 var formatters = {
     "string" : function(val) {return val; },
     "currency" : d3.format("$,.0f"),
-    "integer" : d3.format(",0f"),
-    "decimal" : d3.format(",2f"),
-    "percent" : d3.format(".1%")
+    "integer" : d3.format(",.0f"),
+    "decimal" : d3.format(",.2f"),
+    "percent" : d3.format(".1%"),
+    "superscript" : function(val) {
+        return val.toString()
+            .split("")
+            .map(function(character) { return SUPERSCRIPT[+character]})
+            .join("");
+    },
+    "subscript" : function(val) {
+        return val.toString()
+            .split("")
+            .map(function(character) { return SUBSCRIPT[+character]})
+            .join("");
+    }
 };
 
 for (var type in config.formats) {
@@ -53,58 +89,164 @@ function tableChart() {
     function chart(selection) {
         selection.each(function(data) {
 
+            var marginBump = 0,
+                    charLimit = (Math.round(config.width / 25) * 5);
+
             // Convert data to standard representation greedily;
             // this is needed for nondeterministic accessors.
             data = data;
-            // data = data.map(function(d, i) {
-            //     return [label.call(data, d, i), value.call(data, d, i)];
-            // });
 
-            // outermost table Container
-            var table = d3.select(this).append("table")
+            /*
+            var priority_order = ['MUST', "SHOULD", 'COULD', 'WISH'];
+            var nested_data = d3.nest()
+            .key(function(d) { return d.status; }).sortKeys(d3.ascending)
+            .key(function(d) { return d.priority; }).sortKeys(function(a,b) { return priority_order.indexOf(a) - priority_order.indexOf(b); })
+            .rollup(function(leaves) { return leaves.length; })
+            .entries(csv_data);
+            */
+            if ("nest" in config) {
+                nestedData = d3.nest();
 
-            // Calculate colspan
-            // if header cells < data cells, per row.
-            var noblankColumns = data.columns.filter(function(col) { return col.value !== "" })
+                config.nest.forEach(function(key, keyInd, keyArr) {
+                    if ("order" in config && key in config.order) {
+                        nestedData.key(function (d) { return formatters[d[key].type](d[key].value); })
+                                .sortKeys(function(a, b) {
+                                    return config.order[key].indexOf(a) - config.order[key].indexOf(b);
+                                });
+                    } else {
+                        nestedData.key(function (d) { return formatters[d[key].type](d[key].value); });
+                    }
+                });
 
-            if (noblankColumns.length < data.rows[0].length-1 && noblankColumns.length > 0) {
-                colspan = Math.floor((data.rows[0].length)/(noblankColumns.length))
-                colspan = (colspan > 1 ? colspan : null)
-            }
-            
-            // table header
-            var thead = table.append("thead")
-                    .append("tr")
-                    .selectAll("th")
-                    .data(data.columns).enter()
-                    .append("th")
-                        .text(function(d) { return d.value; } )
-                    .attr("colspan", function(d, i) {
-                        if (i > 0 || d.value != "") {
-                            return colspan;
-                        } else {
-                            return null;
+                nestedData.rollup(function(leaf) {
+                    leaf = leaf.pop();
+                    for (key in leaf) {
+                        if (config.nest.indexOf(key) !== -1) {
+                            delete leaf[key];
                         }
-                    });
+                    }
+                    if ("order" in config && "leaf" in config.order) {
+                        newLeaf = {};
+                        config.order.leaf
+                                .filter(function(key) { return key in leaf; })
+                                .forEach(function(key, keyI, keyA) {
+                                    newLeaf[key] = leaf[key];
+                                });
+                        leaf = newLeaf;
+                    }
+                    return leaf;
+                });
+
+
+                data = nestedData.map(data)
+            }
+
+            // useful debugging of nest functions
+            // var container = d3.select(this).append("pre")
+            //     .text(JSON.stringify(data, null, 4));
+            // return chart;
+
+            // outermost container
+            var container = d3.select(this).append("div")
+                    .attr("class", "table_container");
+            if ("height" in config && config.height > 0) {
+                    container.attr("style", "height:"+config.height+"px;");
+            }
+
+            container = container.append("div");
+
+            if ("title" in config && config.title !== "") {
+                var title = container.append("p")
+                    .attr("class", "table_title")
+                    .text(config.title);
+
+                if ("footnote_number" in config && config.footnote_number != "") {
+                    title.text(
+                        config.title + formatters["superscript"](config.footnote_number)
+                    );
+                }
+            }
+
+            container = container.append("div");
+            
+            // Table
+            var table = container.append("table");
+
+            // bump down by wordwrap
+            table.attr("style", "top:"+(marginBump * 6)+"px;")
+
+            // table header
+            var thead = table.append("thead");
 
             // tbody element
             var tbody = table.append("tbody");
 
-            // tr elements
-            var rows = tbody.selectAll("tr")
-                    .data(data.rows)
-                    .enter()
-                    .append("tr");
+            if (!("header" in config) || config.header == true) {
+                // now populate thead with th cells appropriately
+                populateHeader = function(data, thead, header_zero, level) {
+                    if (data instanceof Object && data[d3.keys(data)[0]] instanceof Object) {
+                        var theadTR = thead.selectAll("tr#level_"+level);
+                        if (theadTR.empty()) {
+                            theadTR = thead.append("tr")
+                                                        .attr("id", "level_"+level);
+                            theadTR.append("th");
+                            if (header_zero !== false) {
+                                theadTR.select("th")
+                                    .text(header_zero);
+                            }
+                        }
+                        for (var key in data) {
+                            theadTR.append("th")
+                                .text(key)
+                                .attr("colspan", d3.keys(data[key]).length);
+                                populateHeader(data[key], thead, header_zero, level + 1)
+                        }
+                    } else {
+                        if (level <= 1 || "header_leaf" in config && config.header_leaf == true) {
+                            // Remove colspan from lowest level (leaf-level) <th> elements
+                            thead.selectAll("tr#level_"+(level-1)).selectAll("th")
+                                    .attr("colspan", null);
+                        } else {
+                            // remove leaf level headers altogether
+                            thead.selectAll("tr#level_"+(level-1)).remove();
+                        }
+                        return
+                    }
+                }
 
-            // create a cell in each row for each column
-            var cells = rows.selectAll("td")
-                .data(function(row) {
-                    return row;
+                var header_zero = false;
+                if ("header_zero" in config && config.header_zero == true) {
+                    header_zero = config.nest[0];
+                }
+                populateHeader(data[d3.keys(data)[0]], thead, header_zero, 0);
+            }
+
+            // populate body
+            populateCells = function(data, thead, tr, level) {
+                if (data instanceof Object && data[d3.keys(data)[0]] instanceof Object) {
+                    for (var key in data) {
+                        populateCells(data[key], thead, tr, level + 1);
+                    }
+                } else {
+                    tr.append("td")
+                        .text(formatters[data.type](data.value));
+                }
+            }
+
+            for (rowKey in data) {
+                var tr = tbody.append("tr");
+                tr.append("td")
+                    .text(rowKey);
+                populateCells(data[rowKey], thead, tr, 0);
+            }
+
+            // Some cleanup.
+            table.selectAll("th[colspan], td[colspan]")
+                .attr("colspan", function() {
+                    return (d3.select(this).attr("colspan") < 2 ? null : d3.select(this).attr("colspan"));
                 })
-                .enter()
-                .append("td")
-                .text(function(d) { return formatters[d.type](d.value); })
-                .attr("colspan", function(d, i) { return colspan && (i > 0 || data.columns[i].value != "") ? 1 : null });
+
+
         });
     }
 

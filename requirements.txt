@@ -1,3 +1,4 @@
 Flask==0.10.1
 Flask-WeasyPrint==0.5
 Naked==0.1.31
+gunicorn==19.3.0

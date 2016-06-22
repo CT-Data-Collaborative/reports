@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <style>
+        table, thead, tbody, tr, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+{% endblock head %}
+
+{% block title -%}
+Testing template
+{% endblock title -%}
+
+{% block body %}
+
+{% for obj in objects -%}
+{{ objects[obj]["output"] | safe }}
+{% endfor -%}
+
+<hr>
+
+{% endblock body %}
+ 

@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/connect.css') }}">
+    <link href="{{ url_for('static', filename = 'styles/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+    <style>
+        @media print {
+            @page {
+                @bottom-left {
+                    font-family: "RobotoCondensed";
+                    color: #4A4A4A;
+                    font-size: 12pt;
+                    width:25%;
+                    text-align:left;
+                    vertical-align: top;
+                    content: counter(page) " | {{ info["month"] }} {{ info["year"] }}" ;
+                }
+            }
+        }
+    </style>
+{% endblock head %}
+
+{% block title -%}
+CONNECT
+{% endblock title -%}
+
+{% block body %}
+<div class="container-fluid header">
+    <div class="row">
+        <div class="col-xs-5">
+            <img class="logo" src="{{ url_for('static', filename='images/connect.jpg') }}" />
+        </div>
+        <div class="col-xs-7">
+            <h1>
+                {{ info["region_title"] }}
+            </h1>
+        </div>
+    </div>
+    <!-- <hr class="header_marker" /> -->
+    {% if objects["region_map"] and objects["town_list"]-%}
+    <div class="row section region_container">
+        <div class="col-xs-3 region_map">
+            <!-- <p class="region_title">Region 1</p> -->
+            {{ objects["region_map"]["output"] | safe }}
+        </div>
+        <div class="col-xs-9">
+            <ul class="float_list town_list">
+                {% for row in objects["town_list"]["data"] -%}
+                <li>{{ " ".join(row | listValues) }}</li>
+                {% endfor -%}
+            </ul>
+        </div>
+    </div>
+    {% endif -%}
+</div>
+<div class="container-fluid content">
+    <div class="section" id="behavioral_health">
+        <p class="section_title">Behavioral Health</p>
+        <div class="row">
+            {% if objects["Treatment Table"] %}
+            <div class="col-xs-12 treatment_table">
+                {{ objects["Treatment Table"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="row">
+            {% if objects["Treatment Chart"] %}
+            <div class="col-xs-12">
+                {{ objects["Treatment Chart"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="row">
+            {% if objects["Treatment Age Pie"] %}
+            <div class="col-xs-6">
+                {{ objects["Treatment Age Pie"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["Treatment Race Pie"] %}
+            <div class="col-xs-6">
+                {{ objects["Treatment Race Pie"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="section" id="education">
+        <p class="section_title">Education</p>
+        <div class="row">
+            {% if objects["Student Characteristics"] %}
+            <div class="col-xs-6">
+                {{ objects["Student Characteristics"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["Sanctions by Substance"] %}
+            <div class="col-xs-6">
+                {{ objects["Sanctions by Substance"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="row">
+            {% if objects["Sanctions by Type"] %}
+            <div class="col-xs-6">
+                {{ objects["Sanctions by Type"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["School Incidents Pie"] %}
+            <div class="col-xs-6 pull-right">
+                {{ objects["School Incidents Pie"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["Percent Incidents by Race"] %}
+            <div class="col-xs-6 pull-left">
+                {{ objects["Percent Incidents by Race"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="section" id="early_childhood">
+            <p class="section_title">Early Childhood</p>
+            <div class="row">
+                {% if objects["B23 Number"] %}
+                <div class="col-xs-12">
+                    {{ objects["B23 Number"]["output"] | safe }}
+                </div>
+                {% endif %}
+                {% if objects["B23 Percent"] %}
+                <div class="col-xs-12">
+                    {{ objects["B23 Percent"]["output"] | safe }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    <div class="section" id="child_welfare">
+        <p class="section_title">Child Welfare</p>
+        <div class="row">
+            {% if objects["CIP In State Age Table"] %}
+            <div class="col-xs-8">
+                {{ objects["CIP In State Age Table"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["CIP Out of State Pie"] %}
+            <div class="col-xs-4">
+                {{ objects["CIP Out of State Pie"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="row">
+            {% if objects["In State Placement by Gender"] %}
+            <div class="col-xs-12">
+                {{ objects["In State Placement by Gender"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="row">
+            {% if objects["In State Placement by Race"] %}
+            <div class="col-xs-12">
+                {{ objects["In State Placement by Race"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="section" id="health">
+        <p class="section_title">Health</p>
+        <div class="row">
+            {% if objects["Fetal Mortality"] %}
+            <div class="col-xs-6">
+                {{ objects["Fetal Mortality"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["Infant Mortality"] %}
+            <div class="col-xs-6">
+                {{ objects["Infant Mortality"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="section">
+        <p class="section_title">Demographics</p>
+        <div class="row">
+            {% if objects["Population Age Pie"] %}
+            <div class="col-xs-6">
+                {{ objects["Population Age Pie"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["Population Race Bar"] %}
+            <div class="col-xs-6">
+                {{ objects["Population Race Bar"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="row">
+            {% if objects["Population Age Race Table"] %}
+            <div class="col-xs-12">
+                {{ objects["Population Age Race Table"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="section">
+        <p class="section_title">Juvenile Justice</p>
+        <div class="row">
+            {% if objects["Juvenile Arrest Rate"] %}
+            <div class="col-xs-6">
+                {{ objects["Juvenile Arrest Rate"]["output"] | safe }}
+            </div>
+            {% endif %}
+            {% if objects["Juvenile Arrests"] %}
+            <div class="col-xs-6">
+                {{ objects["Juvenile Arrests"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- <div class="section">
+        <p class="section_title">Section Name</p>
+        <div class="row">
+            {% if objects["x"] %}
+            <div class="col-xs-6">
+                {{ objects["x"]["output"] | safe }}
+            </div>
+            {% endif %}
+        </div>
+    </div> -->
+    {% if objects["sources"] %}
+    <div class="section" id="sources">
+        <p class="section_title">Notes</p>
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    {% for i in range(0, 16) -%}
+                        <li>
+                            {{ i+1 }}. {{ objects["sources"]["data"][i]["Source"]["value"] }}
+                            {% if objects["sources"]["data"][i]["footnotes"] %}
+                            <ul>
+                                {% for footnote in objects["sources"]["data"][i]["footnotes"]["value"] -%}
+                                    <li>{{ footnote }}</li>
+                                {% endfor -%}
+                            </ul>
+                            {% endif -%}
+                        </li>
+                    {% endfor -%}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if objects["sources"] and objects["sources"]["data"] | length > 16 %}
+    <div class="section" id="sources">
+        <p class="section_title">Notes</p>
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    {% for i in range(16, 32) -%}
+                        {%- if i >= objects["sources"]["data"]|length %}{%- break %}{%- endif %}
+                        <li>
+                            {{ i+1 }}. {{ objects["sources"]["data"][i]["Source"]["value"] }}
+                            {% if objects["sources"]["data"][i]["footnotes"] %}
+                            <ul>
+                                {% for footnote in objects["sources"]["data"][i]["footnotes"]["value"] -%}
+                                    <li>{{ footnote }}</li>
+                                {% endfor -%}
+                            </ul>
+                            {% endif -%}
+                        </li>
+                    {% endfor -%}
+                </ul>
+            </div>
+        </div>
+        <hr class="footer_marker"/>
+    </div>
+    {% endif %}
+</div>
+<div class="container-fluid footer"></div>
+
+{% endblock body %}
+ 

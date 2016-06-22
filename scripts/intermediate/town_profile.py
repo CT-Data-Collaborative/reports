@@ -1,23 +1,35 @@
 import json
+from datetime import date
 
 def table(visObj):
-    if ("header" not in visObj["config"] or visObj["config"]["header"] == True):
-            columns = visObj["data"].pop(0)
-            rows = visObj["data"]
-            return {"columns" : columns, "rows" : rows}
-    else:
-            return {"columns" : [], "rows" : visObj["data"]}
+    visObj["data"] = visObj["data"]["records"]
+    return visObj
+
+def simpletable(visObj):
+    visObj["data"] = visObj["data"]["records"]
+    return visObj
 
 def pie(visObj):
-    return visObj["data"]
+    visObj["data"] = visObj["data"]["records"]
+    return visObj
 
 def map(visObj):
-    return visObj["data"]
+    visObj["data"] = visObj["data"]["records"]
+    return visObj
 
 def bar(visObj):
-    return visObj["data"]
+    visObj["data"] = visObj["data"]["records"]
+    return visObj
 
-transformations = {"table" : table, "pie" : pie, "map" : map, "bar" : bar}
+def groupedbar(visObj):
+    visObj["data"] = visObj["data"]["records"]
+    return visObj
+
+def stackedbar(visObj):
+    visObj["data"] = visObj["data"]["records"]
+    return visObj
+
+transformations = {"table" : table, "simpletable" : simpletable, "pie" : pie, "map" : map, "bar" : bar, "groupedbar" : groupedbar, "stackedbar" : stackedbar}
 
 def get_extra_obj(data):
     extra_obj = []
@@ -25,30 +37,27 @@ def get_extra_obj(data):
     header_map = {
         "type": "map",
         "name": "header_map",
-        "data": [
-            [
-                {
-                    "value": "FIPS",
-                    "type": "string"
-                },
-                {
-                    "value": "Statistic",
-                    "type": "string"
-                }
+        "data": {
+            "fields" : [
+                {"id" : "FIPS", "type" : "integer"},
+                {"id" : "Statistic", "type" : "integer"}
             ],
-            [
+            "records" : [
                 {
-                    "value": "0900337070",
-                    "type": "FIPS"
-                },
-                {
-                    "value": 1,
-                    "type": "decimal"
+                    "Statistic" : {"value" : 1, "type" : "integer"},
+                    "FIPS" : {"value" : data["config"]["FIPS"], "type" : "integer"}
                 }
             ]
-        ],
+        },
         "config": {
-            "margin": 10,
+            "legend" : False,
+            "margin": {
+                "top": 10,
+                "right": 10,
+                "bottom": 10,
+                "left": 10
+            },
+            "colors" : ["#000000"],
             "width" : 275,
             "height" : 150
         }
@@ -61,13 +70,18 @@ def get_extra_obj(data):
 def get_info(data):
     info = {}
 
-    # This info should be sourced according to the data object, probably based on FIPS or town name
-    info["address"] = ["Town Hall", "550 Main Street", "Hartford, CT 06103", "(860) 543-8500"]
-    info["belongs_to"] = ["Hartford County", "LMA Hartford", "Capitol Area Economic Dev. Region", "Capitol Region Planning Area"]
-    info["incorporated"] = 1784
+    today = date.today()
 
-    info["enrollment_info"] = {"district" : "Hartford School District", "enrollment" : 20390}
+    info["generation_date"] = today.strftime("%x");
 
-    info["government_form"] = "Council-Manager"
+    info["current_year"] = today.year;
+    
+    info["years"] = data["config"]["info"]["datayears"]
+
+    info["address"] = data["config"]["info"]["address"]
+    info["belongs_to"] = data["config"]["info"]["municipalorgs"]
+    info["incorporated"] = data["config"]["info"]["incorporation"]
+
+    info["government_form"] = data["config"]["info"]["governmentform"]
 
     return info

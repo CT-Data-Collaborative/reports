@@ -1,65 +1,77 @@
 ├── external_request_mock
 │   ├── index.html
+│   ├── view.html
 │   └── static
 │       └── jquery.fileDownload.js
 ├── node_modules
 │   ├── d3
+│   ├── d3-jetpack
 │   ├── jsdom
 │   └── minimist
+│   └── simple-statistics
 ├── package.json
 ├── pdf_server.py
-├── pdf_server.pyc
+├── pdf_server.ini
 ├── pdf_server_tests.py
 ├── provision.sh
 ├── README.md
 ├── requirements.txt
 ├── scripts
 │   ├── intermediate
-│   │   ├── town_profile.py
-│   │   └── town_profile.pyc
-│   ├── old
-│   │   ├── donut.js
-│   │   ├── donut.pdf
-│   │   ├── donut_test.html
-│   │   ├── index.html
-│   │   ├── intermediate_test.py
-│   │   ├── intermediate_test.pyc
-│   │   ├── jinjatest2.pdf
-│   │   └── naked_test.py
+│   │   ├── intermediate_skeleton.py
+│   │   └── test.md
+│   │   └── town_profile.py
+│   │   └── connect.py
+│   │   └── README.md
+│   └── old
 │   └── visualizations
 │       ├── bar.js
+│       ├── groupedbar.js
+│       ├── stackedbar.js
 │       ├── map.js
 │       ├── pie.js
 │       ├── README.md
 │       └── table.js
+│       └── simpletable.js
 ├── static
+│   ├── fonts
+│   │   └── ...
 │   ├── geography
 │   │   └── town_shapes.json
 │   ├── images
-│   │   └── cerc.png
+│   │   └── ... 
 │   ├── jquery.fileDownload.js
-│   ├── style.css
+│   ├── styles
+│   │   ├── bootstrap
+│   │   │   └── . . .
+│   │   ├── base.css
+│   │   ├── town_profile.css
+│   │   └── connect.css
 │   ├── template_config
+│   │   ├── config_skeleton.json
 │   │   └── town_profile.json
-│   ├── tests
-│   │   ├── town_profile2.pdf
-│   │   └── town_profile.pdf
-│   └── town_profile_mock.json
+│   └── tests
+│       ├── connect.pdf
+│       ├── connect_mock.json
+│       ├── town_profile.pdf
+│       └── town_profile_mock.json
 ├── temp
 ├── templates
-│   ├── bar.html
 │   ├── base.html
+│   ├── bar.html
+│   ├── groupedbar.html
+│   ├── stackedbar.html
 │   ├── map.html
 │   ├── pie.html
 │   ├── table.html
-│   └── town_profile.html
+│   ├── simpletable.html
+│   ├── test.html
+│   ├── town_profile.html
+│   └── connect.html
 ├── Vagrantfile
+├── wsgi.py
 └── venv
     ├── bin
     │  ├── activate
     │  └── ...
-    ├── include
-    ├── lib
-    ├── local
-    ├── pip-selfcheck.json
-    └── share
+    └── ...
