@@ -47,12 +47,16 @@
     - name: Change owner of code repo
       command: chown -R vagrant:www-data /var/www/reports
 
+#    - name: Download node deb source - comes with NPM
+#      get_url: url="https://deb.nodesource.com/setup" dest=/tmp/nodedeb.sh
+#      register: download_node_source
+
     - name: Download node deb source - comes with NPM
-      get_url: url="https://deb.nodesource.com/setup" dest=/tmp/nodedeb.sh
+      command: 'curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh'
       register: download_node_source
 
     - name: run Node deb source installer
-      shell: bash /tmp/nodedeb.sh
+      shell: bash nodesource_setup.sh
       when: download_node_source.changed
 
     - name: Install nodejs and build-essential
