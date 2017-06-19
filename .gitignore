@@ -9,3 +9,5 @@ node_modules/
 .vagrant
 venv/
 *.pyc
+.idea/
+*.retry

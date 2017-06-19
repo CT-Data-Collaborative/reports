@@ -122,10 +122,10 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         {{ objects["enrollment"]["output"] | safe }}
         {% endif -%}
     </div>
-    <div id="cmt" class="vis_container right">
-        {% if objects["cmt"] -%}
-        <h4>Connecticut Mastery Test Percent Above Goal{% if info["years"]["cmt"] %} ({{info["years"]["cmt"]}}){% endif %}</h4>
-        {{ objects["cmt"]["output"] | safe }}
+    <div id="smarterbalanced" class="vis_container right">
+        {% if objects["smarterbalanced"] -%}
+        <h4>Smarter Balanced Test Percent Above Goal{% if info["years"]["smarterbalanced"] %} ({{info["years"]["smarterbalanced"]}}){% endif %}</h4>
+        {{ objects["smarterbalanced"]["output"] | safe }}
         {% endif -%}
     </div>
     <div id="psis" class="vis_container left">

@@ -29,10 +29,30 @@
         - python-dev
         - python-lxml
         - python-pip
+        - build-essential
         - shared-mime-info
         - supervisor
         - unzip
         - zlib1g-dev
+
+    - name: Download node deb source - comes with NPM
+      command: 'curl -sL https://deb.nodesource.com/setup_6.x -o /tmp/nodesource_setup.sh'
+      register: download_node_source
+
+    - name: run Node deb source installer
+      shell: bash /tmp/nodesource_setup.sh
+      when: download_node_source.changed
+
+    - name: Install nodejs and build-essential
+      apt: pkg={{item}} state=installed
+      with_items:
+        - nodejs
+        - build-essential
+
+    - name: Delete report directory
+      file:
+        path: /var/www/reports
+        state: absent
 
     - name: Download pdf report repository from git
       git: repo=https://github.com/CT-Data-Collaborative/reports.git
@@ -47,40 +67,28 @@
     - name: Change owner of code repo
       command: chown -R vagrant:www-data /var/www/reports
 
-#    - name: Download node deb source - comes with NPM
-#      get_url: url="https://deb.nodesource.com/setup" dest=/tmp/nodedeb.sh
-#      register: download_node_source
-
-    - name: Download node deb source - comes with NPM
-      command: 'curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh'
-      register: download_node_source
-
-    - name: run Node deb source installer
-      shell: bash nodesource_setup.sh
-      when: download_node_source.changed
-
-    - name: Install nodejs and build-essential
-      apt: pkg={{item}} state=installed
-      with_items:
-        - nodejs
-        - build-essential
-
     - name: install npm requirements
       npm: path=/var/www/reports/node_modules/
 
     - name: install virtualenv with pip
       pip: name=virtualenv state=present
 
+    - name: create virtualenv
+      become_user: vagrant
+      command: virtualenv /var/www/reports/venv
+
     - name: install pip requirements - automagically (ansible) creates virtualenv
-      pip: chdir=/var/www/reports
-            virtualenv=venv
-            virtualenv_site_packages=yes
-            requirements=requirements.txt
+      pip:
+        virtualenv: /var/www/reports/venv
+        requirements: /var/www/reports/requirements.txt
 
     # install fonts
     - name: List font zip files in repository font directory
       shell: chdir=/var/www/reports/static/fonts ls -1 *.zip
       register: font_files
+
+    - name: Check if font_files was registered
+      debug: msg={{ font_files.stdout_lines }}
 
     - name: Create necessary font directory
       command: sudo mkdir /usr/share/fonts/truetype/{{item}} creates=/usr/share/fonts/truetype/{{item}}
@@ -88,7 +96,7 @@
 
     - name: Unzip font into directory
       command: unzip /var/www/reports/static/fonts/{{item}} -d /usr/share/fonts/truetype/{{item}}
-      with_items: font_files.stdout_lines
+      with_items: "{{ font_files.stdout_lines }}"
 
     - name: Update font cache
       command: sudo fc-cache -fv
