@@ -124,6 +124,10 @@ div.vis_container.span {
     clear: both;
 }
 
+div.vis_container.pad-bottom {
+    padding-bottom: 2rem;
+}
+
 div.vis_container {
     margin: 1pt;
 
@@ -267,7 +271,7 @@ div#age td:not(:first-child) {
             width:30%;
             text-align: center;
             vertical-align: top;
-            content: "profiles.ctdata.com";
+            content: "profiles.ctdata.org";
         }
         @bottom-right {
             font-size: 7pt;

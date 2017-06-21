@@ -122,7 +122,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         {{ objects["enrollment"]["output"] | safe }}
         {% endif -%}
     </div>
-    <div id="smarterbalanced" class="vis_container right">
+    <div id="smarterbalanced" class="vis_container right pad-bottom">
         {% if objects["smarterbalanced"] -%}
         <h4>Smarter Balanced Test Percent Above Goal{% if info["years"]["smarterbalanced"] %} ({{info["years"]["smarterbalanced"]}}){% endif %}</h4>
         {{ objects["smarterbalanced"]["output"] | safe }}
