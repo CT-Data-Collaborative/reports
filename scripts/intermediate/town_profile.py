@@ -75,7 +75,7 @@ def get_info(data):
     info["generation_date"] = today.strftime("%x");
 
     info["current_year"] = today.year;
-    
+    info["profile_year"] = data['config']['profile_years']
     info["years"] = data["config"]["info"]["datayears"]
 
     info["address"] = data["config"]["info"]["address"]
