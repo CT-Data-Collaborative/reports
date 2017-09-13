@@ -107,7 +107,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
         <h4>Major Employers{% if info["years"]["employers"] %} ({{info["years"]["employers"]}}){% endif %}</h4>
         <ul class="float_list">
             {% for row in objects["employers"]["data"] -%}
-            <li>{{ " ".join(row|listValues) }}</li>
+            <li>{{ " ".join(row|list_values) }}</li>
             {% endfor -%}
         </ul>
         {% endif -%}
@@ -275,7 +275,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
             <ul class="indent_list">
                 <h4>Electric Provider</h4>
                 {% for row in objects["electric"]["data"] if row != "" -%}
-                <li>{{ " ".join(row|listValues) }}</li>
+                <li>{{ " ".join(row|list_values) }}</li>
                 {% endfor -%}
             </ul>
             {% endif -%}
@@ -283,7 +283,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
             <ul class="indent_list">
                 <h4>Gas Provider</h4>
                 {% for row in objects["gas"]["data"] if row != "" -%}
-                <li>{{ " ".join(row|listValues) }}</li>
+                <li>{{ " ".join(row|list_values) }}</li>
                 {% endfor -%}
             </ul>
             {% endif -%}
@@ -291,7 +291,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
             <ul class="indent_list">
                 <h4>Water Provider</h4>
                 {% for row in objects["water"]["data"] if row != "" -%}
-                <li>{{ " ".join(row|listValues) }}</li>
+                <li>{{ " ".join(row|list_values) }}</li>
                 {% endfor -%}
             </ul>
             {% endif -%}
@@ -299,7 +299,7 @@ Town Profile{% if config["town"] -%} - {{ config["town"] }}{% endif -%}
             <ul class="indent_list">
                 <h4>Cable Provider</h4>
                 {% for row in objects["cable"]["data"] if row != "" -%}
-                <li>{{ " ".join(row|listValues) }}</li>
+                <li>{{ " ".join(row|list_values) }}</li>
                 {% endfor -%}
             </ul>
             {% endif -%}
