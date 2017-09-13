@@ -5,63 +5,72 @@
  * jsdom - JSDOM library, for accessing browser-less virtual DOM
  */
 var d3 = require("d3"),
-        minimist = require("minimist"),
-        jsdom = require("jsdom");
+  minimist = require("minimist"),
+  jsdom = require("jsdom");
 
 /**
  * Process arguments from node call using minimist
  */
 var args = minimist(process.argv.slice(2)),
-        data = JSON.parse(args.data),
-        config = JSON.parse(args.config);
+  data = JSON.parse(args.data),
+  config = JSON.parse(args.config),
+  tablename = JSON.parse(args.tablename);
 
 // Number formatters
 const SUBSCRIPT = [
-    "\u2080",
-    "\u2081",
-    "\u2082",
-    "\u2083",
-    "\u2084",
-    "\u2085",
-    "\u2086",
-    "\u2087",
-    "\u2088",
-    "\u2089"
+  "\u2080",
+  "\u2081",
+  "\u2082",
+  "\u2083",
+  "\u2084",
+  "\u2085",
+  "\u2086",
+  "\u2087",
+  "\u2088",
+  "\u2089"
 ];
 const SUPERSCRIPT = [
-    "\u2070",
-    "\u00B9",
-    "\u00B2",
-    "\u00B3",
-    "\u2074",
-    "\u2075",
-    "\u2076",
-    "\u2077",
-    "\u2078",
-    "\u2079"
+  "\u2070",
+  "\u00B9",
+  "\u00B2",
+  "\u00B3",
+  "\u2074",
+  "\u2075",
+  "\u2076",
+  "\u2077",
+  "\u2078",
+  "\u2079"
 ];
+
 var formatters = {
-    "string" : function(val) {return val; },
-    "currency" : d3.format("$,.0f"),
-    "integer" : d3.format(",.0f"),
-    "decimal" : d3.format(",.2f"),
-    "percent" : d3.format(".1%"),
-    "superscript" : function(val) {
-        return val.toString()
-            .split("")
-            .map(function(character) { return SUPERSCRIPT[+character]})
-            .join("");
-    },
-    "subscript" : function(val) {
-        return val.toString()
-            .split("")
-            .map(function(character) { return SUBSCRIPT[+character]})
-            .join("");
-    }
+  "string": function (val) {
+    return val;
+  },
+  "currency": d3.format("$,.0f"),
+  "integer": d3.format(",.0f"),
+  "decimal": d3.format(",.2f"),
+  "percent": d3.format(".1%"),
+  "superscript": function (val) {
+    return val.toString()
+      .split("")
+      .map(function (character) {
+        return SUPERSCRIPT[+character]
+      })
+      .join("");
+  },
+  "subscript": function (val) {
+    return val.toString()
+      .split("")
+      .map(function (character) {
+        return SUBSCRIPT[+character]
+      })
+      .join("");
+  }
 };
 
+
 for (var type in config.formats) {
-    formatters[type] = d3.format(config.formats[type]);
+  formatters[type] = d3.format(config.formats[type]);
 }
 
 // get chart function object
@@ -76,201 +85,227 @@ chart = tableChart();
 // get body from jsdom, call chart function
 var document = jsdom.jsdom();
 var body = d3.select(document.body)
-            .html("")
-            .datum(data)
-            .call(chart);
+  .html("")
+  .datum(data)
+  .call(chart);
 
 console.log(body.html());
 
 function tableChart() {
-    // Vars
-    var colspan = null;
-    
-    function chart(selection) {
-        selection.each(function(data) {
+  // Vars
+  var colspan = null;
 
-            var marginBump = 0,
-                    charLimit = (Math.round(config.width / 25) * 5);
+  function chart(selection) {
+    selection.each(function (data) {
 
-            // Convert data to standard representation greedily;
-            // this is needed for nondeterministic accessors.
-            data = data;
+      var marginBump = 0,
+        charLimit = (Math.round(config.width / 25) * 5);
 
-            /*
-            var priority_order = ['MUST', "SHOULD", 'COULD', 'WISH'];
-            var nested_data = d3.nest()
-            .key(function(d) { return d.status; }).sortKeys(d3.ascending)
-            .key(function(d) { return d.priority; }).sortKeys(function(a,b) { return priority_order.indexOf(a) - priority_order.indexOf(b); })
-            .rollup(function(leaves) { return leaves.length; })
-            .entries(csv_data);
-            */
-            if ("nest" in config) {
-                nestedData = d3.nest();
+      // Convert data to standard representation greedily;
+      // this is needed for nondeterministic accessors.
+      data = data;
 
-                config.nest.forEach(function(key, keyInd, keyArr) {
-                    if ("order" in config && key in config.order) {
-                        nestedData.key(function (d) { return formatters[d[key].type](d[key].value); })
-                                .sortKeys(function(a, b) {
-                                    return config.order[key].indexOf(a) - config.order[key].indexOf(b);
-                                });
-                    } else {
-                        nestedData.key(function (d) { return formatters[d[key].type](d[key].value); });
-                    }
-                });
+      /*
+       var priority_order = ['MUST', "SHOULD", 'COULD', 'WISH'];
+       var nested_data = d3.nest()
+       .key(function(d) { return d.status; }).sortKeys(d3.ascending)
+       .key(function(d) { return d.priority; }).sortKeys(function(a,b) { return priority_order.indexOf(a) - priority_order.indexOf(b); })
+       .rollup(function(leaves) { return leaves.length; })
+       .entries(csv_data);
+       */
+      if ("nest" in config) {
+        nestedData = d3.nest();
 
-                nestedData.rollup(function(leaf) {
-                    leaf = leaf.pop();
-                    for (key in leaf) {
-                        if (config.nest.indexOf(key) !== -1) {
-                            delete leaf[key];
-                        }
-                    }
-                    if ("order" in config && "leaf" in config.order) {
-                        newLeaf = {};
-                        config.order.leaf
-                                .filter(function(key) { return key in leaf; })
-                                .forEach(function(key, keyI, keyA) {
-                                    newLeaf[key] = leaf[key];
-                                });
-                        leaf = newLeaf;
-                    }
-                    return leaf;
-                });
-
-
-                data = nestedData.map(data)
-            }
-
-            // useful debugging of nest functions
-            // var container = d3.select(this).append("pre")
-            //     .text(JSON.stringify(data, null, 4));
-            // return chart;
-
-            // outermost container
-            var container = d3.select(this).append("div")
-                    .attr("class", "table_container");
-            if ("height" in config && config.height > 0) {
-                    container.attr("style", "height:"+config.height+"px;");
-            }
-
-            container = container.append("div");
-
-            if ("title" in config && config.title !== "") {
-                var title = container.append("p")
-                    .attr("class", "table_title")
-                    .text(config.title);
-
-                if ("footnote_number" in config && config.footnote_number != "") {
-                    title.text(
-                        config.title + formatters["superscript"](config.footnote_number)
-                    );
-                }
-            }
-
-            container = container.append("div");
-            
-            // Table
-            var table = container.append("table");
-
-            // bump down by wordwrap
-            table.attr("style", "top:"+(marginBump * 6)+"px;")
-
-            // table header
-            var thead = table.append("thead");
-
-            // tbody element
-            var tbody = table.append("tbody");
-
-            if (!("header" in config) || config.header == true) {
-                // now populate thead with th cells appropriately
-                populateHeader = function(data, thead, header_zero, level) {
-                    if (data instanceof Object && data[d3.keys(data)[0]] instanceof Object) {
-                        var theadTR = thead.selectAll("tr#level_"+level);
-                        if (theadTR.empty()) {
-                            theadTR = thead.append("tr")
-                                                        .attr("id", "level_"+level);
-                            theadTR.append("th");
-                            if (header_zero !== false) {
-                                theadTR.select("th")
-                                    .text(header_zero);
-                            }
-                        }
-                        for (var key in data) {
-                            theadTR.append("th")
-                                .text(key)
-                                .attr("colspan", d3.keys(data[key]).length);
-                                populateHeader(data[key], thead, header_zero, level + 1)
-                        }
-                    } else {
-                        if (level <= 1 || "header_leaf" in config && config.header_leaf == true) {
-                            // Remove colspan from lowest level (leaf-level) <th> elements
-                            thead.selectAll("tr#level_"+(level-1)).selectAll("th")
-                                    .attr("colspan", null);
-                        } else {
-                            // remove leaf level headers altogether
-                            thead.selectAll("tr#level_"+(level-1)).remove();
-                        }
-                        return
-                    }
-                }
-
-                var header_zero = false;
-                if ("header_zero" in config && config.header_zero == true) {
-                    header_zero = config.nest[0];
-                }
-                populateHeader(data[d3.keys(data)[0]], thead, header_zero, 0);
-            }
-
-            // populate body
-            populateCells = function(data, thead, tr, level) {
-                if (data instanceof Object && data[d3.keys(data)[0]] instanceof Object) {
-                    for (var key in data) {
-                        populateCells(data[key], thead, tr, level + 1);
-                    }
-                } else {
-                    tr.append("td")
-                        .text(formatters[data.type](data.value));
-                }
-            }
-
-            for (rowKey in data) {
-                var tr = tbody.append("tr");
-                tr.append("td")
-                    .text(rowKey);
-                populateCells(data[rowKey], thead, tr, 0);
-            }
-
-            // Some cleanup.
-            table.selectAll("th[colspan], td[colspan]")
-                .attr("colspan", function() {
-                    return (d3.select(this).attr("colspan") < 2 ? null : d3.select(this).attr("colspan"));
-                })
-
-
+        config.nest.forEach(function (key, keyInd, keyArr) {
+          if ("order" in config && key in config.order) {
+            nestedData.key(function (d) {
+              return formatters[d[key].type](d[key].value);
+            })
+              .sortKeys(function (a, b) {
+                return config.order[key].indexOf(a) - config.order[key].indexOf(b);
+              });
+          } else {
+            nestedData.key(function (d) {
+              return formatters[d[key].type](d[key].value);
+            });
+          }
         });
-    }
 
-    /**
-     * Getter-Setter functions for chart function object
-     */
-    // chart.width = function(_) {
-    //     if (!arguments.length) return width;
-    //     width = _;
-    //     return chart;
-    // };
+        nestedData.rollup(function (leaf) {
+          leaf = leaf.pop();
+          for (key in leaf) {
+            if (config.nest.indexOf(key) !== -1) {
+              delete leaf[key];
+            }
+          }
+          if ("order" in config && "leaf" in config.order) {
+            newLeaf = {};
+            config.order.leaf
+              .filter(function (key) {
+                return key in leaf;
+              })
+              .forEach(function (key, keyI, keyA) {
+                newLeaf[key] = leaf[key];
+              });
+            leaf = newLeaf;
+          }
+          return leaf;
+        });
 
-    // These will probably never be used, but keeping for posterity
-    chart.label = function(_) {
-        if (!arguments.length) return label;
-        label = _;
-        return chart;
-    };
 
-    chart.value = function(_) {
-        if (!arguments.length) return value;
-        value = _;
-        return chart;
-    };
+        // var nested_data = nestedData.entries(data);
+        // var ordered_data = new Map();
+        // nested_data.forEach(function(e) {
+        //   ordered_data.set(e.key, e.values);
+        // });
+        // data = ordered_data;
+        data = nestedData.map(data);
+      }
 
+      // useful debugging of nest functions
+      // var container = d3.select(this).append("pre")
+      //     .text(JSON.stringify(data, null, 4));
+      // return chart;
+
+      // outermost container
+      var container = d3.select(this).append("div")
+        .attr("class", "table_container");
+      if ("height" in config && config.height > 0) {
+        container.attr("style", "height:" + config.height + "px;");
+      }
+
+      container = container.append("div");
+
+      if ("title" in config && config.title !== "") {
+        var title = container.append("p")
+          .attr("class", "table_title")
+          .text(config.title);
+
+        if ("footnote_number" in config && config.footnote_number != "") {
+          title.text(
+            config.title + formatters["superscript"](config.footnote_number)
+          );
+        }
+      }
+
+      container = container.append("div");
+
+      // Table
+      var table = container.append("table");
+
+      // bump down by wordwrap
+      table.attr("style", "top:" + (marginBump * 6) + "px;")
+
+      // table header
+      var thead = table.append("thead");
+
+      // tbody element
+      var tbody = table.append("tbody");
+
+      if (!("header" in config) || config.header == true) {
+        // now populate thead with th cells appropriately
+        populateHeader = function(data, thead, header_zero, level) {
+            if (data instanceof Object && data[d3.keys(data)[0]] instanceof Object) {
+                var theadTR = thead.selectAll("tr#level_"+level);
+                if (theadTR.empty()) {
+                    theadTR = thead.append("tr")
+                                                .attr("id", "level_"+level);
+                    theadTR.append("th");
+                    if (header_zero !== false) {
+                        theadTR.select("th")
+                            .text(header_zero);
+                    }
+                }
+                for (var key in data) {
+                    theadTR.append("th")
+                        .text(key)
+                        .attr("colspan", d3.keys(data[key]).length);
+                        populateHeader(data[key], thead, header_zero, level + 1)
+                }
+            } else {
+                if (level <= 1 || "header_leaf" in config && config.header_leaf == true) {
+                    // Remove colspan from lowest level (leaf-level) <th> elements
+                    thead.selectAll("tr#level_"+(level-1)).selectAll("th")
+                            .attr("colspan", null);
+                } else {
+                    // remove leaf level headers altogether
+                    thead.selectAll("tr#level_"+(level-1)).remove();
+                }
+                return
+            }
+        }
+
+        var header_zero = false;
+        if ("header_zero" in config && config.header_zero == true) {
+          header_zero = config.nest[0];
+        }
+        populateHeader(data[d3.keys(data)[0]], thead, header_zero, 0);
+      }
+
+      // populate body
+      populateCells = function(data, thead, tr, level) {
+          if (data instanceof Object && data[d3.keys(data)[0]] instanceof Object) {
+              for (var key in data) {
+                  populateCells(data[key], thead, tr, level + 1);
+              }
+          } else {
+              tr.append("td")
+                  .text(formatters[data.type](data.value));
+          }
+      }
+
+      // Because of the reliance on nest.map, the custom sortKeys function
+      // is not applied. See https://github.com/d3/d3-collection/blob/master/README.md#nest_sortKeys
+      // for more specifics. Trying sortValues is probably the next approach to try.
+      if (tablename === 'population') {
+        var sort_by = config.nest[0];
+        var ordered_keys = config.order[sort_by];
+        ordered_keys.forEach(function(rowKey) {
+          var tr = tbody.append("tr");
+          tr.append("td")
+            .text(rowKey);
+          populateCells(data[rowKey], thead, tr, 0);
+        });
+      } else {
+        for (rowKey in data) {
+          var tr = tbody.append("tr");
+          tr.append("td")
+            .text(rowKey);
+          populateCells(data[rowKey], thead, tr, 0);
+        }
+      }
+
+      // Some cleanup.
+      table.selectAll("th[colspan], td[colspan]")
+        .attr("colspan", function () {
+          return (d3.select(this).attr("colspan") < 2 ? null : d3.select(this).attr("colspan"));
+        })
+
+
+    });
+  }
+
+  /**
+   * Getter-Setter functions for chart function object
+   */
+  // chart.width = function(_) {
+  //     if (!arguments.length) return width;
+  //     width = _;
+  //     return chart;
+  // };
+
+  // These will probably never be used, but keeping for posterity
+  chart.label = function (_) {
+    if (!arguments.length) return label;
+    label = _;
     return chart;
+  };
+
+  chart.value = function (_) {
+    if (!arguments.length) return value;
+    value = _;
+    return chart;
+  };
+
+  return chart;
 }
