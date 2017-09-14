@@ -122,8 +122,8 @@ def _render_request(request):
         cl_tablename = "--tablename="+quote(request_obj['name'])
 
         node_response = muterun_js(cl_script, cl_data+" "+cl_config+" "+cl_tablename)
-        app.logging.info(node_response.stdout)
-        app.logging.info(node_response.stderr)
+        # app.logger.info(node_response.stdout)
+        # app.logger.info(node_response.stderr)
         # # Useful debugging - change if clause to be whatever type of chart you're debugging
         # if(requestObj['type'] == "table"):
         #     print("###############")
@@ -140,7 +140,7 @@ def _render_request(request):
         obj["dump"] = node_response.stdout
         obj["data"] = request_obj["data"]
         objects[request_obj["name"]] = obj
-        app.logger.info(json.dumps(objects))
+        # app.logger.info(json.dumps(objects))
 
     # render template
     response = render_template(pdf_template+".html", config = template_config, info = intermediate_script_reference_info, objects = objects)
