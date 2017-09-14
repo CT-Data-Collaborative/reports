@@ -188,6 +188,9 @@ table {
 #enrollment {
     min-height: 60pt;
 }
+.container--demographics {
+    margin-top: 2rem;
+}
 div.vis_container > img {
     display: block;
     margin: auto;
