@@ -90,13 +90,13 @@
     - name: Check if font_files was registered
       debug: msg={{ font_files.stdout_lines }}
 
-    - name: Create necessary font directory
-      command: sudo mkdir /usr/share/fonts/truetype/{{item}} creates=/usr/share/fonts/truetype/{{item}}
-      with_items: font_files.stdout_lines
+#    - name: Create necessary font directory
+#      command: sudo mkdir /usr/share/fonts/truetype/{{item}} creates=/usr/share/fonts/truetype/{{item}}
+#      with_items: "{{ font_files.stdout_lines|list }}"
 
     - name: Unzip font into directory
-      command: unzip /var/www/reports/static/fonts/{{item}} -d /usr/share/fonts/truetype/{{item}}
-      with_items: "{{ font_files.stdout_lines }}"
+      command: unzip -o /var/www/reports/static/fonts/{{item}} -d /usr/share/fonts/truetype/{{item}}
+      with_items: "{{ font_files.stdout_lines|list }}"
 
     - name: Update font cache
       command: sudo fc-cache -fv
