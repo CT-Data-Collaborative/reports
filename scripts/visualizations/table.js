@@ -14,7 +14,7 @@ var d3 = require("d3"),
 var args = minimist(process.argv.slice(2)),
   data = JSON.parse(args.data),
   config = JSON.parse(args.config),
-  tablename = JSON.parse(args.tablename);
+  tablename = args.tablename;
 
 // Number formatters
 const SUBSCRIPT = [

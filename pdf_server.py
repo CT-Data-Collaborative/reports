@@ -119,9 +119,11 @@ def _render_request(request):
         cl_script = "scripts/visualizations/"+request_obj["type"]+".js"
         cl_data = "--data="+quote(json.dumps(request_obj["data"]))
         cl_config = "--config="+quote(json.dumps(config))
-        cl_tablename = "--config="+request_obj['name']
-        node_response = muterun_js(cl_script, cl_data+" "+cl_config+" "+cl_tablename)
+        cl_tablename = "--tablename="+quote(request_obj['name'])
 
+        node_response = muterun_js(cl_script, cl_data+" "+cl_config+" "+cl_tablename)
+        app.logging.info(node_response.stdout)
+        app.logging.info(node_response.stderr)
         # # Useful debugging - change if clause to be whatever type of chart you're debugging
         # if(requestObj['type'] == "table"):
         #     print("###############")
@@ -138,8 +140,8 @@ def _render_request(request):
         obj["dump"] = node_response.stdout
         obj["data"] = request_obj["data"]
         objects[request_obj["name"]] = obj
-        logging.info(object)
-        
+        app.logger.info(json.dumps(objects))
+
     # render template
     response = render_template(pdf_template+".html", config = template_config, info = intermediate_script_reference_info, objects = objects)
 
@@ -148,4 +150,6 @@ def _render_request(request):
 
 # run the application to public server
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=False)
+    app.logger.addHandler(logging.StreamHandler())
+    app.logger.setLevel(logging.INFO)
+    app.run(host="0.0.0.0", debug=True)
