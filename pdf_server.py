@@ -71,6 +71,10 @@ def download():
 def view():
     return _render_request(request)
 
+@app.route('/status', methods = ['GET'])
+def status():
+    return json.dumps({'status': 'ok', 'status_code': 200})
+
 # "Internal" function that is used to actually do the request process
 def _render_request(request):
     request_data = json.loads(request.form["data"])
