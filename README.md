@@ -4,7 +4,7 @@
 ##### Local Deployment
 The easiest way to get the report server running is simply to run it locally. To do so, it is as simple as cloning the repository, navigating to the directory, and running `vagrant up`.
 
-##### Other Deployment
+##### Other Deployment (the following is a look behind the scenes into what the vagrant up command executes)
 Follow the steps below if you are trying to deploy to an existing server (such as an existing production server, etc.). By all accounts, this process is simply the manual way of doing the same things the automated Ansible playbook does, without the one or two steps specific to deploying to vagrant, such as changing file ownership to the vagrant user.
 
 1. Install dependencies - you will need to have permission to do so on your server (ie `sudo` authority). Make sure you have udpated your apt!  
